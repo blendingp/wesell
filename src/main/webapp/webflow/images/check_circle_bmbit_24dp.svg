@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="21.667"
+   height="21.667"
+   viewBox="0 0 21.667 21.667"
+   version="1.1"
+   id="svg834"
+   sodipodi:docname="check_circle_bmbit_24dp.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs838" />
+  <sodipodi:namedview
+     id="namedview836"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="37.337887"
+     inkscape:cx="10.8335"
+     inkscape:cy="12.976096"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg834" />
+  <g
+     id="check_circle_black_24dp"
+     transform="translate(-2.167 -2.167)"
+     style="fill:#00b4c9;fill-opacity:1">
+    <path
+       id="패스_2045"
+       data-name="패스 2045"
+       d="M13,2.167A10.833,10.833,0,1,0,23.833,13,10.837,10.837,0,0,0,13,2.167Zm-2.167,16.25L5.417,13l1.527-1.527,3.889,3.878,8.222-8.223,1.528,1.538Z"
+       style="fill:#00b4c9;fill-opacity:1" />
+  </g>
+</svg>
