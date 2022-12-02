@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<sqlMap resource="egovframework/sqlmap/example/sample/EgovSample_Sample_SQL.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/sample/account.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/admin.xml"></sqlMap>
+	
+	<sqlMap resource="egovframework/sqlmap/example/sample/board.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/coin.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/dashboard.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/infl.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/log.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/member.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/message.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/referrals.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/trade.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/wallet.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/copyTrade.xml"></sqlMap>
+	
+	<sqlMap resource="egovframework/sqlmap/example/sample/newwave/board.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/newwave/infl.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/newwave/trade.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/p2p.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/notuserMoney.xml"></sqlMap>
+	<sqlMap resource="egovframework/sqlmap/example/sample/notloginmoney.xml"></sqlMap>
+<sqlMap resource="egovframework/sqlmap/example/sample/spotTrade.xml"></sqlMap></sqlMapConfig>
