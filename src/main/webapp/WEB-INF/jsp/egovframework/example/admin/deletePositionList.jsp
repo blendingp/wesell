@@ -30,7 +30,7 @@
 <div>result : ${result }</div>
 	<c:forEach var="item" items="${trade}" varStatus="i">
 		<div>
-			<a href="javascript:check('/global/deletePositionListProcess.do?useridx=${item.userIdx}&symbol=${item.symbol}')">${item}</a>
+			<a href="javascript:check('/wesell/deletePositionListProcess.do?useridx=${item.userIdx}&symbol=${item.symbol}')">${item}</a>
 		</div>
 	</c:forEach>
 <script>

@@ -31,7 +31,7 @@ function page(pageNo){
 									<h6 class="m-0 font-weight-bold text-primary">청산내역</h6>
 								</div>
 								<div class="card-body">
-									<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do" name="listForm" id="listForm">
+									<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do" name="listForm" id="listForm">
 										<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<input type="hidden" name="pageIndex" value="1" /> <input
 											type="hidden" name="username" id="username"
@@ -169,7 +169,7 @@ function page(pageNo){
 													<tr style="background-color:${item.color}">
 														<td>${item.ltime}</td>
 														<td
-															onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'"
+															onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'"
 															style="cursor: pointer;">${item.name} <c:if
 																test="${item.phone eq '-1'}">
 																<span style="color: red;"> 삭제계정
@@ -177,7 +177,7 @@ function page(pageNo){
 														</td>
 														<c:if test="${item.pname ne null}">
 															<td
-																onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.parentsIdx}'"
+																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.parentsIdx}'"
 																style="cursor: pointer;">${item.pname} <c:if
 																	test="${item.pphone eq '-1'}">
 																	<span style="color: red;"> 삭제계정

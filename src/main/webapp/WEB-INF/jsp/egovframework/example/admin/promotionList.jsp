@@ -82,7 +82,7 @@ function page(pageNo){
                     </div>
                 </div>
             </div>
-		   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionList.do" name="listForm" id="listForm">
+		   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionList.do" name="listForm" id="listForm">
 				<input type="hidden" name="pageIndex" value="1"/>
 			</form>
         </div>
@@ -92,7 +92,7 @@ function page(pageNo){
 	function changeApproval(idx , approval){
 		$.ajax({
 			type:'get',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionApproval.do?idx='+idx+'&approval='+approval,
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionApproval.do?idx='+idx+'&approval='+approval,
 			success:function(data){
 				alert(data.msg);
 				location.reload();

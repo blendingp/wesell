@@ -154,7 +154,7 @@
 				'search' : $("#search").val(),
 				'searchSelect' : $("#searchSelect").val()
 			},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/trade/setSearchInfo.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/setSearchInfo.do',
 			success : function(data) {
 				if (data.result == 'suc') {
 					getPositionData();
@@ -168,7 +168,7 @@
 	function getPositionData() {
 		$.ajax({
 			type : 'post',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/trade/getNowPositionData.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/getNowPositionData.do',
 			success : function(data) {
 				positionCount = 0;
 				marginSum = parseFloat(0);
@@ -287,7 +287,7 @@
 			let
 			parentTdOption = "";
 			if (plist[i].pidx != null) {
-				parentTdOption = "style='cursor:pointer;' onclick=\"location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
+				parentTdOption = "style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
 						+ plist[i].pidx + "'\"";
 			}
 
@@ -297,7 +297,7 @@
 				betCoin = coin.toUpperCase();
 
 			$id.append("<tr><td>"
-							+ plist[i].userIdx+"</td><td style='cursor:pointer;' onclick=\"location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
+							+ plist[i].userIdx+"</td><td style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
 							+ plist[i].userIdx
 							+ "'\">"
 							+ plist[i].name

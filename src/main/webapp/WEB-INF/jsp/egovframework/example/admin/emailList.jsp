@@ -28,7 +28,7 @@ function page(pageNo){
              		         <h6 class="m-0 font-weight-bold text-primary">${info.name}님, 현재 이메일 ${info.email}</h6>
 						</div>
 						<div class="card-body">
-							<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do" name="listForm" id="listForm">
+							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do" name="listForm" id="listForm">
 								<input type="hidden" name="pageIndex" value="1"/>									
 							</form>
 							<div class="table-responsive">

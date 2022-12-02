@@ -37,7 +37,6 @@ import egovframework.example.sample.service.impl.Log;
 import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.example.sample.sise.Hoga;
 import egovframework.example.sample.sise.SiseManager;
-import egovframework.example.sample.web.ZLogController;
 import egovframework.example.sample.web.spot.SpotManager;
 import egovframework.example.sample.web.spot.SpotOrder;
 import egovframework.example.sample.web.spot.SpotTradeTrigger;
@@ -46,8 +45,6 @@ import egovframework.example.sample.web.util.Send;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 public class SocketHandler extends TextWebSocketHandler implements InitializingBean {
-		public ZLogController zlog=new ZLogController(); 
-		
         @Resource(name = "sampleDAO")
         private SampleDAO sampleDAO;
         
@@ -64,7 +61,6 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
         public static SiseManager sise = null;
         public static ArrayList<Member> members = new ArrayList<>();
         
-        public static ArrayList<P2PAutoCancel> p2pAutoCancelList = new ArrayList<>();
         public static ArrayList<TradeTrigger> triggerList = new ArrayList<>();
         public static ArrayList<Position> positionList = new ArrayList<>(); 
         public static ArrayList<Position> tpList = new ArrayList<>(); 
@@ -2229,7 +2225,6 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
         			int p2pIdx = Integer.parseInt(m.get("idx").toString());
         			int userIdx = Integer.parseInt(m.get("useridx").toString());
         			LocalDateTime dt = Send.getLocalDateTime(m.get("mdate").toString(), "yyyy-MM-dd HH:mm:ss.S");
-        			P2PAutoCancel.putAutoCancelList(p2pIdx, userIdx, dt);
         		}
         	}
         	

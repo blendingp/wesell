@@ -35,24 +35,24 @@
     <bean id="adminInterceptor" class="egovframework.example.sample.web.util.Interceptor">
     	<property name="urls">
     		<list> <!-- interceptor 제외할 url list -->
-    			<value>/global/changeLanguage.do</value>
-    			<value>/global/0nI0lMy6jAzAFRVe0DqLOw/logout.do</value>
-    			<value>/global/0nI0lMy6jAzAFRVe0DqLOw/login.do</value>
-    			<value>/global/0nI0lMy6jAzAFRVe0DqLOw/loginProcess.do</value>
-    			<value>/global/showRest.do</value>
-    			<value>/global/user/myasset.do</value>    			   			
-    			<value>/global/user/tradeHistory.do</value>    			   			
-    			<value>/global/user/fundingHistory.do</value>    			   			
-    			<value>/global/trade.do</value>    			   			
-    			<value>/global/block.do</value>    			   			
-    			<value>/global/logoutProcess.do</value>
-    			<value>/global/kycDataUpdate.do</value>
-    			<value>/global/infl/login.do</value>
-    			<value>/global/infl/loginProcess.do</value>
-    			<value>/global/verificationPhoneJoin.do</value>
-    			<value>/global/verificationEmailJoin.do</value>
-    			<value>/global/0nI0lMy6jAzAFRVe0DqLOw/user/updateCommissionRate.do</value>
-    			<value>/global/0nI0lMy6jAzAFRVe0DqLOw/trade/apiMoneyResult.do</value> <!-- api data받는 url -->
+    			<value>/wesell/changeLanguage.do</value>
+    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/logout.do</value>
+    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do</value>
+    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/loginProcess.do</value>
+    			<value>/wesell/showRest.do</value>
+    			<value>/wesell/user/myasset.do</value>    			   			
+    			<value>/wesell/user/tradeHistory.do</value>    			   			
+    			<value>/wesell/user/fundingHistory.do</value>    			   			
+    			<value>/wesell/trade.do</value>    			   			
+    			<value>/wesell/block.do</value>    			   			
+    			<value>/wesell/logoutProcess.do</value>
+    			<value>/wesell/kycDataUpdate.do</value>
+    			<value>/wesell/infl/login.do</value>
+    			<value>/wesell/infl/loginProcess.do</value>
+    			<value>/wesell/verificationPhoneJoin.do</value>
+    			<value>/wesell/verificationEmailJoin.do</value>
+    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateCommissionRate.do</value>
+    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/apiMoneyResult.do</value> <!-- api data받는 url -->
     		</list>
     	</property>
     </bean>  

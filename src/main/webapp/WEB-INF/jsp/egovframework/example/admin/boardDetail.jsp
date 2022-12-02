@@ -10,14 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../adminFrame/header.jsp"></jsp:include>
 </head>
-<script src="/global/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
+<script src="/wesell/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body id="page-top">
 <script>
 function updateProcess(type){
 	oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 	var data = $("#updateForm").serialize();
-	var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Update.do";
+	var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Update.do";
 	$.ajax({
 		type:'post',
 		url : url,
@@ -25,7 +25,7 @@ function updateProcess(type){
 		success:function(data){
 			if(data.result == 'success'){
 				alert("글 수정이 완료되었습니다.");
-				location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
+				location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
 			}else{
 				alert(data.msg);
 			}
@@ -127,11 +127,11 @@ function delProcess(type , idx){
 		jQuery.ajax({
 			type:'post',
 			data:param,
-			url:"/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Delete.do",
+			url:"/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Delete.do",
 			success:function(data){
 				if(data.result == 'success'){
 					alert("삭제되었습니다.");
-					location.href= "/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
+					location.href= "/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
 				}else{
 					alert("에러가 발생했습니다. 다시 시도해주세요");
 					location.reload();

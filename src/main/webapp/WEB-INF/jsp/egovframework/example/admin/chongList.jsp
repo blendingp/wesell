@@ -52,7 +52,7 @@ function page(pageNo){
 					<h1 class="h3 mb-2 text-gray-800">총판 관리</h1>
 		            <div class="card shadow mb-4">
 						<div class="card-body">
-						   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/user/chongList.do" name="listForm" id="listForm">
+						   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/chongList.do" name="listForm" id="listForm">
 						   		<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1"/>
 								<div class="row">
@@ -257,7 +257,7 @@ function page(pageNo){
 		});
 		$(".linkname").on("click", function() {
 			var uidx = Number($(this).parent().attr("uidx"));
-			location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+uidx;
+			location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+uidx;
 		});
 		
 		$.each($(".childblock"), function(index, item){
@@ -320,7 +320,7 @@ function page(pageNo){
 					getGParents(child.array[i].idx).name+"</td><td class='pEventSkip' onclick=\"popChildUserList('"+child.array[i].name+"',"+child.array[i].idx+")\">"+
 					child.array[i].childCnt+"</td><td>"+
 					child.array[i].kycCnt+"</td><td>"+
-					child.array[i].walletCnt+"</td><td class='pEventSkip' onclick=\"location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do?searchSelect=m.idx&search="+
+					child.array[i].walletCnt+"</td><td class='pEventSkip' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do?searchSelect=m.idx&search="+
 					child.array[i].idx+"'\">"+
 					fmtNum(Number(child.array[i].accumSum).toFixed(4))+"</td></tr>";
 					
@@ -415,7 +415,7 @@ function page(pageNo){
 		$.ajax({
 			type :'post',
 			data : {"uidx" : uidx},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/getChildList.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/getChildList.do',
 			success:function(data){
 				thisArray = data.array;
 				modalSortChange();
@@ -440,7 +440,7 @@ function page(pageNo){
 		let tableHTML = "";
 		for(var i = 0; i < thisArray.length; i++){
 			tableHTML += tr(td(thisArray[i].idx)+
-					"<td style='cursor:pointer;' onclick=\"location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+thisArray[i].idx+"'\">"+thisArray[i].name+"</td>"+
+					"<td style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+thisArray[i].idx+"'\">"+thisArray[i].name+"</td>"+
 							td(thisArray[i].isKyc != 0 ? "Y" : "N")+
 							td(thisArray[i].wallet != 0 ? "Y" : "N")+
 							td(thisArray[i].accumSum));

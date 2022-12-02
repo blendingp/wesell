@@ -1,6 +1,6 @@
-let wsUriToWeb = "wss://"+servername+":"+serverport+"/global/websocket/echo.do"; //주소 확인!!
+let wsUriToWeb = "wss://"+servername+":"+serverport+"/wesell/websocket/echo.do"; //주소 확인!!
 if(servername == "localhost")
-	wsUriToWeb = "ws://"+servername+":"+serverport+"/global/websocket/echo.do";
+	wsUriToWeb = "ws://"+servername+":"+serverport+"/wesell/websocket/echo.do";
 	
 let wsUri = "wss://"+servername+":8287/port8287";
 if(servername == "localhost")
@@ -451,7 +451,7 @@ function onMessageToWeb(evt) { // 받은 메세지를 보여준다
 		} /*
 			 * else if (obj.protocol == "symbolSise") { setSymbolList(obj); }
 			 */else if (obj.protocol == "rest") {
-			location.href = "/global/showRest.do";
+			location.href = "/wesell/showRest.do";
 		} else if (obj.protocol == "tradeM") {
 			mdata[d.symbol].setM(obj.symbol, parseInt(obj.gap), parseFloat(obj.price));
 			setC(obj.tArr, obj.symbol);
@@ -543,7 +543,7 @@ function onMessageToWeb(evt) { // 받은 메세지를 보여준다
 			}
 			if (obj.protocol == "showPopup") {
 				if(obj.msg=="kycPop") 
-					location.href='/global/user/kycCenter.do';
+					location.href='/wesell/user/kycCenter.do';
 				else
 					showPopupFromServer(obj.msg, obj.level);
 			}

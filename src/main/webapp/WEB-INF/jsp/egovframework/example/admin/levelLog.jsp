@@ -31,7 +31,7 @@ function page(pageNo){
 						<div class="panel-heading">level log</div>
                         <div class="panel-body">
                         	<div class="row">
-							   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/log/levelLog.do" name="listForm" id="listForm">
+							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/levelLog.do" name="listForm" id="listForm">
 									<input type="hidden" name="pageIndex" value="1"/>
 									<div class="col-lg-4">
 										<div class="form-group">

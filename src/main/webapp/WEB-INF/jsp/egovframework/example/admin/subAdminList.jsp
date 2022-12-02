@@ -23,7 +23,7 @@
 				<div class="container-fluid">
 					<h1 class="h3 mb-2 text-gray-800">하위관리자</h1>
 					<button type="button" style="margin-bottom: 10px;"
-						onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/createSubAdmin.do'"
+						onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/createSubAdmin.do'"
 						class="btn btn-primary">하위관리자 생성</button>
 					<div class="row">
 						<div class="col-lg-12">
@@ -101,7 +101,7 @@
 						<%-- <input type="hidden" name="page" id="page" value="${em.page}"/> --%>
 					</div>
 					<!-- /.row -->
-					<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/subAdminList.do"
+					<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/subAdminList.do"
 						name="listForm" id="listForm">
 						<input type="hidden" name="pageIndex" value="1" />
 					</form>
@@ -115,7 +115,7 @@ function adminDel(idx){
 	if(confirm("삭제하시겠습니까? 복구하실수없습니다.")){
 		$.ajax({
 			type:'get',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/deleteSubAdmin.do?idx='+idx,
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/deleteSubAdmin.do?idx='+idx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -130,7 +130,7 @@ function changeId(idx){
 	var id = $("#id"+idx).val();
 	$.ajax({
 		type:'get',
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/setId.do?idx='+idx+"&id="+id,
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/setId.do?idx='+idx+"&id="+id,
 		success:function(data){
 			alert(data.msg);
 			location.reload();
@@ -144,7 +144,7 @@ function changePw(idx){
 	var pw = $("#pw"+idx).val();
 	$.ajax({
 		type:'get',
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/setPassword.do?idx='+idx+"&pw="+pw,
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/setPassword.do?idx='+idx+"&pw="+pw,
 		success:function(data){
 			alert(data.msg);
 			location.reload();
@@ -158,7 +158,7 @@ function changeAuthkey(idx){
 	var authkey = $("#authkey"+idx).val();
 	$.ajax({
 		type:'get',
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/changeAuthkey.do?idx='+idx+"&authkey="+authkey,
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/changeAuthkey.do?idx='+idx+"&authkey="+authkey,
 		success:function(data){
 			alert(data.msg);
 			location.reload();

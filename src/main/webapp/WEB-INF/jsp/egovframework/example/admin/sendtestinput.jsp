@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/global/sendtest.do" method="post" >
+	<form action="/wesell/sendtest.do" method="post" >
 		<div>코인종류<select name="kind">
 			<option>BTC</option>
 			<option>USDT</option>

@@ -33,14 +33,14 @@
 								<div class="form-group">
 									<label>첨부 파일 </label>
 									<c:forEach var="item" items="${fileList}">
-										<div><a href="/filePath/global/photo/${item.saveNm}" download>${item.originNm}</a></div>
-										<div><img class="kycImage" src="/filePath/global/photo/${item.saveNm}"></div><br>
+										<div><a href="/filePath/wesell/photo/${item.saveNm}" download>${item.originNm}</a></div>
+										<div><img class="kycImage" src="/filePath/wesell/photo/${item.saveNm}"></div><br>
 									</c:forEach> 
 								</div>
 							</div>
 						</c:if>
 					</div>
-					<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do'" class="btn btn-default">목록</button>
+					<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do'" class="btn btn-default">목록</button>
 				</div>
 			</div>
 		</div>

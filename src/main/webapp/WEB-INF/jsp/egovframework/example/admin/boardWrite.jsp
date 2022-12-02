@@ -10,14 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../adminFrame/header.jsp"></jsp:include>
 </head>
-<script src="/global/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
+<script src="/wesell/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body id="page-top">
 <script>
 function insertProcess(type){
 	oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 	var data = $("#insertForm").serialize();
-	var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Insert.do";
+	var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Insert.do";
 	$.ajax({
 		type:'post',
 		url : url,
@@ -25,7 +25,7 @@ function insertProcess(type){
 		success:function(data){
 			if(data.result == 'success'){
 				alert("글 등록이 완료되었습니다.");
-				location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
+				location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
 			}else{
 				alert(data.msg);
 			}

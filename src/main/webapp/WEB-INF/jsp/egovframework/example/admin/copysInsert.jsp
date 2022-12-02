@@ -84,7 +84,7 @@ function insert(){
 		$.ajax({
 			type:'post',
 			data: data ,
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/copysInsertProcess.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/copysInsertProcess.do',
 			success:function(data){
 				alert(data.msg);
 				if(data.result == "suc")

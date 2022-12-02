@@ -26,7 +26,7 @@ import egovframework.example.sample.web.util.Send;
 
 @Controller
 public class Log {
-	static public String projectName = "global";
+	static public String projectName = "wesell";
 
 	static public int DEBUGLEVEL = 6;
 	static public boolean DEBUGTIME = true;

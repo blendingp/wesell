@@ -31,12 +31,12 @@
 							<div>
 								<c:if test="${fixstat eq 0}">
 									<button type="button"
-										onClick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=1'"
+										onClick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=1'"
 										class="btn btn-primary">점검상태로 변동</button>
 								</c:if>
 								<c:if test="${fixstat eq 1}">
 									<button type="button"
-										onClick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=0'"
+										onClick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=0'"
 										class="btn btn-primary">운영상태로 변동</button>
 								</c:if>
 							</div>

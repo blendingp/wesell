@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import egovframework.example.sample.classes.Coin;
 import egovframework.example.sample.classes.Member;
-import egovframework.example.sample.classes.P2PAutoCancel;
 import egovframework.example.sample.classes.Position;
 import egovframework.example.sample.classes.Project;
 import egovframework.example.sample.classes.SocketHandler;
@@ -20,11 +19,6 @@ public class CommissionScheduler {
     @Resource(name = "sampleDAO")        
     SampleDAO sampleDAO;
     
-    @Scheduled(cron = "0 0/1 * * * *")
-    public void autoCancel(){
-    	P2PAutoCancel.cancelCheck(sampleDAO);
-    }
-
     @Scheduled(cron = "0 0/1 * * * *")
     public void siseDisconnectedCheck(){
     	if(SocketHandler.fixstat == 1) return;

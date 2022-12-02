@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../adminFrame/header.jsp"></jsp:include>
 </head>
-<script src="/global/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
+<script src="/wesell/se2/js/HuskyEZCreator.js" charset="utf-8" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body>
 <script>
@@ -22,7 +22,7 @@ function insertProcess(){
 	
 	oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 	var data = $("#insertForm").serialize();
-	var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/contact/messageInsert.do";
+	var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/messageInsert.do";
 	$.ajax({
 		type:'post',
 		url : url,

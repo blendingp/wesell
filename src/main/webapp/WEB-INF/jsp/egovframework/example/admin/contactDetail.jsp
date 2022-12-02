@@ -46,7 +46,7 @@
 										<div class="col-lg-6">
 											<div class="form-group">
 												<label>문의자 (직속상위)</label>
-												<pre><a href="/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${info.uidx}">${info.name}</a>(<c:if test="${info.pname eq null}">없음</c:if>${info.pname})</pre>
+												<pre><a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${info.uidx}">${info.name}</a>(<c:if test="${info.pname eq null}">없음</c:if>${info.pname})</pre>
 											</div>
 										</div>
 										<div class="col-lg-3">
@@ -72,7 +72,7 @@
 												<div class="form-group">
 													<label>첨부 파일 </label>
 													<c:forEach var="item" items="${fileList}">
-														<pre><a href="/filePath/global/photo/${item.saveNm}" download>${item.originNm}</a></pre>
+														<pre><a href="/filePath/wesell/photo/${item.saveNm}" download>${item.originNm}</a></pre>
 													</c:forEach>
 												</div>
 											</div>
@@ -101,7 +101,7 @@
 										</c:if>
 									</div>
 								</form>
-								<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactDelete.do?idxs=${info.idx}'" class="btn btn-danger">
+								<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactDelete.do?idxs=${info.idx}'" class="btn btn-danger">
 									문의 삭제
 								</button>
 								<c:if test="${info.confirm != '1'}">
@@ -133,9 +133,9 @@
 	}
 	function sendAnswer(type){
 		var data = $("#updateForm").serialize();
-		var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactAnswer.do";
+		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactAnswer.do";
 		if(type=="mail")
-			url = "/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactMailAnswer.do";
+			url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactMailAnswer.do";
 		console.log(url);
 		$.ajax({
 			type:'post',
@@ -145,7 +145,7 @@
 				console.log('ajax success');
 				if(data.result == 'success'){
 					alert("답변  완료되었습니다.");
-					location.href = '/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do';
+					location.href = '/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do';
 				}else{
 					alert(data.msg);
 					location.reload();
@@ -159,7 +159,7 @@
 	}
 	function sendAnswerSms(){
 		var data = $("#updateForm").serialize();
-		var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactAnswerSms.do";
+		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactAnswerSms.do";
 		console.log(url);
 		$.ajax({
 			type:'post',
@@ -169,7 +169,7 @@
 				console.log('ajax success');
 				if(data.result == 'success'){
 					alert("답변 문자 발송 완료되었습니다.");
-					location.href = '/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do';
+					location.href = '/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do';
 				}else{
 					alert(data.msg);
 				}

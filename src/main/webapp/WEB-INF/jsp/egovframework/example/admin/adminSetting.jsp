@@ -73,7 +73,7 @@ function setPassword(node,idx){
 	}
     jQuery.ajax({
         type:"POST",
-        url :"/global/0nI0lMy6jAzAFRVe0DqLOw/setPassword.do?idx="+idx+"&pw="+password,
+        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/setPassword.do?idx="+idx+"&pw="+password,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);

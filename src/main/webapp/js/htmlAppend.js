@@ -27,9 +27,9 @@ function showPopup(msg, level) { // msg:팝업 메세지 , level: 1-완료 2-미
 	let id = "binancenoti-n" + Date.now();
 	let image = "";
 	if (level == 1) {
-		image = "<img src=\"/global/webflow/images/check.png\" loading=\"lazy\" class=\"image-39\">";
+		image = "<img src=\"/wesell/webflow/images/check.png\" loading=\"lazy\" class=\"image-39\">";
 	} else if (level == 2) {
-		image = "<img src=\"/global/webflow/images/error.png\" loading=\"lazy\" class=\"image-39\">";
+		image = "<img src=\"/wesell/webflow/images/error.png\" loading=\"lazy\" class=\"image-39\">";
 	}
 	txt += "<div class=\"order_warn\" id=\"" + id
 			+ "\" style=\"margin-bottom:20px;\"><div class=\"order_success\" style=\"display:flex;\">";
@@ -78,7 +78,7 @@ function appendLiqPop(obj){
 	var text = "<div class='settle-complete' id='settlePop' style='display:flex; z-index:15; "+back+"'> <div class='settle-complete__box'> <div class='div-block-84'> <div class='pop_yieldtxt " +
 		prateClass+"'>" +
 		plus+prate+"%<br> <span class='text-span-12'>" +
-		yieldtext+"</span> </div> <img src='/global/webflow/images/sub_logo1.svg' sizes='100vw' class='image-68'> </div> <div class='div-block-124'> <div class='div-block-85'> <div class='qet'>" +
+		yieldtext+"</span> </div> <img src='/wesell/webflow/images/sub_logo1.svg' sizes='100vw' class='image-68'> </div> <div class='div-block-124'> <div class='div-block-85'> <div class='qet'>" +
 		cointext+"</div> <div class='dqr'>" +
 		symbol+" <span class='position_color " +
 		position+"'>" +
@@ -88,7 +88,7 @@ function appendLiqPop(obj){
 		entryPriceText+"</div> <div class='dqr'> " +
 		fmtNum(entry)+"<span class='wr'> USDT</span> </div> </div> <div class='div-block-85'> <div class='qet'>" +
 		lPricetext+"</div> <div class='dqr'> " +
-		fmtNum(liq)+"<span class='wr'> USDT</span> </div> </div> </div> <a href='#' onclick='$(this).parent().parent().remove();' class='popx w-inline-block'><img src='images/wx.png' loading='lazy' srcset='/global/webflow/images/wx.png' sizes='100vw' class='popximg'></a> </div> </div>";
+		fmtNum(liq)+"<span class='wr'> USDT</span> </div> </div> </div> <a href='#' onclick='$(this).parent().parent().remove();' class='popx w-inline-block'><img src='images/wx.png' loading='lazy' srcset='/wesell/webflow/images/wx.png' sizes='100vw' class='popximg'></a> </div> </div>";
 	$("#settlePop").append(text);
 }
 function pileTHHtml(text, trade){

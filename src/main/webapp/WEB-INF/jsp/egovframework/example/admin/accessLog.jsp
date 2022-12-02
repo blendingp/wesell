@@ -24,7 +24,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                         	<div class="row">
-							   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/log/accessLog.do" name="listForm" id="listForm">
+							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/accessLog.do" name="listForm" id="listForm">
 									<input type="hidden" id="pass" name="pass" value="${pass}"/>
 									<div class="col-lg-1">
 										<label>접속여부</label>

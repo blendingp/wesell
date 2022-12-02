@@ -215,7 +215,7 @@ public class AdminBoardController {
 	         // 정보 출력
 	         sFileInfo += "&bNewLine=true";
 	         sFileInfo += "&sFileName="+ realFileNm;;
-	         sFileInfo += "&sFileURL=/filePath/global/editor/"+realFileNm; //에디터 이미지 나타낼 소스 경로
+	         sFileInfo += "&sFileURL=/filePath/wesell/editor/"+realFileNm; //에디터 이미지 나타낼 소스 경로
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
 	         print.flush();

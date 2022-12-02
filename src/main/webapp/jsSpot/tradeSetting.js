@@ -75,7 +75,7 @@ function getCoinNum(symbol) {
 function coinLoad(){
 	$.ajax({
 		type:'get',
-		url:'/global/getCoinInfo.do',
+		url:'/wesell/getCoinInfo.do',
 		data:{"userIdx":userIdx,"spot":true},
 		dataType: "json",
 		success:function(data){

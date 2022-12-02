@@ -78,7 +78,7 @@ function deleteSubmit(){
 		if($(this).is(":checked") == true)
 			checkedVal += $(this).val()+":";
 	});
-	location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/dangerDelete.do?idxs="+checkedVal;
+	location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/dangerDelete.do?idxs="+checkedVal;
 }
 function allSelect(){
 	$("input:checkbox[name=is_check]").each(function() {

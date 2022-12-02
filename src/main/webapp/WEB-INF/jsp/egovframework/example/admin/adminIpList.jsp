@@ -80,7 +80,7 @@ function insertIp(){
 	console.log(ip);
 	jQuery.ajax({
         type:"POST",
-        url :"/global/0nI0lMy6jAzAFRVe0DqLOw/insertAdminIp.do?ip="+ip,
+        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/insertAdminIp.do?ip="+ip,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);
@@ -98,7 +98,7 @@ function deleteIp(idx){
 	console.log("ASAS");
 	jQuery.ajax({
         type:"POST",
-        url :"/global/0nI0lMy6jAzAFRVe0DqLOw/deleteAdminIp.do?idx="+idx,
+        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/deleteAdminIp.do?idx="+idx,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);

@@ -25,7 +25,7 @@
 							</h6>
 						</div>
 						<div class="card-body">
-							<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/account/updateDepositFee.do" name="updateForm" id="updateForm" method="post">
+							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/updateDepositFee.do" name="updateForm" id="updateForm" method="post">
 								<input type="hidden" name="coinname" value="${item.ftype}"/>
 								<div class="row">									
 									<div class="col-lg-6">

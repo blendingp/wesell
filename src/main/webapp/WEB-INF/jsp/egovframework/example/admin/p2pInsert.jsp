@@ -146,7 +146,7 @@
 <script>
 	function insertProcess() {
 		var data = $("#insertForm").serialize();
-		var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pInsertProcess.do";
+		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pInsertProcess.do";
 		$.ajax({
 			type : 'post',
 			url : url,

@@ -93,10 +93,10 @@ function page(pageNo){
 			                                            </c:if>
 		                                            </td>
 		                                            <c:if test="${data.istest eq '1'}">
-		                                            	<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${data.useridx}'" style="cursor:pointer;">${data.userName} <span style="color:red">(테스트 계정)</span></td>
+		                                            	<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${data.useridx}'" style="cursor:pointer;">${data.userName} <span style="color:red">(테스트 계정)</span></td>
 		                                            </c:if>
 		                                            <c:if test="${data.istest ne '1'}">
-		                                            	<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${data.useridx}'" style="cursor:pointer;">${data.userName}</td>
+		                                            	<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${data.useridx}'" style="cursor:pointer;">${data.userName}</td>
 		                                            </c:if>
 		                                            <td>${data.mbank}</td>
 		                                            <td>${data.maccount}</td>
@@ -207,7 +207,7 @@ function depositCancel(idx , midx){
 	if(confirm("입금취소하시겠습니까?")){
 		$.ajax({
 			type :'get',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/cancelDeposit.do?idx='+idx+'&midx='+midx,
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/cancelDeposit.do?idx='+idx+'&midx='+midx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -222,7 +222,7 @@ function checkRequest(widx,stat){
 	requesting = true;
     jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pWithdrawalProcess.do?widx="+widx+"&stat="+stat,
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pWithdrawalProcess.do?widx="+widx+"&stat="+stat,
         dataType:"json",
         date:{widx:widx, stat:stat},
         success : function(data) {              	
@@ -253,7 +253,7 @@ function changeAlarm(idx, alarm, pkind){
 	$.ajax({
 		type :"post",
 		dataType : "json" ,
-		url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
+		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
 		success:function(data){
 			if(data.result == "suc"){
 				location.reload();
@@ -269,7 +269,7 @@ function changeAlarm(idx, alarm, pkind){
 function payConfirm(widx){
     jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/payConfirm.do?widx="+widx,
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/payConfirm.do?widx="+widx,
         dataType:"json",
         date:{widx:widx},
         success : function(data) {              	
@@ -293,7 +293,7 @@ function send(pidx,midx){
 	
 	jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/chatSend.do",
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/chatSend.do",
         dataType:"json",
         data:{"midx":midx,"pidx":pidx,"text":text},
         success : function(data) {              	
@@ -314,7 +314,7 @@ function deleteChat(pidx,midx){
 	console.log("삭제");
 	jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/deleteChat.do",
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/deleteChat.do",
         dataType:"json",
         data:{"midx":midx,"pidx":pidx},
         success : function(data) {              	

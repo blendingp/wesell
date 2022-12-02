@@ -13,7 +13,7 @@
 tradetrigger 갯수:${count }
 	<c:forEach var="item" items="${trade}" varStatus="i">
 		<div>
-			<a href="javascript:check('/global/deleteTradeTriggerListProcess.do?useridx=${item.userIdx}&ordernum=${item.orderNum}')">${item}</a>
+			<a href="javascript:check('/wesell/deleteTradeTriggerListProcess.do?useridx=${item.userIdx}&ordernum=${item.orderNum}')">${item}</a>
 		</div>
 	</c:forEach>
 <script>

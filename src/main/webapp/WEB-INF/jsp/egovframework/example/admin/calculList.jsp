@@ -30,7 +30,7 @@ function page(pageNo){
                     <div class="panel panel-default">
 						<div class="panel-heading">총판 정산 (본사 수익 = 해당 총판+직속하위)</div>
                         <div class="panel-body">
-							   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/calculList.do" name="listForm" id="listForm">
+							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/calculList.do" name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1"/>
 									<input type="hidden" name="test" id="test" value="${test}"/>
@@ -63,9 +63,9 @@ function page(pageNo){
                                   	<c:forEach var="item" items="${list}" varStatus="i">
 	                                    <thead>
 	                                        <tr style="background-color:${item.color}; border-top:double;">
-	                                            <th onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.name}<c:if test="${item.istest eq 1 }"><span style="color:red"> (테스트 계정)</span></c:if>
+	                                            <th onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.name}<c:if test="${item.istest eq 1 }"><span style="color:red"> (테스트 계정)</span></c:if>
 	                                            	( 직속상위 - 
-	                                            	<c:if test="${item.parentsIdx ne '-1'}"><span onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.parentsIdx}'" style="cursor:pointer;">${item.pname}</span></c:if>
+	                                            	<c:if test="${item.parentsIdx ne '-1'}"><span onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.parentsIdx}'" style="cursor:pointer;">${item.pname}</span></c:if>
 	                                            	<c:if test="${item.parentsIdx eq '-1'}"><span>${item.pname}</span></c:if>
 	                                            	)
 	                                            </th>

@@ -14,9 +14,9 @@ function showPopup(msg, level) { // msg:팝업 메세지 , level: 1-완료 2-미
 	let id = "binancenoti-n" + Date.now();
 	let image = "";
 	if (level == 1) {
-		image = "<img src=\"/global/webflow/images/check.png\" loading=\"lazy\" class=\"image-39\">";
+		image = "<img src=\"/wesell/webflow/images/check.png\" loading=\"lazy\" class=\"image-39\">";
 	} else if (level == 2) {
-		image = "<img src=\"/global/webflow/images/error.png\" loading=\"lazy\" class=\"image-39\">";
+		image = "<img src=\"/wesell/webflow/images/error.png\" loading=\"lazy\" class=\"image-39\">";
 	}
 	txt += "<div class=\"order_warn\" id=\"" + id
 			+ "\" style=\"margin-bottom:20px;\"><div class=\"order_success\" style=\"display:flex;\">";

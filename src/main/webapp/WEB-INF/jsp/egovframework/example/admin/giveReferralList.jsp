@@ -52,7 +52,7 @@ function page(pageNo){
 		                <div class="col-lg-12">
 		                    <div class="panel panel-default">
 		                        <div class="panel-body">
-								   	<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do" name="listForm" id="listForm">
+								   	<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do" name="listForm" id="listForm">
 								   		<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<div class="row">
 											<div class="col-lg-1">
@@ -196,7 +196,7 @@ $(function() {
 	});
 	$(".linkname").on("click", function() {
 		var uidx = Number($(this).parent().attr("uidx"));
-		location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+uidx;
+		location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+uidx;
 	});
 	
 	$.each($(".childblock"), function(index, item){
@@ -265,7 +265,7 @@ function appendChild(parentsIdx){
 				getGParents(child.array[i].idx).name+"</td> <td class='accum'>"+
 				fmtNum(Number(child.array[i].accumSum).toFixed(4))+" USDT</td> <td class='receive'>"+
 				fmtNum(Number(child.array[i].receiveSum).toFixed(4))+" USDT</td> <td class='givedate'>"+
-				date+"</td><td class='pEventSkip'><button class=\"btn-xs btn-default\" onclick=\"location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/referral/accumTradeLog.do?uidx="+
+				date+"</td><td class='pEventSkip'><button class=\"btn-xs btn-default\" onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumTradeLog.do?uidx="+
 				child.array[i].idx+"&amp;username="+
 				child.array[i].name+"'\">내역보기</button></td><td class='pEventSkip'><button class=\"btn-xs btn-default\" onclick=\"gift("+
 				child.array[i].idx+")\">지급</button><button style='margin-left:5px;' class=\"btn-xs btn-default\" onclick=\"topGift("+
@@ -375,12 +375,12 @@ function gift(uidx){
 		$.ajax({
 			type :'post',
 			data : {"uidx" : uidx},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift.do',
 			success:function(data){
 				console.log(data);
 				if(data.result == "suc"){
 					alert("지급 완료되었습니다.");
-// 					location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do";
+// 					location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do";
 					let accumSum = Number(data.accumSum).toFixed(4);
 					let receiveSum = Number(data.receiveSum).toFixed(4);
 					let givedate = data.givedate;
@@ -401,7 +401,7 @@ function topGift(uidx){
 		$.ajax({
 			type :'post',
 			data : {"uidx" : uidx},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift_top.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift_top.do',
 			success:function(data){
 				alert(data.msg);
 				if(data.result == "suc"){
@@ -411,7 +411,7 @@ function topGift(uidx){
 					$(".pidx"+uidx).find(".accum").text(accumSum+" USDT");
 					$(".pidx"+uidx).find(".receive").text(receiveSum+" USDT");
 					$(".pidx"+uidx).find(".givedate").text(givedate.substr(0,givedate.length-5));
-// 					location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do";
+// 					location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferralList.do";
 				}
 			},
 			error:function(e){

@@ -107,7 +107,7 @@
 <script>
 	function insertProcess() {
 		var data = $("#insertForm").serialize();
-		var url = "/global/0nI0lMy6jAzAFRVe0DqLOw/user/insertTestUser.do";
+		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/insertTestUser.do";
 		$.ajax({
 			type : 'post',
 			url : url,

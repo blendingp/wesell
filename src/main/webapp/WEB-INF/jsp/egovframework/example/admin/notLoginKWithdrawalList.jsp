@@ -43,13 +43,13 @@ function page(pageNo){
 							</button>
 							*테스트 계정 미포함 금액 표기 --%>
 								<!-- 
-							<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
-							<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
-							<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
-							<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
+							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
+							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
+							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
+							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
 								<div class="card-body">
 									<form
-										action="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do"
+										action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do"
 										name="listForm" id="listForm">
 										<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<input type="hidden" name="pageIndex" value="1" /> <input
@@ -121,15 +121,15 @@ function page(pageNo){
 												<label>상태 분류</label>
 												<div class="form-group input-group">
 													<span class="input-group-btn">
-														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d'" type="button">
+														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d'" type="button">
 															전체</button>
-														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=0'"
+														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=0'"
 															type="button">입금대기</button>
-														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=1'"
+														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=1'"
 															type="button">입금승인</button>
-														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=2'"
+														<button class="btn btn-info btn-sm" onclick="location.href='http://localhost:8080/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=2'"
 															type="button">입금거부</button>
-														<button class="btn btn-danger btn-sm" onclick="location.href='http://localhost:8080/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=3'"
+														<button class="btn btn-danger btn-sm" onclick="location.href='http://localhost:8080/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d&stat=3'"
 															type="button">입금취소</button>
 													</span>
 												</div>
@@ -166,13 +166,13 @@ function page(pageNo){
 		                                            </c:if></td>
 														<c:if test="${item.istest eq '1'}">
 															<td
-																onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
 																style="cursor: pointer;">${item.name}<span
 																style="color: red">(테스트 계정)</span></td>
 														</c:if>
 														<c:if test="${item.istest ne '1'}">
 															<td
-																onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
 																style="cursor: pointer;">${item.name}</td>
 														</c:if>
 														<td>${item.account}</td>
@@ -230,7 +230,7 @@ function page(pageNo){
 														</c:if>
 
 														<%--                                         	<td>
-	                                        		<a target="_blank" href="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
+	                                        		<a target="_blank" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
 	                                        	</td> --%>
 													</tr>
 												</c:forEach>
@@ -269,7 +269,7 @@ function page(pageNo){
 			$
 					.ajax({
 						type : 'get',
-						url : '/global/0nI0lMy6jAzAFRVe0DqLOw/trade/cancelDeposit.do?idx='
+						url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/cancelDeposit.do?idx='
 								+ idx + '&midx=' + midx,
 						success : function(data) {
 							alert(data.msg);
@@ -314,7 +314,7 @@ function page(pageNo){
 		jQuery
 				.ajax({
 					type : "POST",
-					url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalProcess.do?widx="
+					url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalProcess.do?widx="
 							+ widx + "&stat=" + stat,
 					dataType : "json",
 					date : {
@@ -354,7 +354,7 @@ function page(pageNo){
 		jQuery
 				.ajax({
 					type : "POST",
-					url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalEmailConfirm.do?widx="
+					url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalEmailConfirm.do?widx="
 							+ widx,
 					dataType : "json",
 					date : {
@@ -378,7 +378,7 @@ function page(pageNo){
 		$.ajax({
 			type : "post",
 			dataType : "json",
-			url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="
+			url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="
 					+ idx + "&alarm=" + alarm + "&kind=k" + pkind,
 			success : function(data) {
 				if (data.result == "suc") {

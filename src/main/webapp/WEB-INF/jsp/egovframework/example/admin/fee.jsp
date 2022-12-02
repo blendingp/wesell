@@ -23,7 +23,7 @@
 							<h6 class="m-0 font-weight-bold text-primary">${coinname} 출금 수수료 변경</h6>
 						</div>
 						<div class="card-body">
-							<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/account/updateFee.do" name="updateForm" id="updateForm" method="post">
+							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/updateFee.do" name="updateForm" id="updateForm" method="post">
 								<input type="hidden" name="coinname" value="${item.ftype}"/>
 								<div class="row">									
 									<div class="col-lg-6">

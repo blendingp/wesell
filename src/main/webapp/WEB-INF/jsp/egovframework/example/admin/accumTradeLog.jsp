@@ -33,7 +33,7 @@ function page(pageNo){
 							</h6>
 						</div>
 						<div class="card-body">
-							<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/referral/accumTradeLog.do" name="listForm" id="listForm">
+							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumTradeLog.do" name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="uidx" value="${uidx}" /> <input
 										type="hidden" name="username" value="${username}" /> <input
@@ -109,7 +109,7 @@ function page(pageNo){
 												<td><fmt:formatDate value="${item.buyDatetime}"
 														pattern="yyyy-MM-dd HH:mm:ss" /></td>
 												<td>${item.userIdx}</td>
-												<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'" style="cursor: pointer;">${item.name}</td>
+												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'" style="cursor: pointer;">${item.name}</td>
 												<td>${item.symbol}</td>
 												<td>${item.orderNum}</td>
 												<td>${item.orderType}</td>
@@ -194,11 +194,11 @@ function gift(uidx){
 		$.ajax({
 			type :'post',
 			data : {"uidx" : uidx},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift.do',
 			success:function(data){
 				alert(data.msg);
 				if(data.result == "suc"){
-					location.href="/global/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferral.do";
+					location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferral.do";
 				}
 			},
 			error:function(e){

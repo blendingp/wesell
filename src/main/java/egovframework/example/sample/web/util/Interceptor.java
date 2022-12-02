@@ -38,7 +38,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
     	String[] urlArr = request.getRequestURI().split("/");
     	String userip = Member.getClientIP(request);
     	String userIdx = ""+session.getAttribute("userIdx");
-		String path = "/global/";
+		String path = "/wesell/";
 		String subProject = Project.getProjectName();
 		if(urlArr[2].equals(subProject))				
 			path = path+subProject+"/";
@@ -93,13 +93,13 @@ public class Interceptor  extends HandlerInterceptorAdapter{
     	}else if(urlArr[2].equals("0nI0lMy6jAzAFRVe0DqLOw")){// 관리자의 경우 
 			// 로그인 안되어있으면 로그인 페이지로 
 			if(session.getAttribute("adminLogin") == null){ 
-    			response.sendRedirect("/global/0nI0lMy6jAzAFRVe0DqLOw/login.do");
+    			response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
     			return false;
 			}
 			if(!adminIpCheck(userip, request)){
 				session.setAttribute("adminIdx",null);
 				session.setAttribute("adminLogin", null);
-				response.sendRedirect("/global/0nI0lMy6jAzAFRVe0DqLOw/login.do");
+				response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
 				return false;
 			}
 			String adminLevel = ""+session.getAttribute("adminLevel");
@@ -114,7 +114,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 					return true;
 				default:
 					System.out.println(urlArr[urlArr.length-1]);
-					response.sendRedirect("/global/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=d");
+					response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=d");
 					return false;
 				}
 			}
@@ -127,7 +127,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 				case "log.do":
 					if( adminLevel.equals("1"))
 						return true;
-					response.sendRedirect("/global/0nI0lMy6jAzAFRVe0DqLOw/login.do");
+					response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
 					return false;
 				default:
 					return true;
@@ -225,7 +225,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 		
 		if(serverName.equals("localhost")) return true;
 		switch(project){
-		case "bitocean": if(serverName.equals("bitocean-global.com")) return false;
+		case "wesell": if(serverName.equals("wesell.com")) return false;
 		}
 		return true;
     }

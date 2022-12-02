@@ -46,14 +46,14 @@ var fileurl = "money";
 										*테스트 계정 미포함 금액 표기
 									</h6>
 									<!-- 
-									<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
-									<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
-									<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
-									<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
+									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
+									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
+									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
+									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
 								</div>
 								<div class="card-body">
 									<form
-										action="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do"
+										action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do"
 										name="listForm" id="listForm">
 										<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<input type="hidden" name="pageIndex" value="1" /> <input
@@ -191,13 +191,13 @@ var fileurl = "money";
 		                                            </c:if></td>
 														<c:if test="${item.istest eq '1'}">
 															<td
-																onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
 																style="cursor: pointer;">${item.name}<span
 																style="color: red">(테스트 계정)</span></td>
 														</c:if>
 														<c:if test="${item.istest ne '1'}">
 															<td
-																onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
 																style="cursor: pointer;">${item.name}</td>
 														</c:if>
 														<td>${item.mname}</td>
@@ -269,7 +269,7 @@ var fileurl = "money";
 																</c:if></td>
 														</c:if>
 														<%--                                         	<td>
-	                                        		<a target="_blank" href="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
+	                                        		<a target="_blank" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
 	                                        	</td> --%>
 													</tr>
 												</c:forEach>
@@ -308,7 +308,7 @@ function depositCancel(idx , midx){
 	if(confirm("입금취소하시겠습니까?")){
 		$.ajax({
 			type :'get',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/trade/cancelDeposit.do?idx='+idx+'&midx='+midx,
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/cancelDeposit.do?idx='+idx+'&midx='+midx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -350,7 +350,7 @@ function checkRequest(widx,stat){
 	requesting = true;
     jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalProcess.do?widx="+widx+"&stat="+stat,
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalProcess.do?widx="+widx+"&stat="+stat,
         dataType:"json",
         date:{widx:widx, stat:stat},
         success : function(data) {              	
@@ -380,7 +380,7 @@ function checkRequest(widx,stat){
 function emailConfirm(widx){
     jQuery.ajax({                                
         type:"POST", 
-        url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalEmailConfirm.do?widx="+widx,
+        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalEmailConfirm.do?widx="+widx,
         dataType:"json",
         date:{widx:widx},
         success : function(data) {              	
@@ -398,7 +398,7 @@ function changeAlarm(idx, alarm, pkind){
 	$.ajax({
 		type :"post",
 		dataType : "json" ,
-		url : "/global/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
+		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
 		success:function(data){
 			if(data.result == "suc"){
 				location.reload();
