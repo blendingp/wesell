@@ -37,31 +37,31 @@ div[contenteditable=true] {
 			<div class="refer1">
 				<div class="refermenu">
 					<div class="rewardmtitle">
-						<img src="/global/webflow/louisImage/Person_icon.png" loading="lazy" alt="" class="rewardmenuicon">
+						<img src="/wesell/webflow/louisImage/Person_icon.png" loading="lazy" alt="" class="rewardmenuicon">
 						<div class="rewardmlisttext"><spring:message code="wallet.spotWallet"/></div>
 					</div>
-					<div class="rewardmlist" onclick="location.href='/global/user/wallet.do'" style="cursor: pointer;">
+					<div class="rewardmlist" onclick="location.href='/wesell/user/wallet.do'" style="cursor: pointer;">
 						<div class="rewardmlisttext"><spring:message code="wallet.deposit"/></div>
 					</div>
-					<div class="rewardmlist click" onclick="location.href='/global/user/withdrawal.do'" style="cursor: pointer;">
+					<div class="rewardmlist click" onclick="location.href='/wesell/user/withdrawal.do'" style="cursor: pointer;">
 						<div class="rewardmlisttext"><spring:message code="wallet.withdrawal"/></div>
 					</div>
 					<div class="rewardmtitle">
-						<img src="/global/webflow/louisImage/Exchange_icon.png" loading="lazy" alt="" class="rewardmenuicon">
+						<img src="/wesell/webflow/louisImage/Exchange_icon.png" loading="lazy" alt="" class="rewardmenuicon">
 						<div class="rewardmlisttext"><spring:message code="wallet.spotExchange"/></div>
 					</div>
-					<div class="rewardmlist" onclick="location.href='/global/user/exchange.do'" style="cursor: pointer;">
+					<div class="rewardmlist" onclick="location.href='/wesell/user/exchange.do'" style="cursor: pointer;">
 						<div class="rewardmlisttext">BTC</div>
-						<img src="/global/webflow/louisImage/arrow_icon.png" loading="lazy" alt="" class="image-9">
+						<img src="/wesell/webflow/louisImage/arrow_icon.png" loading="lazy" alt="" class="image-9">
 						<div class="rewardmlisttext">USDT</div>
 					</div>
 					<div class="rewardmtitle">
-						<img src="/global/webflow/louisImage/Transfer_icon.png" loading="lazy" alt="" class="rewardmenuicon">
+						<img src="/wesell/webflow/louisImage/Transfer_icon.png" loading="lazy" alt="" class="rewardmenuicon">
 						<div class="rewardmlisttext"><spring:message code="wallet.transfer"/></div>
 					</div>
-					<div class="rewardmlist" onclick="location.href='/global/user/transfer.do'" style="cursor: pointer;">
+					<div class="rewardmlist" onclick="location.href='/wesell/user/transfer.do'" style="cursor: pointer;">
 						<div class="rewardmlisttext">Spot</div>
-						<img src="/global/webflow/louisImage/arrow_icon.png" loading="lazy" alt="" class="image-9">
+						<img src="/wesell/webflow/louisImage/arrow_icon.png" loading="lazy" alt="" class="image-9">
 						<div class="rewardmlisttext">Futures</div>
 					</div>
 					<div class="form-block-6 w-form">
@@ -87,42 +87,42 @@ div[contenteditable=true] {
 					<div class="momenutitle">
 						<div class="momenutext">Menu</div>
 						<a href="#" onclick="$('.notimenu').slideToggle();$('.momeup , .momedown ').toggle()" class="momelink w-inline-block">
-							<img src="/global/webflow/louisImage/check.png" loading="lazy" sizes="100vw" srcset="/global/webflow/louisImage/check-p-500.png 500w, /global/webflow/louisImage/check-p-800.png 800w, /global/webflow/louisImage/check.png 1200w" alt="" class="momedown">
-							<img src="/global/webflow/louisImage/check_1.png" loading="lazy" sizes="(max-width: 767px) 15px, 100vw" srcset="/global/webflow/louisImage/check_1-p-500.png 500w, /global/webflow/louisImage/check_1-p-800.png 800w, /global/webflow/louisImage/check_1.png 1200w" alt="" class="momeup">
+							<img src="/wesell/webflow/louisImage/check.png" loading="lazy" sizes="100vw" srcset="/wesell/webflow/louisImage/check-p-500.png 500w, /wesell/webflow/louisImage/check-p-800.png 800w, /wesell/webflow/louisImage/check.png 1200w" alt="" class="momedown">
+							<img src="/wesell/webflow/louisImage/check_1.png" loading="lazy" sizes="(max-width: 767px) 15px, 100vw" srcset="/wesell/webflow/louisImage/check_1-p-500.png 500w, /wesell/webflow/louisImage/check_1-p-800.png 800w, /wesell/webflow/louisImage/check_1.png 1200w" alt="" class="momeup">
 						</a>
 					</div>
 					<div class="notimenu">
 						<div class="rewardmlist-copy">
 							<div class="rewardmlisttext"><spring:message code="wallet.spotWallet"/></div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
 						<div class="rewardmlist"
-							onclick="location.href='/global/user/wallet.do'">
+							onclick="location.href='/wesell/user/wallet.do'">
 							<div class="rewardmlisttext"><spring:message code="wallet.deposit"/></div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
 						<div class="rewardmlist click"
-							onclick="location.href='/global/user/withdrawal.do'">
+							onclick="location.href='/wesell/user/withdrawal.do'">
 							<div class="rewardmlisttext"><spring:message code="wallet.withdrawal"/></div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
 						<div class="rewardmlist-copy">
 							<div class="rewardmlisttext"><spring:message code="wallet.spotExchange"/></div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
-						<div class="rewardmlist" onclick="location.href='/global/user/exchange.do'">
+						<div class="rewardmlist" onclick="location.href='/wesell/user/exchange.do'">
 							<div class="rewardmlisttext">BTC ↔ USDT</div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
-						<div class="rewardmlist" onclick="location.href='/global/user/transfer.do'">
+						<div class="rewardmlist" onclick="location.href='/wesell/user/transfer.do'">
 							<div class="rewardmlisttext">Spot ↔ Futures</div>
-							<img src="/global/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
+							<img src="/wesell/webflow/louisImage/right_icon.png" loading="lazy" alt="" class="cusarrow">
 						</div>
 					</div>
 				</div>
 				<div class="walletbox">
 					<div class="wcoin">
-						<img src="/global/webflow/louisImage/BTC_icon_1.png" loading="lazy"
+						<img src="/wesell/webflow/louisImage/BTC_icon_1.png" loading="lazy"
 							alt="" class="wcoinimg">
 						<div class="wallettitle">WithDraw BTC</div>
 					</div>
@@ -174,7 +174,7 @@ div[contenteditable=true] {
 						</div>
 					</div>
 					<div class="wcoin">
-						<img src="/global/webflow/louisImage/USDT_icon.png" loading="lazy"
+						<img src="/wesell/webflow/louisImage/USDT_icon.png" loading="lazy"
 							alt="" class="wcoinimg">
 						<div class="wallettitle">WithDraw USDT</div>
 					</div>
@@ -239,7 +239,7 @@ div[contenteditable=true] {
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -292,7 +292,7 @@ div[contenteditable=true] {
 				type:'post',
 				data: {'phone': $("#phone").val() , 'country' : $("#country").val()},
 				dataType : 'json',
-				url:'/global/verificationPhone.do',
+				url:'/wesell/verificationPhone.do',
 				success:function(data){
 					alert(data.msg);
 					checkPhone = true;
@@ -361,7 +361,7 @@ div[contenteditable=true] {
 						'btcWallet' : btc
 					};
 					//console.log("data:::",dat);
-					var url = "/global/user/updateWalletBalance.do";
+					var url = "/wesell/user/updateWalletBalance.do";
  					$.ajax({
 						type : 'post',
 						url : url,
@@ -389,7 +389,7 @@ div[contenteditable=true] {
 					};
 					$.ajax({
 						type : 'post',
-						url : "/global/user/transaction.do",
+						url : "/wesell/user/transaction.do",
 						data : trsData,
 						success : function(data) {
 							if (data.result == 'success') {
@@ -467,7 +467,7 @@ div[contenteditable=true] {
 						'ercWallet' : usdt,
 						'btcWallet' : balance
 					};
-					var url = "/global/user/updateWalletBalance.do";
+					var url = "/wesell/user/updateWalletBalance.do";
 					$.ajax({
 						type : 'post',
 						url : url,
@@ -475,7 +475,7 @@ div[contenteditable=true] {
 						success : function(data) {
 							if (data.result == 'success') {
 								alert('송금이 완료되었습니다.');
-								location.href = "/global/user/wallet.do";
+								location.href = "/wesell/user/wallet.do";
 							} else if (data.result == 'fail') {
 								console.log(data);
 								alert('오류가 발생했습니다. 다시 시도해주세요.');

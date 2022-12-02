@@ -9,7 +9,7 @@
 <html data-wf-page="62b186c2f7e8877e2d12526e" data-wf-site="62b1125ac4d4d60ab9c62f81">
 <head>
 <meta charset="utf-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <style>
 .text7{
@@ -20,7 +20,7 @@
 <body class="body1">
 	<div class="frame">
 		<form id="kycForm" name="kycForm" method="post" enctype="multipart/form-data" class="form-6">
-			<jsp:include page="../userFrame/top.jsp" />
+			<jsp:include page="../wesellFrame/top2.jsp" />
 			<div class="frame5">
 				<jsp:include page="../userFrame/customerBanner.jsp"></jsp:include>
 				<div class="custermer_listblock">
@@ -79,7 +79,7 @@
 				</div>
 
 			</div>
-			<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		</form>
 	</div>
 	<script
@@ -137,7 +137,7 @@
 		
 		$.ajax({
 			type : 'post',
-			url : '/global/kycDataUpdate.do',
+			url : '/wesell/kycDataUpdate.do',
 			data : data,
 			processData : false,
 			contentType : false,

@@ -29,11 +29,11 @@
 	}
 </script>
 
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body2">
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrame.jsp"></jsp:include>
 			<div class="asset_block">
@@ -48,7 +48,7 @@
 					<div class="deposit_warp4">
 						<div class="assettitle"><spring:message code="wallet.WithdrawalList" /></div>
 						<div class="form-block-4 w-form">
-							<form id="listForm" name="listForm" action="/global/user/requestList.do" class="form-3">
+							<form id="listForm" name="listForm" action="/wesell/user/requestList.do" class="form-3">
 								<input type="hidden" name="pageIndex" /> 
 								<select onchange="coinChange(this.value)" name="coinname" class="select-field-5 w-select">
 									<option value="" <c:if test="${coinname eq ''}">selected</c:if>>
@@ -159,7 +159,7 @@
 				<div class="withrawlpop" id="popwallet" style="display:none">
 					<div class="withrawlblock">
 						<div class="pop_exist" style="display: flex;">
-							<img src="/global/webflow/images/wx.png" onclick="javascript:closePop()" loading="lazy" alt="" class="image-38">
+							<img src="/wesell/webflow/images2/wx.png" onclick="javascript:closePop()" loading="lazy" alt="" class="image-38">
 						</div>
 						<div class="title6">
 							<spring:message code="wallet.withdrawal" />
@@ -176,11 +176,11 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="/global/webflow/js/webflow.js" type="text/javascript"></script>
+	<script src="/wesell/webflow/js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -206,7 +206,7 @@
 // 				data : {
 // 					'widx' : widx
 // 				},
-// 				url : '/global/user/withdrawCancel.do',
+// 				url : '/wesell/user/withdrawCancel.do',
 // 				success : function(data) {
 // 					alert(data.msg);
 // 					location.reload();
@@ -288,7 +288,7 @@
 					'idx' : idx,
 				},
 				dataType : 'json',
-				url : '/global/user/withdrawRePhone.do',
+				url : '/wesell/user/withdrawRePhone.do',
 				success : function(data) {
 					sending = false;
 					alert(data.msg);
@@ -325,7 +325,7 @@
 					'code' : code
 				},
 				dataType : 'json',
-				url : '/global/user/requestListConfirm.do',
+				url : '/wesell/user/requestListConfirm.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {

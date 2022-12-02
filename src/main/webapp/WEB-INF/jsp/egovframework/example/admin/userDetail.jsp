@@ -39,37 +39,37 @@
 										value="${info.parentsIdx}" />
 									<div style="margin-bottom: 10px;">
 										<button type="button"
-											onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/orderList.do?searchSelect=idx&search=${info.idx}'"
+											onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/orderList.do?searchSelect=idx&search=${info.idx}'"
 											class="btn btn-primary">주문내역</button>
 										<button type="button"
-											onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?searchSelect=idx&search=${info.idx}'"
+											onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?searchSelect=idx&search=${info.idx}'"
 											class="btn btn-primary">거래내역</button>
 										<button type="button"
-											onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do?searchSelect=idx&search=${info.idx}'"
+											onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do?searchSelect=idx&search=${info.idx}'"
 											class="btn btn-primary">청산내역</button>
 										<c:if test="${adminLevel eq 1}">
 											<button type="button"
-												onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/positionList.do?search=${info.name}'"
+												onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/positionList.do?search=${info.name}'"
 												class="btn btn-primary">포지션내역</button>
 										</c:if>
 										<c:if test="${project.coinDeposit eq true}">
 											<button type="button"
-												onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?pageIndex=1&searchSelect=idx&search=${info.idx}&label=%2B'"
+												onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?pageIndex=1&searchSelect=idx&search=${info.idx}&label=%2B'"
 												class="btn btn-primary">입금내역</button>
 											<button type="button"
-												onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?pageIndex=1&searchSelect=idx&search=${info.idx}&label=-'"
+												onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?pageIndex=1&searchSelect=idx&search=${info.idx}&label=-'"
 												class="btn btn-primary">출금내역</button>
 										</c:if>
 										<c:if test="${project.krwDeposit eq true}">
 											<button type="button"
-												onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?pageIndex=1&kind=d&stat=0<c:if test="${info.istest eq 1}">&test=test</c:if>&searchSelect=idx&search=${info.idx}'"
+												onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?pageIndex=1&kind=d&stat=0<c:if test="${info.istest eq 1}">&test=test</c:if>&searchSelect=idx&search=${info.idx}'"
 												class="btn btn-primary">입금내역(한화)</button>
 											<button type="button"
-												onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?pageIndex=1&kind=w&stat=0<c:if test="${info.istest eq 1}">&test=test</c:if>&searchSelect=idx&search=${info.idx}'"
+												onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?pageIndex=1&kind=w&stat=0<c:if test="${info.istest eq 1}">&test=test</c:if>&searchSelect=idx&search=${info.idx}'"
 												class="btn btn-primary">출금내역(한화)</button>
 										</c:if>
 										<button type="button"
-											onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do?searchSelect=m.phone&search=${info.phone}'"
+											onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do?searchSelect=m.phone&search=${info.phone}'"
 											class="btn btn-primary">문의내역</button>
 									</div>
 									<div class="row">
@@ -119,7 +119,7 @@
 														<input class="form-control" value="${kycValue}${kycConfirm}" readonly />
 														<c:if test="${info.fkey ne null}">
 															<span class="input-group-btn">
-																<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/kycInfo.do?idx=${info.idx}'" class="btn btn-info">확인</button>
+																<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/kycInfo.do?idx=${info.idx}'" class="btn btn-info">확인</button>
 															</span>
 														</c:if>
 														<span class="input-group-btn">
@@ -256,7 +256,7 @@
 												<label>이메일 <c:if test="${info.emailconfirm eq 1}">(인증완료)</c:if>
 													<c:if test="${info.emailconfirm ne 1}">(미인증)</c:if>
 												</label> <a target="_blank"
-													href="/global/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${info.idx }">변경기록</a>
+													href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${info.idx }">변경기록</a>
 												<c:if
 													test="${project.subAdminPower eq false and adminLevel ne 1}">
 													<div class="form-group">
@@ -504,7 +504,7 @@
 										<div class="col-lg-3">
 											<div class="form-group">
 												<label> 
-<%-- 													<a href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/realBalanceLog.do?coinname=XRP&kind=1&useridx=${info.idx}" target="_blank"></a> --%>
+<%-- 													<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalanceLog.do?coinname=XRP&kind=1&useridx=${info.idx}" target="_blank"></a> --%>
 													해당 회원의 XRP Destination Tag 
 												</label>
 												<pre>&nbsp;${info.destinationTag}</pre>
@@ -543,7 +543,7 @@
 														<label> ${fn:toUpperCase(item.key)} Balance <c:if
 																test="${status.index eq 0}">
 																<a
-																	href="/global/0nI0lMy6jAzAFRVe0DqLOw/account/totalLog.do?userIdx=${info.idx}"
+																	href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/totalLog.do?userIdx=${info.idx}"
 																	target="_blank">Total Log</a>
 															</c:if>
 														</label>
@@ -653,7 +653,7 @@
 												<div class="col-lg-6">
 													<div class="form-group">
 														<label>상위</label>
-														<pre><c:forEach var="item" items="${parents}" varStatus="i"><a href="/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}">${item.name}(${item.level})</a><- </c:forEach>${info.name}(${info.level })</pre>
+														<pre><c:forEach var="item" items="${parents}" varStatus="i"><a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}">${item.name}(${item.level})</a><- </c:forEach>${info.name}(${info.level })</pre>
 													</div>
 												</div>
 												<div class="col-lg-2">
@@ -895,7 +895,7 @@
 																</span>
 															</div>
 															<c:if test="${traderInfo.timg ne null}">
-																<pre><img src="/filePath/global/photo/${traderInfo.timg}" loading="lazy"><br>${traderInfo.timg}</pre>
+																<pre><img src="/filePath/wesell/photo/${traderInfo.timg}" loading="lazy"><br>${traderInfo.timg}</pre>
 															</c:if>
 															<input type="file" name="timg" id="timg" accept="image/*" />
 															<span class="input-group-btn"><button
@@ -912,7 +912,7 @@
 						</div>
 					</div>
 				</div>
-				<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do'" class="btn btn btn-secondary">
+				<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do'" class="btn btn btn-secondary">
 					목록
 				</button>
 				<br /> <br />
@@ -934,7 +934,7 @@
 			let data = {'idx':idx , 'dmoney' :$("#dmoney").val() , 'danger' : danger};
 			$.ajax({
 				type :'post',
-				url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDanger.do',
+				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDanger.do',
 				data : data ,
 				success:function(data){
 					alert(data.msg);
@@ -949,7 +949,7 @@
 		$.ajax({
 			type:'post',
 			data:{"type" : type , "kind" :kind , "changeIdx" : self.value},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/changeLevelOption.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/changeLevelOption.do',
 			success:function(data){
 				let text = '<option value="0">-</option>';
 				for(var i=1; i< $("[id*=ch_]").index(self); i++){
@@ -979,7 +979,7 @@
 			$.ajax({
 				type:'post',
 				data:{"idx" : idx, "level" : level},
-				url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/updateLevel.do',
+				url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateLevel.do',
 				dataType:'json',
 				success:function(data){
 					alert(data.msg);
@@ -1005,7 +1005,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx , "kind" : kind , "point" : point},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/updatePoint.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updatePoint.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1035,7 +1035,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx , "usdt" : point},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/depositUSDT.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/depositUSDT.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1059,7 +1059,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx , "commissionRate" : commissionRate},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/updateCommissionRate.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateCommissionRate.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1079,7 +1079,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx , "ip" : ip},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/ipBan.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/ipBan.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1098,7 +1098,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx , "ip" : ip},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/releaseBan.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/releaseBan.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1115,7 +1115,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/userBan.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userBan.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1132,7 +1132,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/releaseUserBan.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/releaseUserBan.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1163,17 +1163,17 @@
 		
 		if(kind == "deposit"){
 			$("#dlist").css("display","flex");
-			$("#listlink").attr("href","/global/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?searchIdx="+"${info.idx}"+"&label=%2B"+"&username="+"${info.name}");
+			$("#listlink").attr("href","/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?searchIdx="+"${info.idx}"+"&label=%2B"+"&username="+"${info.name}");
 			$("#listlink").html("입금내역 전체보기");
 		}
 		else if(kind == "withdraw"){
 			$("#wlist").css("display","flex");
-			$("#listlink").attr("href","/global/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?searchIdx="+"${info.idx}"+"&label=-"+"&username="+"${info.name}");
+			$("#listlink").attr("href","/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?searchIdx="+"${info.idx}"+"&label=-"+"&username="+"${info.name}");
 			$("#listlink").html("출금내역 전체보기");
 		}
 		else if(kind == "trade"){
 			$("#tlist").css("display","flex");
-			$("#listlink").attr("href","/global/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?searchIdx="+"${info.idx}"+"&username="+"${info.name}");
+			$("#listlink").attr("href","/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?searchIdx="+"${info.idx}"+"&username="+"${info.name}");
 			$("#listlink").html("거래내역 전체보기");
 		}
 	}
@@ -1190,7 +1190,7 @@
 		$.ajax({
 			type :'post',
 			data : data,
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/updateInfo.do?kind='+$("#kind").val(),
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateInfo.do?kind='+$("#kind").val(),
 			enctype : "multipart/form-data",
 			processData : false,
 			contentType : false,
@@ -1210,7 +1210,7 @@
 		$.ajax({
 			type:'post',
 			data:{"idx" : idx},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/deleteUser.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/deleteUser.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1230,7 +1230,7 @@
 		$.ajax({
 			type:'post',
 			data:{"parentIdx" : parentIdx, "idx" : idx},
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/user/parentChange.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/parentChange.do',
 			dataType:'json',
 			success:function(data){
 				alert(data.msg);
@@ -1247,7 +1247,7 @@
 		if(confirm("변경하시겠습니까?")){
 			$.ajax({
 				type : 'get',
-				url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/changeJstat.do?idx='+idx+'&jstat='+kind,
+				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/changeJstat.do?idx='+idx+'&jstat='+kind,
 				success:function(data){
 					alert(data.msg);
 					location.reload();
@@ -1260,7 +1260,7 @@
 		if(confirm("변경하시겠습니까?")){
 			$.ajax({
 				type : 'get',
-				url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/setKrCode.do?idx='+idx,
+				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/setKrCode.do?idx='+idx,
 				success:function(data){
 					alert(data.msg);
 					location.reload();
@@ -1273,7 +1273,7 @@
 		if(confirm("변경하시겠습니까?")){
 			$.ajax({
 				type : 'get',
-				url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/setVConfirm.do?idx='+idx+"&vConfirm="+vcf,
+				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/setVConfirm.do?idx='+idx+"&vConfirm="+vcf,
 				success:function(data){
 					alert(data.msg);
 					location.reload();
@@ -1297,7 +1297,7 @@
 		
 		$.ajax({
 			type : 'get',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/kycConfirm.do?idx='+idx+'&confirm='+cf+"&text="+text,
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/kycConfirm.do?idx='+idx+'&confirm='+cf+"&text="+text,
 			success:function(data){
 				alert(data.msg);
 				location.reload();

@@ -12,12 +12,12 @@
 <title><spring:message code="menu.submitrequest" /></title>
 <meta content="account setting" property="og:title">
 <meta content="account setting" property="twitter:title">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body1">
 	<div class="frame">
 		<form id="contactForm" name="contactForm" method="post" enctype="multipart/form-data" class="form-6">
-			<jsp:include page="../userFrame/top.jsp" />
+			<jsp:include page="../wesellFrame/top2.jsp" />
 			<div class="frame5">
 				<jsp:include page="../userFrame/customerBanner.jsp"></jsp:include>
 				<div class="custermer_listblock">
@@ -37,7 +37,7 @@
 										<div class="text7"><spring:message code="menu.fileNoSelect"/></div>
 									</div>
 									<div class="deletebtn_box">
-										<img src="/global/webflow/images/wx.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 4vw, 20px" srcset="/global/webflow/images/wx-p-800.png 800w, /global/webflow/images/wx-p-1080.png 1080w, /global/webflow/images/wx.png 1600w" alt="" class="deletebtn_icon">
+										<img src="/wesell/webflow/images2/wx.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 4vw, 20px" srcset="/wesell/webflow/images2/wx-p-800.png 800w, /wesell/webflow/images2/wx-p-1080.png 1080w, /wesell/webflow/images2/wx.png 1600w" alt="" class="deletebtn_icon">
 										<a href="#" class="deletebtn w-button"></a>
 									</div>
 								</div>
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		</form>
 	</div>
 	<script
@@ -70,7 +70,7 @@
 		var $fileList = $("#fileList");
 		for (var i = 0; i < files.length; i++) {
 			$("#notselect").css("display","none");
-			$fileList.append("<div class='fileselect_block'> <div class='fileselect1'> <div class='text7' style='overflow: hidden; text-overflow:ellipsis;  width: 510px;'>"+files[i].name+"</div> </div> <div class='deletebtn_box'> <img src='/global/webflow/images/wx.png' loading='lazy' sizes='(max-width: 479px) 100vw, (max-width: 767px) 4vw, 20px' srcset='/global/webflow/images/wx-p-800.png 800w, /global/webflow/images/wx-p-1080.png 1080w, /global/webflow/images/wx.png 1600w' alt='' class='deletebtn_icon'> <a href='#' onclick='delFile(this)' class='deletebtn w-button'></a> </div> </div>");
+			$fileList.append("<div class='fileselect_block'> <div class='fileselect1'> <div class='text7' style='overflow: hidden; text-overflow:ellipsis;  width: 510px;'>"+files[i].name+"</div> </div> <div class='deletebtn_box'> <img src='/wesell/webflow/images2/wx.png' loading='lazy' sizes='(max-width: 479px) 100vw, (max-width: 767px) 4vw, 20px' srcset='/wesell/webflow/images2/wx-p-800.png 800w, /wesell/webflow/images2/wx-p-1080.png 1080w, /wesell/webflow/images2/wx.png 1600w' alt='' class='deletebtn_icon'> <a href='#' onclick='delFile(this)' class='deletebtn w-button'></a> </div> </div>");
 			fileIdx++;
 		}
 	});
@@ -95,7 +95,7 @@
 		}
 		$.ajax({
 			type : 'post',
-			url : '/global/contactInsert.do',
+			url : '/wesell/contactInsert.do',
 			data : data,
 			processData : false,
 			contentType : false,

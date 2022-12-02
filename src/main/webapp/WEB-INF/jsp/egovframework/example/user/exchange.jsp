@@ -11,11 +11,11 @@
 	data-wf-site="6180a71858466749aa0b95bc">
 <head>
 <meta charset="utf-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body2">
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrame.jsp"></jsp:include>
 			<div class="asset_block">
@@ -137,7 +137,7 @@
 				</div>
 			</div>
 		</div>
-	<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+	<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 	<script
 		src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6180a71858466749aa0b95bc"
@@ -366,7 +366,7 @@
 			$.ajax({
 				type : 'post',
 				data : data,
-				url : '/global/user/exchangeProcess.do',
+				url : '/wesell/user/exchangeProcess.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {
@@ -591,7 +591,7 @@
 		}
 		window.addEventListener("load", initAPI, false);
 	</script>
-	<script src="../js/webflow.js" type="text/javascript"></script>
+	<script src="../js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

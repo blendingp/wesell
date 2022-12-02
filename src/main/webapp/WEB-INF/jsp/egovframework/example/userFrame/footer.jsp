@@ -11,10 +11,10 @@
 	<div class="footer <c:if test="${nowpage eq 'tradep'}"> _2</c:if>">
 		<div class="footer_block">
 			<div class="f_wrap">
-				<div class="footerlogoblock"><img src="/global/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="footerlogo"></div>
+				<div class="footerlogoblock"><img src="/wesell/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="footerlogo"></div>
 				<div class="footerlist_warp">
 					<div class="footerlist_block">
-						<div class="footerlist_title" style="cursor: pointer;" onclick="location.href='/global/user/main.do'">
+						<div class="footerlist_title" style="cursor: pointer;" onclick="location.href='/wesell/user/main.do'">
 							<spring:message code="menu.main" />
 						</div>
 					</div>
@@ -22,29 +22,29 @@
 						<div class="footerlist_title">
 							<spring:message code="menu.deal" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/trade.do?betMode=usdt'"><spring:message code="menu.futuresCoin"/></div>
-						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/trade.do?betMode=inverse'"><spring:message code="menu.spotCoin"/></div> --%>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/trade.do?betMode=usdt'"><spring:message code="menu.futuresCoin"/></div>
+						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/trade.do?betMode=inverse'"><spring:message code="menu.spotCoin"/></div> --%>
 						
 					</div>
 					<div class="footerlist_block">
 						<div class="footerlist_title">
 							<spring:message code="detail.copy" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/traderList.do'"><spring:message code="trader.follow1"/></div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/traderFollowerOrder.do'"><spring:message code="trader.myTrading"/></div>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/traderList.do'"><spring:message code="trader.follow1"/></div>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/traderFollowerOrder.do'"><spring:message code="trader.myTrading"/></div>
 					</div>
 					<div class="footerlist_block">
 						<div class="footerlist_title">
 							<spring:message code="menu.depandwith" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/myasset.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/myasset.do'">
 							<spring:message code="menu.depandwith"/>
 						</div>
-						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/kmyasset.do'">
+						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/kmyasset.do'">
 							KRW <spring:message code="menu.depandwith"/>
 						</div>
 						 --%>
-<!-- 						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/p2pbuy.do'"> -->
+<!-- 						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/p2pbuy.do'"> -->
 <%-- 							<spring:message code="wallet.p2p.trade_1"/> --%>
 <!-- 						</div> -->
 					</div>
@@ -52,16 +52,16 @@
 						<div class="footerlist_title">
 							<spring:message code="support.center" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/customerService.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/customerService.do'">
 							<spring:message code="support.center" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/notice.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/notice.do'">
 							<spring:message code="menu.notice" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/faq.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/faq.do'">
 							<spring:message code="menu.faq"/>
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/helpCenter.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/helpCenter.do'">
 							<spring:message code="submitRequest" />
 						</div>
 						
@@ -70,10 +70,10 @@
 						<div class="footerlist_title">
 							<spring:message code="menu.mypage" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/tradeHistory.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/tradeHistory.do'">
 							<spring:message code="trade.tradeHistory" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/global/user/fundingHistory.do'">
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/fundingHistory.do'">
 							<spring:message code="menu.fundingHistory"/>
 						</div>						
 					</div>

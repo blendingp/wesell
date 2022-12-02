@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Futures Trade</title>
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <style>
 input[type=range]::-webkit-slider-thumb {
@@ -22,11 +22,11 @@ input[type=range]::-webkit-slider-thumb {
 </style>
 <body class="body1">
 	<div class="frame">
-	<jsp:include page="../userFrame/top.jsp"></jsp:include>
+	<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 	<div class="frame6">
 		<div class="block">
 			<div class="maintananceblock">
-				<img src="/global/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="image-40">
+				<img src="//webflow/images2/sub_logo1.svg" loading="lazy" alt="" class="image-40">
 					<div class="title4">
 						<spring:message code="pop.ServiceRest_1" />
 						<span class="text-span-16">
@@ -45,7 +45,7 @@ input[type=range]::-webkit-slider-thumb {
 				</div>
 		</div>
 	</div>
-	<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+	<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

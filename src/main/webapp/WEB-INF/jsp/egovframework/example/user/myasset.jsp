@@ -10,7 +10,7 @@
 <html data-wf-page="62b16a1ad874f735cccc57cd" data-wf-site="62b1125ac4d4d60ab9c62f81">
 <head>
 <meta charset="utf-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <style>
 .asset_coininfo_txt {
 	min-width: 150px;
@@ -116,7 +116,7 @@
 <body class="body2">
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrame.jsp"></jsp:include>
 			<div class="asset_block">
@@ -152,7 +152,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/BTCicon_img_2BTCicon_img.png"
+									<img src="../webflow/images2/BTCicon_img_2BTCicon_img.png"
 										loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">BTC</div>
 								</div>
@@ -171,7 +171,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/USDTicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/USDTicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">USDT</div>
 								</div>
@@ -191,7 +191,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/ETHicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/ETHicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">ETH</div>
 								</div>
@@ -209,7 +209,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/TRXicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/TRXicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">TRX</div>
 								</div>
@@ -227,7 +227,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/XRPicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/XRPicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">XRP</div>
 								</div>
@@ -274,14 +274,14 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 	<script
 		src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6180a71858466749aa0b95bc"
 		type="text/javascript"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
-		<script src="../js/webflow.js" type="text/javascript"></script>
+		<script src="../js/webflow2.js" type="text/javascript"></script>
 	<script>
 	var cfnum = 5;
 	function coinPosUpdate() {

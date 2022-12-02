@@ -34,14 +34,14 @@ function page(pageNo){
 	                	<c:if test="${level eq 'user'}"> 일반 회원 목록 </c:if>
 	                	<c:if test="${level eq 'chong'}"> 총판 목록 </c:if>
 					</h1>
-		            <button type="button" class="btn btn-info" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/createTestUser.do'" style="margin-bottom:10px;">테스트 유저/총판 생성</button>
-		            <button type="button" class="btn btn-primary" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/createChong.do'" style="margin-bottom:10px;">일반 총판 생성</button>
+		            <button type="button" class="btn btn-info" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/createTestUser.do'" style="margin-bottom:10px;">테스트 유저/총판 생성</button>
+		            <button type="button" class="btn btn-primary" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/createChong.do'" style="margin-bottom:10px;">일반 총판 생성</button>
 		            <div class="card shadow mb-4">
 		                <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">member</h6>
                         </div>		                        
 						<div class="card-body">
-						   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do" name="listForm" id="listForm">
+						   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do" name="listForm" id="listForm">
 						   		<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1"/>
 								<input type="hidden" name="level" id="level" value="${level}"/>
@@ -136,7 +136,7 @@ function page(pageNo){
 									<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 									<tbody>
 										<c:forEach var="item" items="${list}" varStatus="i">
-											<tr onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer; background-color:${item.color}">
+											<tr onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer; background-color:${item.color}">
 												<td>${item.idx}&nbsp;</td>
 												<td>${item.name}&nbsp;
 													<c:if test="${item.parent ne null && item.parent ne ''}">
@@ -176,7 +176,7 @@ function page(pageNo){
 														</c:if>
 														<c:if test="${item.fkey ne null}">
 															(등록)
-															<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/kycInfo.do?idx=${item.idx}'" class="btn btn-info btn-sm pEventSkip">확인</button>
+															<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/kycInfo.do?idx=${item.idx}'" class="btn btn-info btn-sm pEventSkip">확인</button>
 														</c:if>
 														<button type="button" class="btn btn-primary btn-sm pEventSkip" onclick="kycConfirm(${item.idx} , true)">승인</button>
 	                                            		<button type="button" class="btn btn-danger btn-sm pEventSkip" onclick="kycConfirm(${item.idx} , false)">미승인</button>
@@ -223,7 +223,7 @@ function page(pageNo){
 	function popParent(parentCode){
 		var width = window.screen.width/2;
 		var height = window.screen.height;
-		window.open('/global/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?searchSelect=inviteMem&search='+parentCode,'','width='+width+',height='+height+',left='+width+',location=no,status=no,scrollbars=yes');
+		window.open('/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?searchSelect=inviteMem&search='+parentCode,'','width='+width+',height='+height+',left='+width+',location=no,status=no,scrollbars=yes');
 	}
 	function changeColor(){
 		checkForm(0);
@@ -258,7 +258,7 @@ function page(pageNo){
 		if(confirm("변경하시겠습니까?")){
 			$.ajax({
 				type : 'get',
-				url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/changeJstat.do?idx='+idx+'&jstat='+kind,
+				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/changeJstat.do?idx='+idx+'&jstat='+kind,
 				success:function(data){
 					alert(data.msg);
 					location.reload();
@@ -277,7 +277,7 @@ function page(pageNo){
 		
 		$.ajax({
 			type : 'get',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/kycConfirm.do?idx='+idx+'&confirm='+cf+"&text="+text,
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/kycConfirm.do?idx='+idx+'&confirm='+cf+"&text="+text,
 			success:function(data){
 				alert(data.msg);
 				location.reload();

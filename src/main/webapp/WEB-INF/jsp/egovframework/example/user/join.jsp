@@ -9,15 +9,15 @@
 <html data-wf-page="6344e745b7a4c981c4be68a6" data-wf-site="6344e745b7a4c962c3be683c" >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body1">
 	<form id="joinFrm" class="form-5">
 		<div class="frame">
-			<jsp:include page="../userFrame/top.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 			<div class="frame4 regist" >
 				<div class="login_block">
-					<div class="loginblock" style="display:flex;"><img src="/global/webflow/images/main_logo1.svg" loading="lazy" data-w-id="ea9f9d47-59cb-1533-1095-666329c4628b" alt="" class="login_logo">
+					<div class="loginblock" style="display:flex;"><img src="/wesell/webflow/images2/main_logo1.svg" loading="lazy" data-w-id="ea9f9d47-59cb-1533-1095-666329c4628b" alt="" class="login_logo">
 						<div class="title4"><spring:message code="menu.register" /></div>
 						<div class="w-form">
 							<div class="regist_btnwarp">
@@ -107,7 +107,7 @@
 			<div class="registpop_blcok">
 				<div class="pop_exist">
 					<img onclick="javascript:$('#phonePop').css('display', 'none')"
-						src="/global/webflow/images/wx.png" loading="lazy" alt=""
+						src="/wesell/webflow/images2/wx.png" loading="lazy" alt=""
 						class="image-38">
 				</div>
 				<div class="poptitle">
@@ -142,7 +142,7 @@
 			<div class="registpop_blcok">
 				<div class="pop_exist">
 					<img onclick="javascript:$('#emailPop').css('display', 'none')"
-						src="/global/webflow/images/wx.png" loading="lazy" alt=""
+						src="/wesell/webflow/images2/wx.png" loading="lazy" alt=""
 						class="image-38">
 				</div>
 				<div class="poptitle">
@@ -177,7 +177,7 @@
 				<div class="welcomepop">
 					<div class="registpop_blcok">
 						<div class="pop_exist">
-							<img src="/global/webflow/images/wx.png" loading="lazy" alt=""
+							<img src="/wesell/webflow/images2/wx.png" loading="lazy" alt=""
 								class="image-38">
 						</div>
 						<div class="poptitle welcome">
@@ -201,10 +201,10 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</form>
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="	crossorigin="anonymous"></script>
-	<script src="/global/webflow/js/webflow.js" type="text/javascript"></script>
+	<script src="/wesell/webflow/js/webflow2.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		function SetNum(obj) {
@@ -228,7 +228,7 @@
 				data : {
 					'phone' : $("#phone").val()
 				},
-				url : '/global/verificationPhoneJoin.do',
+				url : '/wesell/verificationPhoneJoin.do',
 				success : function(data) {
 					sendingPhone = false;
 					alert(data.msg);
@@ -249,7 +249,7 @@
 				data : {
 					'pCode' : $("#pCode").val()
 				},
-				url : '/global/checkPhoneCode.do',
+				url : '/wesell/checkPhoneCode.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == 'success') {
@@ -270,7 +270,7 @@
 				data : {
 					'email' : $("#email").val()
 				},
-				url : '/global/verificationEmailJoin.do',
+				url : '/wesell/verificationEmailJoin.do',
 				success : function(data) {
 					sendingEmail = false;
 					alert(data.msg);
@@ -286,7 +286,7 @@
 				data : {
 					'eCode' : $("#eCode").val()
 				},
-				url : '/global/checkEmailCode.do',
+				url : '/wesell/checkEmailCode.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == 'success') {
@@ -338,12 +338,12 @@
 			$.ajax({
 				type : 'post',
 				data : data,
-				url : '/global/joinProcess.do',
+				url : '/wesell/joinProcess.do',
 				success : function(data) {
 					joining = false;
 					alert(data.msg);
 					if (data.result == 'success') {
-						location.href = "/global/login.do";
+						location.href = "/wesell/login.do";
 					}
 				}
 			})

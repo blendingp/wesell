@@ -18,79 +18,61 @@
 </style>
 	<div class="top">
 		<div class="topblock">
-			<div class="mob_sidebtn" onclick="mobMenu()"><img src="/global/webflow/images/menu_square_white.svg" loading="lazy" alt="" class="image-44"></div>
-			<div class="logoblock" onclick="location.href='/global/user/main.do'">
-				<img src="/global/webflow/images/sub_logo1.svg" class="logo">
+			<div class="mob_sidebtn" onclick="mobMenu()"><img src="/wesell/webflow/images/menu_square_white.svg" loading="lazy" alt="" class="image-44"></div>
+			<div class="logoblock" onclick="location.href='/wesell/user/main.do'">
+				<img src="/wesell/webflow/images/sub_logo1.svg" class="logo">
 			</div>
 			<div class="top_menubtnlist">
 				<div class="topmenubtn">
-					<a href="/global/user/main.do" class="topbtn <c:if test="${currentP eq 'main'}">click</c:if> w-button"><spring:message code="menu.main"/></a>
+					<a href="/wesell/user/main.do" class="topbtn <c:if test="${currentP eq 'main'}">click</c:if> w-button"><spring:message code="menu.main"/></a>
 				</div>
 				<div class="topmenubtn">
-					<a href="/global/trade.do" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="trade.trade"/></a>
-				</div>
- 				<%-- <div class="topmenubtn tall"> 
- 					<img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow"> 
- 					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="menu.deal"/></a> 
- 					<div class="topbtn_drop tall"> 
- 						<a href="/global/trade.do?betMode=usdt" class="button-14-copy w-button"><spring:message code="menu.futuresCoin"/></a>
- 						<a href="/global/tradeSpot.do" class="button-14-copy w-button">SPOT</a>  
- 						<a href="/global/trade.do?betMode=inverse" class="button-14-copy w-button"><spring:message code="menu.spotCoin"/></a> 
- 					</div> 
- 				</div> --%>
-				<div class="topmenubtn tall">
-					<img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
-					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'trader'}">click</c:if> w-button"><spring:message code="detail.copy"/></a>
-					<div class="topbtn_drop tall">
-						<a href="/global/user/traderList.do" class="button-14-copy w-button"><spring:message code="trader.follow1"/></a> 
-						<a href="/global/user/traderFollowerOrder.do" class="button-14-copy w-button"><spring:message code="trader.myTrading"/></a> 
-					</div>
+					<a href="/wesell/tradeSpot.do" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="trade.trade"/></a>
 				</div>
 				<div class="topmenubtn">
-					<img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
+					<img src="/wesell/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
  					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'wallet'}">click</c:if> w-button"><spring:message code="menu.depandwith"/></a> 
 					<div class="topbtn_drop">
-						<a href="/global/user/myasset.do" class="button-14-copy w-button"><spring:message code="menu.depandwith"/></a> 
-						<%-- <a href="/global/user/kmyasset.do" class="button-14-copy w-button krw_menu">KRW <spring:message code="menu.depandwith"/></a> --%> 
-						<%-- <a href="/global/user/transactions.do" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
-						<a href="/global/user/exchange.do" class="button-14-copy w-button"><spring:message code="wallet.menu.exchange"/></a> 
-						<a href="/global/user/transfer.do" class="button-14-copy w-button"><spring:message code="wallet.futuresExchange"/></a> 
-						<a href="/global/user/requestList.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawallist"/></a> --%> 
- 						<a href="/global/user/p2pbuy.do" class="button-14-copy w-button"><spring:message code="wallet.p2p.trade_1"/></a>
+						<a href="/wesell/user/myasset.do" class="button-14-copy w-button"><spring:message code="menu.depandwith"/></a> 
+						<%-- <a href="/wesell/user/kmyasset.do" class="button-14-copy w-button krw_menu">KRW <spring:message code="menu.depandwith"/></a> --%> 
+						<%-- <a href="/wesell/user/transactions.do" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
+						<a href="/wesell/user/exchange.do" class="button-14-copy w-button"><spring:message code="wallet.menu.exchange"/></a> 
+						<a href="/wesell/user/transfer.do" class="button-14-copy w-button"><spring:message code="wallet.futuresExchange"/></a> 
+						<a href="/wesell/user/requestList.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawallist"/></a> --%> 
 					</div>
 				</div>
 				<div class="topmenubtn tall">
-					<img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
+					<img src="/wesell/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
  					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'customer'}">click</c:if> w-button"><spring:message code="menu.support"/></a> 
 					<div class="topbtn_drop tall">
-						<a href="/global/customerService.do" class="button-14-copy w-button"><spring:message code="menu.support" /></a> 
-						<a href="/global/notice.do" class="button-14-copy w-button"><spring:message code="menu.notice" /></a> 
-						<a href="/global/faq.do" class="button-14-copy w-button"><spring:message code="menu.faq"/></a> 
-						<a href="/global/user/helpCenter.do" class="button-14-copy w-button"><spring:message code="submitRequest" /></a> 
+						<a href="/wesell/customerService.do" class="button-14-copy w-button"><spring:message code="menu.support" /></a> 
+						<a href="/wesell/notice.do" class="button-14-copy w-button"><spring:message code="menu.notice" /></a> 
+						<a href="/wesell/faq.do" class="button-14-copy w-button"><spring:message code="menu.faq"/></a> 
+						<a href="/wesell/user/helpCenter.do" class="button-14-copy w-button"><spring:message code="submitRequest" /></a> 
 					</div>
 					<%-- <a href="#" class="button-3 w-button servicep"><spring:message code="menu.support"/></a> --%>
 				</div>
 				<div class="topmenubtn tall">
-					<img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
+					<img src="/wesell/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
 					<a href="#" onclick="dropToggle(this)" class="topbtn <c:if test="${currentP eq 'mypage'}">click</c:if> w-button"><spring:message code="menu.mypage"/></a> 
 					<div class="topbtn_drop tall">
-						<a href="/global/user/tradeHistory.do" class="button-14-copy w-button"><spring:message code="trade.tradeHistory"/></a>
+						<a href="/wesell/user/tradeHistory.do" class="button-14-copy w-button"><spring:message code="trade.tradeHistory"/></a>
 <%-- 						<c:if test="${userLevel eq 'chong'}">  --%>
-<%-- 							<a href="/global/user/referells.do" class="button-14-copy w-button"><spring:message code="menu.referrals"/></a> --%>
+<%-- 							<a href="/wesell/user/referells.do" class="button-14-copy w-button"><spring:message code="menu.referrals"/></a> --%>
 <%-- 						</c:if>  --%>
-						<a href="/global/user/tradeSpotHistory.do" class="button-14-copy w-button"><spring:message code="pop.show.SpotHistory"/></a>
-						<a href="/global/user/fundingHistory.do" class="button-14-copy w-button"><spring:message code="menu.fundingHistory"/></a>
+						<a href="/wesell/user/tradeSpotHistory.do" class="button-14-copy w-button"><spring:message code="pop.show.SpotHistory"/></a>
+						<a href="/wesell/user/fundingHistory.do" class="button-14-copy w-button"><spring:message code="menu.fundingHistory"/></a>
 					</div>
 				<%-- <a href="javascript:menuShow('mypageMenu')" class="button-3 w-button"><spring:message code="menu.mypage"/></a> --%> 
 				</div>
 			</div>
 			<div class="top_leftblock">
              	<c:if test="${userIdx eq null}">
-					<a href="/global/login.do" class="loginbtn <c:if test="${currentP eq 'login'}">click</c:if> w-button"><spring:message code="menu.login"/></a>
-					<a href="/global/join.do" class="registbtn <c:if test="${currentP eq 'join'}">click</c:if> w-button"><spring:message code="menu.register"/></a>
+					<a href="/wesell/login.do" class="loginbtn <c:if test="${currentP eq 'login'}">click</c:if> w-button"><spring:message code="menu.login"/></a>
+					<a href="/wesell/join.do" class="registbtn <c:if test="${currentP eq 'join'}">click</c:if> w-button"><spring:message code="menu.register"/></a>
 				</c:if>
            		<c:if test="${userIdx ne null}">
-           			<a href="/global/user/myInfo.do" class="registbtn <c:if test="${currentP eq 'myInfo'}">click</c:if> w-button"><spring:message code="join.info"/></a> 
+           			<a href="/wesell/user/myInfo.do" class="registbtn <c:if test="${currentP eq 'myInfo'}">click</c:if> w-button"><spring:message code="join.info"/></a> 
            			<a href="javascript:logout()" class="registbtn w-button"><spring:message code="menu.logout"/></a>
            		</c:if>
 				<div class="topmenubtn2">
@@ -101,7 +83,7 @@
                 		<c:if test="${lang eq 'JP'}">日本語</c:if>
                 		<c:if test="${lang eq 'CH'}">简体中文</c:if>
                 		<c:if test="${lang eq 'FC'}">Français</c:if>
-                	</a><img src="/global/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
+                	</a><img src="/wesell/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
 	                <div class="topbtn_drop">
 	                  <a href="javascript:changeLang2('EN')" class="button-14-copy w-button">English</a>
 	                  <c:if test="${userIdx ne null and isKrCode eq true}">
@@ -120,111 +102,111 @@
 			<div class="aside_profile">
 				<div class="asidewarp">
 					<c:if test="${userIdx ne null}">
-						<img src="/global/webflow/images/account_1white.svg" loading="lazy" alt="" class="image-44">
+						<img src="/wesell/webflow/images/account_1white.svg" loading="lazy" alt="" class="image-44">
 						<div class="text-block-17">
 							<span class="profilename">${userName } </span><spring:message code="menu.nim"/>
 						</div>
 					</c:if>
 					<c:if test="${userIdx eq null}">
-						<div class="text-block-17" onclick="location.href='/global/login.do'">
+						<div class="text-block-17" onclick="location.href='/wesell/login.do'">
 							<span><spring:message code="menu.login"/></span>
 						</div>
 					</c:if>
 				</div>
 				<c:if test="${userIdx ne null}">
-					<div class="text-block-21" onclick="location.href='/global/user/myInfo.do'"><spring:message code="join.info"/></div>
+					<div class="text-block-21" onclick="location.href='/wesell/user/myInfo.do'"><spring:message code="join.info"/></div>
 				</c:if>
 			</div>
 			<div class="asideblock">
-				<div class="asidelist" onclick="location.href='/global/user/main.do'">
+				<div class="asidelist" onclick="location.href='/wesell/user/main.do'">
 					<div><spring:message code="menu.main"/></div>
 				</div>
 				<div class="asidelist additionalbtn">
 					<div><spring:message code="menu.deal"/></div>
-					<img src="/global/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
+					<img src="/wesell/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
 				</div>
-				<div class="asidelist" onclick="location.href='/global/trade.do?betMode=usdt'">
+				<div class="asidelist" onclick="location.href='/wesell/trade.do?betMode=usdt'">
 					<div><spring:message code="trade.trade"/></div>
 				</div>
 <!-- 				<div class="aasidedrop" style="display:none;"> -->
-<!-- 					<div class="asidelist" onclick="location.href='/global/trade.do?betMode=usdt'"> -->
+<!-- 					<div class="asidelist" onclick="location.href='/wesell/trade.do?betMode=usdt'"> -->
 <%-- 						<div><spring:message code="menu.futuresCoin"/></div> --%>
 <!-- 					</div> -->
-<!-- 					<div class="asidelist" onclick="location.href='/global/trade.do?betMode=inverse'"> -->
+<!-- 					<div class="asidelist" onclick="location.href='/wesell/trade.do?betMode=inverse'"> -->
 <%-- 						<div><spring:message code="menu.spotCoin"/></div> --%>
 <!-- 					</div> -->
 <!-- 				</div> -->
 				 <div class="asidelist additionalbtn">
 					<div><spring:message code="detail.copy"/></div>
-					<img src="/global/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
+					<img src="/wesell/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
 				</div>
 				<div class="aasidedrop" style="display:none;">
-					<div class="asidelist" onclick="location.href='/global/user/traderList.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/traderList.do'">
 						<div><spring:message code="trader.follow1"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/user/traderFollowerOrder.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/traderFollowerOrder.do'">
 						<div><spring:message code="trader.myTrading"/></div>
 					</div>
 				</div>
 				<div class="asidelist additionalbtn">
 					<div><spring:message code="menu.depandwith"/></div>
-					<img src="/global/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
+					<img src="/wesell/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
 				</div>
 				<div class="aasidedrop" style="display:none;">
-					<div class="asidelist" onclick="location.href='/global/user/myasset.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/myasset.do'">
 						<div><spring:message code="menu.depandwith"/></div>
 					</div>
-					<%-- <div class="asidelist" class="krw_menu" onclick="location.href='/global/user/kmyasset.do'">
+					<%-- <div class="asidelist" class="krw_menu" onclick="location.href='/wesell/user/kmyasset.do'">
 						<div>KRW <spring:message code="menu.depandwith"/></div>
 					</div> --%>
-					<%-- <div class="asidelist" onclick="location.href='/global/user/transactions.do'">
+					<%-- <div class="asidelist" onclick="location.href='/wesell/user/transactions.do'">
 						<div><spring:message code="wallet.DeandWithHistory_m"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/user/exchange.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/exchange.do'">
 						<div><spring:message code="wallet.menu.exchange"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/user/transfer.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/transfer.do'">
 						<div><spring:message code="wallet.futuresExchange"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/user/requestList.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/requestList.do'">
 						<div><spring:message code="wallet.withdrawallist"/></div>
 					</div> --%>
- 					<div class="asidelist" onclick="location.href='/global/user/p2pbuy.do'">
+ 					<div class="asidelist" onclick="location.href='/wesell/user/p2pbuy.do'">
  						<div><spring:message code="wallet.p2p.trade_1"/></div> 
  					</div>
 				</div>
 				<div class="asidelist additionalbtn">
 					<div><spring:message code="menu.support"/></div>
-					<img src="/global/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
+					<img src="/wesell/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
 				</div>
 				<div class="aasidedrop" style="display:none;">
-					<div class="asidelist" onclick="location.href='/global/customerService.do'">
+					<div class="asidelist" onclick="location.href='/wesell/customerService.do'">
 						<div><spring:message code="menu.support"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/notice.do'">
+					<div class="asidelist" onclick="location.href='/wesell/notice.do'">
 						<div><spring:message code="menu.notice"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/faq.do'">
+					<div class="asidelist" onclick="location.href='/wesell/faq.do'">
 						<div><spring:message code="menu.faq"/></div>
 					</div>
-					<div class="asidelist" onclick="location.href='/global/user/helpCenter.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/helpCenter.do'">
 						<div><spring:message code="submitRequest"/></div>
 					</div>
 				</div>
 				<div class="asidelist additionalbtn">
 					<div><spring:message code="menu.mypage"/></div>
-					<img src="/global/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
+					<img src="/wesell/webflow/images/arrow_up.svg" loading="lazy" alt="" class="image-45 menuarrow" style="transform: rotate(0deg);">
 				</div>
 				<div class="aasidedrop" style="display:none;">
-					<div class="asidelist" onclick="location.href='/global/user/tradeHistory.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/tradeHistory.do'">
 						<div><spring:message code="trade.tradeHistory"/></div>
 					</div>
 <%-- 						<c:if test="${userLevel eq 'chong'}"> --%>
-<!-- 							<div class="asidelist" onclick="location.href='/global/user/referells.do'"> -->
+<!-- 							<div class="asidelist" onclick="location.href='/wesell/user/referells.do'"> -->
 <%-- 								<div><spring:message code="menu.referrals"/></div> --%>
 <!-- 							</div> -->
 <%-- 						</c:if> --%>
-					<div class="asidelist" onclick="location.href='/global/user/fundingHistory.do'">
+					<div class="asidelist" onclick="location.href='/wesell/user/fundingHistory.do'">
 						<div><spring:message code="menu.fundingHistory"/></div>
 					</div>
 				</div>
@@ -240,7 +222,7 @@
 	function getExchangeRate() {
 		jQuery.ajax({
 			type : 'get',
-			url : '/global/getExchangeRate.do',
+			url : '/wesell/getExchangeRate.do',
 			async : false,
 			success : function(data) {
 				exRate = Number(data.exRate);
@@ -254,12 +236,12 @@
 	function logout() {
 		$.ajax({
 			type : 'post',
-			url : '/global/logoutProcess.do',
+			url : '/wesell/logoutProcess.do',
 			success : function(data) {
 				/* showPopup(data.msg, data.level); */
 				if (data.result == 'success') {
 					alert(data.msg);
-					location.href = "/global/login.do";
+					location.href = "/wesell/login.do";
 				}
 			}
 		})
@@ -278,7 +260,7 @@
 		
 		$.ajax({
 			type : 'post',
-			url : '/global/changeLanguage.do?lang=' + clang,
+			url : '/wesell/changeLanguage.do?lang=' + clang,
 			success : function(data) {
 				location.reload(true);
 			}
@@ -291,7 +273,7 @@
 		
 		$.ajax({
 			type : 'post',
-			url : '/global/changeLanguage.do?lang=' + lang,
+			url : '/wesell/changeLanguage.do?lang=' + lang,
 			success : function(data) {
 				location.reload(true);
 			}

@@ -8,10 +8,10 @@
 </head>
 <div class="influ_top">
 	<div class="mob_sidebtn" onclick="$('.influ_block2 , .mobbackdark').css('display' , 'block');">
-		<img src="/global/webflow/images/Menu_icon.png" loading="lazy" alt="" class="image-52">
+		<img src="/wesell/webflow/images/Menu_icon.png" loading="lazy" alt="" class="image-52">
 	</div>
 	<a href="javascript:getProfitImage()" class="button-23 w-button">수익인증</a>&ensp;
-	<a href="/global/infl/logout.do" class="button-23 w-button">로그아웃</a>
+	<a href="/wesell/infl/logout.do" class="button-23 w-button">로그아웃</a>
 </div>
 <div class="settle-complete" id="settlePop" style="display: none; z-index: 15; letter-spacing: -0.5px; font-family:'Nanumsquareotf ac', sans-serif;">
 	<div class="body-2 settle-complete__box">
@@ -19,7 +19,7 @@
 			<div class="pop_yieldtxt up">
 				<span id="pop_profit">52.26%</span><span class="text-span-12">Profit Rate</span>
 			</div>
-			<img src="/global/webflow/images/sub_logo1.svg" loading="lazy" alt=""
+			<img src="/wesell/webflow/images/sub_logo1.svg" loading="lazy" alt=""
 				class="image-68">
 		</div>
 		<div class="div-block-124">
@@ -48,7 +48,7 @@
 		</div>
 		<a href="#" onclick="$('#settlePop').css('display','none');"
 			class="popx w-inline-block"><img
-			src="/global/webflow/images/wx.png" loading="lazy" sizes="100vw"
+			src="/wesell/webflow/images/wx.png" loading="lazy" sizes="100vw"
 			alt="" class="popximg"></a>
 	</div>
 	<br>

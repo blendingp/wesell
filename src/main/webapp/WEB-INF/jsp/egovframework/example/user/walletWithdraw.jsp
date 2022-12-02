@@ -32,7 +32,7 @@
 </style>
 <head>
 <meta charset="utf-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <script>
 	var overMargin = new Array(0, 0, 0, 0, 0);
 	var longSise = new Array(0, 0, 0, 0, 0); // 코인별 매수 시세 
@@ -175,7 +175,7 @@
 // 		tmpEmail = "${user.email}";
 // 		if (tmpEmail == "") {
 // 			alert("<spring:message code='join.emailconfirm'/>");
-// 			location.href = "/global/user/myInfo.do";
+// 			location.href = "/wesell/user/myInfo.do";
 // 		}
 		if (sending)
 			return;
@@ -261,7 +261,7 @@
 		
 // 		if (emailconfirm == 0) {
 // 			alert("<spring:message code='pop.wallet.emailRequired'/>");
-// 			location.href = "/global/user/myInfo.do";
+// 			location.href = "/wesell/user/myInfo.do";
 // 			return;
 // 		}
 
@@ -274,8 +274,8 @@
 		$("#withdrawAmount").val(amount);
 		$("#withCoin").val(selectedCoin);
 		sending = true;
-// 		var vurl = '/global/user/withdrawEmail.do';
-		var vurl = '/global/user/withdrawPhone.do';
+// 		var vurl = '/wesell/user/withdrawEmail.do';
+		var vurl = '/wesell/user/withdrawPhone.do';
 		$.ajax({
 			type : 'post',
 			data : {
@@ -413,7 +413,7 @@
 		<input type="hidden" name="withCoin" id="withCoin">
 	</form>
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrame.jsp"></jsp:include>
 			<div class="asset_block">
@@ -441,7 +441,7 @@
 							<div class="asset_coininfoblock"
 								onclick="coinToggle(this, 'BTC')" slide="on">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images2/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">BTC</div>
 								</div>
 								<div class="asset_coininfo">
@@ -509,7 +509,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'USDT')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/USDTicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images2/USDTicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">USDT</div>
 								</div>
 								<div class="asset_coininfo">
@@ -529,7 +529,7 @@
 								<div class="form-2">
 									<div class="trc_box" style="cursor: pointer;">
 										<div class="trc_txt">TRC 20</div>
-										<img src="/global/webflow/images/check_icon-2_1check_icon-2.png" loading="lazy" alt="" class="trc_img">
+										<img src="/wesell/webflow/images2/check_icon-2_1check_icon-2.png" loading="lazy" alt="" class="trc_img">
 									</div>
 									<label class="title2"><spring:message code="wallet.stockExchange" /></label>
 									<input type="text" class="text-field-3 w-input" maxlength="100" placeholder="<spring:message code="wallet.inputStockExchange"/>" id="USDTinStock">
@@ -585,7 +585,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'ETH')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/ETHicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images2/ETHicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">ETH</div>
 								</div>
 								<div class="asset_coininfo">
@@ -605,7 +605,7 @@
 								<div class="form-2">
 									<div class="trc_box" style="cursor: pointer;">
 										<div class="trc_txt">ERC 20</div>
-										<img src="/global/webflow/images/check_icon-2_1check_icon-2.png" loading="lazy" alt="" class="trc_img">
+										<img src="/wesell/webflow/images2/check_icon-2_1check_icon-2.png" loading="lazy" alt="" class="trc_img">
 									</div>
 									<label class="title2"><spring:message code="wallet.stockExchange" /></label>
 									<input type="text" class="text-field-3 w-input" maxlength="100" placeholder="<spring:message code="wallet.inputStockExchange"/>" id="ETHinStock">
@@ -662,7 +662,7 @@
 							<div class="asset_coininfoblock"
 								onclick="coinToggle(this, 'TRX')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/TRXicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images2/TRXicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">TRX</div>
 								</div>
 								<div class="asset_coininfo">
@@ -682,7 +682,7 @@
 								<div class="form-2">
 									<div class="trc_box" style="cursor: pointer;">
 										<div class="trc_txt">TRC 20</div>
-										<img src="/global/webflow/images/check_icon-2_1check_icon-2.png"
+										<img src="/wesell/webflow/images2/check_icon-2_1check_icon-2.png"
 											loading="lazy" alt="" class="trc_img">
 									</div>
 									<label class="title2"><spring:message code="wallet.stockExchange" /></label>
@@ -735,7 +735,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'XRP')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/XRPicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images2/XRPicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">XRP</div>
 								</div>
 								<div class="asset_coininfo">
@@ -798,11 +798,11 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		<div class="withrawlpop" id="codePop" style="display:none">
 				<div class="withrawlblock">
 					<div class="pop_exist" onClick="location.reload();" style="cursor:pointer; display:flex">
-						<img src="../webflow/images/wx.png" loading="lazy" alt="" class="image-38">
+						<img src="../webflow/images2/wx.png" loading="lazy" alt="" class="image-38">
 					</div>
 					<div class="title6"><spring:message code="wallet.withdrawal" /> <spring:message code="join.code" /></div>
 					<div class="form-block-14 w-form">
@@ -951,7 +951,7 @@
 			$.ajax({
 				type : 'post',
 				dataType : 'json',
-				url : '/global/user/userBalanceCheck.do',
+				url : '/wesell/user/userBalanceCheck.do',
 				success : function(data) {
 					alert(data.msg);
 				},
@@ -979,7 +979,7 @@
 					'code' : code
 				},
 				dataType : 'json',
-				url : '/global/user/requestListConfirm.do',
+				url : '/wesell/user/requestListConfirm.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {
@@ -1108,7 +1108,7 @@
 		}
 		window.addEventListener("load", initAPI, false);
 	</script>
-	<script src="../js/webflow.js" type="text/javascript"></script>
+	<script src="../js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

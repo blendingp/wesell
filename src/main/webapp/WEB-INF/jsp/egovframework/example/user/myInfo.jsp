@@ -12,7 +12,7 @@
 <title>My Info</title>
 <meta content="reward" property="og:title">
 <meta content="reward" property="twitter:title">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body2">
 	<div class="frame">
@@ -22,7 +22,7 @@
 			<input type="hidden" name="changeEmail" id="changeEmail" value="false" /> 
 			<input type="hidden" name="eCode" id="eCode" /> 
 			<input type="hidden" id="copyInput" />
-			<jsp:include page="../userFrame/top.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 			<div class="frame2">
 				<div class="accountblock">
 					<div class="title7"><spring:message code="join.info"/></div>
@@ -92,7 +92,7 @@
 								</c:if>
 								<c:if test="${info.level ne 'user'}">
 									<div class="text-block-31 nochange">${info.level}</div>
-									<a href="/global/infl/login.do" target="_blank" class="button-38 w-button">PARTNER</a>
+									<a href="/wesell/infl/login.do" target="_blank" class="button-38 w-button">PARTNER</a>
 								</c:if>
 							</div>
 <%-- 							<div class="title3"><spring:message code="menu.wallet"/></div> --%>
@@ -154,18 +154,18 @@
 					</div>
 <!-- 					<div class="accountbtn"> -->
 <%-- 						<a href="javascript:updateInfo()" class="button-21 w-button"><spring:message code="button.modify"/></a>  --%>
-<%-- 						<a href="/global/user/myInfo.do" class="button-21-copy w-button"><spring:message code="wallet.cancel"/></a> --%>
+<%-- 						<a href="/wesell/user/myInfo.do" class="button-21-copy w-button"><spring:message code="wallet.cancel"/></a> --%>
 <!-- 					</div> -->
-					<img src="/global/webflow/images/wallet-icon4.png" loading="lazy" alt="" class="asset_img">
+					<img src="/wesell/webflow/images2/wallet-icon4.png" loading="lazy" alt="" class="asset_img">
 				</div>
 			</div>
 		</form>
-			<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		
 		<div class="registpop" id="telegramPop" style="display: none">
 			<div class="registpop_blcok">
 				<div class="pop_exist" style="cursor: pointer;">
-					<img onclick="javascript:$('#telegramPop').css('display', 'none')" src="/global/webflow/images/wx.png" loading="lazy" alt="" class="image-38">
+					<img onclick="javascript:$('#telegramPop').css('display', 'none')" src="/wesell/webflow/images2/wx.png" loading="lazy" alt="" class="image-38">
 				</div>
 				<div class="poptitle">
 					<div class="title6">
@@ -188,7 +188,7 @@
 	</div>
 
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="/global/webflow/js/webflow.js" type="text/javascript"></script>
+	<script src="/wesell/webflow/js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -262,7 +262,7 @@
 					'kind' : id, 'value' : $("#"+id).val()
 				},
 				dataType : 'json',
-				url : '/global/user/updateBankInfo.do',
+				url : '/wesell/user/updateBankInfo.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {
@@ -282,7 +282,7 @@
 					'phone' : $("#phone").val()
 				},
 				dataType : 'json',
-				url : '/global/user/verificationPhone.do',
+				url : '/wesell/user/verificationPhone.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {
@@ -307,7 +307,7 @@
 					'changeEmail' : changeEmail
 				},
 				dataType : 'json',
-				url : '/global/user/verificationPhoneConfirm.do',
+				url : '/wesell/user/verificationPhoneConfirm.do',
 				success : function(data) {
 					if (data.result == "success") {
 						checkPhone = true;
@@ -335,7 +335,7 @@
 					'email' : $("#email").val()
 				},
 				dataType : 'json',
-				url : '/global/user/verificationEmailUpdate.do',
+				url : '/wesell/user/verificationEmailUpdate.do',
 				success : function(data) {
 					alert(data.msg);
 					// 					$("#email").attr("readonly","true");
@@ -364,7 +364,7 @@
 					'emailCode' : $("#emailCode").val()
 				},
 				dataType : 'json',
-				url : '/global/user/verificationEmailConfirm.do',
+				url : '/wesell/user/verificationEmailConfirm.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "success") {
@@ -405,7 +405,7 @@
 			$.ajax({
 				type : 'post',
 				data : data,
-				url : '/global/user/updateMyInfo.do',
+				url : '/wesell/user/updateMyInfo.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == 'success') {
@@ -419,7 +419,7 @@
 		}
 		function inviteCopy() {
 			$("#copyInput").attr("type", "text");
-			$("#copyInput").val("https://bitocean-global.com/global/join.do?invi=${info.inviteCode}");
+			$("#copyInput").val("https://bitocean-global.com/wesell/join.do?invi=${info.inviteCode}");
 			$("#copyInput").select();
 			document.execCommand('Copy');
 			$("#copyInput").attr("type", "hidden");
@@ -439,7 +439,7 @@
 			$.ajax({
 				type : 'post',
 				data : {"code":code, "pw":pw},
-				url : '/global/user/changePW.do',
+				url : '/wesell/user/changePW.do',
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == 'success') {
@@ -496,7 +496,7 @@
 		function getTelegramCode(){
 			$.ajax({
 				type : 'post',
-				url : '/global/user/getTelegramCode.do',
+				url : '/wesell/user/getTelegramCode.do',
 				success : function(data) {
 					if (data.result == "suc") {
 						$("#tCode").val(data.code);

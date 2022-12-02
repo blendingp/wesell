@@ -28,7 +28,7 @@ function page(pageNo){
 		                    <div class="panel panel-default">
 		                        <div class="panel-body">
 		                        	<div class="row">
-									   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/account/totalLog.do" name="listForm" id="listForm">
+									   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/totalLog.do" name="listForm" id="listForm">
 											<input type="hidden" name="pageIndex" value="1"/>
 											<input type="hidden" name="userIdx" value="${userIdx}"/>									
 										</form>

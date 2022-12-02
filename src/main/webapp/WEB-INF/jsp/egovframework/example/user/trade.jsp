@@ -9,7 +9,7 @@
 	data-wf-site="6073d35203881b197a7cdb93">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <style>
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
@@ -40,16 +40,16 @@ input[type=range]::-webkit-slider-thumb {
 
 <body class="body-2">
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="trade_frame">
 			<div class="trade_topblock">
 				<div class="tradetop_coin" onclick="coinMenu()" style="cursor:pointer; z-index:5;">
-					<img src="/global/webflow/images/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
-					<img src="/global/webflow/images/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
-					<img src="/global/webflow/images/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
-					<img src="/global/webflow/images/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
+					<img src="//webflow/images2/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
+					<img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
+					<img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
+					<img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
 					<div class="coinsub"><span class="qtycoinm">${coin}</span>USD<c:if test="${betMode eq 'usdt'}">T</c:if></div>
-					<img src="/global/webflow/images/arrow_up_white.svg" loading="lazy" alt="" class="image-41">
+					<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt="" class="image-41">
 					<div class="trade_coinsub" id="coinMenu" style="display:none; padding-top:0; top:100%;">
 						<div class="trade_coiningo_warp">
 							<div class="div-block-116">
@@ -62,10 +62,10 @@ input[type=range]::-webkit-slider-thumb {
 								<c:set var="lowCoin" value="${fn:toLowerCase(item)}"/>
 								<div class="trade_coinsublist coin_${lowCoin} changecoin" ctype="coin_${item}USDT">
 									<c:choose>
-										<c:when test="${item eq 'BTC'}"><img src="/global/webflow/images/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'ETH'}"><img src="/global/webflow/images/ETHicon45.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'TRX'}"><img src="/global/webflow/images/TRXicon45.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'XRP'}"><img src="/global/webflow/images/XRPicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'BTC'}"><img src="//webflow/images2/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'ETH'}"><img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'TRX'}"><img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'XRP'}"><img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="image-42"></c:when>
 									</c:choose>
 									<div class="text-block-15">${item}</div>
 									<div class="runtimequote-copy up"><span class="coinval color"></span></div>
@@ -84,7 +84,7 @@ input[type=range]::-webkit-slider-thumb {
 				</div>
 				<div class="tradetop_coin _2" onclick="infoMenu()">
 					<div class="coinsub">24h info</div>
-					<img src="/global/webflow/images/arrow_up_white.svg" loading="lazy" alt=""
+					<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt=""
 						class="image-41">
 					<div class="trade_coinsub _2" id="infoMenu">
 						<div class="_24h_box mobile">
@@ -246,7 +246,7 @@ input[type=range]::-webkit-slider-thumb {
 							<a href="javascript:positionTabChange('position')" class="order_topbtn click w-button tabbtn position"><spring:message code="trade.conclusion"/></a>
 							<a href="javascript:positionTabChange('olist')" class="order_topbtn w-button tabbtn olist"><spring:message code="trade.outstanding"/></a> 
 							<a href="javascript:positionTabChange('stopMarket')" class="order_topbtn w-button tabbtn stopMarket"><spring:message code="trade.stop2"/></a>
-							<a href="/global/user/tradeHistory.do" class="p_historybtn w-inline-block"><img src="/global/webflow/images/8666682_external_link_icon_18666682_external_link_icon.png" loading="lazy" alt="" class="p_history_img"></a>
+							<a href="//user/tradeHistory.do" class="p_historybtn w-inline-block"><img src="//webflow/images2/8666682_external_link_icon_18666682_external_link_icon.png" loading="lazy" alt="" class="p_history_img"></a>
 						</div>
 						<div class="position_box order olist" style="display:none;">
 							<div class="order_top1">
@@ -290,10 +290,10 @@ input[type=range]::-webkit-slider-thumb {
 								<div class="list_frame position">
 									<div class="position_notlogin" style="display: flex;">
 										<c:if test="${lang eq 'KO'}">
-											<span class="position_login" style="cursor:pointer;" onclick="location.href='/global/login.do'"><spring:message code="trade.loginOrSign_login"/></span> <spring:message code="trade.loginOrSign_or"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='/global/join.do'"><spring:message code="trade.loginOrSign_sign"/></span><spring:message code="trade.loginOrSign_start"/>
+											<span class="position_login" style="cursor:pointer;" onclick="location.href='//login.do'"><spring:message code="trade.loginOrSign_login"/></span> <spring:message code="trade.loginOrSign_or"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='//join.do'"><spring:message code="trade.loginOrSign_sign"/></span><spring:message code="trade.loginOrSign_start"/>
 										</c:if>
 										<c:if test="${lang ne 'KO'}">
-											<spring:message code="trade.loginOrSign_start"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='/global/login.do'"><spring:message code="trade.loginOrSign_login"/></span> <spring:message code="trade.loginOrSign_or"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='/global/join.do'"><spring:message code="trade.loginOrSign_sign"/></span>
+											<spring:message code="trade.loginOrSign_start"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='//login.do'"><spring:message code="trade.loginOrSign_login"/></span> <spring:message code="trade.loginOrSign_or"/> <span class="position_login" style="cursor:pointer;" onclick="location.href='//join.do'"><spring:message code="trade.loginOrSign_sign"/></span>
 										</c:if>
 									</div>
 								</div>
@@ -443,7 +443,7 @@ input[type=range]::-webkit-slider-thumb {
 												<span class="checkbox-label-3 w-form-label" for="checkbox"><spring:message code="trade.SL"/>/<spring:message code="trade.TP"/></span>
 											</label>
 										</div>
-<!-- 										<img src="/global/webflow/images/icon4.svg" loading="lazy" alt="" class="exicon"> -->
+<!-- 										<img src="//webflow/images2/icon4.svg" loading="lazy" alt="" class="exicon"> -->
 									</div>
 									<div class="order_tpslarea buyTpsl" id="buyTpsl_div" style="display:none;">
 										<div class="form-block w-form">
@@ -490,7 +490,7 @@ input[type=range]::-webkit-slider-thumb {
 								</div>
 								<div class="usdt-asset">
 									<div class="order_title">
-										USD<c:if test="${betMode eq 'usdt'}">T</c:if> <spring:message code="trade.asset"/><a href="/global/user/wallet.do" class="deposit"><spring:message code="wallet.deposit"/></a>
+										USD<c:if test="${betMode eq 'usdt'}">T</c:if> <spring:message code="trade.asset"/><a href="//user/wallet.do" class="deposit"><spring:message code="wallet.deposit"/></a>
 									</div>
 									<div class="tradelistbox2">
 										<div class="assetlist">
@@ -569,12 +569,12 @@ input[type=range]::-webkit-slider-thumb {
 		<div class="chart_bottom">
 			<div class="bottom_btn w-inline-block">
 				<spring:message code="trade.order_title"/>
-				<img src="/global/webflow/images/arrow_up_white.svg" loading="lazy" alt="" class="bottom_btnimg on">
+				<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt="" class="bottom_btnimg on">
 			</div>
 			<div class="bottom_box" style="display: none;">
 				<div class="usdt-asset b">
 					<div class="order_title">
-						USD<c:if test="${betMode eq 'usdt'}">T</c:if> <spring:message code="trade.asset"/><a href="/global/user/wallet.do" class="deposit"><spring:message code="wallet.deposit"/></a>
+						USD<c:if test="${betMode eq 'usdt'}">T</c:if> <spring:message code="trade.asset"/><a href="//user/wallet.do" class="deposit"><spring:message code="wallet.deposit"/></a>
 					</div>
 					<div class="tradelistbox2">
 						<div class="assetlist">
@@ -802,7 +802,7 @@ input[type=range]::-webkit-slider-thumb {
 				</div>
 				<div class="modepop">
 					<div class="modepop_box">
-						<div class="pop_exist" onclick="popDisplay('modepop','none')" style="cursor: pointer;"><img src="/global/webflow/images/wx_black.png" loading="lazy" sizes="100vw" srcset="/global/webflow/images/wx_black-p-800.png 800w, /global/webflow/images/wx_black-p-1080.png 1080w, /global/webflow/images/wx_black.png 1600w" alt="" class="image-38"></div>
+						<div class="pop_exist" onclick="popDisplay('modepop','none')" style="cursor: pointer;"><img src="//webflow/images2/wx_black.png" loading="lazy" sizes="100vw" srcset="//webflow/images2/wx_black-p-800.png 800w, //webflow/images2/wx_black-p-1080.png 1080w, //webflow/images2/wx_black.png 1600w" alt="" class="image-38"></div>
 						<div class="poptitle">
 							<div class="title6"><span class="qtycoinm">${coin}</span>USD<c:if test="${betMode eq 'usdt'}">T</c:if></div>
 						</div>
@@ -845,7 +845,7 @@ input[type=range]::-webkit-slider-thumb {
 			</div>
 		</div>
 
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 	<div style="display: none">
 		<div class="notBalance"><spring:message code='pop.transfer.notBalance' /></div>

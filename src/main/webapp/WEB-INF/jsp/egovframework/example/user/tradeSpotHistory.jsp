@@ -12,7 +12,7 @@
 <title>Transactional information</title>
 <meta content="transactional information" property="og:title">
 <meta content="transactional information" property="twitter:title">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <style>
 .settle-complete__box {
 	color:white
@@ -21,13 +21,13 @@
 </head>
 <body class="body2">
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<div class="asset_block">
 				<div class="assetbox">
 					<div class="assettitle"><spring:message code="trade.tradeHistory"/></div>
 					<div class="form-block-4 w-form">
-						<form id="listForm" name="listForm" action="/global/user/tradeSpotHistory.do" class="form-3">
+						<form id="listForm" name="listForm" action="/wesell/user/tradeSpotHistory.do" class="form-3">
 							<input type="hidden" name="pageIndex" /> 
 							<input type="hidden" name="date" id="date" value="${date}" />
 							<input type="hidden" name="endDate" id="endDate" value="${endDate}" /> 
@@ -117,14 +117,14 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		<div class="settle-complete" id="settlePop" style="display: none; z-index: 15; letter-spacing: -0.5px; font-family:'Nanumsquareotf ac', sans-serif;">
 			<div class="settle-complete__box">
 				<div class="div-block-84">
 					<div class="pop_yieldtxt revenue_color up">
 						<span id="pop_profit">52.26%</span><span class="text-span-12">Profit Rate</span>
 					</div>
-					<img src="/global/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="image-68">
+					<img src="/wesell/webflow/images2/sub_logo1.svg" loading="lazy" alt="" class="image-68">
 				</div>
 				<div class="div-block-124">
 					<div class="div-block-85">
@@ -152,13 +152,13 @@
 				</div>
 				<a href="#" onclick="$('#settlePop').css('display','none');"
 					class="popx w-inline-block"><img
-					src="/global/webflow/images/wx.png" loading="lazy" sizes="100vw"
+					src="/wesell/webflow/images2/wx.png" loading="lazy" sizes="100vw"
 					alt="" class="popximg"></a>
 			</div>
 		</div>
 	</div>
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93"type="text/javascript"integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="/global/webflow/js/webflow.js" type="text/javascript"></script>
+	<script src="/wesell/webflow/js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

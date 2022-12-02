@@ -9,36 +9,36 @@
 
 <div class="influ_block2">
 	<!-- <div class="pop_exist" onclick="$('.influ_block2 , .mobbackdark').css('display' , 'none');">
-		<img src="/global/webflow/images/close.png" loading="lazy" alt="" class="image-38">
+		<img src="/wesell/webflow/images/close.png" loading="lazy" alt="" class="image-38">
 	</div> -->
 	<div class="influ_logo">
-		<img src="/global/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="image-47">
+		<img src="/wesell/webflow/images/sub_logo1.svg" loading="lazy" alt="" class="image-47">
 	</div>
 	<div class="influ_linkbox">
 		<div class="link_boxwarp">
-			<img src="/global/webflow/images/link_bitocean.svg" loading="lazy" alt="" class="image-49"> 
+			<img src="/wesell/webflow/images/link_bitocean.svg" loading="lazy" alt="" class="image-49"> 
 			<a href="javascript:inviteCodeCopy()" class="link-3">나의 초대 링크</a>
 			<input type="hidden" id="invite"/>
 		</div>
 	</div>
 	<div class="influ_sidebtnbox">
-		<a href="/global/infl/memberlist.do" class="button-25 <c:if test="${refPage == 'memberlist'}">click</c:if> w-button">유저 관리</a>
+		<a href="/wesell/infl/memberlist.do" class="button-25 <c:if test="${refPage == 'memberlist'}">click</c:if> w-button">유저 관리</a>
 		<div class="influ_sidebtndeco"></div>
 	</div>
 	<div class="influ_sidebtnbox">
-		<a href="/global/infl/chonglist.do" class="button-25 <c:if test="${refPage == 'chonglist'}">click</c:if> w-button">총판 관리</a>
+		<a href="/wesell/infl/chonglist.do" class="button-25 <c:if test="${refPage == 'chonglist'}">click</c:if> w-button">총판 관리</a>
 		<div class="influ_sidebtndeco"></div>
 	</div>
 	<div class="influ_sidebtnbox">
-		<a href="/global/infl/transactionHistory.do" class="button-25 <c:if test="${refPage == 'transactions'}">click</c:if> w-button">거래 관리</a>
+		<a href="/wesell/infl/transactionHistory.do" class="button-25 <c:if test="${refPage == 'transactions'}">click</c:if> w-button">거래 관리</a>
 		<div class="influ_sidebtndeco"></div>
 	</div>
 	<!-- 	<div class="influ_sidebtnbox"> -->
-<%-- 		<a href="/global/infl/referral.do" class="button-25 <c:if test="${refPage == 'referral'}">click</c:if> w-button">커미션 관리</a> --%>
+<%-- 		<a href="/wesell/infl/referral.do" class="button-25 <c:if test="${refPage == 'referral'}">click</c:if> w-button">커미션 관리</a> --%>
 <!-- 		<div class="influ_sidebtndeco"></div> -->
 <!-- 	</div> -->
 	<div class="influ_sidebtnbox">
-		<a href="/global/infl/accum.do" class="button-25 <c:if test="${refPage == 'accum'}">click</c:if> w-button">정산</a>
+		<a href="/wesell/infl/accum.do" class="button-25 <c:if test="${refPage == 'accum'}">click</c:if> w-button">정산</a>
 		<div class="influ_sidebtndeco"></div>
 	</div>
 </div>
@@ -57,9 +57,9 @@ getInviteCode();
 function getInviteCode(){
 	$.ajax({
 		type:'post',
-		url:'/global/infl/getInviteCode.do',
+		url:'/wesell/infl/getInviteCode.do',
 		success:function(data){
-			$("#invite").val("https://bitocean-global.com/global/join.do?invi="+data.invite);
+			$("#invite").val("https://bitocean-global.com/wesell/join.do?invi="+data.invite);
 		}
 	})
 }

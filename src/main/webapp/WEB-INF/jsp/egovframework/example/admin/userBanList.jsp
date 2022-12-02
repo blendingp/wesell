@@ -25,7 +25,7 @@ function page(pageNo){
 					<h1 class="h3 mb-2 text-gray-800">유저 차단 목록</h1>
 					<div class="card shadow mb-4">
 						<div class="card-body">
-							<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/user/ipBanList.do"
+							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/ipBanList.do"
 								name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1" /> <input
@@ -76,7 +76,7 @@ function page(pageNo){
 												<td><fmt:formatDate value="${item.bandate}"
 														pattern="yyyy-MM-dd HH:mm" /></td>
 												<td
-													onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
 													style="cursor: pointer;">${item.name}</td>
 												<td>
 													<button type="button"
@@ -124,7 +124,7 @@ function page(pageNo){
 			data : {
 				"idx" : idx
 			},
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/releaseUserBan.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/releaseUserBan.do',
 			dataType : 'json',
 			success : function(data) {
 				alert(data.msg);

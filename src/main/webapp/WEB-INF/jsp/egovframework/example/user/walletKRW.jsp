@@ -10,7 +10,7 @@
 <!--  Last Published: Mon Mar 14 2022 08:21:34 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="621f09891b27a047c66f3f0c" data-wf-site="6180a71858466749aa0b95bc">
 <head>
-  <jsp:include page="../userFrame/header.jsp"></jsp:include>
+  <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
  <style>
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -24,7 +24,7 @@ input[type="number"]::-webkit-inner-spin-button {
 </head>
 <body class="body2">
   <div class="frame">
-    <jsp:include page="../userFrame/top.jsp" />
+    <jsp:include page="../wesellFrame/top2.jsp" />
     <div class="frame2">
 		<jsp:include page="../userFrame/walletFrameKRW.jsp" />
 		<div class="asset_block">
@@ -77,7 +77,7 @@ input[type="number"]::-webkit-inner-spin-button {
                     </div>
                   </div>
                   <div class="btnwrap">
-                    <a href="/global/user/helpCenter.do?title=입금계좌문의" class="btn w-inline-block">
+                    <a href="/wesell/user/helpCenter.do?title=입금계좌문의" class="btn w-inline-block">
                       <div class="btntxt"><spring:message code="newwave.wallet.acc_inq" /></div>
                     </a>
                     <a href="#" class="btn2 w-inline-block">
@@ -97,11 +97,11 @@ input[type="number"]::-webkit-inner-spin-button {
         </div>
       </div>
     </div>
-    <jsp:include page="../userFrame/footer.jsp" />
+    <jsp:include page="../wesellFrame/footer2.jsp" />
     <div class="popup" style="display:none;">
       <div class="deposit_pop">
         <div class="depositpop_box">
-          <div class="pop_exist"><img src="../webflow/images/wx.png" loading="lazy" alt="" class="image-38"></div>
+          <div class="pop_exist"><img src="../webflow/images2/wx.png" loading="lazy" alt="" class="image-38"></div>
           <div class="poptitle"><spring:message code="newwave.wallet.account" /></div>
           <div class="div-block-105">
             <div class="form-block-17 w-form">
@@ -153,7 +153,7 @@ input[type="number"]::-webkit-inner-spin-button {
     </div>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6180a71858466749aa0b95bc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="../js/webflow.js" type="text/javascript"></script>
+  <script src="../js/webflow2.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   	<script>
 	var walletBTC = "${walletBTC}";
@@ -212,12 +212,12 @@ input[type="number"]::-webkit-inner-spin-button {
 			jQuery.ajax({
 				type : "POST",
 				data : allData,
-				url : "/global/user/depositProcess.do",
+				url : "/wesell/user/depositProcess.do",
 				dataType : "json",
 				success : function(data) {
 					alert(data.msg);
 					if (data.result == "suc") {
-						location.href = "/global/user/kTransactions.do";
+						location.href = "/wesell/user/kTransactions.do";
 					}
 					else{
 						location.reload();
@@ -338,7 +338,7 @@ input[type="number"]::-webkit-inner-spin-button {
 			$('.popup').css('display','none');
 			jQuery.ajax({
 				type : "POST",
-				url : "/global/epayProcess.do",
+				url : "/wesell/epayProcess.do",
 				data : edata,
 				dataType : "json",
 				success : function(data) {

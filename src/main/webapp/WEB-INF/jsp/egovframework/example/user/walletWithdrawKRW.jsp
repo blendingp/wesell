@@ -10,11 +10,11 @@
 <!--  Last Published: Mon Mar 14 2022 08:21:34 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="621f09ab6891ea2e761f009d" data-wf-site="6180a71858466749aa0b95bc">
 <head>
-  <jsp:include page="../userFrame/header.jsp"></jsp:include>
+  <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body2">
   <div class="frame">
-    <jsp:include page="../userFrame/top.jsp"></jsp:include>
+    <jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
     <div class="frame2">
 		<jsp:include page="../userFrame/walletFrameKRW.jsp"></jsp:include>
 		<div class="asset_block">
@@ -102,7 +102,7 @@
       <div class="withrawlpop">
         <div class="withrawlblock">
           <div class="pop_exist">
-            <a href="#" class="w-inline-block"><img src="../images/close.png" loading="lazy" alt="" class="image-38"></a>
+            <a href="#" class="w-inline-block"><img src="../images2/close.png" loading="lazy" alt="" class="image-38"></a>
           </div>
           <div class="title6">출금 인증 코드</div>
           <div class="form-block-14 w-form">
@@ -121,10 +121,10 @@
         </div>
       </div>
     </div>
-    <jsp:include page="../userFrame/footer.jsp" />
+    <jsp:include page="../wesellFrame/footer2.jsp" />
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6180a71858466749aa0b95bc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="../js/webflow.js" type="text/javascript"></script>
+  <script src="../js/webflow2.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   <script>
 	window.addEventListener("load", loadExcRate, false);
@@ -240,12 +240,12 @@
 		jQuery.ajax({
 			type : "POST",
 			data : allData,
-			url : "/global/user/kWithdrawProcess.do",
+			url : "/wesell/user/kWithdrawProcess.do",
 			dataType : "json",
 			success : function(data) {
 				alert(data.msg);
 				if (data.result == "suc") {
-					location.href = "/global/user/kTransactions.do";
+					location.href = "/wesell/user/kTransactions.do";
 				} else {
 					location.reload();
 				}

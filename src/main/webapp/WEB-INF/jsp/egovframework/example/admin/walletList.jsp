@@ -31,7 +31,7 @@ function page(pageNo){
 						<div class="panel-heading">member</div>
                         <div class="panel-body">
 							<div class="row">
-							   <form action="/global/0nI0lMy6jAzAFRVe0DqLOw/user/walletList.do" name="listForm" id="listForm">
+							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/walletList.do" name="listForm" id="listForm">
 									<input type="hidden" name="pageIndex" value="1"/>
 									<input type="hidden" name="test" id="test" value="${test}"/>
 									<input type="hidden" name="level" id="level" value="${level}"/>
@@ -89,7 +89,7 @@ function page(pageNo){
 									<c:forEach var="item" items="${list}" varStatus="i">
 										<tr style="background-color:${item.color}">
 											<td>00${item.idx}&nbsp;</td>
-											<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.name}&nbsp;
+											<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.name}&nbsp;
 												<c:if test="${item.parent ne null && item.parent ne ''}"> ( ${item.parent} ) </c:if>
 												<c:if test="${item.istest eq 1}"> <span style="color: red">테스트 계정</span> </c:if>
 												<c:if test="${item.danger == 1}"> <span style="color: red;">*주의회원*</span> </c:if>
@@ -162,7 +162,7 @@ function page(pageNo){
 		$.ajax({
 			type :'post',
 			data : data,
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/user/updateInfo.do',
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateInfo.do',
 			success:function(data){
 				alert(data.msg);
 				location.reload();

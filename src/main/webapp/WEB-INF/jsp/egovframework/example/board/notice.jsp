@@ -10,14 +10,14 @@
 <head>
 <meta charset="utf-8">
 <title>Notice</title>
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
 <body class="body1">
 	<div class="frame">
 		<div class="form-block w-form">
-			<form name="listForm" id="listForm" action="/global/notice.do">
+			<form name="listForm" id="listForm" action="/wesell/notice.do">
 				<input type="hidden" name="pageIndex" />
-				<jsp:include page="../userFrame/top.jsp"></jsp:include>
+				<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 				<div class="frame5">
 					<jsp:include page="../userFrame/customerBanner.jsp"></jsp:include>
 					<div class="custermer_listblock">
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 			</form>
-			<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+			<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		</div>
 	</div>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
@@ -81,10 +81,10 @@
 						type : type,
 					},
 					dataType : 'json',
-					url : '/global/checkdetail.do',
+					url : '/wesell/checkdetail.do',
 					success : function(data) {
 						if (data.result == 'success') {
-							location.href = "/global/detail.do?bidx="+bidx+"&type=notice";
+							location.href = "/wesell/detail.do?bidx="+bidx+"&type=notice";
 						} else {
 							console.log(data.msg);
 							alert(data.msg);

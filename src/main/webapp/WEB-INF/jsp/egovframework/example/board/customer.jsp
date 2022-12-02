@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="detail" property="og:title">
 <meta content="detail" property="twitter:title">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <title>customer service</title>
 </head>
 <style>
@@ -26,22 +26,22 @@
 	<div class="frame">
 		<div class="form-block w-form">
 			<form id="email-form" name="email-form" data-name="Email Form" class="form">
-				<jsp:include page="../userFrame/top.jsp"></jsp:include>
+				<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 				<div class="frame5">
 					<jsp:include page="../userFrame/customerBanner.jsp"></jsp:include>
 					<div class="custermermain_warp">
 						<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef83830" class="custermermain_box">
 							<div class="custermermain_warp1">
-								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef83832" class="custermer_iconbtn" onClick="location.href='/global/notice.do'">
-									<img src="/global/webflow/images/Bitmarket_s_img2.png" loading="lazy" alt="" class="image-51">
+								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef83832" class="custermer_iconbtn" onClick="location.href='/wesell/notice.do'">
+									<img src="/wesell/webflow/images2/Bitmarket_s_img2.png" loading="lazy" alt="" class="image-51">
 									<div><spring:message code="support.notice" /> </div>
 								</div>
-								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef83836" class="custermer_iconbtn" onClick="location.href='/global/faq.do'">
-									<img src="/global/webflow/images/Bitmarket_s_img1.png" loading="lazy" alt="" class="image-51">
+								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef83836" class="custermer_iconbtn" onClick="location.href='/wesell/faq.do'">
+									<img src="/wesell/webflow/images2/Bitmarket_s_img1.png" loading="lazy" alt="" class="image-51">
 									<div><spring:message code="menu.faq"/></div>
 								</div>
-								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef8383a" class="custermer_iconbtn" onClick="location.href='/global/user/helpCenter.do'">
-									<img src="/global/webflow/images/Bitmarket_s_img8.png" loading="lazy"alt="" class="image-51" >
+								<div data-w-id="bb40effc-63fb-5600-70b0-10de2ef8383a" class="custermer_iconbtn" onClick="location.href='/wesell/user/helpCenter.do'">
+									<img src="/wesell/webflow/images2/Bitmarket_s_img8.png" loading="lazy"alt="" class="image-51" >
 									<div><spring:message code="submitRequest"/></div>
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+				<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 			</form>
 		</div>
 	</div>
@@ -93,10 +93,10 @@
 						type : type,
 					},
 					dataType : 'json',
-					url : '/global/checkdetail.do',
+					url : '/wesell/checkdetail.do',
 					success : function(data) {
 						if (data.result == 'success') {
-							location.href = "/global/detail.do?bidx="+bidx+"&type="+type;
+							location.href = "/wesell/detail.do?bidx="+bidx+"&type="+type;
 						} else {
 							console.log(data.msg);
 							alert(data.msg);

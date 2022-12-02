@@ -89,7 +89,7 @@ function tailSet(type,coinNum){
 	$.ajax({
 		type:'post',
 		data:{"coinNum" : coinNum, "type" : type, "val" : val},
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trade/tailSet.do',
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tailSet.do',
 		dataType:'json',
 		success:function(data){
 			alert(data.msg);

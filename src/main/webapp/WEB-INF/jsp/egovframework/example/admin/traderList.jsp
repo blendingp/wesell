@@ -40,7 +40,7 @@ function page(pageNo){
 						</div>
 						<div class="card-body">
 							<form
-								action="/global/0nI0lMy6jAzAFRVe0DqLOw/trader/traderList.do"
+								action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/traderList.do"
 								name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1" />
@@ -92,11 +92,11 @@ function page(pageNo){
 										<c:forEach var="item" items="${traderList}" varStatus="i">
 											<tbody>
 												<td>
-													<button type="button" onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/trader/followerList.do?tidx=${item.tuseridx}'" class="btn btn-primary">목록</button>
+													<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/followerList.do?tidx=${item.tuseridx}'" class="btn btn-primary">목록</button>
 												</td>
 											
 												<td style="cursor: pointer;"
-													onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.tuseridx}'">${item.name}&nbsp;</td>
+													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.tuseridx}'">${item.name}&nbsp;</td>
 												<td>
 													<input type="text"  id="total${item.tuseridx}" value="${item.total}">
 													<button type="button" onclick="changeTotal(${item.tidx}, ${item.tuseridx})" class="btn btn-warning btn-sm">변경</button>
@@ -214,7 +214,7 @@ function changeTstat(idx , useridx, tstat ,istrader){
 	if(confirm("변경하시겠습니까?")){
 		$.ajax({
 			type:'get',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trader/tstat.do?idx='+idx+'&useridx='+useridx+'&tstat='+tstat+'&istrader='+istrader,
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/tstat.do?idx='+idx+'&useridx='+useridx+'&tstat='+tstat+'&istrader='+istrader,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -230,7 +230,7 @@ function changeTotal(idx, useridx){
 	if(confirm("변경하시겠습니까?")){
 		$.ajax({
 			type:'get',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trader/total.do?idx='+idx+'&total='+total+'&useridx='+useridx,
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/total.do?idx='+idx+'&total='+total+'&useridx='+useridx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -245,7 +245,7 @@ function traderDelete(idx,useridx){
 	if(confirm("삭제하시겠습니까? 복구하실수없습니다.")){
 		$.ajax({
 			type:'get',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trader/traderDelete.do?idx='+idx+'&useridx='+useridx,
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/traderDelete.do?idx='+idx+'&useridx='+useridx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -259,7 +259,7 @@ function traderDelete(idx,useridx){
 function traderinfoUse(useridx,use,type){
 	$.ajax({
 		type:'get',
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trader/traderinfoUse.do?useridx='+useridx+'&use='+use+'&type='+type,
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/traderinfoUse.do?useridx='+useridx+'&use='+use+'&type='+type,
 		success:function(data){
 			alert(data.msg);
 			if(data.result=="suc")
@@ -276,7 +276,7 @@ function traderinfoWrite(useridx){
 	$.ajax({
 		type :'post',
 		data : data,
-		url:'/global/0nI0lMy6jAzAFRVe0DqLOw/trader/traderinfoWrite.do',
+		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/traderinfoWrite.do',
 		success:function(data){
 			alert(data.msg);
 			if(data.result=="suc")

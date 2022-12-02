@@ -14,7 +14,7 @@
 <title>transactional information</title>
 <meta content="transactional information" property="og:title">
 <meta content="transactional information" property="twitter:title">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <script>
 	function numberWithCommas(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -23,7 +23,7 @@
 </head>
 <body class="body2">
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrameKRW.jsp"></jsp:include>
 			<div class="asset_block">
@@ -47,7 +47,7 @@
 						</div>
 						<div class="form-block-4 w-form">
 							<form name="listForm" id="listForm"
-								action="/global/user/kTransactions.do" class="form-3">
+								action="/wesell/user/kTransactions.do" class="form-3">
 								<input type="hidden" name="pageIndex" />
 								<select id="op"
 										name="op" data-name="Field 5" onchange="tabChange(this.value)"
@@ -139,14 +139,14 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 	</div>
 	<script
 		src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93"
 		type="text/javascript"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
-	<script src="/global/webflow/js/webflow.js" type="text/javascript"></script>
+	<script src="/wesell/webflow/js/webflow2.js" type="text/javascript"></script>
 	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">

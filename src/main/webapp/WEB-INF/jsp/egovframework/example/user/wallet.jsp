@@ -10,7 +10,7 @@
 <html data-wf-page="62b16a1ad874f735cccc57cd" data-wf-site="62b1125ac4d4d60ab9c62f81">
 <head>
 <meta charset="utf-8">
-<jsp:include page="../userFrame/header.jsp"></jsp:include>
+<jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <style>
 .asset_coininfo_txt {
 	min-width: 150px;
@@ -133,7 +133,7 @@
 		}
 	</script>
 	<div class="frame">
-		<jsp:include page="../userFrame/top.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">
 			<jsp:include page="../userFrame/walletFrame.jsp"></jsp:include>
 			<div class="asset_block">
@@ -196,7 +196,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this)">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/BTCicon_img_2BTCicon_img.png"
+									<img src="../webflow/images2/BTCicon_img_2BTCicon_img.png"
 										loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">BTC</div>
 								</div>
@@ -222,7 +222,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${user.btcAddress}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> --%>
@@ -257,7 +257,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this)">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/USDTicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/USDTicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coininfo_name">USDT</div>
 								</div>
@@ -293,7 +293,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${user.ercAddress}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> --%>
@@ -328,7 +328,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this)">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/ETHicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/ETHicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coininfo_name">ETH</div>
 								</div>
@@ -355,7 +355,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${user.ercAddress}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> --%>
@@ -390,7 +390,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this)">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/TRXicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/TRXicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coininfo_name">TRX</div>
 								</div>
@@ -417,7 +417,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${user.trxAddress}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> --%>
@@ -452,7 +452,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this)">
 								<div class="asset_cointitle">
-									<img src="../webflow/images/XRPicon.png" loading="lazy" alt=""
+									<img src="../webflow/images2/XRPicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coininfo_name">XRP</div>
 								</div>
@@ -477,7 +477,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${user.destinationTag}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> 
@@ -492,7 +492,7 @@
 									<div class="depositaddress_txtbox"
 										style="width: -webkit-fill-available">${xrpAccount.xrpAddress}</div>
 									<img
-										src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png"
+										src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png"
 										loading="lazy" alt="" class="copyicon"
 										style="cursor: pointer;" onclick="copy(this)">
 								</div> --%>
@@ -516,11 +516,11 @@
 				</div>
 			</div>
 		</div>
-		<jsp:include page="../userFrame/footer.jsp"></jsp:include>
+		<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
     <div class="popup" style="display:none;">
       <div class="deposit_pop" style="display:flex;">
         <div class="depositpop_box" style="display:flex;">
-          <div class="pop_exist"><img src="../webflow/images/wx.png" loading="lazy" alt="" sizes="100vw" class="image-38" onclick="closePopup();"></div>
+          <div class="pop_exist"><img src="../webflow/images2/wx.png" loading="lazy" alt="" sizes="100vw" class="image-38" onclick="closePopup();"></div>
           <div class="poptitle"></div>
           <div class="div-block-105">
           	<div class="d_network" id="pop_network" style="display:none;">
@@ -534,7 +534,7 @@
             <div class="asset_address">
               <div class="title2"><spring:message code="wallet.depositAddress" /></div>
               <div class="depositaddress">
-                <div class="depositaddress_txtbox"></div><img src="../webflow/images/content_copy_black_24dp_1content_copy_black_24dp.png" loading="lazy" onclick="copy(this)" alt="" class="copyicon">
+                <div class="depositaddress_txtbox"></div><img src="../webflow/images2/content_copy_black_24dp_1content_copy_black_24dp.png" loading="lazy" onclick="copy(this)" alt="" class="copyicon">
               </div>
             </div>
             <div class="form-block-17 w-form">
@@ -564,7 +564,7 @@
 		type="text/javascript"
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 		crossorigin="anonymous"></script>
-		<script src="../js/webflow.js" type="text/javascript"></script>
+		<script src="../js/webflow2.js" type="text/javascript"></script>
 	<script>
 	var cfnum = 5;
 	var selectCoin = "";
@@ -685,7 +685,7 @@
 				'amount' : ramount
 			},
 			dataType : 'json',
-			url : '/global/user/requestDeposit.do',
+			url : '/wesell/user/requestDeposit.do',
 			success : function(data) {
 				alert("<spring:message code='pop.applycationComplete'/>");
 				location.href = 'transactions.do';

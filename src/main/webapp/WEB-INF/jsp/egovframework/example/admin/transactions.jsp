@@ -28,7 +28,7 @@ function page(pageNo){
 						<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<div class="card-body">
-									<form action="/global/0nI0lMy6jAzAFRVe0DqLOw/transactions.do"
+									<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do"
 										name="listForm" id="listForm">
 										<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<input type="hidden" name="pageIndex" value="1" /> <input
@@ -230,7 +230,7 @@ function page(pageNo){
 															<td>확인불가</td>
 														</c:if>
 														<c:if test="${item.userIdx ne null }">
-															<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'" style="cursor: pointer;">
+															<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'" style="cursor: pointer;">
 																<c:if test="${item.label eq '+' }">${item.fromname}</c:if>
 																<c:if test="${item.label eq '-' }">${item.toname}</c:if> 
 																<c:if test="${item.istest eq 1 }">
@@ -242,9 +242,9 @@ function page(pageNo){
 															<td>없음</td>
 														</c:if>
 														<c:if test="${item.from ne 1 }">
-															<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.from}'" style="cursor: pointer;">${item.fromname}</td>
+															<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.from}'" style="cursor: pointer;">${item.fromname}</td>
 														</c:if>
-														<td onclick="location.href='/global/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.to}'" style="cursor: pointer;">${item.toname}</td>
+														<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.to}'" style="cursor: pointer;">${item.toname}</td>
 														<td>${item.coin}</td>
 														<td><fmt:formatNumber value="${item.amount}" pattern="#,###.########" /></td>
 														<td>
@@ -363,7 +363,7 @@ function depositCancel(idx , midx){
 	if(confirm("입금취소하시겠습니까?")){
 		$.ajax({
 			type :'get',
-			url : '/global/0nI0lMy6jAzAFRVe0DqLOw/cancelDeposit.do?idx='+idx+'&midx='+midx,
+			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/cancelDeposit.do?idx='+idx+'&midx='+midx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -411,7 +411,7 @@ function checkForm(wstat, label){
 function checkRequest(widx,stat){	      
     jQuery.ajax({                                
         type:"POST", 
-        url : "/global/trade/withdrawalProcess.do?widx="+widx+"&stat="+stat,
+        url : "/wesell/trade/withdrawalProcess.do?widx="+widx+"&stat="+stat,
         dataType:"json",
         date:{widx:widx, stat:stat},
         success : function(data) {              	

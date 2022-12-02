@@ -21,7 +21,7 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="/global/0nI0lMy6jAzAFRVe0DqLOw/logout.do">
+                <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/logout.do">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
                 </a>
             </li>
@@ -32,7 +32,7 @@
 	function getMoneySum(){
 		$.ajax({
 			type:'post',
-			url:'/global/0nI0lMy6jAzAFRVe0DqLOw/getMoneySum.do',
+			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/getMoneySum.do',
 			success:function(data){
 				console.log(data);
 				$("#position").text(data.margin);
