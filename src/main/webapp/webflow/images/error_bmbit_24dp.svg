@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="21.667"
+   height="21.667"
+   viewBox="0 0 21.667 21.667"
+   version="1.1"
+   id="svg1044"
+   sodipodi:docname="error_bmbit_24dp.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1048" />
+  <sodipodi:namedview
+     id="namedview1046"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="38.39941"
+     inkscape:cx="10.846521"
+     inkscape:cy="10.846521"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1044" />
+  <g
+     id="error_black_24dp"
+     transform="translate(-2.167 -2.167)"
+     style="fill:#f34840;fill-opacity:1">
+    <path
+       id="패스_2047"
+       data-name="패스 2047"
+       d="M13,2.167A10.833,10.833,0,1,0,23.833,13,10.837,10.837,0,0,0,13,2.167Zm1.083,16.25H11.917V16.25h2.167Zm0-4.333H11.917v-6.5h2.167Z"
+       style="fill:#f34840;fill-opacity:1" />
+  </g>
+</svg>
