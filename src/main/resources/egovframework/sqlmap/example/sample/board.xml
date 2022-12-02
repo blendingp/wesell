@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	
+	<select id="selectContatListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*) num
+            FROM contact
+            where uidx = #userIdx#
+        ]]>
+        <isNotEmpty property = "isp2p">
+        	and isp2p = #isp2p#
+        </isNotEmpty> 
+    </select>
+	<select id="selectContatListP" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM contact
+            where uidx = #userIdx#
+        ]]>
+        <isNotEmpty property = "isp2p">
+        	and isp2p = #isp2p#
+        </isNotEmpty> 
+        <![CDATA[
+            order by idx desc
+            limit #first# , #record#
+        ]]>
+    </select>
+    <select id="selectContactCnt" resultClass="int">
+    	<![CDATA[
+            SELECT count(*)
+            FROM contact
+            where confirm = 0
+        ]]>
+	</select>
+	<select id="selectAllBoard" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = #bcategory#
+        ]]>
+		<isNotEmpty property = "bwhere">
+        	and ( bwhere = #bwhere# or bwhere = 0 )
+        </isNotEmpty>   
+		<isNotEmpty property = "blang">
+        	and blang = #blang#
+        </isNotEmpty>   
+        <![CDATA[    	
+            order by bidx desc
+        ]]>
+        <isNotEmpty property="limit">
+        	limit #limit#
+        </isNotEmpty>
+	</select>
+	
+	<select id="selectNoticeListLimit3" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory in ('notice')
+        ]]>
+		<isNotEmpty property = "blang">
+        	and blang = #blang#
+        </isNotEmpty>   
+        <![CDATA[    	
+            order by bidx desc
+            limit 3
+        ]]>
+	</select>
+	<select id="selectFaqListLimit3" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = 'faq'
+        ]]>
+        <isNotEmpty property = "blang">
+        	and blang = #blang#
+        </isNotEmpty>   
+        <![CDATA[    	
+            order by bidx desc
+            limit 3
+        ]]>
+	</select>
+	<select id="selectNoticeListLimit5" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory in ('notice' , 'event' , 'system')
+            order by bidx desc
+            limit 6
+        ]]>
+	</select>
+	<select id="selectFaqListLimit5" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = 'faq'
+            order by bidx desc
+            limit 6
+        ]]>
+	</select>
+	<select id="selectBoardLm5" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = #bcategory#
+            order by bidx desc
+            limit 5
+        ]]>
+	</select>
+    
+    <select id="selectBoardDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	*
+            	,(select id from admin where idx=board.buseridx) id
+            FROM board
+            where bidx = #bidx#
+        ]]>
+	</select>
+	
+	<insert id="insertBoard">
+		<![CDATA[
+			INSERT INTO board
+				( btitle
+				  , bcontent
+				  , bdate
+				  , buseridx
+		]]>
+		<isNotEmpty property = "bwhere">
+        		  , bwhere
+        </isNotEmpty>
+		<isNotEmpty property = "blang">
+        		  , blang
+        </isNotEmpty>
+        <![CDATA[
+				  , bcategory)
+			VALUES ( #btitle#
+				  , #bcontent#
+				  , now()
+				  , #buseridx#
+				  ]]>
+		<isNotEmpty property = "bwhere">
+        		  , #bwhere#
+        </isNotEmpty>
+		<isNotEmpty property = "blang">
+        		  , #blang#
+        </isNotEmpty>
+        <![CDATA[
+				  , #bcategory#)
+	    ]]>
+	</insert>
+	<select id="selectBoardList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = #bcategory#
+        ]]>
+        <isNotEmpty property="search">
+        	and btitle like concat('%' , #search# , '%')
+        </isNotEmpty>
+		<isNotEmpty property = "blang">
+        	and blang = #blang#
+        </isNotEmpty>   
+        <![CDATA[
+            order by bdate desc , bidx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectBoardListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM board
+            where bcategory = #bcategory#
+        ]]>
+        <isNotEmpty property="search">
+        	and btitle like concat('%' , #search# , '%')
+        </isNotEmpty>
+		<isNotEmpty property = "blang">
+        	and blang = #blang#
+        </isNotEmpty>   
+	</select>
+	<select id="selectBoardSystemList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM board
+            where bcategory = 'system'
+        ]]>
+    </select>
+	<update id="updateBoard">
+		<![CDATA[
+			UPDATE board
+			SET btitle=#btitle#
+				, bcontent=#bcontent#
+		]]>
+		<isNotEmpty property = "bwhere">
+        		, bwhere=#bwhere# 
+        </isNotEmpty>	
+		<isNotEmpty property = "blang">
+        		, blang=#blang# 
+        </isNotEmpty>	
+        <isNotEmpty property = "bdate">
+        		, bdate=#bdate# 
+        </isNotEmpty>
+        <![CDATA[			
+			WHERE bidx=#bidx#
+		]]>
+	</update>
+	
+	<delete id="deleteBoard">
+		<![CDATA[
+			DELETE FROM board
+			WHERE bidx=#idx#
+		]]>
+	</delete>
+	<insert id="insertFile">
+		<![CDATA[
+			INSERT INTO file
+				( fkey
+				  , originNm
+				  , saveNm)
+			VALUES ( #fkey#
+				  , #originNm#
+				  , #saveNm#)
+		]]>
+	</insert>
+	<insert id="insertContact">
+		<![CDATA[
+			INSERT INTO contact
+				( uidx
+				  , title
+				  , content
+				  , cdate
+				  , readYn
+				  , answerYn
+		]]>
+			<isNotEmpty property="fkey">
+				  , fkey
+			</isNotEmpty>				  
+			<isNotEmpty property="isp2p">
+				  , isp2p
+			</isNotEmpty>				  
+		<![CDATA[
+					)
+			VALUES ( #uidx#
+				  , #title#
+				  , #content#
+				  , now()
+				  , 'N'
+				  , 'N'
+		]]>
+			<isNotEmpty property="fkey">
+				  , #fkey#
+			</isNotEmpty>				  
+			<isNotEmpty property="isp2p">
+				  , #isp2p#
+			</isNotEmpty>				  
+		<![CDATA[
+				  )
+		]]>
+	</insert>
+	<select id="selectNonReadContact" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM contact
+            where confirm = 0
+            limit 1
+        ]]>
+	</select>
+	<select id="selectContactList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT c.*, m.color, m.name mname, m.phone mphone, m.email 
+            , (select name from member where m.parentsIdx = member.idx) pname
+            FROM contact c left join member m on c.uidx = m.idx
+		    where 1=1
+        ]]>
+		<isNotEmpty property = "search">
+			and $searchSelect$ like concat('%', #search# , '%')
+        </isNotEmpty>  
+        <isNotEmpty property = "isp2p">
+		    and isp2p=#isp2p#
+        </isNotEmpty>   
+        <![CDATA[
+            order by c.cdate desc , c.idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectContactListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM contact left join member m on contact.uidx = m.idx
+            where 1=1
+        ]]>
+        <isNotEmpty property = "search">
+		    and $searchSelect$ like concat('%', #search# , '%')
+        </isNotEmpty>
+        <isNotEmpty property = "isp2p">
+		    and isp2p=#isp2p#
+        </isNotEmpty>
+	</select>
+	<select id="selectContactDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT contact.*, m.email mail, m.name, m.phone uphone, m.country country
+            , (select name from member where m.parentsIdx = member.idx) pname
+            FROM contact left join member m on contact.uidx = m.idx
+            where contact.idx =#idx#
+        ]]>
+	</select>
+	<select id="selectFileList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM file
+            where fkey = #fkey#
+        ]]>
+	</select>
+	<update id="updateContactReadYn">
+		<![CDATA[
+			UPDATE contact
+			SET readYn='Y'
+			WHERE idx=#idx#
+		]]>
+	</update>
+	<update id="updateContactAnswer">
+		<![CDATA[
+			UPDATE contact
+			SET answerYn='Y' , 
+				answer = #answer# ,
+				adate = now()
+			WHERE idx=#idx#
+		]]>
+	</update>
+	<select id="selectBoardSearchCategoryCnt" resultClass="EgovMap">
+        <![CDATA[
+			select * 
+			from
+				(select count(*) tot from board where btitle like concat('%' , #search# , '%') ) allCnt ,
+				(select count(*) notice from board where btitle like concat('%' , #search# , '%') and bcategory in ('notice' , 'event' , 'system')) noticeCnt ,
+				(select count(*) guide from board where btitle like concat('%' , #search# , '%') and bcategory in ('api' , 'copy' , 'order' , 'money')) guideCnt ,
+				(select count(*) faq from board where btitle like concat('%' , #search# , '%') and bcategory in ('faq' , 'tac')) faqCnt ,
+				(select count(*) setting from board where btitle like concat('%' , #search# , '%') and bcategory in ('setting')) settingCnt
+        ]]>
+	</select>
+	<select id="selectBoardSearchList" resultClass="EgovMap">
+        <![CDATA[
+			select * 
+			from board
+			where btitle like concat('%' , #search# , '%')
+        ]]>
+        	<isEqual property = "cate" compareValue="n">
+        		and bcategory in ('notice' , 'event' , 'system')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="g">
+        		and bcategory in ('api' , 'copy' , 'order' , 'money')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="f">
+        		and bcategory in ('faq' , 'tac')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="s">
+        		and bcategory in ('setting')
+        	</isEqual>
+        <![CDATA[
+            order by bdate desc , bidx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectBoardSearchListCnt" resultClass="int">
+        <![CDATA[
+			select count(*) 
+			from board
+			where btitle like concat('%' , #search# , '%')
+        ]]>
+        	<isEqual property = "cate" compareValue="n">
+        		and bcategory in ('notice' , 'event' , 'system')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="g">
+        		and bcategory in ('api' , 'copy' , 'order' , 'money')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="f">
+        		and bcategory in ('faq' , 'tac')
+        	</isEqual>
+        	<isEqual property = "cate" compareValue="s">
+        		and bcategory in ('setting')
+        	</isEqual>
+	</select>
+	<delete id="deleteContact">
+			<![CDATA[
+				DELETE FROM contact
+				WHERE idx=#idx#
+			]]>
+	</delete>
+	<update id="updateContactConfirm">
+		<![CDATA[
+			UPDATE contact
+			SET confirm=1
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<select id="selectEventBannerList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM eventbanner
+            order by idx desc
+        ]]>
+	</select>
+	<insert id="insertEventBanner">
+		<![CDATA[
+			INSERT INTO eventbanner
+				( lang
+				  , page
+				  , img
+				  , date)
+			VALUES ( #lang#
+				  , #page#
+				  , #img#
+				  , now())
+		]]>
+	</insert>
+	
+	<insert id="insertKyc">
+		<![CDATA[
+			INSERT INTO kyc
+				( userIdx )
+			VALUES ( #userIdx# )
+		]]>
+	</insert>
+	<update id="updateKyc">
+		<![CDATA[
+			UPDATE kyc
+			SET userIdx=userIdx
+		]]>
+		<isNotEmpty property = "fkey">
+        		, fkey=#fkey# 
+        </isNotEmpty>
+		<isNotEmpty property = "confirm">
+			<isEqual property="confirm" compareValue="0">
+        		, fkey=null
+			</isEqual>
+        		, confirm=#confirm# 
+        </isNotEmpty>
+		<![CDATA[
+			WHERE userIdx=#userIdx#
+		]]>
+	</update>
+	<select id="selectKyc" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM kyc
+            where userIdx=#userIdx#
+            limit 1
+        ]]>
+	</select>
+</sqlMap>

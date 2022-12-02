@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<select id="selectP2PTrader" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM p2ptrader
+            where idx=#tidx#
+            limit 1
+        ]]>
+	</select>
+	<delete id="deleteP2PTrader">
+			<![CDATA[
+				DELETE FROM p2ptrader
+				WHERE idx=#idx#
+			]]>
+	</delete>
+	<update id="updateP2PTrader">
+		<![CDATA[
+			UPDATE p2ptrader
+			SET type=type
+		]]>
+		<isNotEmpty property="name">
+			, name=#name#	
+		</isNotEmpty>
+		<isNotEmpty property="orders">
+			, orders=#orders#	
+		</isNotEmpty>
+		<isNotEmpty property="price">
+			, price=#price#	
+		</isNotEmpty>
+		<isNotEmpty property="qty">
+			, qty=#qty#	
+		</isNotEmpty>
+		<isNotEmpty property="lowLimit">
+			, lowLimit=#lowLimit#	
+		</isNotEmpty>
+		<isNotEmpty property="maxLimit">
+			, maxLimit=#maxLimit#	
+		</isNotEmpty>
+		<isNotEmpty property="aveTime">
+			, aveTime=#aveTime#	
+		</isNotEmpty>
+		<isNotEmpty property="type">
+			, type=#type#	
+		</isNotEmpty>
+		<isNotEmpty property="isDelete">
+			, isDelete=#isDelete#	
+		</isNotEmpty>
+		<isNotEmpty property="bank">
+			, bank=#bank#	
+		</isNotEmpty>
+		<isNotEmpty property="banknum">
+			, banknum=#banknum#	
+		</isNotEmpty>
+		<isNotEmpty property="bankname">
+			, bankname=#bankname#	
+		</isNotEmpty>
+		<isNotEmpty property="msg">
+			, msg=#msg#	
+		</isNotEmpty>
+		<![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
+	<insert id="insertP2PTrader">
+		<![CDATA[
+			INSERT INTO p2ptrader
+				( name
+				  , orders
+				  , price
+				  , qty
+				  , lowLimit
+				  , maxLimit
+				  , aveTime
+				  , bank
+				  , banknum
+				  , bankname
+				  , msg
+				  , type)
+			VALUES ( #name#
+				  , #orders#
+				  , #price#
+				  , #qty#
+				  , #lowLimit#
+				  , #maxLimit#
+				  , #aveTime#
+				  , #bank#
+				  , #banknum#
+				  , #bankname#
+				  , #msg#
+				  , #type#)
+		]]>
+	</insert>
+	<select id="selectP2PTraderList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM p2ptrader
+            where isDelete=0
+        ]]>
+        <isNotEmpty property="search">
+			and name like concat('%' , #search# , '%')
+		</isNotEmpty>
+		<isNotEmpty property="type">
+			and type=#type#
+		</isNotEmpty>
+        <![CDATA[
+            ORDER BY idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	<select id="selectP2PTraderListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM p2ptrader
+            where isDelete=0
+        ]]>
+        <isNotEmpty property="search">
+			and name like concat('%' , #search# , '%')
+		</isNotEmpty>
+		<isNotEmpty property="type">
+			and type=#type#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectKwithdrawalListP2P" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT w.* , m.istest, m.name, m.mname, m.color, p.idx pidx, p.name pname, m.mbank mbank, m.maccount maccount, pt.name tname
+            FROM moneyp2p w
+            left join member m on m.idx = w.useridx left join member p on m.parentsIdx = p.idx
+            left join p2ptrader pt on w.tidx = pt.idx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "stat">
+        	and stat = #stat#
+        </isNotEmpty>
+        <isNotEmpty property = "except">
+	       	and stat != #except#
+	    </isNotEmpty>
+        <isNotEmpty property = "kind">
+	        and kind = #kind#
+	    </isNotEmpty>
+	    <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	    </isEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest = 1
+		</isEqual>
+		<isNotEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isNotEqual>
+		<isNotEmpty property = "tidx">
+        	and tidx=#tidx#
+        </isNotEmpty>
+        <![CDATA[
+            order by w.idx desc
+        ]]>
+        <isNull property = "limit">
+            limit #first# , #record#
+        </isNull>
+	</select>
+	<select id="selectKwithdrawalListP2PCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT w.* , m.name, m.mname 
+	            FROM moneyp2p w
+	            left join member m on m.idx = w.useridx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(mdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "stat">
+	        	and stat = #stat#
+	        </isNotEmpty>
+	        <isNotEmpty property = "except">
+	        	and stat != #except#
+	        </isNotEmpty>
+	        <isNotEmpty property = "kind">
+	        	and kind = #kind#
+	        </isNotEmpty>
+	        <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	        </isEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest = 1
+			</isEqual>
+			<isNotEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isNotEqual>
+	        <isNotEmpty property = "tidx">
+	        	and tidx=#tidx#
+	        </isNotEmpty>
+            )A
+	</select>
+	
+	<select id="depoalloutmoneysP2P" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM moneyp2p left join member m on moneyp2p.useridx = m.idx
+            WHERE stat = 1 and kind = '+' and istest = 0
+        ]]>
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())
+        	and (m.parentsIdx = #userIdx# or m.gparentsIdx = #userIdx# or m.idx = #userIdx#)
+        </isEqual>
+        <isNotEmpty property = "tidx">
+        	and tidx=#tidx#
+        </isNotEmpty>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+	<select id="depoallinmoneysP2P" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM moneyp2p left join member m on moneyp2p.useridx = m.idx
+            WHERE stat = 1 and kind = '-' and istest = 0
+        ]]>    
+ 		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())
+        	and (m.parentsIdx = #userIdx# or m.gparentsIdx = #userIdx# or m.idx = #userIdx#)
+        </isEqual>
+        <isNotEmpty property = "tidx">
+        	and tidx=#tidx#
+        </isNotEmpty>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+	<update id="updateMoneyP2P"  parameterClass="egovMap">
+		<![CDATA[
+			UPDATE moneyp2p
+			SET stat = #stat#, date2 = now()
+		]]> 
+		<isNotEmpty property = "exchangeValue">
+          , exchangeValue = #exchangeValue#
+        </isNotEmpty>
+        <isNotEmpty property = "exchangeRate">
+          , exchangeRate = #exchangeRate#
+        </isNotEmpty>
+        <![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<update id="updateMoneyP2PStat"  parameterClass="egovMap">
+		<![CDATA[
+			UPDATE moneyp2p
+			SET stat = #stat#
+			WHERE idx=#widx#
+		]]>
+	</update>
+	
+	<update id="updateMoneyP2PSend"  parameterClass="egovMap">
+		<![CDATA[
+			UPDATE moneyp2p
+			SET send = #send#
+			WHERE idx=#midx#
+		]]>
+	</update>
+	
+	<select id="selectKtransactionsP2PCnt" resultClass="int">
+	        <![CDATA[
+	            SELECT count(*)
+	            FROM moneyp2p
+	            where useridx=#userIdx#
+	        ]]>
+		<isNotEmpty property="kind">	
+			and kind=#kind#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<![CDATA[
+				AND mdate >= 
+				#sdate#
+			]]>
+		</isNotEmpty>
+		<isNotEmpty property="edate">
+			<![CDATA[
+			AND mdate <= 
+			#edate#
+			]]>
+		</isNotEmpty>
+	</select>
+	<select id="selectKtransactionsP2P" resultClass="EgovMap">
+	        <![CDATA[
+	            SELECT *
+	            FROM moneyp2p m left join p2ptrader p on m.tidx=p.idx 
+	            where m.useridx=#userIdx#
+	           ]]> 
+		<isNotEmpty property="kind">	
+			and kind=#kind#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<![CDATA[
+				AND mdate >= 
+				#sdate#
+			]]>
+		</isNotEmpty>
+		<isNotEmpty property="edate">
+			<![CDATA[
+			AND mdate < 
+			DATE_ADD(#edate#, INTERVAL 1 DAY)
+			]]>
+		</isNotEmpty>
+	         <![CDATA[
+	            ORDER BY m.idx desc
+	            limit #first#, #record#
+	        ]]>
+	</select>
+	
+	<insert id="insertMoneyP2P" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO moneyp2p
+				( useridx
+				  , kind
+				  , money
+				  , exchangeValue
+				  , exchangeRate
+				  , tidx
+				  , mdate
+				  , stat
+				)
+			VALUES ( #userIdx#
+				  , #kind#
+				  , #money#
+				  , #exchangeValue#
+				  , #exchangeRate#
+				  , #tidx#
+				  , now()
+				  , -1
+				)
+		]]>
+		<selectKey keyProperty="idx" resultClass="int">
+	        SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="checkMoneyStatP2P" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            WHERE useridx=#userIdx# and kind=#kind# and (stat='0' or stat='-1')
+            limit 1
+        ]]>
+	</select>
+	
+	<select id="selectP2PWithdrawal" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            WHERE idx = #widx#
+        ]]>
+	</select>
+	
+	<select id="checkMoneyIdxP2P" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            WHERE idx=#widx#
+        ]]>
+	</select>
+	
+	<select id="checkMoneyIdxWithP2PInfo" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT m.*, p.*, mem.name userName, mem.color color, mem.mname mname, mem.istest, mem.mbank mbank, mem.maccount maccount
+            FROM moneyp2p m left join p2ptrader p on m.tidx = p.idx left join member mem on m.useridx = mem.idx
+            WHERE m.idx=#midx#
+            limit 1
+        ]]>
+	</select>
+	
+	<insert id="insertChatLog">
+		<![CDATA[
+			INSERT INTO chatlog
+				( useridx
+				  , pidx
+				  , text
+				  , time
+				  , isAdmin)
+			VALUES ( #userIdx#
+				  , #pidx#
+				  , #text#
+				  , #time#
+				  , #isAdmin#)
+		]]>
+	</insert>
+	
+	<select id="selectChatList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM chatlog
+            where useridx=#userIdx#
+            order by time asc
+        ]]>
+	</select>
+	
+	<select id="selectP2PWithdrawCnt" resultClass="int">
+        <![CDATA[
+			select count(*)
+			from moneyp2p
+			where (stat = 0 or stat = -1) and kind = '-' and alarm = 1
+        ]]>
+	</select>
+	<select id="selectP2PDepositCnt" resultClass="int">
+        <![CDATA[
+			select count(*)
+			from moneyp2p
+			where (stat = 0 or stat = -1) and kind = '+' and alarm = 1
+        ]]>
+	</select>
+	<update id="updateChatRead">
+		<![CDATA[
+			UPDATE chatlog
+			SET useridx=useridx
+		]]>
+		<isNotEmpty property="adminRead">
+				, adminRead=#adminRead#
+		</isNotEmpty> 
+		<isNotEmpty property="userRead">
+				, userRead=#userRead#
+		</isNotEmpty> 
+			WHERE useridx=#userIdx# 
+			and pidx=#pidx#
+	</update>
+	
+	<delete id="deleteChatLog">
+			<![CDATA[
+				DELETE FROM chatlog
+				WHERE useridx=#userIdx# and pidx=#pidx#
+			]]>
+	</delete>
+	
+	<select id="selectAnyRunP2P" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            WHERE useridx=#userIdx#
+            and (stat=-1 or stat=0)
+            limit 1
+        ]]>
+	</select>
+	<update id="updateP2PDepositCancel">
+		<![CDATA[
+			UPDATE moneyp2p
+			SET stat=3
+			WHERE idx=#idx#
+			and stat = -1
+			and kind = '+'
+		]]>
+	</update>
+	<select id="selectP2PDepositPendingList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            where kind='+'
+            and stat=-1
+        ]]>
+	</select>
+	
+	<select id="selectP2PDeposit" resultClass="int">
+        <![CDATA[
+            SELECT ifnull(sum(money),0) depositMoney
+            FROM moneyp2p
+            where useridx=#userIdx#
+            and kind='+' 
+            and stat=1
+        ]]>
+	</select>
+	<select id="selectKrwDeposit" resultClass="int">
+        <![CDATA[
+            SELECT ifnull(sum(money),0) depositMoney
+            FROM money
+            where useridx=#userIdx#
+            and kind='+' 
+            and stat=1
+        ]]>
+	</select>
+	<select id="selectCoinDeposit" resultClass="EgovMap">
+        <![CDATA[
+            SELECT coin, sum(amount) amountSum
+			from transactions
+			where userIdx=#userIdx#
+			and label="+"
+			and status=1
+			GROUP BY coin
+        ]]>
+	</select>
+	
+	<select id="selectP2PLowPrice" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(price,0)
+			from p2ptrader
+			where type=#type#
+			and isDelete=0
+			and qty!=0
+			order by price
+			limit 1
+        ]]>
+	</select>
+	
+</sqlMap>

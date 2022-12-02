@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO"
+		type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<insert id="insertPointLog">
+		<![CDATA[
+			INSERT INTO pointlog
+				( midx
+				  , bfPoint
+				  , point
+				  , afPoint
+				  , coinTYpe
+				  , pm
+				  , kind
+				  , pdate)
+			VALUES ( #midx#
+				  , #bfPoint#
+				  , #point#
+				  , #afPoint#
+				  , #coinType#
+				  , #pm#
+				  , #kind#
+				  , now())
+		]]>
+	</insert>
+	
+	<select id="selectPointLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT p.*  , m.name , m.level , m.wallet, m.color
+            FROM pointlog p
+            LEFT JOIN member m on m.idx = p.midx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')
+        			or p.point like concat('%' , #search# , '%') or p.coinType like concat('%' , #search# , '%') )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(pdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "ltype">
+        	<isEqual property = "ltype" compareValue="trade">
+        		and (kind = "trade" or kind = "tradeclose" or kind = "tradeclose2" or kind = "profit" or kind = "liquid" or kind = "order" or kind = "orderCancel" or kind = "margin")
+        	</isEqual>
+        	<isEqual property = "ltype" compareValue="deposit">
+        		and (kind = "deposit" or kind = "withdrawal" or kind = "adDeposit" or kind = "adWithdrawal" or kind = "withdrawDeny" or kind = "withdraw" or kind = "exchange")
+        	</isEqual>
+        	<isNotEqual property = "ltype" compareValue="trade">
+        		<isNotEqual property = "ltype" compareValue="deposit">
+        			and kind = #ltype#
+        		</isNotEqual>
+        	</isNotEqual>
+        </isNotEmpty>
+        <![CDATA[
+            ORDER BY p.pdate desc , p.idx desc
+        ]]>
+        <isNotEmpty property = "first">
+            LIMIT #first# , #record#
+        </isNotEmpty>
+	</select>
+	<select id="selectPointLogCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+        	from (
+            SELECT p.*  , m.name , m.level , m.wallet
+            FROM pointlog p
+            LEFT JOIN member m on m.idx = p.midx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')
+        			or p.point like concat('%' , #search# , '%') or p.coinType like concat('%' , #search# , '%') )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(pdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "ltype">
+        	<isEqual property = "ltype" compareValue="trade">
+        		and (kind = "trade" or kind = "tradeclose" or kind = "tradeclose2" or kind = "profit" or kind = "liquid" or kind = "order" or kind = "orderCancel" or kind = "margin")
+        	</isEqual>
+        	<isEqual property = "ltype" compareValue="deposit">
+        		and (kind = "deposit" or kind = "withdrawal" or kind = "adDeposit" or kind = "adWithdrawal" or kind = "withdrawDeny" or kind = "withdraw" or kind = "exchange")
+        	</isEqual>
+        	<isNotEqual property = "ltype" compareValue="trade">
+        		<isNotEqual property = "ltype" compareValue="deposit">
+        			and kind = #ltype#
+        		</isNotEqual>
+        	</isNotEqual>
+        </isNotEmpty>
+        <![CDATA[
+        	) A
+        ]]>
+	</select>
+	<select id="selectFundingFeeSum" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(fundingFee),0) fundingFeeSum
+            FROM funding f
+            LEFT JOIN member m on m.idx = f.userIdx
+            WHERE m.istest != 1
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')  )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(fundDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isEqual property="coin" compareValue="FUTURES">
+        	and right(symbol,1) = "T"
+        </isEqual>
+        <isNotEqual property="coin" compareValue="FUTURES">
+        	and symbol = #coin#
+        </isNotEqual>
+        <![CDATA[
+            ORDER BY f.fundDatetime desc , f.idx desc
+        ]]>
+	</select>
+	<select id="selectFundingLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT p.*  , m.name , m.level , m.wallet, m.color
+            FROM funding p
+            LEFT JOIN member m on m.idx = p.userIdx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')  )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(fundDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isEqual property="coin" compareValue="FUTURES">
+        	and right(symbol,1) = "T"
+        </isEqual>
+        <isNotEqual property="coin" compareValue="FUTURES">
+        	and symbol = #coin#
+        </isNotEqual>
+        <![CDATA[
+            ORDER BY p.fundDatetime desc , p.idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	<select id="selectFundingLogCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+        	from (
+            SELECT p.*  , m.name , m.level , m.wallet
+            FROM funding p
+            LEFT JOIN member m on m.idx = p.userIdx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')  )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(fundDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isEqual property="coin" compareValue="FUTURES">
+        	and right(symbol,1) = "T"
+        </isEqual>
+        <isNotEqual property="coin" compareValue="FUTURES">
+        	and symbol = #coin#
+        </isNotEqual>
+        <![CDATA[
+        	) A
+        ]]>
+	</select>
+	<select id="selectLevelLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT p.*  , m.name , m.level , m.wallet , (select id from admin where idx = p.adminIdx) admin
+            FROM levellog p
+            LEFT JOIN member m on m.idx = p.userIdx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="p.userIdx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="p.userIdx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(ldate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <![CDATA[
+            ORDER BY p.ldate desc , p.idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	<select id="selectLevelLogCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+        	from (
+            SELECT p.*  , m.name , m.level , m.wallet
+            FROM levellog p
+            LEFT JOIN member m on m.idx = p.userIdx
+            WHERE 1=1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="p.userIdx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="p.userIdx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(ldate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <![CDATA[
+        	) A
+        ]]>
+	</select>
+	<insert id="insertLevelLog">
+		<![CDATA[
+			INSERT INTO levellog
+				( userIdx
+				  , adminIdx
+				  , ip
+				  , bf
+				  , af
+				  , kind
+				  , ldate)
+			VALUES ( #userIdx#
+				  , #adminIdx#
+				  , #ip#
+				  , #bf#
+				  , #af#
+				  , #kind#
+				  , now())
+		]]>
+	</insert>
+	
+	<insert id="insertLiqlog">
+		<![CDATA[
+			INSERT INTO liqlog
+				( sise
+				  , triggerPrice
+				  , userIdx
+				  , ltime
+				  , position
+				  , symbol)
+			VALUES ( #sise#
+				  , #triggerPrice#
+				  , #userIdx#
+				  , now()
+				  , #position#
+				  , #symbol#)
+		]]>
+	</insert>
+	
+	<select id="selectLiqlogListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM liqlog l left join member m on m.idx = l.userIdx
+            where 1=1 
+            and l.userIdx !=1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+       	</isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(ltime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "position">
+        	and position = #position#
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+	</select>
+	<select id="selectLiqlogList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT l.*, m.name,m.phone, m.color,m.istest,m.parentsIdx, p.name pname, p.phone pphone
+            FROM liqlog l 
+            left join member m on m.idx = l.userIdx
+            left join member p on p.idx = m.parentsIdx
+            where 1=1 
+            and l.userIdx !=1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+       	</isNotEmpty> 
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+       		and date(ltime) between #sdate# and #edate# 
+       	</isNotEmpty>
+       	<isNotEmpty property = "position">
+        	and position = #position#
+        </isNotEmpty>
+       	<isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$
+		</isNotEmpty>
+		<isEmpty property="nolimit">
+            limit #first#, #record#
+		</isEmpty>
+	</select>	
+	
+	<select id="selectCoinTransLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT c.*, m.name , m.level , cb.balance , m.color
+            FROM cointranslog c            
+            	LEFT JOIN member m on m.idx = c.useridx
+            	LEFT JOIN coinbalance cb on cb.useridx = c.useridx
+            WHERE c.coinname = #coinname#
+            and cb.coinname = #coinname#
+        ]]>        
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')
+        			or c.price like concat('%' , #search# , '%') or c.coinname like concat('%' , #search# , '%') )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(c.createdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "ltype">
+        	<isEqual property = "ltype" compareValue="trade">
+        		and c.desc = "trade" or c.desc = "tradeclose" or c.desc = "tradeclose2" or c.desc = "profit" or c.desc = "liquid" or c.desc = "order" or c.desc = "orderCancel" or c.desc = "margin"
+        	</isEqual>
+        	<isEqual property = "ltype" compareValue="deposit">
+        		and c.desc = "deposit" or c.desc = "withdraw" or 
+        			c.desc = "withdrawDeny" or  c.desc = "outmoney" or 
+        			c.desc = concat("UTo" , #coinname#) or c.desc = concat(#coinname#,"ToU")
+        	</isEqual>
+        	<isNotEqual property = "ltype" compareValue="trade">
+        		<isNotEqual property = "ltype" compareValue="deposit">
+        			and c.desc = #ltype#
+        		</isNotEqual>
+        	</isNotEqual>
+        </isNotEmpty>
+        <![CDATA[
+            ORDER BY idx desc
+        ]]>
+        <isNotEmpty property = "first">
+            LIMIT #first# , #record#
+        </isNotEmpty>
+	</select>
+	
+	<select id="selectCoinTransLogCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+            FROM cointranslog c
+            	LEFT JOIN member m on m.idx = c.useridx
+            WHERE c.coinname = #coinname#
+        ]]>
+        <isNotEmpty property = "search">
+        	and ( m.name like concat('%' , #search# , '%') or m.level like concat('%' , #search# , '%')
+        			or c.price like concat('%' , #search# , '%') or c.coinname like concat('%' , #search# , '%') )
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(c.createdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "ltype">
+        	<isEqual property = "ltype" compareValue="trade">
+        		and c.desc = "trade" or c.desc = "tradeclose" or c.desc = "tradeclose2" or c.desc = "profit" or c.desc = "liquid" or c.desc = "order" or c.desc = "orderCancel" or c.desc = "margin"
+        	</isEqual>
+        	<isEqual property = "ltype" compareValue="deposit">
+        		and c.desc = "deposit" or c.desc = "withdraw" or 
+        			c.desc = "withdrawDeny" or c.desc = "PToU" or 
+        			c.desc = "UToP" or c.desc = "outmoney" or 
+        			c.desc = "UToBTC" or c.desc = "BTCToU" or 
+        			c.desc = "UToETH" or c.desc = "ETHToU" or 
+        			c.desc = "UToXRP" or c.desc = "XRPToU" or 
+        			c.desc = "UToTRX" or c.desc = "TRXToU"
+        	</isEqual>
+        	<isNotEqual property = "ltype" compareValue="trade">
+        		<isNotEqual property = "ltype" compareValue="deposit">
+        			and c.desc = #ltype#
+        		</isNotEqual>
+        	</isNotEqual>
+        </isNotEmpty>
+	</select>
+	
+	<insert id="insertBalancelog">
+		<![CDATA[
+			INSERT INTO balancelog
+				( coin
+				  , aidx
+				  , nowPrice
+				  , price
+				  , gap
+				  , rtime)
+			VALUES ( #coin#
+				  , #aidx#
+				  , #nowPrice#
+				  , #price#
+				  , #gap#
+				  , now())
+		]]>
+	</insert>
+</sqlMap>

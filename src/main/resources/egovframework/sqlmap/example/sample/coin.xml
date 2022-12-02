@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="selectCoinList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM coinlist
+        ]]>
+	</select>
+	
+	<!-- 코인 승인 했을때 리플  정보 조회 -->
+	<select 
+		id="coin_getXrpinfo" 
+		resultClass="egovMap">
+		SELECT 
+			* 
+		FROM
+			xrpaccount
+		ORDER BY idx DESC LIMIT 1
+	</select>
+	<!-- 코인 승인 했을때 코인 출금 정보 조회 -->
+	<select 
+		id="coin_getWithdrawInfo" 
+		parameterClass="java.lang.String" 
+		resultClass="egovMap">
+		SELECT 
+			* 
+		FROM
+			withdraw
+		WHERE
+			widx =#value#
+	</select>
+
+	<select 
+		id="all_coin_getBalance" 
+		parameterClass="egovMap" 
+		resultClass="egovMap">
+		SELECT 
+			* 
+		FROM
+			coinbalance
+		WHERE
+			useridx = #userIdx#
+	</select>
+	
+	<select 
+		id="coin_getBalance" 
+		parameterClass="egovMap" 
+		resultClass="egovMap">
+		SELECT 
+			* 
+		FROM
+			coinbalance
+		WHERE
+			useridx = #useridx# and coinname=#coinname#
+		limit 1
+	</select>
+	
+	<select id="selectBalance" resultClass="double">
+		SELECT ifnull(sum(balance),0)
+		FROM coinbalance
+		WHERE useridx = #userIdx# and coinname=#coin#
+	</select>
+	<select id="selectRealBalance" resultClass="double">
+		SELECT ifnull(sum(balancereal),0)
+		FROM coinbalance
+		WHERE useridx = #userIdx# and coinname=#coin#
+	</select>
+	<insert id="coin_isnertBalance" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO coinbalance
+				( useridx
+				  , coinname
+				  , balance
+				  , balancereal
+				  , createdate
+				  , lastupdate )
+			VALUES ( #useridx#
+				  , #coinname#
+				  , 0
+				  , 0
+				  , now()
+				  , now() )
+		]]>
+	</insert>
+	<insert id="coin_insertTranslog" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO cointranslog
+				( useridx
+				  ,`desc`
+				  , coinname
+				  , price				  
+				  , `before`
+				  , after
+				  , createdate )
+			VALUES ( #useridx#
+				  , #desc#
+				  , #coinname#
+				  , #price#				  
+				  , #before#
+				  , #after#
+				  , now())
+		]]>
+	</insert>
+	<update id="coin_addBalance" parameterClass="egovMap">
+		UPDATE coinbalance set
+			 balance=balance+($balance$)
+			,lastupdate=now()
+		WHERE
+			useridx=#useridx# and coinname=#coinname#
+	</update>
+	<update id="coin_updateBalance" parameterClass="egovMap">
+		UPDATE coinbalance set
+			 balance = balance+#balance#
+			,lastupdate=now()
+		WHERE
+			useridx=#useridx# and coinname=#coinname#
+		
+	</update>
+	<update id="coin_updateBalanceReal" parameterClass="egovMap">
+		UPDATE coinbalance set
+			 balancereal=balancereal+#balance#
+			,lastupdate=now()
+		WHERE
+			useridx=#useridx# and coinname=#coinname#		
+	</update>
+	<update id="coin_updateBalanceRealAndOutmoney" parameterClass="egovMap">
+		UPDATE coinbalance set
+			 balancereal=balancereal+#balance#			 
+			,lastupdate=now()
+		WHERE
+			useridx=#useridx# and coinname=#coinname#		
+	</update>	
+	<update id="coin_updateAdminRealBalance" parameterClass="egovMap">
+		UPDATE coinbalance set
+			 balancereal=balancereal+#balance#
+			,lastupdate=now()
+		WHERE
+			useridx=#useridx# and coinname=#coinname#		
+	</update>
+	<update id="coin_updateFlag" parameterClass="egovMap">
+		UPDATE transactions set
+			 flag = 1			
+		WHERE
+			idx=#idx#		
+	</update>
+	<select id="selectFlag" resultClass="int">
+        <![CDATA[
+            SELECT flag
+            FROM transactions
+            where idx = #idx#
+        ]]>
+	</select>	
+	<select id="selectXrpAccount" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM xrpaccount
+            limit 1
+        ]]>
+	</select>
+	
+	<update id="updateWithdrawFee">
+		<![CDATA[
+			UPDATE withdraw
+			SET wfee=#fee#				
+			WHERE widx=#widx#
+		]]>
+	</update>
+</sqlMap>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<insert id="insertSpotOrder" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO spotorderList
+				( userIdx
+				  , orderNum
+				  , symbol
+				  , orderType
+				  , position
+				  , entryPrice
+				  , entryPriceForStop
+				  , buyQuantity
+				  , conclusionQuantity
+				  , state
+				  , triggerPrice
+				  , paidVolume
+				  , orderDatetime)
+			VALUES ( #userIdx#
+				  , #orderNum#
+				  , #symbol#
+				  , #orderType#
+				  , #position#
+				  , #entryPrice#
+				  , #entryPriceForStop#
+				  , #buyQuantity#
+				  , #conclusionQuantity#
+				  , #state#
+				  , #triggerPrice#
+				  , #paidVolume#
+				  , now())
+		]]>
+	</insert>
+
+	<insert id="insertSpotTradeTrigger" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO spottradetrigger
+				( userIdx
+				  , orderNum
+				  , symbol
+				  , triggerType
+				  , position
+				  , triggerPrice
+				  ,buyDatetime)
+			VALUES ( #userIdx#
+				  , #orderNum#
+				  , #symbol#
+				  , #triggerType#
+				  , #position#
+				  , #triggerPrice#
+				  ,now())
+		]]>
+		<selectKey keyProperty="idx" resultClass="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>		
+	</insert>	
+	
+		<delete id="deleteSpotTradeTriggerByOrderNum" parameterClass="egovMap">
+		<![CDATA[
+			DELETE FROM spottradetrigger
+			WHERE userIdx=#userIdx# and orderNum=#orderNum#
+		]]>
+	</delete>
+	
+	<insert id="insertSpotTradeLog" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO spottradelog
+				( userIdx
+				  , buyDatetime
+				  , orderNum
+				  , symbol
+				  , orderType
+				  , position
+				  , entryPrice
+				  , buyQuantity				 
+				  , fee
+				)
+			VALUES ( #userIdx#
+				  , #buyDatetime#
+				  , #orderNum#
+				  , #symbol#
+				  , #orderType#
+				  , #position#
+				  , #entryPrice#
+				  , #buyQuantity#
+				  , #fee#
+				 )
+	  	  ]]>
+	</insert>
+	
+	<update id="updateSpotOrderState" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE spotorderList
+			SET state=#state#
+			WHERE userIdx=#userIdx# and orderNum=#orderNum# 
+		]]>
+	</update>
+	
+	<select id="selectSpotOrderAll" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM spotorderList
+            WHERE state=#state#
+        ]]>
+	</select>
+	
+	<select id="selectAllSpotTradeTrigger" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM spottradeTrigger
+        ]]>
+	</select>
+
+
+<!-- 유저화면 거래내역 -->
+	<select id="selectEndtimeMySpotTradeList" resultClass="EgovMap"
+		parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM spottradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) <= #endDate# 
+            	and symbol = #symbol#
+            order by idx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectEndtimeMySpotTradeListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM spottradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) <= #endDate# 
+            	and symbol = #symbol#
+        ]]>
+	</select>
+<!-- 관리자 -->
+<select id="selectSpotTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name,m.phone, m.color,m.istest,m.parentsIdx, p.name pname, p.phone pphone
+            FROM spottradelog t
+            left join member m on m.idx = t.userIdx
+            left join member p on p.idx = m.parentsIdx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ = #search# 
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>     
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$
+		</isNotEmpty>
+        <isEmpty property="nolimit">
+            limit #first# , #record#
+        </isEmpty>
+	</select>
+	
+	<select id="selectSpotTradeListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT t.* , m.name
+	            FROM spottradelog t
+	            left join member m on m.idx = t.userIdx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ = #search# 
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+	        </isNotEmpty> 
+		        <isNotEmpty property = "sdate">
+		        	and date(buyDatetime) between #sdate# and #edate# 
+		        </isNotEmpty>
+		        <isNotEmpty property = "searchIdx">
+	        		and m.idx = #searchIdx#
+	        </isNotEmpty>	        
+	        <isNotEmpty property = "symbol">
+	        	and symbol = #symbol#
+	        </isNotEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isEqual>
+            )A
+	</select>	
+	
+	<select id="selectSpotOrderList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT o.* , m.name, m.color,m.phone, m.istest,m.parentsIdx, p.name pname, p.phone pphone
+            FROM spotorderlist o
+            left join member m on m.idx = o.userIdx
+            left join member p on p.idx = m.parentsIdx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(orderDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, o.idx desc
+		</isNotEmpty>
+        <isEmpty property="nolimit">
+            limit #first# , #record#
+        </isEmpty>
+	</select>
+	<select id="selectSpotOrderListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT o.* , m.name
+	            FROM spotorderlist o
+	            left join member m on m.idx = o.userIdx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(orderDatetime) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "searchIdx">
+        		and m.idx = #searchIdx#
+        	</isNotEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isEqual>
+	        <isNotEmpty property = "symbol">
+	        	and symbol = #symbol#
+	        </isNotEmpty>
+            )A
+	</select>
+	<select id="selectSpotLongEntryList" resultClass="egovMap">
+		<![CDATA[
+			select symbol, entryPrice
+			from spottradelog
+			where userIdx=#userIdx#
+			and position="long"
+		]]>
+	</select>
+</sqlMap>

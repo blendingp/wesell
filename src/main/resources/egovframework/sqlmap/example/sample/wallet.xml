@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO"
+		type="egovframework.example.sample.service.SampleDefaultVO" />
+	<update id="updateWalletBalance">
+		<![CDATA[
+			UPDATE member
+			SET ercWallet=#ercWallet#,
+			btcWallet=#btcWallet#
+			WHERE idx = #userIdx#
+		]]>
+	</update>
+	<update id="updateTransfer">
+		<![CDATA[
+			UPDATE 
+				member
+			SET 
+				wallet=wallet+($wallet$)
+			WHERE 
+				idx = #userIdx#
+		]]>
+	</update>
+	<insert id="insertTransaction" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO transactions
+				( coin
+				  , amount
+				  , label
+				  , `status`
+				  ]]>
+	  	<isNotEmpty property = "tx">
+				  , tx
+        </isNotEmpty>
+		<isNotEqual property = "dtag" compareValue="null">
+			<![CDATA[
+	       		  , dtag
+	    	]]>
+	    </isNotEqual>
+	    	<![CDATA[
+				  , fee
+				  , `from`
+				  , `to`
+				  , completionTime
+				  , userIdx)
+			VALUES (#coin#
+				  , #amount#
+				  , #label#
+				  , #status#
+		 	]]>
+	 	<isNotEmpty property = "tx">
+				  , #tx#
+        </isNotEmpty>
+	    <isNotEqual property = "dtag" compareValue="null">
+			<![CDATA[
+				  , #dtag#
+	    	]]>
+	    </isNotEqual>
+		<![CDATA[
+				  , #fee#
+				  , #from#
+				  , #to#
+				  , now()
+				  , #userIdx#)
+		]]>
+	</insert>
+	<update id="updateTransactionStatus">
+			<![CDATA[
+				UPDATE transactions
+				SET status=#status#
+				WHERE idx=#idx#
+			]]>
+	</update>
+	<select id="selectTransactionsCnt" resultClass="int">
+	        <![CDATA[
+	            SELECT count(*)
+	            FROM transactions
+	            where `to`=#userIdx#
+	        ]]>
+	        <isNotEmpty property = "label">
+        		and label=#label#
+	        	<isEqual property = "label" compareValue="+">
+		        	and `from` = #userIdx#
+		        </isEqual>
+		        <isEqual property = "label" compareValue="-">
+		        	and `from` = 1
+		        </isEqual>
+        	</isNotEmpty>
+	        <isNotEmpty property = "sdate">
+	        	and date(completionTime) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "coin">
+	        	and coin = #coin#
+	        </isNotEmpty>
+	</select>
+	<select id="selectTransactions" resultClass="EgovMap">
+	        <![CDATA[
+	            SELECT *
+	            FROM transactions
+	            where userIdx=#userIdx#
+	           ]]> 
+	        <isNotEmpty property = "label">
+        		and label=#label#
+	        	<isEqual property = "label" compareValue="+">
+		        	and `from` = `to`
+		        </isEqual>
+		        <isEqual property = "label" compareValue="-">
+		        	and `from` = 1
+		        </isEqual>
+        	</isNotEmpty>
+	        <isNotEmpty property = "sdate">
+	        	and date(completionTime) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "coin">
+	        	and coin = #coin#
+	        </isNotEmpty>
+	         <![CDATA[
+	            ORDER BY idx desc
+	            limit #first#, #record#
+	        ]]>
+	</select>
+	
+	<select id="selectTransactionsTotal" resultClass="EgovMap">
+        <![CDATA[
+            SELECT count(*) num
+            FROM transactions
+	        where userIdx=#userIdx#
+        ]]>
+    </select>
+    <insert id="insertTransaction2">
+		<![CDATA[
+		INSERT INTO transactions
+           (     coin
+               , amount
+               , tx
+               , label
+               , status
+               
+               , userIdx)
+         SELECT * FROM (SELECT #coin#
+				  , #amount#
+				  , #tx#
+				  , #label#
+				  , #status#
+				
+				  , #userIdx#) AS tmp
+		 WHERE NOT EXISTS (
+    	 SELECT tx FROM transactions WHERE tx = #tx#
+		 ) LIMIT 1;
+		]]>
+	</insert>
+	<update id="updateMemberBalancecheck2" parameterClass="java.lang.String">
+		<![CDATA[
+			UPDATE member
+			SET balancecheck=2
+			WHERE idx=#value#
+		]]>
+	</update>
+	
+	<select id="selectKtransactionsCnt" resultClass="int">
+	        <![CDATA[
+	            SELECT count(*)
+	            FROM money
+	            where useridx=#userIdx#
+	        ]]>
+		<isNotEmpty property="kind">	
+			and kind=#kind#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<![CDATA[
+				AND mdate >= 
+				#sdate#
+			]]>
+		</isNotEmpty>
+		<isNotEmpty property="edate">
+			<![CDATA[
+			AND mdate <= 
+			#edate#
+			]]>
+		</isNotEmpty>
+	</select>
+	<select id="selectKtransactions" resultClass="EgovMap">
+	        <![CDATA[
+	            SELECT *
+	            FROM money
+	            where useridx=#userIdx#
+	           ]]> 
+		<isNotEmpty property="kind">	
+			and kind=#kind#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<![CDATA[
+				AND mdate >= 
+				#sdate#
+			]]>
+		</isNotEmpty>
+		<isNotEmpty property="edate">
+			<![CDATA[
+			AND mdate < 
+			DATE_ADD(#edate#, INTERVAL 1 DAY)
+			]]>
+		</isNotEmpty>
+	         <![CDATA[
+	            ORDER BY idx desc
+	            limit #first#, #record#
+	        ]]>
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO"
+		type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<!--새 대시보드 -->
+	<select id="selectTransSumDate" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions t left join member m on t.to = m.idx
+			where 
+				status=1
+				and label = #label#
+				and m.istest != 1
+        ]]>
+        <isEqual property="label" compareValue="+">
+        		and `to` != 1
+        </isEqual>
+		<isNotEmpty property = "sdate">
+        	and date(completionTime) between #sdate# and #edate# 
+        </isNotEmpty>
+			group by coin
+	</select>
+	<select id="selectTransAdminSumDate" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions
+			where `to` = 1 
+			and `from` = 1
+			and userIdx = 1
+        ]]>
+        <isNotEmpty property = "sdate">
+        	and date(completionTime) between #sdate# and #edate# 
+        </isNotEmpty>
+			group by coin
+	</select>	
+	<select id="selectTransAdminColSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions t left join member m on t.from = m.idx
+			where `to` = 1 
+			and `from` != 1
+			and userIdx = 1	
+			and m.istest != 1
+        ]]>
+        <isNotEmpty property = "sdate">
+        	and date(completionTime) between #sdate# and #edate# 
+        </isNotEmpty>
+			group by coin
+	</select>	
+	<select id="selectWithdrawSumDate" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions t left join member m on t.to = m.idx
+			where label = #label# 
+			and status=1
+			and m.istest != 1
+        ]]>
+        <isNotEmpty property = "sdate">
+        	and date(completionTime) between #sdate# and #edate# 
+        </isNotEmpty>
+			group by coin
+	</select>
+	
+	<!--기존 대시보드 -->
+	<select id="selectMemberAllWallet" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(wallet),0)
+            FROM member 
+			WHERE idx != 1 and istest!=1 and phone!='-1'
+        ]]>
+	</select>
+	<select id="selectMemberAdminBalance" resultClass="EgovMap">
+        <![CDATA[
+            SELECT coinname, ifnull(sum(balancereal),0)rbal
+            FROM coinbalance
+            where useridx = 1
+            group by coinname
+        ]]>
+	</select>
+	<select id="selectUserRealBalance" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	coinname, 
+            	ifnull(sum(balancereal),0)bal
+            FROM 
+            	coinbalance c left join member m on c.useridx = m.idx
+            where useridx != 1
+            and m.istest != 1
+            group by coinname
+        ]]>
+	</select>
+	<select id="selectUserBalance" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	coinname, 
+            	ifnull(sum(balance),0)bal
+            FROM 
+            	coinbalance c left join member m on c.useridx = m.idx
+            where useridx != 1
+            and m.level = "user"
+            and m.istest != 1
+            and m.phone != -1
+            group by coinname
+        ]]>
+	</select>
+	<select id="selectTransSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions
+			where label = #label# and userIdx != 1 
+			group by coin
+        ]]>
+	</select>
+	<select id="selectTransAdminSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions
+			where `to` = 1 
+			group by coin
+        ]]>
+	</select>	
+	<select id="selectWithdrawSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT coin,ifnull(sum(amount),0)amountsum
+            FROM transactions
+			where label = #label# 
+			group by coin
+        ]]>
+	</select>
+	
+	<!-- 입출금내역 -->
+	<select id="selectAllTransactionsCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+ 			FROM transactions t left join member m on t.userIdx=m.idx where status != -1
+        ]]>
+         <isNotEmpty property = "coin">
+        	and coin=#coin#
+        </isNotEmpty>    
+        <isNotEmpty property = "status">
+        	and status=#status#
+        </isNotEmpty>
+        <isNotEmpty property = "isDeposit">
+        	and (status="0" or status="2")
+        </isNotEmpty>
+        <isNotEmpty property = "label">
+        	and label=#label#
+        </isNotEmpty>	            	        
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and (`to`=#search# or `from`=#search#)
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and ((SELECT name FROM member m WHERE m.idx = t.to) like concat('%' , #search# , '%') or
+       			(SELECT name FROM member m WHERE m.idx = t.from) like concat('%' , #search# , '%'))
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+       		and date(completionTime) between #sdate# and #edate# 
+       	</isNotEmpty>
+       	<isNotEmpty property = "searchIdx">
+        	and userIdx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+	</select>
+	<select id="selectAllTransactions" resultClass="EgovMap">
+        <![CDATA[
+            SELECT t.*,
+				(select name from member where idx = t.to) toname,
+				(select name from member where idx = t.from) fromname,
+				(select istest from member where idx = t.from) istest,
+				(select color from member where idx = t.from) color
+ 			FROM transactions t left join member m on t.userIdx=m.idx where status != -1
+        ]]>
+        <isNotEmpty property = "coin">
+        	and coin=#coin#
+        </isNotEmpty>    
+        <isNotEmpty property = "status">
+        	and status=#status#
+        </isNotEmpty>
+        <isNotEmpty property = "isDeposit">
+        	and (status="0" or status="2")
+        </isNotEmpty>
+        <isNotEmpty property = "label">
+        	and label=#label#
+        </isNotEmpty>	            	        
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and (`to`=#search# or `from`=#search#)
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and ((SELECT name FROM member m WHERE m.idx = t.to) like concat('%' , #search# , '%') or
+       			(SELECT name FROM member m WHERE m.idx = t.from) like concat('%' , #search# , '%'))
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+       		and date(completionTime) between #sdate# and #edate# 
+       	</isNotEmpty>
+       	<isNotEmpty property = "searchIdx">
+        	and userIdx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, t.idx
+		</isNotEmpty>
+        <isNull property = "limit">
+            limit #first# , #record#
+        </isNull>
+	</select>	
+	
+	<select id="selectAllTransactionsOnlyFromCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+ 			FROM transactions t left join member m on t.userIdx=m.idx where status != -1
+        ]]>
+         <isNotEmpty property = "coin">
+        	and coin=#coin#
+        </isNotEmpty>    
+        <isNotEmpty property = "status">
+        	and status=#status#
+        </isNotEmpty>
+        <isNotEmpty property = "isDeposit">
+        	and (status="0" or status="2")
+        </isNotEmpty>
+        <isNotEmpty property = "label">
+        	and label=#label#
+        </isNotEmpty>	            	        
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and ((`from`=#search# and label="+") or (`to`=#search# and label="-"))
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and (SELECT name FROM member m WHERE m.idx = t.from) like concat('%' , #search# , '%'))
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+       		and date(completionTime) between #sdate# and #edate# 
+       	</isNotEmpty>
+       	<isNotEmpty property = "searchIdx">
+        	and userIdx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+	</select>
+	<select id="selectAllTransactionsOnlyFrom" resultClass="EgovMap">
+        <![CDATA[
+            SELECT t.*,
+				(select name from member where idx = t.to) toname,
+				(select name from member where idx = t.from) fromname,
+				(select istest from member where idx = t.from) istest,
+				(select color from member where idx = t.from) color
+ 			FROM transactions t left join member m on t.userIdx=m.idx where status != -1
+        ]]>
+        <isNotEmpty property = "coin">
+        	and coin=#coin#
+        </isNotEmpty>    
+        <isNotEmpty property = "status">
+        	and status=#status#
+        </isNotEmpty>
+        <isNotEmpty property = "isDeposit">
+        	and (status="0" or status="2")
+        </isNotEmpty>
+        <isNotEmpty property = "label">
+        	and label=#label#
+        </isNotEmpty>	            	        
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and ((`from`=#search# and label="+") or (`to`=#search# and label="-"))
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and (SELECT name FROM member m WHERE m.idx = t.from) like concat('%' , #search# , '%'))
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+       		and date(completionTime) between #sdate# and #edate# 
+       	</isNotEmpty>
+       	<isNotEmpty property = "searchIdx">
+        	and userIdx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, t.idx desc
+		</isNotEmpty>
+        <isNull property = "limit">
+            limit #first# , #record#
+        </isNull>
+	</select>	
+	<select id="selectWDSum" resultClass="EgovMap">
+        <![CDATA[
+            SELECT  ifnull(sum(amount),0)sumamount, ifnull(coin,0)coinname
+            FROM transactions t left join member m on m.idx = t.userIdx
+            where m.istest != 1 and t.status = 1
+        ]]>
+        <isNotEmpty property = "coin">
+        	and t.coin=#coin#
+        </isNotEmpty>
+        <isNotEmpty property = "label">
+        	and t.label=#label#
+        </isNotEmpty>	
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and (`to`=#search# or `from`=#search#)
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and ((SELECT name FROM member m WHERE m.idx = t.to) like concat('%' , #search# , '%') or
+       			(SELECT name FROM member m WHERE m.idx = t.from) like concat('%' , #search# , '%'))
+			</isNotEqual>
+       	</isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(completionTime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+        	group by coin
+	</select>
+	<select id="selectMem30Transactions" resultClass="EgovMap">
+	        <![CDATA[
+	            SELECT * , (select name from member where idx = #to# )name
+	            FROM transactions
+	            where 
+	            	label = #label#
+	           	 	and `from` = #from#
+	            	and `to` = #to#
+	       		order by date(completionTime) desc
+	            limit 30
+	        ]]>
+	</select>
+	<select id="selectTransactionByIdx" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM transactions
+			where idx=#idx#
+        ]]>
+	</select>
+	<update id="updateTransactionByIdx" parameterClass="egovMap">
+		UPDATE transactions set
+			 status=#status#
+		WHERE
+			idx=#idx#
+	</update>
+	
+	<select id="selectIsDeposit" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM transactions
+            where status = 0 and label='+' and alarm = 1
+        ]]>
+	</select>
+
+	<select id="selectNewMemberCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member
+            where jstat=0 and level='user' and idx!=1 and phone!=-1
+        ]]>
+	</select>
+	
+	<update id="changeAlarmD">
+		<![CDATA[
+			UPDATE transactions
+			SET alarm=#alarm#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<update id="changeAlarmKW">
+		<![CDATA[
+			UPDATE money
+			SET alarm=#alarm#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<update id="changeAlarmKD">
+		<![CDATA[
+			UPDATE money
+			SET alarm=#alarm#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	
+	<select id="selectMemberDW" resultClass="EgovMap">
+        <![CDATA[
+            select idx, name, color, istest,
+        ]]>
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.idx = member.idx and coin="BTC" and label="+" and status=1
+		        <isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+       		) btcDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.idx = member.idx and coin="BTC" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+        	) btcWithdraw,
+        	(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.idx = member.idx and coin="USDT" and label="+" and status=1
+		        <isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+       		) usdtDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.idx = member.idx and coin="USDT" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+        	) usdtWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.idx = member.idx and coin="ETH" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) ethDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.idx = member.idx and coin="ETH" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) ethWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.idx = member.idx and coin="XRP" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) xrpDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.idx = member.idx and coin="XRP" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) xrpWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.idx = member.idx and coin="TRX" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) trxDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.idx = member.idx and coin="TRX" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) trxWithdraw,
+			(select ifnull(sum(money),0) from money where useridx=member.idx and kind="+" and stat=1
+				<isNotEmpty property = "sdate">
+        			and date(date2) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) krwDeposit,
+			(select ifnull(sum(money),0) from money where useridx=member.idx and kind="-" and stat=1
+				<isNotEmpty property = "sdate">
+        			and date(date2) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) krwWithdraw
+			
+		 <![CDATA[
+			from member
+			where 1=1
+		]]>
+		<isNotEmpty property="userIdx">
+			and idx=#userIdx#
+			order by idx
+			limit 1
+		</isNotEmpty>
+		<isEmpty property="userIdx">
+			and level="chong"
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="idx">
+			    	and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isEqual property="test" compareValue="test">
+					and istest != 1
+			</isEqual>
+			<isEmpty property="out">
+					and phone != -1
+			</isEmpty>
+			<isNotEmpty property="out">
+					and phone = -1
+			</isNotEmpty>
+			order by idx
+            limit #first# , #record#
+		</isEmpty>
+	</select>
+	
+	<select id="selectChongPerfomances" resultClass="EgovMap">
+        <![CDATA[
+            select idx, name, color, istest,
+        ]]>
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.parentsIdx = member.idx and coin="BTC" and label="+" and status=1
+		        <isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+       		) btcDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.parentsIdx = member.idx and coin="BTC" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+        	) btcWithdraw,
+        	(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.parentsIdx = member.idx and coin="USDT" and label="+" and status=1
+		        <isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+       		) usdtDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.parentsIdx = member.idx and coin="USDT" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+        	) usdtWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.parentsIdx = member.idx and coin="ETH" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) ethDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.parentsIdx = member.idx and coin="ETH" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) ethWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.parentsIdx = member.idx and coin="XRP" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) xrpDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.parentsIdx = member.idx and coin="XRP" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) xrpWithdraw,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.userIdx = m.idx where m.parentsIdx = member.idx and coin="TRX" and label="+" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) trxDeposit,
+			(select ifnull(sum(amount),0) from transactions t left join member m on t.to = m.idx where m.parentsIdx = member.idx and coin="TRX" and label="-" and status=1
+				<isNotEmpty property = "sdate">
+        			and date(t.completionTime) between #sdate# and #edate# 
+        		</isNotEmpty>
+			) trxWithdraw
+		 <![CDATA[
+			from member
+			where 1=1
+		]]>
+		<isNotEmpty property="userIdx">
+			and idx=#userIdx#
+			order by idx
+			limit 1
+		</isNotEmpty>
+		<isEmpty property="userIdx">
+			and level="chong"
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="idx">
+			    	and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isEqual property="test" compareValue="test">
+					and istest != 1
+			</isEqual>
+			<isEmpty property="out">
+					and phone != -1
+			</isEmpty>
+			<isNotEmpty property="out">
+					and phone = -1
+			</isNotEmpty>
+			order by idx
+            limit #first# , #record#
+		</isEmpty>
+	</select>
+	
+	<select id="selectChongPerfomancesCnt" resultClass="int">
+        <![CDATA[
+            select count(*)
+			from member
+			where level = "chong"
+		]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="idx">
+		    	and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isEqual property="test" compareValue="test">
+				and istest != 1
+		</isEqual>
+		<isEmpty property="out">
+				and phone != -1
+		</isEmpty>
+		<isNotEmpty property="out">
+				and phone = -1
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectCompleteMoneyList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM money
+            where useridx=#userIdx#
+            	and stat=1
+        ]]>
+       	<isNotEmpty property = "sdate">
+   				and date(date2) between #sdate# and #edate# 
+		</isNotEmpty>
+	   		order by idx
+	        limit #first# , #record#
+	</select>
+	<select id="selectCompleteMoneyListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM money
+            where useridx=#userIdx#
+            	and stat=1
+        ]]>
+        <isNotEmpty property = "sdate">
+   				and date(date2) between #sdate# and #edate# 
+   		</isNotEmpty>
+	</select>
+	
+	<select id="selectCompleteMoneyListP2P" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM moneyp2p
+            where useridx=#userIdx#
+            	and stat=1
+        ]]>
+       	<isNotEmpty property = "sdate">
+   				and date(date2) between #sdate# and #edate# 
+		</isNotEmpty>
+	   		order by idx
+	        limit #first# , #record#
+	</select>
+	<select id="selectCompleteMoneyListP2PCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM moneyp2p
+            where useridx=#userIdx#
+            	and stat=1
+        ]]>
+        <isNotEmpty property = "sdate">
+   				and date(date2) between #sdate# and #edate# 
+   		</isNotEmpty>
+	</select>
+	
+	<select id="selectChongCalculList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT m.idx, m.name, m.color,m.parentsIdx, m.istest, ifnull(acr.accum,0) accum, ifnull(acr.receive,0) receive, 
+            (select ifnull(sum(t.adminProfit),0) 
+            	from acreferrallog acl 
+            		left join tradelog t on t.orderNum = acl.orderNum
+					left join member mem on t.userIdx = mem.idx
+				where mem.parentsIdx = m.idx
+            ) adminProfit
+            FROM member m 
+            	left join acreferral acr on m.idx = acr.uidx
+            where m.level != 'user'
+            	and m.phone != -1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="idx">
+		    	and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isEqual property="test" compareValue="test">
+				and m.istest != 1
+		</isEqual>
+			order by m.idx
+	        limit #first# , #record#
+	</select>
+	
+	<select id="selectChongCalculListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member m 
+            where m.level != 'user'
+            	and m.phone != -1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="idx">
+		    	and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isEqual property="test" compareValue="test">
+				and m.istest != 1
+		</isEqual>
+	</select>
+	
+	<select id="selectTodayMemberCnt" resultClass="EgovMap">
+        <![CDATA[
+            select 
+				(
+					select count(*) 
+					from member where istest=0 and phone != "-1" and level="user" 
+						and joinDate >= curdate()
+				) userCnt,
+				(
+					select count(*) from member where istest=0 and phone != "-1" and level="chong" 
+						and joinDate >= curdate()
+				) chongCnt
+        ]]>
+	</select>
+	<select id="selectMemberCnt" resultClass="EgovMap">
+        <![CDATA[
+            select 
+				(
+					select count(*) 
+					from member where istest=0 and phone != "-1" and level="user" 
+				) userCnt,
+				(
+					select count(*) from member where istest=0 and phone != "-1" and level="chong" 
+				) chongCnt
+        ]]>
+	</select>
+</sqlMap>

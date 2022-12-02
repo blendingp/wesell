@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO"
+		type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<select id="selectFee" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM fee
+            where ftype = #coinname#
+        ]]>
+	</select>
+	
+	<select id="selectFeeList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM fee
+        ]]>
+	</select>
+	
+	<update id="updateFee">
+		<![CDATA[
+			UPDATE fee
+			SET fee=#fee#				
+			WHERE ftype=#coinname#
+		]]>
+	</update>
+	
+	<select id="selectDepositFee" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM feedepo
+            where ftype = #coinname#
+        ]]>
+	</select>
+	
+	<select id="selectDepositFeeList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM feedepo
+        ]]>
+	</select>
+	
+	<update id="updateDepositFee">
+		<![CDATA[
+			UPDATE feedepo
+			SET fee=#fee#				
+			WHERE ftype=#coinname#
+		]]>
+	</update>
+	
+	<select id="selectRealBalancep" resultClass="EgovMap">
+        <![CDATA[
+            SELECT c.*  , m.name , m.level , m.phone, m.color
+            FROM coinbalance c
+            LEFT JOIN member m on m.idx = c.useridx
+            WHERE coinname = #coinname#
+        ]]>        
+        <isEqual property="type" compareValue="0">
+            ORDER BY balancereal desc
+            LIMIT #first# , #record#
+        </isEqual>
+        <isEqual property="type" compareValue="1">
+            ORDER BY balance desc
+            LIMIT #first# , #record#
+        </isEqual>
+	</select>
+	
+	<select id="selectRealBalancepCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+            FROM coinbalance c
+            LEFT JOIN member m on m.idx = c.useridx
+            WHERE coinname = #coinname#
+        ]]>
+	</select>
+
+	<select id="selectRealBalanceLogp" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM $kind$ c            
+            WHERE coinname = #coinname# and useridx=#useridx#
+        ]]>        
+        <![CDATA[
+            ORDER BY idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	
+	<select id="selectRealBalanceLogpCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+            FROM $kind$ c
+            WHERE coinname = #coinname# and useridx=#useridx#
+        ]]>
+	</select>
+
+	<select id="selectTotalBalance" resultClass="EgovMap">
+        <![CDATA[
+			select 
+				*
+			from 
+			
+			(
+				select useridx userIdx, `desc`des, coinname coinname, price price, `before` `before`, after after, createdate mdate, 'coinlog' tablekind
+				from cointranslog
+				where useridx = #userIdx#
+			union
+				select midx userIdx, kind des, coinType coinname, point price, bfPoint `before`, afPoint after, pdate mdate, 'pointlog' tablekind
+				from pointlog
+				where midx = #userIdx#
+			) a
+            order by mdate desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	
+	<select id="selectTotalBalanceCnt" resultClass="int">
+        <![CDATA[
+select 
+	count(*)
+from 
+
+(
+	select useridx userIdx, `desc`des, coinname coinname, price price, `before` `before`, after after, createdate mdate, 'coinlog' tablekind
+	from cointranslog
+	where useridx = #userIdx#
+union
+	select midx userIdx, kind des, coinType coinname, point price, bfPoint `before`, afPoint after, pdate mdate, 'pointlog' tablekind
+	from pointlog
+	where midx = #userIdx#
+) a
+order by mdate desc
+        ]]>
+	</select>
+</sqlMap>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	
+	<insert id="insertAccumRefLog">
+		<![CDATA[
+			INSERT INTO acreferrallog
+				( orderNum
+				  , gidx
+				  , allot
+				  , adate)
+			VALUES ( #orderNum#
+				  , #gidx#
+				  , #allot#
+				  , now())
+		]]>
+	</insert>
+	
+	<insert id="insertAccumRef">
+		<![CDATA[
+			INSERT INTO acreferral
+				( uidx
+				  , givedate)
+			VALUES ( #uidx#
+				  , #givedate#)
+		]]>
+	</insert>
+	<select id="selectAcReferralList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT a.* , m.name, m.color
+            FROM acreferral a left join member m on m.idx = a.uidx
+            WHERE m.phone != -1
+            	and m.istest = 0
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <![CDATA[
+            order by a.accum desc
+        ]]>
+        <isNotEmpty property = "first">
+            limit #first# , #record#
+        </isNotEmpty>
+	</select>
+	<select id="selectAcReferralListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT a.*
+	            FROM acreferral a
+         		left join member m on m.idx = a.uidx
+	            WHERE m.phone != -1
+	            	and m.istest = 0
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+            )A
+	</select>
+	<select id="selectAccumRef" resultClass="EgovMap">
+        <![CDATA[
+            SELECT a.*, 
+            (
+           		select ifnull(sum(ac.allot),0)
+           		from acreferrallog ac
+           		where ac.gidx = a.uidx
+           			and ac.adate >= a.givedate
+           	) accumSum,
+           	(
+           		select ifnull(sum(ac.allot),0)
+           		from acreferrallog ac
+           		where ac.gidx = a.uidx
+           			and ac.adate < a.givedate
+           	) receiveSum
+            FROM acreferral a
+            where uidx=#uidx#
+            limit 1
+        ]]>
+	</select>
+	<update id="updatePileAccumRef">
+		<![CDATA[
+			UPDATE acreferral
+			SET accum=#accum#
+			WHERE uidx=#uidx#
+		]]>
+	</update>
+	<update id="updateGiveAccumRef">
+		<![CDATA[
+			UPDATE acreferral
+			SET receive = receive+accum
+				, accum=0
+				, givedate=#givedate#
+			WHERE uidx=#uidx#
+		]]>
+	</update>
+	<update id="updateEmptyAccumRef">
+		<![CDATA[
+			UPDATE acreferral
+			SET accum=0
+				, givedate=#givedate#
+			WHERE uidx=#uidx#
+		]]>
+	</update>
+	
+	<select id="selectAccumTradeLogList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT  al.*, t.* , m.name, m.color, m.phone, if(t.buyDateTime < #givedate#,1,0) isGive, p.name pName
+            FROM acreferrallog al
+            	left join tradelog t on al.orderNum = t.orderNum
+            	left join member m on m.idx = t.userIdx
+            	left join member p on p.idx = m.parentsIdx
+            WHERE 
+            	m.istest = 0 and al.gidx = #uidx#
+        ]]>
+        <isEmpty property="all">
+       		and t.buyDateTime > #givedate#
+		</isEmpty>
+        <isNotEmpty property = "search">
+        	<isEqual property="searchSelect" compareValue="m.phone">
+	       		and ($searchSelect$ = #search#
+					<isNotEmpty property = "psearchSelect">
+		       			or $psearchSelect$ = #search#
+		       		</isNotEmpty>
+				)
+        	</isEqual>
+        	<isNotEqual property="searchSelect" compareValue="m.phone">
+	       		and ($searchSelect$ like concat ('%' , #search# , '%')
+					<isNotEmpty property = "psearchSelect">
+	       				or $psearchSelect$ like concat ('%' , #search# , '%')
+	       			</isNotEmpty>
+				)
+        	</isNotEqual>
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+        	and t.symbol = #symbol#
+        </isNotEmpty>
+        <![CDATA[
+            order by t.buyDateTime desc
+        ]]>
+        <isNotEmpty property = "first">
+	        limit #first# , #record#
+        </isNotEmpty>
+	</select>
+	
+	<select id="selectAccumTradeLogListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM acreferrallog al
+            	left join tradelog t on al.orderNum = t.orderNum
+            	left join member m on m.idx = t.userIdx
+            	left join member p on p.idx = m.parentsIdx
+            WHERE 
+            	m.istest = 0 and al.gidx = #uidx#
+        ]]>
+        <isEqual property="feeAccum" compareValue="0">
+        		and t.result != 0
+		</isEqual>
+        <isEmpty property="all">
+        		and t.buyDateTime > #givedate#
+		</isEmpty>
+		<isNotEmpty property = "search">
+        	<isEqual property="searchSelect" compareValue="m.phone">
+	       		and ($searchSelect$ = #search#
+	       			<isNotEmpty property = "psearchSelect">
+		       			or $psearchSelect$ = #search#
+		       		</isNotEmpty>
+	       		 )
+        	</isEqual>
+        	<isNotEqual property="searchSelect" compareValue="m.phone">
+	       		and ($searchSelect$ like concat ('%' , #search# , '%') 
+	       			<isNotEmpty property = "psearchSelect">
+	       				or $psearchSelect$ like concat ('%' , #search# , '%')
+	       			</isNotEmpty>
+       			)
+        	</isNotEqual>
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+	        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+	        	and t.symbol = #symbol#
+        </isNotEmpty>
+	</select>
+	
+	<select id="selectAcFeeResultSum" resultClass="EgovMap">
+        <![CDATA[
+            select ifnull(sum(tl.fee),0) feeSum, ifnull(sum(tl.result),0) resultSum
+			from acreferrallog al left join tradelog tl on al.orderNum = tl.orderNum
+					left join acreferral a on al.gidx = a.uidx
+			where a.givedate < tl.buyDatetime
+        ]]>
+	</select>
+	<select id="selectAccumSum" resultClass="double">
+        <![CDATA[
+	            SELECT ifnull(sum(accum),0) accumSum
+	            FROM acreferral
+        ]]>
+	</select>
+	
+	<select id="selectChildByIdxGetParentName_ref" resultClass="EgovMap">
+        <![CDATA[
+            SELECT a.accum, a.receive, a.givedate, m.idx, m.level, m.name, m.parentsIdx, m.phone, m.joinDate,
+            	(select name from member where member.idx = m.parentsIdx) pName,
+            	(
+            		select ifnull(sum(ac.allot),0)
+            		from acreferrallog ac
+            		where ac.gidx = m.idx
+            			and ac.adate >= a.givedate
+        ]]>
+        <isNotEmpty property="sdate">
+						and date(ac.adate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) accumSum,
+            	(
+            		select ifnull(sum(ac.allot),0)
+            		from acreferrallog ac
+            		where ac.gidx = m.idx
+            			and ac.adate < a.givedate
+        ]]>
+        <isNotEmpty property="sdate">
+						and date(ac.adate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) receiveSum
+            FROM acreferral a left join member m on m.idx = a.uidx
+            WHERE m.phone != -1
+            and m.istest = 0
+        ]]>
+        <isNotEmpty property="userIdx">
+        	<isNotEmpty property="self">
+				and m.idx = #userIdx#
+			</isNotEmpty>  
+			<isEmpty property="self">
+				and m.parentsIdx = #userIdx#
+			</isEmpty>  
+		</isNotEmpty>
+        <isNotEmpty property="uid">
+			and (m.idx like concat(#uid# , '%') or concat('00',m.idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and m.phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty> 
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+				<isEqual property="searchSelect" compareValue="m.phone">
+				    and $searchSelect$ = #search#
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.phone">
+			    	and $searchSelect$ like concat('%' , #search# , '%')
+			    </isNotEqual>
+			</isNotEqual>
+        </isNotEmpty>  
+	</select>
+</sqlMap>

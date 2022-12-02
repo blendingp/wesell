@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+	<select id="selectProjectSetting" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM projectsetting
+            limit 1
+        ]]>
+	</select>
+
+	<insert id="insertOrder" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO orderList
+				( userIdx
+				  , orderNum
+				  , symbol
+				  , orderType
+				  , position
+				  , entryPrice
+				  , entryPriceForStop
+				  , buyQuantity
+				  , strategy
+				  , conclusionQuantity
+				  , leverage
+				  , state
+				  , marginType
+				  , paidVolume
+				  , postOnly
+				  , auto
+				  , triggerPrice
+				  , orderDatetime)
+			VALUES ( #userIdx#
+				  , #orderNum#
+				  , #symbol#
+				  , #orderType#
+				  , #position#
+				  , #entryPrice#
+				  , #entryPriceForStop#
+				  , #buyQuantity#
+				  , #strategy#
+				  , #conclusionQuantity#
+				  , #leverage#
+				  , #state#
+				  , #marginType#
+				  , #paidVolume#
+				  , #postOnly#
+				  , #auto#
+				  , #triggerPrice#
+				  , now())
+		]]>
+	</insert>
+	<select id="selectOrderAll" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM orderList
+            WHERE state=#state#
+        ]]>
+	</select>
+	<select id="selectOrderByIdxPaidSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT symbol,ifnull(sum(paidVolume),0)sum
+            FROM orderList
+            WHERE state=#state# and userIdx=#userIdx#
+            group by symbol
+        ]]>
+	</select>
+	<update id="updateOrderState" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE orderList
+			SET state=#state#
+			WHERE userIdx=#userIdx# and orderNum=#orderNum# 
+		]]>
+	</update>
+	<update id="updateOrderConclusion" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE orderList
+			SET conclusionQuantity=#conclusionQuantity#,
+				buyQuantity=#buyQuantity#,
+				paidVolume=#paidVolume#,
+				leverage=#leverage#
+			WHERE userIdx=#userIdx# and orderNum=#orderNum# 
+		]]>
+	</update>
+
+	<insert id="insertTradeLog" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO tradelog
+				( userIdx
+				  , buyDatetime
+				  , orderNum
+				  , symbol
+				  , orderType
+				  , position
+				  , entryPrice
+				  , buyQuantity
+				  , leverage
+				  , fee
+				  , margin
+				  , result
+				  , adminProfit
+				  , isOpen
+				  , liqPrice
+				  , marginType)
+			VALUES ( #userIdx#
+				  , #buyDatetime#
+				  , #orderNum#
+				  , #symbol#
+				  , #orderType#
+				  , #position#
+				  , #entryPrice#
+				  , #buyQuantity#
+				  , #leverage#
+				  , #fee#
+				  , #margin#
+				  , #result#
+				  , #adminProfit#
+				  , #isOpen#
+				  , #liqPrice#
+				  , #marginType#)
+	  	  ]]>
+	</insert>
+	
+	<insert id="insertTradeTrigger" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO tradeTrigger
+				( userIdx
+				  , orderNum
+				  , symbol
+				  , triggerType
+				  , position
+				  , triggerPrice
+				  ,buyDatetime)
+			VALUES ( #userIdx#
+				  , #orderNum#
+				  , #symbol#
+				  , #triggerType#
+				  , #position#
+				  , #triggerPrice#
+				  ,now())
+		]]>
+		<selectKey keyProperty="idx" resultClass="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>		
+	</insert>
+	
+	<select id="selectAllTradeTrigger" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradeTrigger
+        ]]>
+	</select>
+
+	<update id="updateTradeTriggerForPosition" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE tradeTrigger
+			SET position=#position#
+				, triggerPrice=#triggerPrice#
+			WHERE orderNum=#orderNum#
+		]]>
+	</update>	
+
+	<delete id="deleteTradeTriggerByOrderNum" parameterClass="egovMap">
+		<![CDATA[
+			DELETE FROM tradeTrigger
+			WHERE userIdx=#userIdx# and orderNum=#orderNum#
+		]]>
+	</delete>
+	
+	<update id="updateTradeTriggerPrice" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE tradetrigger
+			SET triggerPrice=#liquidationPrice#
+			WHERE userIdx=#userIdx# and symbol = #symbol# and triggerType="inPosition"
+		]]>
+	</update>
+	<update id="updateWallet" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE member
+			SET wallet= #chansgeWallet#
+			WHERE idx=#userIdx#
+		]]>
+	</update>
+	<insert id="insertPosition" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO position
+				( userIdx
+				  , symbol
+				  , position
+				  , entryPrice
+				  , buyQuantity
+				  , liquidationPrice
+				  , contractVolume
+				  , margin
+				  , leverage
+				  , marginType
+				  , orderType
+				  , fee
+				  , openFee
+				  , sdate)
+			VALUES ( #userIdx#
+				  , #symbol#
+				  , #position#
+				  , #entryPrice#
+				  , #buyQuantity#
+				  , #liquidationPrice#
+				  , #contractVolume#
+				  , #margin#
+				  , #leverage#
+				  , #marginType#
+				  , #orderType#
+				  , #fee#
+				  , #openFee#
+				  , now())
+		]]>
+</insert>
+	<select id="selectPositionBySymbol" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM position
+            WHERE userIdx=#userIdx# and symbol=#symbol#
+        ]]>
+	</select>
+	<select id="selectPositionByIdx" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM position
+            WHERE userIdx=#userIdx#
+        ]]>
+	</select>
+	<select id="selectAllPosition" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM position
+        ]]>
+	</select>
+	<update id="updatePosition" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE position
+			SET entryPrice=#entryPrice#
+				, position=#position#
+				, buyQuantity=#buyQuantity#
+				, liquidationPrice=#liquidationPrice#
+				, contractVolume=#contractVolume#
+				, margin=#margin#
+				, leverage=#leverage#
+				, fee=#fee#
+				, openFee=#openFee#
+			WHERE userIdx=#userIdx# and symbol=#symbol#
+		]]>
+	</update>
+
+	<update id="updatePositionLiquid" parameterClass="egovMap">
+		<![CDATA[
+			UPDATE position
+			SET
+				liquidationPrice=#liquidationPrice#				
+			WHERE userIdx=#userIdx# and symbol=#symbol#
+		]]>
+	</update>	
+	<delete id="deletePosition" parameterClass="egovMap">
+		<![CDATA[
+			DELETE FROM position
+			WHERE userIdx=#userIdx# and symbol=#symbol#
+		]]>
+	</delete>
+	
+	<select id="selectMem30TradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name
+            FROM tradelog t
+            left join member m on m.idx = t.userIdx
+            WHERE m.idx = #useridx#
+            order by t.idx desc
+            limit 30
+        ]]>
+	</select>
+	<select id="selectTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name,m.phone, m.color,m.istest,m.parentsIdx, p.name pname, p.phone pphone
+            FROM tradelog t
+            left join member m on m.idx = t.userIdx
+            left join member p on p.idx = m.parentsIdx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ = #search# 
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$
+		</isNotEmpty>
+        <isEmpty property="nolimit">
+            limit #first# , #record#
+        </isEmpty>
+	</select>
+	<select id="selectTradeFeeResultSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(t.fee),0)feeSum, ifnull(sum(t.result),0)resultSum
+            FROM tradelog t
+            left join member m on m.idx = t.userIdx
+            WHERE 1=1 
+            and m.istest != 1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+	</select>
+	<select id="selectTradeTestFeeResultSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(t.fee),0)feeSum, ifnull(sum(t.result),0)resultSum
+            FROM tradelog t
+            left join member m on m.idx = t.userIdx
+            WHERE 1=1 
+            and m.istest = 1
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+	</select>
+	<select id="selectTradeListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT t.* , m.name
+	            FROM tradelog t
+	            left join member m on m.idx = t.userIdx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ = #search# 
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+	        </isNotEmpty> 
+		        <isNotEmpty property = "sdate">
+		        	and date(buyDatetime) between #sdate# and #edate# 
+		        </isNotEmpty>
+		        <isNotEmpty property = "searchIdx">
+	        		and m.idx = #searchIdx#
+	        </isNotEmpty>
+	        <isNotEmpty property = "inverse">
+	        	and right(symbol,1) = #inverse#
+	        </isNotEmpty>
+	        <isNotEmpty property = "symbol">
+	        	and symbol = #symbol#
+	        </isNotEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isEqual>
+            )A
+	</select>
+	
+	<select id="selectOrderList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT o.* , m.name, m.color,m.phone, m.istest,m.parentsIdx, p.name pname, p.phone pphone
+            FROM orderlist o
+            left join member m on m.idx = o.userIdx
+            left join member p on p.idx = m.parentsIdx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(orderDatetime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "searchIdx">
+        	and m.idx = #searchIdx#
+        </isNotEmpty>
+        <isNotEmpty property = "inverse">
+        	and right(symbol,1) = #inverse#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+        <isNotEmpty property = "symbol">
+        	and symbol = #symbol#
+        </isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, o.idx desc
+		</isNotEmpty>
+        <isEmpty property="nolimit">
+            limit #first# , #record#
+        </isEmpty>
+	</select>
+	<select id="selectOrderListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT o.* , m.name
+	            FROM orderlist o
+	            left join member m on m.idx = o.userIdx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(orderDatetime) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "searchIdx">
+        		and m.idx = #searchIdx#
+        	</isNotEmpty>
+        	<isNotEmpty property = "inverse">
+	        	and right(symbol,1) = #inverse#
+	        </isNotEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isEqual>
+	        <isNotEmpty property = "symbol">
+	        	and symbol = #symbol#
+	        </isNotEmpty>
+            )A
+	</select>
+	
+	<insert id="insertRequsetWithdraw">
+		<![CDATA[
+			INSERT INTO withdraw
+				( wuseridx
+				  , wamount
+				  , wcoinname
+				  , waddress
+				  , wemail
+		]]>
+		<isNotEmpty property = "xrptag">
+        		  , xrptag
+        </isNotEmpty>
+		<isNotEmpty property = "stock">
+        		  , stock
+        </isNotEmpty>
+        <isNotEmpty property = "wstat">
+        		  , wstat
+        </isNotEmpty>
+		<![CDATA[
+				  , wfee
+				  , wdate)
+			VALUES ( #userIdx#
+				  , #amount#
+				  , #coin#
+				  , #wallet#
+				  , #email#
+		 ]]>
+		<isNotEmpty property = "xrptag">
+        		  , #xrptag#
+        </isNotEmpty>
+		<isNotEmpty property = "stock">
+        		  , #stock#
+        </isNotEmpty>
+        <isNotEmpty property = "wstat">
+        		  , #wstat#
+        </isNotEmpty>
+		<![CDATA[
+				  , #wfee#
+				  , now())
+		]]>
+		<selectKey keyProperty="widx" resultClass="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<delete id="deleteWithdraw">
+		<![CDATA[
+			DELETE FROM withdraw
+			WHERE widx=#widx#
+		]]>
+	</delete>
+	
+	<update id="updateWithdrawCancel">
+		<![CDATA[
+			UPDATE withdraw
+			SET widx=#widx#
+			WHERE wstat=3
+		]]>
+	</update>
+	
+	<select id="selectWithdraw" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM withdraw
+            where widx = #widx#
+        ]]>
+	</select>
+	
+	<select id="selectIsWithdraw" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM withdraw
+            where wstat = 0 and alarm = 1
+        ]]>
+	</select>
+	
+	<select id="selectIsKwithdraw" resultClass="int">
+        <![CDATA[
+			select count(*)
+			from money 
+			where stat = 0 and kind = '-' and alarm = 1
+        ]]>
+	</select>
+	<select id="selectIsKdeposit" resultClass="int">
+        <![CDATA[
+			select count(*)
+			from money 
+			where stat = 0 and kind = '+' and alarm = 1
+        ]]>
+	</select>
+	
+	<update id="changeAlarmW">
+		<![CDATA[
+			UPDATE withdraw
+			SET alarm=#alarm#
+			WHERE widx=#idx#
+		]]>
+	</update>
+	
+	<select id="selectWithdrawalList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT w.* , m.name, m.color
+            FROM withdraw w
+            left join member m on m.idx = w.wuseridx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "coin">
+        	and wcoinname=#coin#
+        </isNotEmpty>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(wdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "islist">
+	        and (wstat = 0 or wstat = -1)
+	    </isNotEmpty>
+        <isNotEmpty property = "wstat">
+        	and wstat = #wstat#
+        </isNotEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isEqual>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, w.widx desc
+		</isNotEmpty>
+        <![CDATA[
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectWithdrawalListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT w.* , m.name
+	            FROM withdraw w
+	            left join member m on m.idx = w.wuseridx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "coin">
+	        	and wcoinname=#coin#
+	        </isNotEmpty>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(wdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "islist">
+		        and (wstat = 0 or wstat = -1)
+		    </isNotEmpty>
+	        <isNotEmpty property = "wstat">
+	        	and wstat = #wstat#
+	        </isNotEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isEqual>
+            )A
+	</select>
+	<select id="selectMyWithdrawalList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM withdraw
+            WHERE wuseridx = #userIdx#
+        ]]>
+        <isNotEmpty property = "coin">
+	        and wcoinname = #coin#
+	    </isNotEmpty>
+        <isNotEmpty property = "except">
+        	and wstat != #except#
+        </isNotEmpty>
+        <isNotEmpty property = "islist">
+	        and (wstat = 0 or wstat = -1)
+	    </isNotEmpty>
+        <isNotEmpty property = "search">
+        	and m.name like concat('%' , #search# , '%')
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(wdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "wstat">
+        	and wstat = #wstat#
+        </isNotEmpty>
+        <![CDATA[
+            order by widx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectMyWithdrawalListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT *
+	            FROM withdraw
+	            WHERE wuseridx = #userIdx#
+	        ]]>
+	        <isNotEmpty property = "coin">
+	        	and wcoinname = #coin#
+	        </isNotEmpty>
+	        <isNotEmpty property = "except">
+	        	and wstat != #except#
+	        </isNotEmpty>
+	       	<isNotEmpty property = "islist">
+	        	and (wstat = 0 or wstat = -1)
+	        </isNotEmpty>
+	        <isNotEmpty property = "search">
+	        	and m.name like concat('%' , #search# , '%')
+	        </isNotEmpty>
+	        <isNotEmpty property = "sdate">
+	        	and date(wdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+            )A
+	</select>
+	<update id="updateWithdrawalStat">
+		<![CDATA[
+			UPDATE withdraw
+			SET wstat = #stat#
+			WHERE widx=#widx#
+		]]>
+	</update>
+	<select id="selectWithdrawal" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM withdraw 
+            WHERE widx = #widx#
+        ]]>
+	</select>
+	<select id="selectMyTradeListSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(buyQuantity),0) symbol 
+            	, ifnull( sum(ifnull(buyQuantity,0)*ifnull(entryPrice,0)), 0) size 
+            	, ifnull(sum(result),0) result
+            	, ifnull(sum(fee),0) fee
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) = #date# and symbol = #coin#
+        ]]>
+	</select>
+
+	<select id="getSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(result), 0) result
+            	, ifnull(sum(fee), 0) fee
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) = #date# and symbol = #coin#
+        ]]>
+	</select>
+
+	<select id="getFunding" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(fundingFee), 0) funding
+            FROM funding
+            where userIdx = #userIdx# and date(fundDatetime) = #date# and symbol = #coin#            
+        ]]>
+	</select>
+			
+	<select id="selectEndtimeMyTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) <= #endDate# 
+            	and symbol = #symbol#
+            order by idx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectEndtimeMyTradeListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) <= #endDate# 
+            	and symbol = #symbol#
+        ]]>
+	</select>
+	
+	<select id="selectEndtimeMyTradeListSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT sum(ifnull(buyQuantity,0)) qty , sum(ifnull(buyQuantity,0)*ifnull(entryPrice,0)) size , sum(ifnull(result,0)) result
+            	,sum(ifnull(fee,0)) fee
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) <= #endDate# 
+            	and symbol = #symbol#
+        ]]>
+	</select>
+
+	<select id="getEndtimeSum" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(result),0) result
+            	,ifnull(sum(fee),0) fee
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) >= #date# 
+            	and date(buyDatetime) < #endDate# 
+            	and symbol = #symbol#
+        ]]>
+	</select>
+
+	<select id="getEndtimeFunding" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT ifnull(sum(fundingFee), 0) funding
+            FROM funding
+            where userIdx = #userIdx# 
+            and date(fundDatetime) >= #date# 
+            	and date(fundDatetime) < #endDate# 
+            	and symbol = #coin#         
+        ]]>
+	</select>
+	
+	<select id="selectMyTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) = #date# and symbol = #coin#
+            order by idx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectMyTradeListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM tradelog
+            WHERE userIdx = #userIdx#
+            	and date(buyDatetime) = #date# and symbol = #coin#
+        ]]>
+	</select>
+	
+	<insert id="insertFunding" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO funding
+				( fundDatetime
+				  , symbol
+				  , position
+				  , userIdx
+				  , fundingFee)
+			VALUES ( now()
+				  , #symbol#
+				  , #position#
+				  , #userIdx#
+				  , #fundingFee#)
+		]]>
+	</insert>
+	
+	<select id="selectMyFundingHistory" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM funding
+            where userIdx = #userIdx# 
+	       	and date(fundDatetime) between #date# and #edate# and symbol = #symbol#
+            order by idx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	
+	<select id="selectMyFundingHistoryCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM funding
+            where userIdx = #userIdx# 
+            and date(fundDatetime) between #date# and #edate#  and symbol = #symbol#
+        ]]>
+	</select>
+	<select id="selectPositionList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT p.* , m.name, (select name from member where member.idx = m.parentsIdx) pname, m.color
+            FROM position p
+            left join member m on p.userIdx = m.idx
+            where 1=1
+        ]]>
+        <isNotEmpty property = "coin">
+	        <isEqual property="coin" compareValue="FUTURES">
+	        	and right(symbol,1) = "T"
+	        </isEqual>
+	        <isNotEqual property="coin" compareValue="FUTURES">
+	        	and symbol = #coin#
+	        </isNotEqual>
+        </isNotEmpty>
+        <isNotEmpty property = "search">
+        	and m.name like concat('%' , #search# , '%')
+        </isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$
+		</isNotEmpty>
+	</select>
+	<select id="selectPositionListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM position p
+            left join member m on p.userIdx = m.idx
+            where 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and m.name like concat('%' , #search# , '%')
+        </isNotEmpty>
+        <isEqual property="coin" compareValue="FUTURES">
+        	and right(symbol,1) = "T"
+        </isEqual>
+        <isNotEqual property="coin" compareValue="FUTURES">
+        	and symbol = #coin#
+        </isNotEqual>
+	</select>
+	<select id="selectPositionMarginSum" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(p.margin),0) marginSum
+            FROM position p 
+            left join member m on p.userIdx = m.idx
+            where 1=1
+        ]]>
+        <isNotEmpty property = "search">
+        	and m.name like concat('%' , #search# , '%')
+        </isNotEmpty>
+	</select>
+
+	<select id="selectPositionAllFee" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(fee),0)
+            FROM position p left join member m on p.userIdx = m.idx
+            where m.istest!=1
+        ]]>
+        <isNotEmpty property = "coin">
+	        <isEqual property="coin" compareValue="FUTURES">
+	        	and right(symbol,1) = "T"
+	        </isEqual>
+	        <isNotEqual property="coin" compareValue="FUTURES">
+	        	and symbol = #coin#
+	        </isNotEqual>
+        </isNotEmpty>
+        
+	</select>
+		
+	<select id="selectPositionAllMarginSum" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(margin),0)
+            FROM position
+        ]]>
+	</select>
+	<select id="selectPartnerWallet" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(wallet),0)
+            FROM member
+            where level != "user"
+            and istest!=1
+        ]]>
+	</select>
+	<select id="selectMemberAllBalance" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	coinname, 
+            	ifnull(sum(balance),0)bal
+            FROM 
+            	coinbalance c left join member m on c.useridx = m.idx
+            where useridx != 1
+            and istest != 1
+        ]]>
+        <isNotEmpty property = "exceptLevel">
+        	and m.level != #exceptLevel#
+        </isNotEmpty>
+        
+        <![CDATA[
+            group by coinname
+        ]]>
+	</select>
+	<select id="selectProfitSumToday" resultClass="EgovMap">
+        <![CDATA[
+            SELECT (ifnull(sum(result),0)*-1) profitSum, (ifnull(sum(adminProfit),0)) adminProfitSum, (ifnull(sum(fee),0)) feeSum
+            FROM tradelog left join member m on tradelog.userIdx=m.idx
+            where m.istest != 1
+            and buyDatetime between date_format(concat(curdate(),' 8:00:00') , '%Y-%m-%d %H:%i:%S') and date_format(concat(date_add(curdate() , interval 1 day),' 7:59:59') , '%Y-%m-%d %H:%i:%S')
+        ]]>
+	</select>
+	<select id="selectFundingSumToday" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(fundingFee),0)
+            FROM funding left join member m on funding.userIdx=m.idx
+            where m.istest != 1
+            and fundDatetime between date_format(concat(curdate(),' 8:00:00') , '%Y-%m-%d %H:%i:%S') and date_format(concat(date_add(curdate() , interval 1 day),' 7:59:59') , '%Y-%m-%d %H:%i:%S')
+        ]]>
+	</select>
+	
+	<select id="selectAllMemberCnt" resultClass="EgovMap">
+        <![CDATA[
+            SELECT count(idx) 
+            FROM member
+            where istest!=1 and phone!=-1
+        ]]>
+	</select>	
+	<select id="selectPositionCnt" resultClass="EgovMap">
+        <![CDATA[
+            SELECT count(idx) 
+            FROM position            
+        ]]>
+	</select>
+	<select id="selectAccumTradeListSelf" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name, m.color, a.*, m.phone,
+            	(select name from member where idx = m.parentsIdx) pName
+            FROM tradelog t
+            	left join member m on m.idx = t.userIdx
+            	left join acreferral a on a.uidx = #uidx#
+            WHERE 
+            	m.istest = 0
+				and ((m.level='user' and (m.parentsIdx = #uidx#))
+					or (m.level!='user' and (m.parentsIdx = #uidx# or m.idx = #uidx#)))
+        ]]>
+        <isEqual property="feeAccum" compareValue="0">
+        		and t.result != 0
+		</isEqual>
+        <isNotEmpty property="givedate">
+        		and t.buyDateTime > #givedate#
+		</isNotEmpty>
+		<isNotEmpty property="uid">
+        		and m.idx = #uid#
+		</isNotEmpty>
+        <isNotEmpty property="name">
+        		and m.name like concat ('%' , #name# , '%')
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+        		and m.phone like concat ('%' , #phone# , '%')
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+	        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+	        	and t.symbol = #symbol#
+        </isNotEmpty>
+        <![CDATA[
+            order by t.buyDateTime desc
+        ]]>
+        <isNotEmpty property = "first">
+	        limit #first# , #record#
+        </isNotEmpty>
+	</select>
+	<select id="selectAccumTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name, m.color, a.*, m.phone,
+            	(select name from member where idx = m.parentsIdx) pName
+            FROM tradelog t
+            	left join member m on m.idx = t.userIdx
+            	left join acreferral a on a.uidx = #uidx#
+            WHERE 
+            	m.istest = 0
+				and m.parentsIdx = #uidx#
+        ]]>
+        <isEqual property="feeAccum" compareValue="0">
+        		and t.result != 0
+		</isEqual>
+        <isNotEmpty property="givedate">
+        		and t.buyDateTime > #givedate#
+		</isNotEmpty>
+		<isNotEmpty property="uid">
+        		and m.idx = #uid# 
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+        		and m.phone like concat ('%' , #phone# , '%')
+		</isNotEmpty>
+        <isNotEmpty property="name">
+        		and m.name like concat ('%' , #name# , '%')
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+	        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+	        	and t.symbol = #symbol#
+        </isNotEmpty>
+        <![CDATA[
+            order by t.buyDateTime desc
+        ]]>
+        <isNotEmpty property = "first">
+	        limit #first# , #record#
+        </isNotEmpty>
+	</select>
+	<update id="updateTraderShow">
+		<![CDATA[
+			UPDATE tradelog
+			SET traderShow=#traderShow#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<select id="selectKwithdrawalList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT w.* , m.istest, m.name, m.mname, m.color
+            FROM money w
+            left join member m on m.idx = w.useridx
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "stat">
+        	and stat = #stat#
+        </isNotEmpty>
+        <isNotEmpty property = "except">
+	       	and stat != #except#
+	    </isNotEmpty>
+        <isNotEmpty property = "kind">
+	        and kind = #kind#
+	    </isNotEmpty>
+	    <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	    </isEmpty>
+		<isEqual property="test" compareValue="test">
+			and m.istest = 1
+		</isEqual>
+		<isNotEqual property="test" compareValue="test">
+			and m.istest != 1
+		</isNotEqual>
+        <![CDATA[
+            order by w.idx desc
+        ]]>
+        <isNull property = "limit">
+            limit #first# , #record#
+        </isNull>
+	</select>
+	<select id="selectKwithdrawalListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT w.* , m.name, m.mname 
+	            FROM money w
+	            left join member m on m.idx = w.useridx
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(mdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "stat">
+	        	and stat = #stat#
+	        </isNotEmpty>
+	        <isNotEmpty property = "except">
+	        	and stat != #except#
+	        </isNotEmpty>
+	        <isNotEmpty property = "kind">
+	        	and kind = #kind#
+	        </isNotEmpty>
+	        <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	        </isEmpty>
+			<isEqual property="test" compareValue="test">
+				and m.istest = 1
+			</isEqual>
+			<isNotEqual property="test" compareValue="test">
+				and m.istest != 1
+			</isNotEqual>
+            )A
+	</select>
+	<select id="selectMyKwithdrawalList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM money
+            WHERE useridx = #userIdx#
+        ]]>
+        <isNotEmpty property = "except">
+        	and stat != #except#
+        </isNotEmpty>
+        <isNotEmpty property = "search">
+        	and m.name like concat('%' , #search# , '%')
+        </isNotEmpty>
+        <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "stat">
+        	and stat = #stat#
+        </isNotEmpty>
+        <![CDATA[
+            order by idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectMyKwithdrawalListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT *
+	            FROM money
+	            WHERE useridx = #userIdx#
+	        ]]>
+	        <isNotEmpty property = "except">
+	        	and stat != #except#
+	        </isNotEmpty>
+	        <isNotEmpty property = "search">
+	        	and m.name like concat('%' , #search# , '%')
+	        </isNotEmpty>
+	        <isNotEmpty property = "sdate">
+	        	and date(mdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+            )A
+	</select>
+	<update id="updateKwithdrawalStat">
+		<![CDATA[
+			UPDATE money
+			SET stat = #stat#
+			WHERE idx=#widx#
+		]]>
+	</update>
+	<select id="selectKwithdrawal" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM money 
+            WHERE idx = #widx#
+        ]]>
+	</select>
+	
+	<update id="updatePositionTPSL">
+		<![CDATA[
+			UPDATE position
+			SET tp=#tp#
+				, sl=#sl#
+			WHERE userIdx=#userIdx#
+			and symbol=#symbol#
+		]]>
+	</update>
+</sqlMap>

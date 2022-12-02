@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	
+	<insert id="insertAdminIp">
+		<![CDATA[
+			INSERT INTO adminip
+				( ip
+				  , date)
+			VALUES ( #ip#
+				  , now())
+		]]>
+	</insert>
+	<select id="selectAdminIp" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM adminip
+        ]]>
+	</select>
+	<delete id="deleteAdminIp">
+		<![CDATA[
+			DELETE FROM adminip
+			WHERE idx=#idx#
+		]]>
+	</delete>
+	<select id="selectAdminList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT idx,id
+            FROM admin
+        ]]>
+	</select>
+	
+	<update id="updateAdminPw">
+		<![CDATA[
+			UPDATE admin
+			SET idx=idx
+		]]>
+		<isNotEmpty property="id">
+       		, id=#id#
+       	</isNotEmpty>
+		<isNotEmpty property="pw">
+       		, pw=#pw#
+       	</isNotEmpty>
+		<![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
+
+	<select id="selectLoginId" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM admin
+            where id=#id# and pw=#pw# and authkey=#authkey#
+        ]]>
+	</select>
+	
+	<update id="updateWalletPrivateVersion2">
+		<![CDATA[
+			UPDATE member
+			SET btcWif = #btcWif#
+				, ercPrivateKey = #ercPrivateKey#
+				, trxPrivateKey = #trxPrivateKey#
+				, version = 2
+			WHERE idx = #userIdx#
+		]]>
+	</update>
+	
+	<update id="newAdminWallet">
+		<![CDATA[
+			UPDATE member
+			SET btcWif = #btcWif#
+				, ercPrivateKey = #ercPrivateKey#
+				, trxPrivateKey = #trxPrivateKey#				
+				
+				, btcAddress = #btcAddress#
+				, ercAddress = #ercAddress#
+				, trxAddress = #trxAddress#
+				
+				, version = 2
+			WHERE idx = #userIdx#
+		]]>
+	</update>	
+	
+	<select id="selectOnlyVersion1" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM member
+            where version = 1
+        ]]>
+	</select>
+	
+	<update id="updateXRPWallet">
+		<![CDATA[
+			UPDATE xrpaccount
+			SET xrpAddress = #xrpAddress#
+				, xrpPassword = #xrpPassword#
+			WHERE idx = 1
+		]]>
+	</update>
+	
+	<select id="selectAllMember" resultClass="EgovMap">
+	        <![CDATA[
+	            SELECT *
+	            FROM member
+	            where level != 'admin'
+	        ]]>
+	</select>	
+	
+	<update id="updateAllMemberCommissionRate">
+		<![CDATA[
+			update 
+				member
+			set 
+				commissionRate = commissionRate+#rate#
+		]]>
+		<isLessThan property="rate" compareValue="0">
+			where commissionRate > 0
+		</isLessThan>
+	</update>
+	
+	<select id="selectElistList" resultClass="EgovMap">
+        <![CDATA[
+             SELECT 
+                *
+            FROM elist
+            where euserIdx = #idx#
+            limit $first$, $record$
+        ]]>
+    </select>
+     <select id="selectElistCnt"  resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM elist
+            where euserIdx = #idx#
+            order by eidx desc
+        ]]>
+    </select>
+    <select id="listProblemIdx" resultClass="EgovMap">
+        <![CDATA[
+		select rt.* , count(notadmin) act , m.name,m.phone
+		from
+		(
+		SELECT
+		   *  
+		  , count( tx )  txct 
+		  , ( select useridx from transactions s where s.tx=t.tx and  s.userIdx != 1 limit 1 ) notadmin
+		  , ( select max( completiontime ) from transactions s where s.tx=t.tx and  s.userIdx != 1 limit 1 ) ctime
+		from transactions t
+		group by tx
+		having( txct) > 1
+		order by notadmin
+		) rt
+		  left join member m on rt.notadmin = m.idx
+		where rt.notadmin is not null
+		group by notadmin
+		order by act desc
+        ]]>
+    </select>
+    <select id="listProblemTxList"  resultClass="EgovMap" parameterClass="java.lang.String">
+        <![CDATA[
+		select * from
+		(
+				SELECT
+				   *  
+				  , count( tx )  txct 
+				  , ( select useridx from transactions s where s.tx=t.tx and  s.userIdx != 1 limit 1 ) notadmin
+				  , ( select max( completiontime ) from transactions s where s.tx=t.tx and  s.userIdx != 1 limit 1 ) ctime
+				from transactions t
+				group by tx
+				having( txct) > 1
+				order by notadmin
+		) nl
+		where nl.notadmin = #value#
+
+        ]]>
+    </select>
+	<select id="selectTraderList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT trader.*, m.name, t.idx infoidx, t.*
+            FROM trader
+           	left join member m on m.idx = trader.tuseridx
+           	left join traderinfo t on trader.tuseridx = t.tuseridx
+           	where m.phone != -1
+        ]]>
+        	<isNotEmpty property="tstat">
+        		and tstat = #tstat#
+        	</isNotEmpty>
+        	<isNotEmpty property="search">
+        		and m.name like concat('%',#search#,'%')
+        	</isNotEmpty>
+        <![CDATA[
+            order by tidx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectTraderListCnt" resultClass="int">
+        <![CDATA[
+        select count(*)
+        from (
+            SELECT trader.*, m.name
+            FROM trader
+           	left join member m on m.idx = trader.tuseridx
+           	where m.phone != -1
+        ]]>
+        	<isNotEmpty property="search">
+        		and m.name like concat('%',#search#,'%')
+        	</isNotEmpty>
+        	<isNotEmpty property="tstat">
+        		and tstat = #tstat#
+        	</isNotEmpty>
+        <![CDATA[
+       	)A
+        ]]>
+	</select>
+	<insert id="insertTrader">
+		<![CDATA[
+			INSERT INTO trader
+				( tuseridx
+				  , timg
+				  , tintro)
+			VALUES ( #tuseridx#
+				  , #timg#
+				  , #tintro#)
+		]]>
+		<selectKey keyProperty="idx" resultClass="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+    <update id="updateUserTstat">
+		<![CDATA[
+			UPDATE trader
+			left join member m on m.idx = trader.tuseridx
+			SET tstat=#tstat#
+				,istrader=#istrader#
+			WHERE tidx=#tidx#
+		]]>
+	</update>
+    <update id="updateUserTotal">
+		<![CDATA[
+			UPDATE trader
+			SET total=#total#
+			WHERE tidx=#tidx#
+		]]>
+	</update>
+	<select id="selectTraderByIdx" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM trader
+            where tidx = #tidx#
+        ]]>
+	</select>
+	<delete id="deleteUserTrader">
+		<![CDATA[
+			DELETE FROM trader
+			WHERE tidx=#tidx#
+		]]>
+	</delete>
+	<delete id="deleteUseridxTrader">
+		<![CDATA[
+			DELETE FROM trader
+			WHERE tuseridx=#tuseridx#
+		]]>
+	</delete>
+		<insert id="insertAdminLog">
+		<![CDATA[
+			INSERT INTO adminlog
+				( kind
+				  , uidx
+				  , aidx
+		]]>
+			<isNotEmpty property="etc1">
+				, etc1
+			</isNotEmpty>
+			<isNotEmpty property="etc2">
+				, etc2
+			</isNotEmpty>
+			<isNotEmpty property="etc3">
+				, etc3
+			</isNotEmpty>
+			<isNotEmpty property="etc4">
+				, etc4
+			</isNotEmpty>
+		<![CDATA[
+				  , adate)
+			VALUES ( #kind#
+				  , #uidx#
+				  , #aidx#
+		]]>
+			<isNotEmpty property="etc1">
+				, #etc1#
+			</isNotEmpty>
+			<isNotEmpty property="etc2">
+				, #etc2#
+			</isNotEmpty>
+			<isNotEmpty property="etc3">
+				, #etc3#
+			</isNotEmpty>
+			<isNotEmpty property="etc4">
+				, #etc4#
+			</isNotEmpty>
+		<![CDATA[
+				  , now())
+		]]>
+	</insert>
+	<select id="selectAdminLogList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT al.* , m.name ,m.phone , m.level, a.id
+            FROM adminlog al
+            left join member m on m.idx = al.uidx left join admin a on al.aidx=a.idx
+            where 1=1
+        ]]>
+        	<isNotEmpty property="kind">
+        		and al.kind = #kind#
+        	</isNotEmpty>
+        	<isNotEmpty property="search">
+        		and m.name like concat ('%',#search#,'%')
+        	</isNotEmpty>
+        <![CDATA[
+            order by al.idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectAdminLogListCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+        	from (
+            SELECT al.* , m.name ,m.phone , m.level
+            FROM adminlog al
+            left join member m on m.idx = al.uidx
+            where 1=1
+        ]]>
+        	<isNotEmpty property="kind">
+        		and al.kind = #kind#
+        	</isNotEmpty>
+        	<isNotEmpty property="search">
+        		and m.name like concat ('%',#search#,'%')
+        	</isNotEmpty>
+        	)A
+	</select>
+	
+	<select id="selectSubAdminList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM admin
+            where level != 1 
+            order by idx desc 
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectSubAdminListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM admin
+            where level != 1 
+        ]]>
+	</select>
+	<delete id="deleteSubAdmin">
+		<![CDATA[
+			DELETE FROM admin
+			WHERE idx=#idx#
+		]]>
+	</delete>
+	<update id="updateSubAdmin">
+		<![CDATA[
+			UPDATE admin
+			SET authkey=#authkey#				
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<insert id="insertAdmin">
+		<![CDATA[
+			INSERT INTO admin
+				( id
+				  , pw
+		]]>
+		<isNotEmpty property = "level">
+				  , level
+		</isNotEmpty>
+		<![CDATA[
+				  , authkey)
+			VALUES ( #id#
+				  , #pw#
+		]]>
+	 	<isNotEmpty property = "level">
+				  , #level#
+		</isNotEmpty>
+		<![CDATA[
+				  , #authkey#)
+		]]>
+	</insert>
+	<select id="checkAdminId" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM admin
+            where id = #id#
+            limit 1 
+        ]]>
+	</select>
+	
+	<select id="depoalloutmoneys" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM money left join member m on money.useridx = m.idx
+            WHERE stat = 1 and kind = '+' and istest = 0
+        ]]>
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())
+        	and (m.parentsIdx = #userIdx# or m.gparentsIdx = #userIdx# or m.idx = #userIdx#)
+        </isEqual>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+	<select id="depoallinmoneys" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM money left join member m on money.useridx = m.idx
+            WHERE stat = 1 and kind = '-' and istest = 0
+        ]]>    
+ 		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())
+        	and (m.parentsIdx = #userIdx# or m.gparentsIdx = #userIdx# or m.idx = #userIdx#)
+        </isEqual>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+	<update id="updateMoney"  parameterClass="egovMap">
+		<![CDATA[
+			UPDATE money
+			SET stat = #stat#, date2 = now()
+		]]> 
+		<isNotEmpty property = "exchangeValue">
+          , exchangeValue = #exchangeValue#
+        </isNotEmpty>
+        <isNotEmpty property = "exchangeRate">
+          , exchangeRate = #exchangeRate#
+        </isNotEmpty>
+        <![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
+	
+	<select id="checkMoneyStat" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT *
+            FROM money
+            WHERE useridx=#userIdx# and kind=#kind# and stat='0'
+            limit 1
+        ]]>
+	</select>
+	
+	<select id="checkMoneyIdx" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM money
+            WHERE idx=#widx#
+        ]]>
+	</select>
+	
+	<insert id="insertMoney" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO money
+				( useridx
+				  , kind
+				  , money
+				  , exchangeValue
+				  , exchangeRate
+				  , mdate
+				  , stat
+				)
+			VALUES ( #userIdx#
+				  , #kind#
+				  , #money#
+				  , #exchangeValue#
+				  , #exchangeRate#
+				  , now()
+				  , 0
+				)
+		]]>
+		<selectKey keyProperty="idx" resultClass="int">
+	        SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="insertMoneyLog" parameterClass="egovMap">
+		<![CDATA[
+			INSERT INTO moneylog
+				( luseridx
+				  , beforemoney
+				  , aftermoney
+				  , lmoney
+				  , lkind
+				  , ltime
+				  , lforeignidx)
+			VALUES ( #userIdx#
+				  , #userPoint#
+		]]>
+			<isEqual property="kind" compareValue="+">
+			    , #userPoint# + #exchangeValue#
+			</isEqual>
+			<isEqual property="kind" compareValue="-">
+			    , #userPoint# - #exchangeValue#
+			</isEqual>
+		<![CDATA[
+				  , #exchangeValue#
+				  , #lkind#
+				  , now()
+				  , #idx#)
+		]]>
+	</insert>
+	
+	<update id="userMoneyUpdate">
+		<![CDATA[
+			UPDATE member
+			SET wallet = wallet + #exchangeValue#
+			WHERE idx=#userIdx#
+		]]>
+	</update>
+	
+	<select id="selectIsTradeLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradelog
+            where userIdx=#userIdx#
+            limit 1
+        ]]>
+	</select>
+	<select id="selectIsTransactions" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM transactions
+            where userIdx=#userIdx#
+            limit 1
+        ]]>
+	</select>
+	<select id="isOrderLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM orderlist
+            where userIdx = #userIdx#
+            limit 1
+        ]]>
+	</select>
+	
+	<insert id="insertAdminAccessLog">
+		<![CDATA[
+			INSERT INTO adminaccesslog
+				( ip
+				  , date
+				  , pass
+				  , atID
+				  , atPW
+				  , loginuser)
+			VALUES ( #ip#
+				  , now()
+				  , #pass#
+				  , #atID#
+				  , #atPW#
+				  , #loginuser#)
+		]]>
+	</insert>
+	<select id="selectAdminAccessLog" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM adminaccesslog
+            where (ip not like '61.79.227.%' AND ip not like '118.37.234.%' AND ip not like '183.102.237.%')
+        ]]>
+        <isNotEmpty property = "pass">
+            and pass = #pass#
+        </isNotEmpty>
+        <![CDATA[  
+            order by idx desc
+        ]]>
+	</select>
+	<update id="updateWdPhone">
+		<![CDATA[
+			UPDATE wdphone
+			SET phonenum=#phonenum#
+			WHERE idx=#idx#
+		]]>
+	</update>
+	<select id="selectWdPhone" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM wdphone
+        ]]>
+	</select>
+	<insert id="insertWdPhone">
+		<![CDATA[
+			INSERT INTO wdphone
+				( phonenum)
+			VALUES ( #phonenum#)
+		]]>
+		<selectKey keyProperty="idx" resultClass="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<delete id="deleteWdPhone">
+			<![CDATA[
+				DELETE FROM wdphone
+				WHERE idx=#idx#
+			]]>
+	</delete>
+	<update id="updateCoinTail">
+		<![CDATA[
+			UPDATE coinlist
+			SET tailPrice=#tailPrice#
+				, tailRate=#tailRate#
+			WHERE coinNum=#coinNum#
+		]]>
+	</update>
+	
+	<select id="selectChildByIdxGetParentName_chong" resultClass="EgovMap">
+        <![CDATA[
+            SELECT m.idx, m.level, m.name, m.parentsIdx, m.phone, m.joinDate, 
+            	(select name from member where member.idx = m.parentsIdx) pName,
+            	(
+            		select count(*)
+            		from member c
+					where m.idx=c.parentsIdx 
+						and c.level = "user"
+						and c.phone != "-1"
+		]]>
+        <isNotEmpty property="sdate">
+						and date(c.joinDate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) childCnt,
+				(
+            		select count(*)
+            		from member c join kyc k on c.idx=k.userIdx
+					where m.idx=c.parentsIdx 
+						and c.phone != "-1"
+						and c.level = "user"
+						and k.confirm=1
+		]]>
+        <isNotEmpty property="sdate">
+						and date(c.joinDate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) kycCnt,
+				(
+            		select count(*)
+            		from member c
+					where m.idx=c.parentsIdx 
+						and c.phone != "-1"
+						and c.level = "user"
+						and c.wallet != 0
+		]]>
+        <isNotEmpty property="sdate">
+						and date(c.joinDate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) walletCnt,
+           		(
+            		select ifnull(sum(ac.allot),0)
+            		from acreferrallog ac
+            		where ac.gidx = m.idx
+        ]]>
+        <isNotEmpty property="sdate">
+						and date(ac.adate) between #sdate# and #edate#
+		</isNotEmpty> 
+        <![CDATA[
+            	) accumSum
+            FROM acreferral a left join member m on m.idx = a.uidx
+            WHERE m.phone != -1
+        ]]>
+        <isNotEmpty property="userIdx">
+        	<isNotEmpty property="self">
+				and m.idx = #userIdx#
+			</isNotEmpty>  
+			<isEmpty property="self">
+				and m.parentsIdx = #userIdx#
+			</isEmpty>  
+		</isNotEmpty>
+        <isNotEmpty property="uid">
+			and (m.idx like concat(#uid# , '%') or concat('00',m.idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and m.phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty> 
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+				<isEqual property="searchSelect" compareValue="m.phone">
+				    and $searchSelect$ = #search#
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.phone">
+			    	and $searchSelect$ like concat('%' , #search# , '%')
+			    </isNotEqual>
+			</isNotEqual>
+        </isNotEmpty>  
+	</select>
+	<select id="selectChongChildInfo" resultClass="EgovMap">
+        <![CDATA[
+            SELECT m.idx, m.name, ifnull(k.confirm,0) isKyc, m.wallet,
+			(
+				select ifnull(sum(allot),0)
+				from acreferrallog ac join tradelog tl on ac.orderNum=tl.orderNum
+				where tl.userIdx=m.idx
+			) accumSum
+			FROM member m left join kyc k on m.idx = k.userIdx
+			where m.level="user" 
+			and m.parentsIdx=#userIdx#
+        ]]>
+	</select>
+	<update id="updateMemberVConfirm">
+		<![CDATA[
+			UPDATE member
+			SET vConfirm=#vConfirm#
+			WHERE idx=#userIdx#
+		]]>
+	</update>
+	<update id="updateMemberVAccount">
+		<![CDATA[
+			UPDATE member
+			SET vAccount=#vAccount#
+			, vBank=#vBank#
+			WHERE idx=#userIdx#
+		]]>
+	</update>
+	
+	<select id="selectBalanceListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM balancelog
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "sdate">
+        	and date(rtime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "coin">
+        	and coin = #coin#
+        </isNotEmpty>
+	</select>
+	
+	<select id="selectBalanceList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT b.*, a.id
+            FROM balancelog b left join admin a on b.aidx = a.idx
+            WHERE 1=1 
+        ]]> 
+        <isNotEmpty property = "sdate">
+        	and date(b.rtime) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "coin">
+        	and b.coin = #coin#
+        </isNotEmpty>
+        <![CDATA[
+			order by b.idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+</sqlMap>

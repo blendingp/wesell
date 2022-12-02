@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+	
+	<select id="selectUnreadMessage" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM message
+            where useridx=#useridx#
+            and mread=0
+            limit 1
+        ]]>
+	</select>
+	<select id="selectMessageList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM message
+            where useridx=#useridx#
+            order by mdate desc , idx desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="selectMessageListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM message
+            where useridx=#useridx#
+        ]]>
+	</select>
+	<select id="selectMessageDetail" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM message
+            where idx=#idx#
+        ]]>
+	</select>
+	<update id="updateMessageRead">
+		<![CDATA[
+			UPDATE message
+			SET mread='1'
+			WHERE idx=#idx#
+		]]>
+	</update>
+	<delete id="deleteMessage">
+			<![CDATA[
+				DELETE FROM message
+				WHERE idx=#idx#
+			]]>
+	</delete>
+	<insert id="insertMessage">
+		<![CDATA[
+			INSERT INTO message
+				( useridx
+				  , title
+				  , content
+				  , mdate)
+			VALUES ( #useridx#
+				  , #title#
+				  , #content#
+				  , now())
+		]]>
+	</insert>
+</sqlMap>

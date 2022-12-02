@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	
+	<select id="inflList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	*
+            	,(select count(*)  from member m where $memcntlevel$= member.idx) memcnt
+            	,(select balance from coinbalance where useridx = member.idx and coinname="BTC") balanceBTC
+            	,(select balance from coinbalance where useridx = member.idx and coinname="USDT") balanceUSDT
+            	,(select balance from coinbalance where useridx = member.idx and coinname="XRP") balanceXRP
+            	,(select balance from coinbalance where useridx = member.idx and coinname="TRX") balanceTRX
+            FROM member
+            where $userLevel$ = #userIdx# and level = #level#
+        ]]>
+	</select>
+	
+	<select id="myinfolist" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	*
+            	,(select count(*)  from member m where m.idx = member.idx) memcnt
+            	,(select ifnull(sum(commission), 0)  from referells where userIdx = member.idx) commissioncSum
+            	,(select balance from coinbalance where useridx = member.idx and coinname="BTC") balanceBTC
+            	,(select balance from coinbalance where useridx = member.idx and coinname="USDT") balanceUSDT
+            	,(select balance from coinbalance where useridx = member.idx and coinname="XRP") balanceXRP
+            	,(select balance from coinbalance where useridx = member.idx and coinname="TRX") balanceTRX
+            FROM member
+            where idx = #userIdx#
+        ]]>
+	</select>	
+	<!--뉴웨이브  -->
+	<select id="newMemberCurSituation" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull(count(*), 0) count
+            FROM member
+            WHERE (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or idx = #userIdx#)
+				and date(joinDate) = date(now())
+        ]]>
+	</select>
+	
+	<select id="tradeMemberCurSituation" resultClass="EgovMap">
+        <![CDATA[
+        	SELECT ifnull(count(*), 0) count
+        	FROM ( select member.idx
+					from member left join tradelog on tradelog.userIdx=member.idx
+					where (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or member.idx = #userIdx#)
+						and date(buyDatetime) = date(now())
+					group by member.idx
+				)a
+        ]]>
+	</select>
+	<select id="tradePriceCurSituation" resultClass="EgovMap">
+        <![CDATA[
+        	SELECT ifnull(sum(entryPrice*buyQuantity/leverage), 0) sums
+        	FROM tradelog left join member on tradelog.userIdx=member.idx
+			WHERE (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or member.idx = #userIdx#)
+				and date(buyDatetime) = date(now())
+        ]]>
+	</select>
+	<select id="totalProfitCurSituation" resultClass="EgovMap">
+        <![CDATA[
+        	SELECT *
+        	FROM acreferral
+			WHERE uidx = #userIdx#
+        ]]>
+	</select>
+	<!--뉴웨이브 끝  -->
+	<select id="selectMyInflMemberList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	*
+            FROM 
+            	member
+            where 
+            	$userLevel$ = #userIdx#
+        ]]>
+    </select>
+    
+	<select id="selectInflMemberList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	m.*, a.accum, a.receive,
+            	(select name from member where idx = member.parentsIdx) pName
+            FROM 
+            	member m left join acreferral a on m.idx = a.uidx
+            where 
+            	(m.parentsIdx = #userIdx# or m.idx = #userIdx#)
+            	and m.phone != -1
+        ]]>
+		<isNotEmpty property="uid">
+			and (m.idx like concat(#uid# , '%') or concat('00',m.idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and m.phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>  
+		<isNotEmpty property="sdate">
+			and date(m.joinDate) between #sdate# and #edate#
+		</isNotEmpty>  
+        <![CDATA[  
+        	order by m.idx desc	  	
+            limit 
+            	$first$, $record$
+        ]]>
+    </select>
+     <select id="selectInflMemberListCnt"  resultClass="int">
+        <![CDATA[
+            SELECT count(*) 
+            FROM member
+            where (parentsIdx = #userIdx# or idx = #userIdx#)
+            and phone != -1
+        ]]>
+		<isNotEmpty property="uid">
+			and (idx like concat(#uid# , '%') or concat('00',idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty> 
+		<isNotEmpty property="sdate">
+			and date(joinDate) between #sdate# and #edate#
+		</isNotEmpty>   
+    </select>
+    
+    <select id="selectInflMemberTradeList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	m.idx, m.name,m.phone, m.inviteCode,t.*
+            FROM 
+            	member m left join tradelog t on m.idx = t.userIdx
+            where 
+            	(parentsIdx = #userIdx# or m.idx = #userIdx#)
+            	and m.idx = t.userIdx
+            	and t.result != 0
+        ]]>
+		<isNotEmpty property="symbol">
+        	and t.symbol like concat ('%' , #symbol#)
+		</isNotEmpty>  
+		<isNotEmpty property="coin">
+        	and t.symbol like concat (#coin# , '%')
+		</isNotEmpty>  
+		<isNotEmpty property="uid">
+				and (m.idx like concat(#uid# , '%') or concat('00',m.idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and m.phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>  
+        <![CDATA[    
+        	order by t.idx desc	
+            limit $first$, $record$
+        ]]>
+    </select>
+    <select id="selectInflMemberTradeFeeList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	t.fee, t.result
+            FROM 
+            	member m left join tradelog t on m.idx = t.userIdx
+            where 
+            	(parentsIdx = #userIdx# or m.idx = #userIdx#)
+            	and m.idx = t.userIdx
+        ]]>
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty>  
+		<isNotEmpty property="sdate">
+        	and date(t.buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>         
+    </select>
+    <select id="selectInflMemberTradeListCnt"  resultClass="int">
+        <![CDATA[
+            SELECT count(*) 
+            FROM member m left join tradelog t on m.idx = t.userIdx
+            where (parentsIdx = #userIdx# or m.idx = #userIdx#)
+            and m.idx = t.userIdx
+        ]]>
+		<isNotEmpty property="symbol">
+        	and t.symbol like concat ('%' , #symbol#)
+		</isNotEmpty>  
+		<isNotEmpty property="coin">
+        	and t.symbol like concat (#coin# , '%')
+		</isNotEmpty>  
+		<isNotEmpty property="uid">
+			and (m.idx like concat(#uid# , '%') or concat('00',m.idx) like concat (#uid# , '%') )
+		</isNotEmpty>  
+		<isNotEmpty property="phone">
+			and m.phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>  
+        
+    </select>
+    
+	<select id="inflTradelist" resultClass="EgovMap">
+        <![CDATA[
+             SELECT 
+                *
+            FROM tradelog
+            where userIdx = #userIdx#
+        ]]>
+        <isNotEmpty property="sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>          
+        <![CDATA[
+        	order by idx desc
+            limit $first$, $record$
+        ]]>
+    </select>
+    
+     <select id="inflTradelistCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*) num
+            FROM tradelog
+            where userIdx = #userIdx#
+        ]]>
+        <isNotEmpty property="sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>    
+    </select> 	
+    
+     <select id="inflTradeSumResult" resultClass="EgovMap">
+        <![CDATA[
+            SELECT sum(result) num
+            FROM tradelog
+            where userIdx = #userIdx#
+        ]]>
+        <isNotEmpty property="sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>        
+    </select> 	
+    
+     <select id="inflTradeSumFee" resultClass="EgovMap">
+        <![CDATA[
+            SELECT sum(fee) num
+            FROM tradelog
+            where userIdx = #userIdx#
+        ]]>
+        <isNotEmpty property="sdate">
+        	and date(buyDatetime) between #sdate# and #edate# 
+        </isNotEmpty>        
+    </select> 	
+
+	<select id="selectInflMemberCoinBalance" resultClass="double">
+        <![CDATA[
+            SELECT ifnull(sum(c.balance),0)
+            FROM coinbalance c left join member m on m.idx = c.useridx
+            where $userLevel$ = #userIdx#
+            and m.phone != -1
+            and c.coinname = #coin#
+        ]]>
+    </select>       
+    
+    <select id="selectInflDayjoinCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member
+            where $userLevel$ = #userIdx#
+            	and	DATE_FORMAT(joinDate, "%Y-%m-%d") = CURDATE()
+            	and phone != -1
+        ]]>
+    </select>
+    <select id="selectInflWeekjoinCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member
+            where 
+            	$userLevel$ = #userIdx#
+            	and phone != -1
+            and	DATE_FORMAT(joinDate, "%Y-%m-%d")
+            	BETWEEN (SELECT ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 0 ))
+		    	AND (SELECT ADDDATE(CURDATE(), - WEEKDAY(CURDATE()) + 6 ))
+        ]]>
+    </select>
+    <select id="selectInflDirectMemCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM member
+            where parentsIdx = #userIdx#
+            and phone != -1
+        ]]>
+        <isNotEmpty property="out">
+        	and level != #out# 
+        </isNotEmpty> 
+    </select>
+</sqlMap>

@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO"
+		type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<insert id="insertTraderCoinlist">
+		<![CDATA[
+			INSERT INTO tradercoinlist
+				( tidx
+				  , coinNum)
+			VALUES ( #tidx#
+				  , #coinNum#)
+		]]>
+	</insert>
+	
+	<select id="selectTraderCoinlist" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradercoinlist
+            where tidx=#tidx#
+        ]]>
+	</select>
+	
+	<update id="updateTraderCoinlist">
+		<![CDATA[
+			UPDATE tradercoinlist
+			SET `use`=#use#
+			WHERE tidx=#tidx#
+			and coinNum = #coinNum#
+		]]>
+	</update>
+
+	<update id="updateTraderMinRegist">
+		<![CDATA[
+			UPDATE trader
+			SET minRegistWallet=#minRegistWallet#
+			WHERE tuseridx=#tidx#
+		]]>
+	</update>
+
+	<select id="copyTraderList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT trader.*, member.name, traderinfo.follow, traderinfo.useFollow
+            FROM trader 
+            	left join member on trader.tuseridx = member.idx
+	    		left join traderinfo on trader.tuseridx = traderinfo.tuseridx
+	    	where member.istrader = 1 and member.phone != -1                  
+        ]]>
+		<isNotEmpty property="search">
+			and name like concat('%' , #search# , '%')
+		</isNotEmpty>
+        <![CDATA[
+            ORDER BY tidx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+
+	<select id="copyTraderListCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+            FROM trader left join member 
+	    	on trader.tuseridx = member.idx 
+	    	where member.istrader = 1 and member.phone != -1
+        ]]>
+		<isNotEmpty property="search">
+			and name like concat('%' , #search# , '%')
+		</isNotEmpty>
+	</select>
+
+	<select id="getTraderMidx" resultClass="int">
+        <![CDATA[
+            SELECT tuseridx
+            FROM trader
+            where tidx=#tidx#
+        ]]>
+	</select>
+	<select id="selectIsTrader" resultClass="int">
+        <![CDATA[
+            SELECT tidx
+            FROM trader
+            where tuseridx = #tidx#
+            limit 1 
+        ]]>
+	</select>
+	<select id="getTraderInfo" resultClass="EgovMap">
+        <![CDATA[
+            SELECT trader.*, member.name, member.email, traderinfo.follow infoFollow, traderinfo.useFollow
+            FROM trader 
+            	left join member on trader.tuseridx = member.idx
+            	left join traderinfo on trader.tuseridx = traderinfo.tuseridx
+	    	where trader.tuseridx = #tidx#
+	    	limit 1                  
+        ]]>
+	</select>
+	<select id="copyTraderTradeLogList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradelog 
+	    	where userIdx = #tidx#    
+	    	and result != 0
+	    ]]>
+		<isNotEmpty property="hide">
+			and traderShow != #hide#
+		</isNotEmpty>
+		<isEqual prepend="AND" property="isBTC" compareValue="0">
+			symbol != "BTCUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isETH" compareValue="0">
+			symbol != "ETHUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isXRP" compareValue="0">
+			symbol != "XRPUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isTRX" compareValue="0">
+			symbol != "TRXUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isDOGE" compareValue="0">
+			symbol != "DOGEUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isLTC" compareValue="0">
+			symbol != "LTCUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isSAND" compareValue="0">
+			symbol != "SANDUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isADA" compareValue="0">
+			symbol != "ADAUSDT"
+		</isEqual>	
+		 <![CDATA[
+            ORDER BY idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	<select id="selectTradeLogListAll" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM tradelog 
+	    	where userIdx = #tidx#    
+	    	and result != 0
+        ]]>
+        <isNotEmpty property="traderShow">
+			and traderShow = #traderShow#
+		</isNotEmpty>
+		<isEqual prepend="AND" property="isBTC" compareValue="0">
+			symbol != "BTCUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isETH" compareValue="0">
+			symbol != "ETHUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isXRP" compareValue="0">
+			symbol != "XRPUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isTRX" compareValue="0">
+			symbol != "TRXUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isDOGE" compareValue="0">
+			symbol != "DOGEUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isLTC" compareValue="0">
+			symbol != "LTCUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isSAND" compareValue="0">
+			symbol != "SANDUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isADA" compareValue="0">
+			symbol != "ADAUSDT"
+		</isEqual>
+	</select>
+
+	<select id="copyTraderTradeLogListCnt" resultClass="int">
+        <![CDATA[
+        	select count(*)
+            FROM tradelog 
+	    	where userIdx = #tidx#
+	    	and result != 0    
+        ]]>
+		<isNotEmpty property="hide">
+			and traderShow != #hide#
+		</isNotEmpty>
+		<isEqual prepend="AND" property="isBTC" compareValue="0">
+			symbol != "BTCUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isETH" compareValue="0">
+			symbol != "ETHUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isXRP" compareValue="0">
+			symbol != "XRPUSDT"
+		</isEqual>
+		<isEqual prepend="AND" property="isTRX" compareValue="0">
+			symbol != "TRXUSDT"
+		</isEqual>
+	</select>
+
+	<select id="copyTraderPositionList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT
+            	 *            	
+            FROM position 
+	    	where userIdx = #tidx#                  
+        ]]>        	        
+        <![CDATA[
+            ORDER BY idx desc
+        ]]>
+	</select>
+
+	<select id="copyTraderFollowerList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT
+            	 *
+            	 , (select name from member where copytrade.uidx = member.idx) name
+            FROM copytrade 
+	    	where tidx = #tidx#                  
+        ]]>        	        
+        <![CDATA[
+            ORDER BY idx desc
+            LIMIT #first# , #record#
+        ]]>
+	</select>
+	<select id="copyTraderFollowerListCnt" resultClass="int">
+        <![CDATA[
+       		select count(*)
+			FROM copytrade 
+	    	where tidx = #tidx#    
+	  	]]>
+	</select>
+	<select id="copyTraderFollowerInfo" resultClass="EgovMap">
+        <![CDATA[
+       		select
+	 			count(*) fcount,
+	 			ifnull(( select total from trader where tuseridx = #tidx#),0) total,
+	 			ifnull(( select minRegistWallet from trader where tuseridx = #tidx#),0) minRegistWallet
+			from (
+	 			select *
+	   			from copytrade
+	   		where 
+				tidx = #tidx#
+			group by uidx
+  			) rt
+	  	]]>
+	</select>
+	<select id="copyTraderAllFollower" resultClass="int">
+        <![CDATA[
+       		select
+	 			count(*)
+			from (
+	 			select *
+	   			from copytrade
+	   		where 
+				tidx = #tidx#
+				group by uidx
+  			) rt
+	  	]]>
+	</select>
+
+	<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- copytrade -->
+	<select id="selectCopytradeAllList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM copytrade
+            where state = 0 or state = 7
+        ]]>
+	</select>
+	<insert id="insertCopytrade">
+		<![CDATA[
+			INSERT INTO copytrade
+				( uidx
+				  , tidx
+				  , guid
+				  , symbol
+				  , isQtyRate
+				  , fixQty
+		]]>
+		<isNotEmpty property="fixLeverage">
+			, fixLeverage
+		</isNotEmpty>
+		<isNotEmpty property="lossCutRate">
+			, lossCutRate
+		</isNotEmpty>
+		<isNotEmpty property="profitCutRate">
+			, profitCutRate
+		</isNotEmpty>
+		<isNotEmpty property="maxPositionQty">
+			, maxPositionQty
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			, state
+		</isNotEmpty>
+		<![CDATA[
+				  , sdate)
+			VALUES ( #uidx#
+				  , #tidx#
+				  , #guid#
+				  , #symbol#
+				  , #isQtyRate#
+				  , #fixQty#
+	    ]]>
+		<isNotEmpty property="fixLeverage">
+			, #fixLeverage#
+		</isNotEmpty>
+		<isNotEmpty property="lossCutRate">
+			, #lossCutRate#
+		</isNotEmpty>
+		<isNotEmpty property="profitCutRate">
+			, #profitCutRate#
+		</isNotEmpty>
+		<isNotEmpty property="maxPositionQty">
+			, #maxPositionQty#
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			, #state#
+		</isNotEmpty>
+		, now())
+	</insert>
+	<update id="requestConfirmCopytrade">
+		<![CDATA[
+			UPDATE copytrade
+			SET idx=idx
+		]]>
+		<isNotEmpty property="followMoney">
+			, followMoney = #followMoney#
+		</isNotEmpty>
+		<isNotEmpty property="profit">
+			, profit = #profit#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			, sdate = #sdate#
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			, state = #state#
+		</isNotEmpty>
+		WHERE uidx=#uidx#
+		<isNotEmpty property="guid">
+			, guid = #guid#
+		</isNotEmpty>
+		and tidx=#tidx#
+		and symbol=#symbol#
+		and (state=0 or state=7)
+	</update>
+	<update id="updateCopytrade">
+		<![CDATA[
+			UPDATE copytrade
+			SET idx=idx
+		]]>
+		<isNotEmpty property="followMoney">
+			, followMoney = #followMoney#
+		</isNotEmpty>
+		<isNotEmpty property="profit">
+			, profit = #profit#
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			, sdate = #sdate#
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			, state = #state#
+			, edate = now()
+		</isNotEmpty>
+		WHERE uidx=#uidx#
+		<isNotEmpty property="guid">
+			and guid = #guid#
+		</isNotEmpty>
+		and tidx=#tidx#
+		and symbol=#symbol#
+		and (state=0 or state=7)
+	</update>
+	<select id="selectCopyMyFollower" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM copytrade
+            where tidx = #idx#
+        ]]>
+	</select>
+	<select id="selectFollowTradeList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *, (select name from member where copytrade.tidx = member.idx) tname
+            FROM copytrade
+            where uidx = #uidx#
+        ]]>
+		<isNotEmpty property="coin">
+			and symbol = #coin#
+		</isNotEmpty>
+        <![CDATA[
+            order by idx desc
+            limit #first#,#record#
+        ]]>
+	</select>
+	<select id="selectFollowTradeListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM copytrade
+            where uidx =#uidx# 
+        ]]>
+		<isNotEmpty property="coin">
+			and symbol = #coin#
+		</isNotEmpty>
+	</select>
+	<select id="selectCopytradeState0" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *, (select name from member where copytrade.tidx = member.idx) tname
+            FROM copytrade
+            where state = 0 and uidx = #uidx#
+             ]]>
+		<isNotEmpty property="coin">
+			and symbol = #coin#
+		</isNotEmpty>
+        <![CDATA[
+            limit #first#,#record#
+        ]]>
+	</select>
+	<select id="selectCopytradeState0Cnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM copytrade
+            where state = 0 and uidx = #uidx#
+        ]]>
+		<isNotEmpty property="coin">
+			and symbol = #coin#
+		</isNotEmpty>
+	</select>
+	<select id="selectCopyFollowList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT copytrade.*,t.timg,m.name tradername
+            FROM copytrade
+            left join trader t on tuseridx = copytrade.tidx
+            left join member m on m.idx = copytrade.tidx
+            where copytrade.uidx = #uidx#
+            and state=0
+            limit #first#,#record#
+        ]]>
+	</select>
+	<select id="selectAllCopyCount" resultClass="EgovMap">
+        <![CDATA[
+            SELECT uidx, count(*) cnt
+            FROM copytrade
+            where state=0
+			GROUP BY uidx
+        ]]>
+	</select>
+	<select id="selectCopyFollowListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM copytrade
+            where copytrade.uidx = #uidx#
+            and state=0
+        ]]>
+	</select>
+	<select id="selectFollowerMoney" resultClass="EgovMap">
+        <![CDATA[
+           SELECT sum(followMoney) usdtSum, sum(profit) profitSum
+            FROM copytrade
+            where uidx=#uidx#
+            group by uidx
+        ]]>
+	</select>
+	<select id="selectCopytradeFollowInfo" resultClass="EgovMap">
+        <![CDATA[
+            SELECT sum(followMoney) usdtSum, sum(profit) profitSum,
+            		(select name from member where copytrade.uidx = member.idx) name
+            FROM copytrade
+            where tidx=#tidx#
+            and state=0
+            group by uidx
+        ]]>
+	</select>
+
+	<select id="selectCopyAllList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT c.*, m.name uname, t.name tname, m.color
+            FROM copytrade c
+	            left join member t on t.idx = c.tidx
+	            left join member m on m.idx = c.uidx
+            WHERE 1=1
+        ]]>
+		<isNotEmpty property="search">
+			and ( m.name like concat('%' , #search# , '%') or t.name like concat('%'
+			, #search# , '%')
+			or c.symbol like concat('%' , #search# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<isEqual property="dateSelect" compareValue="s">
+				and date(c.sdate) between #sdate# and #edate#
+			</isEqual>
+			<isEqual property="dateSelect" compareValue="e">
+				and date(c.edate) between #sdate# and #edate#
+			</isEqual>
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			and c.state = #state#
+		</isNotEmpty>
+		<isNotEmpty property="tidx">
+			and c.tidx = #tidx#
+		</isNotEmpty>
+		<isNotEmpty property="symbol">
+			and c.symbol = #symbol#
+		</isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, c.idx desc
+		</isNotEmpty>
+		<isNotEmpty property="first">
+            limit #first#,#record#
+		</isNotEmpty>
+	</select>
+	<select id="selectCopyAllListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM copytrade c
+	            left join member t on t.idx = c.tidx
+	            left join member m on m.idx = c.uidx
+            where 1=1
+        ]]>
+		<isNotEmpty property="search">
+			and ( m.name like concat('%' , #search# , '%') or t.name like concat('%'
+			, #search# , '%')
+			or c.symbol like concat('%' , #search# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			<isEqual property="dateSelect" compareValue="s">
+				and date(c.sdate) between #sdate# and #edate#
+			</isEqual>
+			<isEqual property="dateSelect" compareValue="e">
+				and date(c.edate) between #sdate# and #edate#
+			</isEqual>
+		</isNotEmpty>
+		<isNotEmpty property="state">
+			and c.state = #state#
+		</isNotEmpty>
+		<isNotEmpty property="tidx">
+			and c.tidx = #tidx#
+		</isNotEmpty>
+		<isNotEmpty property="symbol">
+			and c.symbol = #symbol#
+		</isNotEmpty>
+	</select>
+
+	<insert id="insertCopytradeLog">
+		<![CDATA[
+			INSERT INTO copytradelog
+				( userIdx
+				  , tidx
+				  , symbol
+				  , position
+				  , entryPrice
+				  , buyQuantity
+				  , leverage
+				  , result
+				  , margin
+				  , kind
+				  , levFollow
+				  , date)
+			VALUES ( #uidx#
+				  , #tidx#
+				  , #symbol#
+				  , #position#
+				  , #entryPrice#
+				  , #buyQuantity#
+				  , #leverage#
+				  , #result#
+				  , #margin#
+				  , #kind#
+				  , #levFollow#
+				  , now())
+		]]>
+	</insert>
+
+	<select id="selectCopytradeLogList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT c.*, m.name uname, t.name tname, m.color
+            FROM copytradelog c
+	            left join member t on t.idx = c.tidx
+	            left join member m on m.idx = c.userIdx
+            WHERE 1=1
+        ]]>
+		<isNotEmpty property="search">
+			and ( m.name like concat('%' , #search# , '%') or t.name like concat('%'
+			, #search# , '%')
+			or c.symbol like concat('%' , #search# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			and date(c.date) between #sdate# and #edate#
+		</isNotEmpty>
+		<isNotEmpty property="kind">
+			and c.kind = #kind#
+		</isNotEmpty>
+		<isNotEmpty property="symbol">
+			and c.symbol = #symbol#
+		</isNotEmpty>
+		<isNotEmpty property="order">
+			order by $order$ $orderAD$, c.idx desc
+		</isNotEmpty>
+		<isNotEmpty property="first">
+            limit #first#,#record#
+		</isNotEmpty>
+	</select>
+	<select id="selectCopytradeLogListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM copytradelog c
+	            left join member t on t.idx = c.tidx
+	            left join member m on m.idx = c.userIdx
+            where 1=1
+        ]]>
+		<isNotEmpty property="search">
+			and ( m.name like concat('%' , #search# , '%') or t.name like concat('%'
+			, #search# , '%')
+			or c.symbol like concat('%' , #search# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="sdate">
+			and date(c.date) between #sdate# and #edate#
+		</isNotEmpty>
+		<isNotEmpty property="kind">
+			and c.kind = #kind#
+		</isNotEmpty>
+		<isNotEmpty property="symbol">
+			and c.symbol = #symbol#
+		</isNotEmpty>
+	</select>
+	<update id="updateTraderInfoUse">
+		<![CDATA[
+			UPDATE traderinfo
+			SET idx=idx
+		]]>
+		<isNotEmpty property="useFollow">
+			, useFollow = #useFollow#
+		</isNotEmpty>
+		<isNotEmpty property="useOtherInfo">
+			, useOtherInfo = #useOtherInfo#
+		</isNotEmpty>
+		<![CDATA[
+			WHERE tuseridx=#tuseridx#
+		]]>
+	</update>
+	<update id="updateTraderInfo">
+		<![CDATA[
+			UPDATE traderinfo
+			SET idx=idx
+		]]>
+		<isNotEmpty property="profitRate">
+				, profitRate=#profitRate#
+		</isNotEmpty>
+		<isNotEmpty property="tradeCount">
+				, tradeCount=#tradeCount#
+		</isNotEmpty>
+		<isNotEmpty property="follow">
+				, follow=#follow#
+		</isNotEmpty>
+		<isNotEmpty property="fAccum">
+				, fAccum=#fAccum#
+		</isNotEmpty>
+		<isNotEmpty property="revenue">
+				, revenue=#revenue#
+		</isNotEmpty>
+		<isNotEmpty property="avail">
+				, avail=#avail#
+		</isNotEmpty>
+		<isNotEmpty property="loss">
+				, loss=#loss#
+		</isNotEmpty>
+		<isNotEmpty property="winRate">
+				, winRate=#winRate#
+		</isNotEmpty>
+		<![CDATA[
+			WHERE tuseridx=#tuseridx#
+		]]>
+	</update>
+	<delete id="deleteTraderInfo">
+		<![CDATA[
+			DELETE FROM traderinfo
+			WHERE tuseridx=#tuseridx#
+		]]>
+	</delete>
+	<select id="selectTraderInfo" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM traderinfo
+            where tuseridx=#tuseridx#
+            order by idx
+            limit 1
+        ]]>
+	</select>
+	<insert id="insertTraderInfo">
+		<![CDATA[
+			INSERT INTO traderinfo
+				( tuseridx )
+			VALUES ( #tuseridx#)
+		]]>
+	</insert>
+	<select id="selectTraderFollowerCnt" resultClass="EgovMap">
+        <![CDATA[
+            select m.name, m.idx tidx,
+			(
+				select count(c.uidx)
+				from(
+					select uidx
+					from copytrade
+					where tidx = t.tuseridx
+					and state = 0
+					GROUP BY uidx
+				) as c
+			) followerCnt
+			from trader t join member m on t.tuseridx = m.idx
+			where t.tuseridx = #tidx# 
+        ]]>
+	</select>
+</sqlMap>

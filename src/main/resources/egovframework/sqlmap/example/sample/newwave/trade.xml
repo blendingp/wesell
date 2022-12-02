@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<select id="newwave_selectAccumTradeList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT t.* , m.name, m.color, a.*
+            FROM tradelog t
+            	left join member m on m.idx = t.userIdx
+            	left join acreferral a on a.uidx = #uidx#
+            WHERE 
+            	t.result != 0
+            	and t.buyDateTime > a.givedate
+				and ((m.level='user' and (m.parentsIdx = #uidx# or m.gparentsIdx = #uidx#))
+					or (m.level!='user' and (m.parentsIdx = #uidx# or m.gparentsIdx = #uidx# or m.idx = #uidx#)))
+        ]]>
+        <isNotEmpty property="name">
+        		and m.name like concat ('%' , #name# , '%')
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+	        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+	        	and t.symbol = #symbol#
+        </isNotEmpty>
+        <![CDATA[
+            order by t.buyDateTime desc
+            limit #first# , #record#
+        ]]>
+	</select>
+	<select id="newwave_selectAccumTradeListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*)
+            FROM tradelog t
+            	left join member m on m.idx = t.userIdx
+            	left join acreferral a on a.uidx = #uidx#
+            WHERE 
+            	t.result != 0
+            	and t.buyDateTime > a.givedate
+				and ((m.level='user' and (m.parentsIdx = 467 or m.gparentsIdx = 467))
+					or (m.level!='user' and (m.parentsIdx = 467 or m.gparentsIdx = 467 or m.idx = 467)))
+        ]]>
+        <isNotEmpty property="name">
+        		and m.name like concat ('%' , #name# , '%')
+		</isNotEmpty>
+		<isNotEmpty property = "sdate">
+	        	and date(t.buyDateTime) between #sdate# and #edate# 
+        </isNotEmpty>
+		<isNotEmpty property = "symbol">
+	        	and t.symbol = #symbol#
+        </isNotEmpty>
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO" />
+	
+	<select id="newwave_selectInflMemberList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT 
+            	*
+            	, (select level from member m where m.idx = member.parentsIdx) plevel
+            	, (select name from member m where m.idx = member.parentsIdx) pname 
+            	, (select name from member m where m.idx = member.gparentsIdx) gpname 
+            	, (select receive from acreferral where uidx = member.idx) receive
+            	,(select balance from coinbalance where useridx = member.idx and coinname="BTC") balanceBTC
+            	,(select balance from coinbalance where useridx = member.idx and coinname="USDT") balanceUSDT
+            	,(select balance from coinbalance where useridx = member.idx and coinname="XRP") balanceXRP
+            	,(select balance from coinbalance where useridx = member.idx and coinname="TRX") balanceTRX
+            	, (
+            		select ifnull(sum(commission),0) cummission 
+            		from referells 
+            		where userIdx = member.idx and getIdx = #userIdx#
+		        ]]>
+				<isNotEmpty property="sdate">
+					and date(feeDatetime) between #sdate# and #edate#
+				</isNotEmpty>
+		        <![CDATA[  
+            		) cummission 
+            FROM 
+            	member
+            where 
+            	(parentsIdx = #userIdx# or gparentsIdx = #userIdx# or idx = #userIdx#)
+            	and phone != -1
+        ]]>
+		<isNotEmpty property="uid">
+			and (idx like concat(#uid# , '%') or concat('00',idx) like concat (#uid# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="level">
+			and level = #level#
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			and phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>
+        <![CDATA[  
+        	order by idx desc	  	
+            limit $first$, $record$
+        ]]>
+    </select>
+     <select id="newwave_selectInflMemberListCnt"  resultClass="int">
+        <![CDATA[
+            SELECT count(*) 
+            FROM member
+            where (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or idx = #userIdx#)
+            and phone != -1
+        ]]>
+		<isNotEmpty property="uid">
+			and (idx like concat(#uid# , '%') or concat('00',idx) like concat (#uid# , '%') )
+		</isNotEmpty>
+		<isNotEmpty property="level">
+			and level = #level#
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			and phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>
+    </select>
+	
+	<select id="moneyInoutList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            	, (select level from member m where m.idx = member.parentsIdx) plevel
+            	, (select name from member m where m.idx = member.parentsIdx) pname 
+            	, (select name from member m where m.idx = member.gparentsIdx) gpname 
+            	
+            	, (select ifnull(sum(money),0) from money where money.useridx=member.idx and kind='+')depositSum
+            	, (select ifnull(sum(money),0) from money where money.useridx=member.idx and kind='-')withdrawSum
+            FROM member
+            WHERE (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or idx = #userIdx#)
+        ]]>
+        <isNull property = "limit">
+            limit $first$, $record$
+        </isNull>
+    </select>
+    <select id="moneyInoutListCnt" resultClass="int">
+        <![CDATA[
+            SELECT count(*) num
+            FROM member
+            WHERE (parentsIdx = #userIdx# or gparentsIdx = #userIdx# or idx = #userIdx#)
+        ]]>
+    </select>
+    
+    <select id="selectApplicationList" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM application left join member on member.idx=application.appIdx
+            WHERE userIdx = #userIdx#
+        ]]>
+		<isNotEmpty property="sdate">
+			and date(appDate) between #sdate# and #edate#
+		</isNotEmpty>
+		<isNotEmpty property="stat">
+			and jstat = #stat#
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			and phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>
+        <![CDATA[  
+        	order by application.idx desc	  	
+            limit $first$, $record$
+        ]]>
+    </select>
+     <select id="selectApplicationListCnt"  resultClass="int">
+        <![CDATA[
+            SELECT count(*) 
+            FROM application left join member on member.idx=application.appIdx
+            WHERE userIdx = #userIdx#
+        ]]>
+		<isNotEmpty property="sdate">
+			and date(appDate) between #sdate# and #edate#
+		</isNotEmpty>
+		<isNotEmpty property="stat">
+			and jstat = #stat#
+		</isNotEmpty>
+		<isNotEmpty property="phone">
+			and phone like concat('%' ,  #phone# , '%')
+		</isNotEmpty>
+    </select>
+	
+</sqlMap>

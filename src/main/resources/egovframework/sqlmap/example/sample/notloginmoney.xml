@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sample">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+
+		<select id="notloginSelectKwithdrawalListCnt" resultClass="int" parameterClass="egovMap">
+        <![CDATA[
+            SELECT count(*)
+            FROM (
+	            SELECT w.*  
+	            FROM notloginmoney w	            
+	            WHERE 1=1 
+	        ]]>
+	        <isNotEmpty property = "search">
+				<isEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat(#search# , '%')
+				</isEqual>
+				<isNotEqual property="searchSelect" compareValue="m.idx">
+				    and $searchSelect$ like concat('%' , #search# , '%')
+				</isNotEqual>
+	        </isNotEmpty> 
+	        <isNotEmpty property = "sdate">
+	        	and date(mdate) between #sdate# and #edate# 
+	        </isNotEmpty>
+	        <isNotEmpty property = "stat">
+	        	and stat = #stat#
+	        </isNotEmpty>
+	        <isNotEmpty property = "except">
+	        	and stat != #except#
+	        </isNotEmpty>
+	        <isNotEmpty property = "kind">
+	        	and kind = #kind#
+	        </isNotEmpty>
+	        <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	        </isEmpty>
+            )A
+	</select>
+	<select id="notloginSelectKwithdrawalList" resultClass="EgovMap" parameterClass="egovMap">
+        <![CDATA[
+            SELECT w.* 
+            FROM notloginmoney w            
+            WHERE 1=1 
+        ]]>
+        <isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="m.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+        <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+        <isNotEmpty property = "stat">
+        	and stat = #stat#
+        </isNotEmpty>
+        <isNotEmpty property = "except">
+	       	and stat != #except#
+	    </isNotEmpty>
+        <isNotEmpty property = "kind">
+	        and kind = #kind#
+	    </isNotEmpty>
+	    <isEmpty property = "kind">
+	        	<isNotEmpty property="kind2">
+	        	and kind = #kind2#
+	        	</isNotEmpty>
+	    </isEmpty>		
+        <![CDATA[
+            order by w.idx desc
+        ]]>
+        <isNull property = "limit">
+            limit #first# , #record#
+        </isNull>
+	</select>
+	<select id="notloginDepoalloutmoneys" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM notloginmoney
+            WHERE stat = 1 and kind = '+'
+        ]]>
+		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())        	
+        </isEqual>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+	<select id="notloginDepoallinmoneys" resultClass="EgovMap">
+        <![CDATA[
+            SELECT ifnull( sum(money) ,0)sums
+            FROM notloginmoney
+            WHERE stat = 1 and kind = '-'
+        ]]>    
+ 		<isNotEmpty property = "search">
+			<isEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat(#search# , '%')
+			</isEqual>
+			<isNotEqual property="searchSelect" compareValue="member.idx">
+			    and $searchSelect$ like concat('%' , #search# , '%')
+			</isNotEqual>
+        </isNotEmpty> 
+	    <isNotEmpty property = "sdate">
+        	and date(mdate) between #sdate# and #edate# 
+        </isNotEmpty>
+	    <isEqual property = "page" compareValue="curSituation">
+        	and date(mdate) = date(now())        	
+        </isEqual>
+        <![CDATA[
+        	limit 1
+        ]]>
+	</select>
+
+	<update id="updateNotloginMoneyStat">
+		<![CDATA[
+			UPDATE notloginmoney
+			SET stat=#stat#
+			WHERE idx=#widx#
+		]]>
+	</update>
+</sqlMap>
