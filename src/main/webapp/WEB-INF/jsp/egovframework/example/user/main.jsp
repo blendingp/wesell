@@ -314,7 +314,7 @@
 		              <div class="store_box">
 		                <h1 class="heading-17"><spring:message code="main.feelfree"/></h1>
 		                <div class="store_btnarea">
-		                  <a href="https://play.google.com/store/apps/details?id=com.app.bitocean" target="_blank" class="appstore_btn w-inline-block"><img src="/wesell/webflow/images2/white_googleplay.svg" loading="lazy" alt="" class="store_icon">
+		                  <a href="https://play.google.com/store/apps/details?id=com.app.wesell" target="_blank" class="appstore_btn w-inline-block"><img src="/wesell/webflow/images2/white_googleplay.svg" loading="lazy" alt="" class="store_icon">
 		                    <div>GET IT ON<br><span class="app_title">Google Play</span></div>
 		                  </a>
 		                  <a href="javascript:alert('<spring:message code="main.preparing"/>');" class="appstore_btn w-inline-block"><img src="/wesell/webflow/images2/appstore_white.svg" loading="lazy" alt="" class="store_icon">

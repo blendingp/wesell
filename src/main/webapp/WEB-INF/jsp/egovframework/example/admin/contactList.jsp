@@ -53,7 +53,7 @@ function page(pageNo){
 									</div>
 								</div>
 									
-								<c:if test="${project.name eq 'bitocean'}">
+								<c:if test="${project.name eq 'wesell'}">
 									<div class="col-lg-2">
 										<label>구분 설정</label>
 										<div class="form-group input-group">

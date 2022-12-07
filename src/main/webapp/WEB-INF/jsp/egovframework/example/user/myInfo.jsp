@@ -419,7 +419,7 @@
 		}
 		function inviteCopy() {
 			$("#copyInput").attr("type", "text");
-			$("#copyInput").val("https://bitocean-global.com/wesell/join.do?invi=${info.inviteCode}");
+			$("#copyInput").val("https://wesell.com/wesell/join.do?invi=${info.inviteCode}");
 			$("#copyInput").select();
 			document.execCommand('Copy');
 			$("#copyInput").attr("type", "hidden");

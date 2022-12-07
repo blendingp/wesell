@@ -24,9 +24,6 @@
 			</div>
 			<div class="top_menubtnlist">
 				<div class="topmenubtn">
-					<a href="/wesell/user/main.do" class="topbtn <c:if test="${currentP eq 'main'}">click</c:if> w-button"><spring:message code="menu.main"/></a>
-				</div>
-				<div class="topmenubtn">
 					<a href="/wesell/tradeSpot.do" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="trade.trade"/></a>
 				</div>
 				<div class="topmenubtn">
@@ -34,7 +31,7 @@
  					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'wallet'}">click</c:if> w-button"><spring:message code="menu.depandwith"/></a> 
 					<div class="topbtn_drop">
 						<a href="/wesell/user/wallet.do" class="button-14-copy w-button"><spring:message code="wallet.deposit"/></a> 
-						<a href="/wesell/user/walletWithdrwa.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawal"/></a>
+						<a href="/wesell/user/walletWithdraw.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawal"/></a>
 						<a href="/wesell/user/transactions.do" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
 						<a href="/wesell/user/exchange.do" class="button-14-copy w-button"><spring:message code="wallet.menu.exchange"/></a> 
 						<a href="/wesell/user/transfer.do" class="button-14-copy w-button"><spring:message code="wallet.futuresExchange"/></a> 

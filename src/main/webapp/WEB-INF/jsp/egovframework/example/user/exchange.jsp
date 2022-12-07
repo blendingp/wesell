@@ -53,7 +53,7 @@
 												<div class="text3" id="balance1" style="width:auto;"><spring:message code="wallet.available_1" />: 0.000000 BTC</div>
 											</div>
 											<div class="exchangebtn" click" onclick="changeType()">
-												<img src="../webflow/images/exchange_white.svg" loading="lazy" alt=""
+												<img src="../webflow/images2/exchange_white.svg" loading="lazy" alt=""
 													class="exchangebtn_img">
 											</div>
 											<div class="coin_selectwrap">

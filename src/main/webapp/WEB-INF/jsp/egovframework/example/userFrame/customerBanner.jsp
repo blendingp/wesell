@@ -27,6 +27,7 @@
 		<div class="banner_warp">
 			<div class="bannerbox2">
 				<div class="custermertitle1">
+					<strong class="bold-text-4">Wesell</strong>
 					<spring:message code="menu.support" />
 				</div>
 				<div class="custermertitle2">

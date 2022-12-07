@@ -63,11 +63,12 @@
 					</div>
 				</div>
 			</div>
-          	<div class="copyright">Copyright ⓒ BITOCEAN All Rights Reserved.<a href="https://kr.freepik.com/" class="link"></a>
+          	<div class="copyright">Copyright ⓒ WESELL All Rights Reserved.<a href="https://kr.freepik.com/" class="link"></a>
           	</div>
 		</div>
 	</div>
 </div>
+  <a data-w-id="0331a75b-f75e-124e-d24c-9bad6e3bde93" style="opacity:0" href="#" class="ask w-inline-block"><img src="/wesell/webflow/images2/9042680_multi_bubble_icon_19042680_multi_bubble_icon.png" loading="lazy" alt="" class="askicon"></a>
 <!-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=6a6127be-0ed3-4737-b291-ffad1cae3e54"> </script> -->
 <!--End of Tawk.to Script-->
 <script>

@@ -44,20 +44,30 @@ public class JoinController {
 
 	@RequestMapping(value = "/login.do")
 	public String login(HttpServletRequest request, Model model) throws Exception {
+		return "wesell/wesellLogin";
+	}
+	@RequestMapping(value = "/wesellLogin.do")
+	public String wesellLogin(HttpServletRequest request, Model model) throws Exception {
 		String autoLogout = request.getParameter("autoLogout");
 		HttpSession session = request.getSession();
 		session.setAttribute("currentP", "login");
 		model.addAttribute("autoLogout",autoLogout);
-		return "user/login";
-	}
-	@RequestMapping(value = "/join.do")
-	public String join(Model model, HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		session.setAttribute("currentP", "join");
-		model.addAttribute("invi", request.getParameter("invi"));
-		return "user/join";
+		return "user/wesellLogin";
 	}
 	
+	@RequestMapping(value = "/join.do")
+	public String join(Model model, HttpServletRequest request) throws Exception {
+
+		return "wesell/wesellJoin";
+	}
+	@RequestMapping(value = "/wesellJoin.do")
+	public String wesellJoin(HttpServletRequest request, Model model) throws Exception {
+		String autoLogout = request.getParameter("autoLogout");
+		HttpSession session = request.getSession();
+		session.setAttribute("currentP", "login");
+		model.addAttribute("autoLogout",autoLogout);
+		return "user/wesellJoin";
+	}
 	@ResponseBody
 	@RequestMapping(value="/verificationPhone.do" , produces="application/json; charset=utf8")
 	public String verificationPhone(HttpServletRequest request){
@@ -807,6 +817,75 @@ public class JoinController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}   
-		return outResult.toString();
+		return outResult.toString();		
+	}
+
+//	@RequestMapping(value = "/login2.do")
+//	public String login2(HttpServletRequest request, Model model) throws Exception {		
+//		HttpSession session = request.getSession();
+//		String id = request.getParameter("id"); // 전화번호
+//		String pw = request.getParameter("pw"); // 비밀번호
+//
+//		Log.print("Login st"+id, 1, "logincheck");
+//		
+//		EgovMap in = new EgovMap();
+//		in.put("id", id);
+//		in.put("pw", pw);				
+//		EgovMap info = (EgovMap)sampleDAO.select("selectMemberForLoginById" , in);		
+//		if(info != null && Integer.parseInt(info.get("istest")+"") == 1){
+//			int userIdx = Integer.parseInt(info.get("idx").toString());
+//			Member mem = Member.getMemberByIdx(userIdx);
+//			
+//			session.setAttribute("userIdx", info.get("idx"));
+//			session.setAttribute("userName", info.get("name"));
+//			session.setAttribute("userPhone", info.get("phone"));
+//			session.setAttribute("userLevel", info.get("level"));
+//			session.setAttribute("mute", info.get("mute"));
+//			session.setAttribute("phoneCode", null);
+//			session.setAttribute("emailCode", null);
+//			session.setAttribute("isKrCode", mem.getKrCode());		
+//		}		
+//		return "user/login2";
+//	}
+	
+	@RequestMapping(value = "/login2.do")
+	public String login2(HttpServletRequest request, Model model) throws Exception {
+		return "wesell/login2";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/loginProcess2.do", produces="application/json; charset=utf8")
+	public String loginProcess2(HttpServletRequest request, Model model) throws Exception {
+		String userId = ""+ request.getParameter("userId");
+		String userPw = ""+ request.getParameter("userPw");
+
+		EgovMap in = new EgovMap();
+		in.put("id", userId);
+		in.put("pw", userPw);
+		
+		EgovMap info = new EgovMap();
+		info = (EgovMap)sampleDAO.select("selectMemberForLoginById" , in);	
+		
+		if(info!=null){
+			System.out.println("접속 성공  접속 idx:" + info.get("idx"));
+			HttpSession session = request.getSession();
+			session.setAttribute("userIdx", info.get("idx"));
+			session.setAttribute("userName", info.get("name"));
+			session.setAttribute("userPhone", info.get("phone"));
+			session.setAttribute("userLevel", info.get("level"));
+			session.setAttribute("mute", info.get("mute"));
+			session.setAttribute("phoneCode", null);
+			session.setAttribute("emailCode", null);
+			JSONObject obj = new JSONObject();
+			obj.put("result", "suc");
+			obj.put("msg", "접속 성공");
+			return obj.toJSONString();
+		}
+		else{
+			JSONObject obj = new JSONObject();
+			System.out.println("접속 실패");
+			obj.put("result", "fail");
+			obj.put("msg", "로그인 실패");
+			return obj.toJSONString();
+		}
 	}
 }

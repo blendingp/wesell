@@ -25,7 +25,7 @@
 								</div>
 								<div class="card-body">
 									<form name="insertForm" id="insertForm" method="post">
-										<c:if test="${project.name eq 'bitocean'}">
+										<c:if test="${project.name eq 'wesell'}">
 											<div class="form-group">
 												<label>분류 </label> 
 												<label class="radio-inline"> <input type="radio" name="level" value="2" checked="">권한 2</label>
