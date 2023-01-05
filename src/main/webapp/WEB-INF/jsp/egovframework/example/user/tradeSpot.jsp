@@ -47,12 +47,12 @@ input[type=range]::-webkit-slider-thumb {
 		<div class="trade_frame">
 			<div class="trade_topblock">
 				<div class="tradetop_coin in" onclick="coinMenu()">
-					<img src="//webflow/images2/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
-					<img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
-					<img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
-					<img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
+					<img src="/wesell/webflow/images/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
+					<img src="/wesell/webflow/images/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
+					<img src="/wesell/webflow/images/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
+					<img src="/wesell/webflow/images/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
 					<div class="coinsub"><span class="qtycoinm">BTC</span>/USD</div>
-					<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt="" class="image-41">
+					<img src="/wesell/webflow/images/arrow_up_white.svg" loading="lazy" alt="" class="image-41">
 					<div class="trade_coinsub _1" id="coinMenu" style="display:none; padding-top:0; top:100%;">
 						<div class="trade_coiningo_warp">
 							<div class="div-block-116">
@@ -65,10 +65,10 @@ input[type=range]::-webkit-slider-thumb {
 								<c:set var="lowCoin" value="${fn:toLowerCase(item)}"/>
 								<div class="trade_coinsublist coin_${lowCoin} changecoin" ctype="coin_${item}USDT">
 									<c:choose>
-										<c:when test="${item eq 'BTC'}"><img src="//webflow/images2/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'ETH'}"><img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'TRX'}"><img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="image-42"></c:when>
-										<c:when test="${item eq 'XRP'}"><img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'BTC'}"><img src="/wesell/webflow/images/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'ETH'}"><img src="/wesell/webflow/images/ETHicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'TRX'}"><img src="/wesell/webflow/images/TRXicon45.png" loading="lazy" alt="" class="image-42"></c:when>
+										<c:when test="${item eq 'XRP'}"><img src="/wesell/webflow/images/XRPicon45.png" loading="lazy" alt="" class="image-42"></c:when>
 									</c:choose>
 									<div class="text-block-15">${item}</div>
 									<div class="runtimequote-copy up"><span class="coinval color"></span></div>
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb {
 				</div>
 				<div class="tradetop_coin _2" onclick="infoMenu()">
 					<div class="coinsub">24h info</div>
-					<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt=""
+					<img src="/wesell/webflow/images/arrow_up_white.svg" loading="lazy" alt=""
 						class="image-41">
 					<div class="trade_coinsub _2" id="infoMenu">
 						<div class="_24h_box mobile">
@@ -125,10 +125,10 @@ input[type=range]::-webkit-slider-thumb {
 					</div>
 				</div>
 				<div class="inverse_sub">
-					<img src="//webflow/images2/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
-					<img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
-					<img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
-					<img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
+					<img src="/wesell/webflow/images/BTCicon_img_1.png" loading="lazy" alt="" class="image coinImg coinBTC">
+					<img src="/wesell/webflow/images/XRPicon45.png" loading="lazy" alt="" class="image coinImg coinXRP" style="display:none;">
+					<img src="/wesell/webflow/images/ETHicon45.png" loading="lazy" alt="" class="image coinImg coinETH" style="display:none;">
+					<img src="/wesell/webflow/images/TRXicon45.png" loading="lazy" alt="" class="image coinImg coinTRX" style="display:none;">
 					<div class="coinsub"><span class="qtycoinm">BTC</span>/USD</div>
 				</div>
 				<div class="_24h_box">
@@ -212,16 +212,16 @@ input[type=range]::-webkit-slider-thumb {
 											<div class="in_list">
 												<c:choose>
 													<c:when test="${item eq 'BTC'}">
-														<img src="//webflow/images2/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="coin_img">
+														<img src="/wesell/webflow/images/BTCicon_img_2BTCicon_img.png" loading="lazy" alt="" class="coin_img">
 													</c:when>
 													<c:when test="${item eq 'ETH'}">
-														<img src="//webflow/images2/ETHicon45.png" loading="lazy" alt="" class="coin_img">
+														<img src="/wesell/webflow/images/ETHicon45.png" loading="lazy" alt="" class="coin_img">
 													</c:when>
 													<c:when test="${item eq 'TRX'}">
-														<img src="//webflow/images2/TRXicon45.png" loading="lazy" alt="" class="coin_img">
+														<img src="/wesell/webflow/images/TRXicon45.png" loading="lazy" alt="" class="coin_img">
 													</c:when>
 													<c:when test="${item eq 'XRP'}">
-														<img src="//webflow/images2/XRPicon45.png" loading="lazy" alt="" class="coin_img">
+														<img src="/wesell/webflow/images/XRPicon45.png" loading="lazy" alt="" class="coin_img">
 													</c:when>
 												</c:choose>
 												<div>${item}</div>
@@ -258,19 +258,20 @@ input[type=range]::-webkit-slider-thumb {
 						<div class="orderbox1 _2" id="transactionsBook">
 							<div class="orderbook_block">
 								<div class="orderbook_top pc">
-									<a onclick="orderBookTab('orderbook',this)"
+									<%-- <a onclick="orderBookTab('orderbook',this)"
 										class="orderbook_btn click w-inline-block">
 										<div class="title1">
 											<spring:message code="trade.orderbook2" />
 										</div>
-									</a> <a onclick="orderBookTab('tradehistory',this)"
-										class="orderbook_btn w-inline-block">
+									</a>  --%>
+									<a onclick="orderBookTab('tradehistory',this)"
+										class="orderbook_btn click w-inline-block">
 										<div class="title1">
 											<spring:message code="trade.recentTrade"/>
 										</div>
 									</a>
 								</div>
-								<div class="d_listwrap orderbook ob">
+								<div class="d_listwrap orderbook all ob">
 									<div class="orderlist ordertable">
 										<div class="orderobox _2">
 											<div class="text">
@@ -315,7 +316,7 @@ input[type=range]::-webkit-slider-thumb {
 										</c:forEach>
 									</div>
 								</div>
-								<div class="markettrade tradehistory all ob">
+								<div class="markettrade tradehistory ob">
 									<div class="tradehistory_top">
 										<div class="trademarket_txtbox">
 											<spring:message code="th.price" />
@@ -340,11 +341,11 @@ input[type=range]::-webkit-slider-thumb {
 							<a href="javascript:cOrdersTabChange('cAssets')" class="order_topbtn w-button cOrdertap cAssets"><spring:message code="trade.asset"/></a>
 			            </div>
 			            <div class="cOrderblock cOrders">
-							<div class="order_topbtnlist">
+							<!-- <div class="order_topbtnlist">
 								<a href="javascript:positionTabChange('olist')" class="type_btn click w-button tabbtn olist">Limit&amp;Market Orders</a>
 								<a href="javascript:positionTabChange('stopMarket')" class="type_btn w-button tabbtn stopMarket">TP/SL Orders</a>
-								<!-- <a href="#" class="type_btn w-button">Conditional Orders</a> -->
-							</div>
+								<a href="#" class="type_btn w-button">Conditional Orders</a>
+							</div> -->
 							<!-- ORDER -->
 							<div class="inverse_p c1 olist bigBox">
 								<div class="in_p_top">
@@ -501,7 +502,7 @@ input[type=range]::-webkit-slider-thumb {
 		<div class="chart_bottom">
 			<div class="bottom_btn">
 				<div><spring:message code="trade.asset"/></div>
-				<img src="//webflow/images2/arrow_up_white.svg" loading="lazy" alt="" class="bottom_btnimg">
+				<img src="/wesell/webflow/images/arrow_up_white.svg" loading="lazy" alt="" class="bottom_btnimg">
 			</div>
 			<div class="bottom_box">
 				<div class="usdt-asset b">
@@ -536,7 +537,7 @@ input[type=range]::-webkit-slider-thumb {
 							<span class="position_span long" id="popOrderType">Limit </span><span class="position_span long" id="popBuySell"> </span> BTC
 						</div>
 						<div class="pop_exsit_2" onClick="javascript:closeDealPop();" style="cursor: pointer">
-							<img src="//webflow/images2/wx_black.png" loading="lazy" sizes="100vw" srcset="//webflow/images2/wx_black-p-500.png 500w, //webflow/images2/wx_black-p-800.png 800w, //webflow/images2/wx_black-p-1080.png 1080w, //webflow/images2/wx_black.png 1600w" alt="" class="image-38">
+							<img src="/wesell/webflow/images/wx_black.png" loading="lazy" sizes="100vw" srcset="/wesell/webflow/images/wx_black-p-500.png 500w, /wesell/webflow/images/wx_black-p-800.png 800w, /wesell/webflow/images/wx_black-p-1080.png 1080w, /wesell/webflow/images/wx_black.png 1600w" alt="" class="image-38">
 						</div>
 					</div>
 					<div class="in_trade_block">
