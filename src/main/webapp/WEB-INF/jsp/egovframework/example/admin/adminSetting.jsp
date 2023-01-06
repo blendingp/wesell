@@ -18,7 +18,7 @@ function page(pageNo){
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>		
+		<c:import url="/admin/left.do"/>		
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -73,7 +73,7 @@ function setPassword(node,idx){
 	}
     jQuery.ajax({
         type:"POST",
-        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/setPassword.do?idx="+idx+"&pw="+password,
+        url :"/wesell/admin/setPassword.do?idx="+idx+"&pw="+password,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);

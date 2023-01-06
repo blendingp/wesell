@@ -12,7 +12,7 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -24,7 +24,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                         	<div class="row">
-							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/accessLog.do" name="listForm" id="listForm">
+							   <form action="/wesell/admin/log/accessLog.do" name="listForm" id="listForm">
 									<input type="hidden" id="pass" name="pass" value="${pass}"/>
 									<div class="col-lg-1">
 										<label>접속여부</label>

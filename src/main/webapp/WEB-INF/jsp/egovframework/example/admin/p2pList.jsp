@@ -23,7 +23,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -35,7 +35,7 @@ function page(pageNo){
 									<h6 class="m-0 font-weight-bold text-primary">P2P 목록</h6>
 								</div>
 								<div class="card-body">
-									<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pList.do"
+									<form action="/wesell/admin/p2p/p2pList.do"
 										name="listForm" id="listForm">
 										<div class="row">
 											<input type="hidden" name="pageIndex" value="1" />
@@ -123,7 +123,7 @@ function page(pageNo){
 														</td>
 														<td class="infoblock">
 															<button type="button"
-																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=${kind}&tidx=${item.idx}&tname=${item.name}'"
+																onclick="location.href='/wesell/admin/p2p/p2pLog.do?kind=${kind}&tidx=${item.idx}&tname=${item.name}'"
 																class="btn btn-primary btn-xs">내역</button>
 														</td>
 														<td class="infoblock">
@@ -161,7 +161,7 @@ function p2pDelete(idx){
 	if(confirm("삭제하시겠습니까? 복구하실수없습니다.")){
 		$.ajax({
 			type:'get',
-			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pDelete.do?idx='+idx,
+			url:'/wesell/admin/p2p/p2pDelete.do?idx='+idx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -178,7 +178,7 @@ function infoUpdate(useridx){
 	$.ajax({
 		type :'post',
 		data : data,
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pUpdate.do',
+		url:'/wesell/admin/p2p/p2pUpdate.do',
 		success:function(data){
 			alert(data.msg);
 			if(data.result=="suc")

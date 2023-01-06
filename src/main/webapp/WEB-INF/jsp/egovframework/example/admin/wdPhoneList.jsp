@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">	
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="content-wrapper">        	
         	<div id="content">	        
 			<jsp:include page="../adminFrame/top.jsp"></jsp:include>	           
@@ -28,7 +28,7 @@ function page(pageNo){
 								<h6 class="m-0 font-weight-bold text-primary">관리자 알림 휴대폰</h6>
 							</div>
 	                        <div class="card-body">	        									
-								<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/ipBanList.do" name="listForm" id="listForm">
+								<form action="/wesell/admin/user/ipBanList.do" name="listForm" id="listForm">
 									<div class="row">
 											<input type="hidden" name="pageIndex" value="1"/>
 											<div class="col-lg-4">
@@ -87,7 +87,7 @@ function page(pageNo){
 	    obj.value=val.replace(re,"");
 	}
 	function insertProcess() {
-		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/wdPhoneInsert.do";
+		var url = "/wesell/admin/wdPhoneInsert.do";
 		var phonenum=$("#phonenum").val();
 		
 		if(isNaN(phonenum)){
@@ -113,7 +113,7 @@ function page(pageNo){
 		});
 	}
 	function deletePhone(idx) {
-		var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/wdPhoneDelete.do";
+		var url = "/wesell/admin/wdPhoneDelete.do";
 		
 		$.ajax({
 			type : 'post',

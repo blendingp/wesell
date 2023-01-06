@@ -18,7 +18,7 @@ function page(pageNo){
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -39,7 +39,7 @@ function page(pageNo){
 						</div>
                         <div class="panel-body">
                         	<div class="row">
-							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalanceLog.do" name="listForm" id="listForm">
+							   <form action="/wesell/admin/account/realBalanceLog.do" name="listForm" id="listForm">
 									<input type="hidden" name="pageIndex" value="1"/>
 									<input type="hidden" name="coinname" value="${coinname}"/>
 									<input type="hidden" name="kind" value="${kind}"/>

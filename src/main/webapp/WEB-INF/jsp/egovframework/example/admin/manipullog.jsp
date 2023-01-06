@@ -18,7 +18,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -26,7 +26,7 @@ function page(pageNo){
 					<h1 class="h3 mb-2 text-gray-800">balance 실행내역</h1>
 					<div class="card shadow mb-4">
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/manipullog.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/log/manipullog.do" name="listForm" id="listForm">
 								<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1" /> 
 								<input type="hidden" name="coin" id="coin" value="${coin}" />

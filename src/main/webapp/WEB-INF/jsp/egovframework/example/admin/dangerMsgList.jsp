@@ -12,7 +12,7 @@
 </head>
 <body id="page-top">
 		<div id="wrapper">	
-			<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+			<c:import url="/admin/left.do"/>
 	        <div id="content-wrapper">	           
         		<div id="content">        		
 					<jsp:include page="../adminFrame/top.jsp"></jsp:include>   
@@ -78,7 +78,7 @@ function deleteSubmit(){
 		if($(this).is(":checked") == true)
 			checkedVal += $(this).val()+":";
 	});
-	location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/dangerDelete.do?idxs="+checkedVal;
+	location.href="/wesell/admin/dangerDelete.do?idxs="+checkedVal;
 }
 function allSelect(){
 	$("input:checkbox[name=is_check]").each(function() {

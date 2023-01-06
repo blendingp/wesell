@@ -12,7 +12,7 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -42,11 +42,11 @@
                                         <tr>
                                             <td><fmt:formatDate value="${item.ctime}" pattern="yyyy-MM-dd HH:mm"/></td>
                                             <td>${item.notadmin}</td>
-                                            <td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.notadmin}'" style="cursor:pointer;">[${item.name}]</td>
+                                            <td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.notadmin}'" style="cursor:pointer;">[${item.name}]</td>
                                             <td>${item.phone}</td>
                                             <td>${item.coin}</td>
                                             <td>
-                                            	<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/checkProblemTxList.do?uidx=${item.notadmin}" target="_blank">
+                                            	<a href="/wesell/admin/trade/checkProblemTxList.do?uidx=${item.notadmin}" target="_blank">
                                             		<font color="red">${item.act}</font>
                                             	</a>
                                             </td>

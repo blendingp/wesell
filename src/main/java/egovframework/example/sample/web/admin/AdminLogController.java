@@ -21,7 +21,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/log")
+@RequestMapping("/admin/log")
 public class AdminLogController {
 
 	@Resource(name = "sampleDAO")

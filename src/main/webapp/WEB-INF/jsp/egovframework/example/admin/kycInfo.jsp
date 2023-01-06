@@ -21,7 +21,7 @@
 </style>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
 		<div id="content-wrapper">
         	<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -40,7 +40,7 @@
 							</div>
 						</c:if>
 					</div>
-					<button type="button" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do'" class="btn btn-default">목록</button>
+					<button type="button" onclick="location.href='/wesell/admin/user/userList.do'" class="btn btn-default">목록</button>
 				</div>
 			</div>
 		</div>

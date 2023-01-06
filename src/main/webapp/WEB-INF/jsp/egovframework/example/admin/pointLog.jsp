@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
 							<h6 class="m-0 font-weight-bold text-primary">point log</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/pointLog.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/log/pointLog.do" name="listForm" id="listForm">
 								<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1" />
@@ -105,7 +105,7 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td>${item.midx}</td>
-												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.midx}'" style="cursor: pointer;">${item.name}</td>
+												<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.midx}'" style="cursor: pointer;">${item.name}</td>
 												<td>${item.level}</td>
 												<td><fmt:formatNumber value="${item.wallet}"
 														pattern="#,###.########" /></td>

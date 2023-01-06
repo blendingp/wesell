@@ -22,7 +22,7 @@ import egovframework.example.sample.web.util.Send;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/user")
+@RequestMapping("/admin/user")
 public class AdminKycController {
 
 	@Resource(name = "sampleDAO")

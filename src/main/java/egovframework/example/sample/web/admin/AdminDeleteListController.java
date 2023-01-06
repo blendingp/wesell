@@ -20,7 +20,7 @@ import egovframework.example.sample.sise.SiseManager;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw")
+@RequestMapping("/admin")
 public class AdminDeleteListController {
 	@Resource(name="sampleDAO")
 	SampleDAO sampleDAO;

@@ -41,7 +41,7 @@ function infoChange(value){
 </script>
 <body id="page-top">
 	<div id="wrapper">		
-	<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+	<c:import url="/admin/left.do"/>
        <div id="content-wrapper">        	
         	<div id="content">	        
 			<jsp:include page="../adminFrame/top.jsp"></jsp:include>	           
@@ -50,10 +50,10 @@ function infoChange(value){
 		            	<div class="card shadow mb-4">
 			                <div class="card-header py-3">
 	                            <h6 class="m-0 font-weight-bold text-primary"><b>※ 동일 종목에 대해 꼬리달기가 진행 중일 때 중복 실행이 불가능합니다.</b>  
-			                    	<input type="button" value="새로고침" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/manipulation.do'">
+			                    	<input type="button" value="새로고침" onclick="location.href='/wesell/admin/trade/manipulation.do'">
 			                    	<br>
 			                    	<b>현재 실행중인 종목 : <span>${mList}</span></b><br>	                    	
-			                    	<input type="button" style="float:right" value="로그" onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/manipullog.do'">
+			                    	<input type="button" style="float:right" value="로그" onclick="location.href='/wesell/admin/log/manipullog.do'">
 			                    	<input type="button" style="float:right" value="차트 초기화" onclick="resetC()">
 			                    	<input type="button" style="float:right" value="실행 초기화" onclick="resetM()">
 			                    	<br>
@@ -187,7 +187,7 @@ function infoChange(value){
 				$.ajax({
 					type :'post',
 					data : data,
-					url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/manipultailProcess.do',
+					url : '/wesell/admin/trade/manipultailProcess.do',
 					success:function(data){
 						alert(data.msg);
 						location.reload();
@@ -211,7 +211,7 @@ function infoChange(value){
 		function getPositionData(){
 			$.ajax({
 				type :'post',
-				url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/getPositionData.do',
+				url : '/wesell/admin/trade/getPositionData.do',
 				success:function(data){
 					var $trRate = $("#trRate");
 					$trRate.empty();
@@ -315,7 +315,7 @@ function infoChange(value){
 					betCoin = coin.toUpperCase();
 			
 				$id.append(
-					"<tr><td style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+plist[i].userIdx+"'\">"+plist[i].name+"</td>" +
+					"<tr><td style='cursor:pointer;' onclick=\"location.href='/wesell/admin/user/userDetail.do?idx="+plist[i].userIdx+"'\">"+plist[i].name+"</td>" +
 					"<td>"+plist[i].symbol+"</td>"+
 					"<td>"+plist[i].position.toUpperCase()+"</td>"+
 					"<td>"+parseFloat(plist[i].fee).toFixed(5)+" "+betCoin+"</td>"+
@@ -419,7 +419,7 @@ function infoChange(value){
 				if(data === 'ok') {
 					$.ajax({
 						type :'post',
-						url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/resetChart.do',
+						url : '/wesell/admin/trade/resetChart.do',
 						success:function(data){
 							alert(data.result);
 						},
@@ -440,7 +440,7 @@ function infoChange(value){
 	function resetM() {
 		$.ajax({
 			type :'post',
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/resetMStatus.do',
+			url : '/wesell/admin/trade/resetMStatus.do',
 			success:function(data){
 				alert(data.msg);
 				location.reload();

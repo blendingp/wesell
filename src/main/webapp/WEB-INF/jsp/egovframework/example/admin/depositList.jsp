@@ -17,20 +17,20 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
 				<div class="container-fluid">
 					<h1 class="h3 mb-2 text-gray-800">입금신청 목록</h1>
 					<!-- 
-						<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
-						<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
-						<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
-						<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
+						<a href="/wesell/admin/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
+						<a href="/wesell/admin/account/realBalance.do?coinname=XRP&type=1">XRP</a>
+						<a href="/wesell/admin/account/realBalance.do?coinname=TRX&type=1">TRX</a>
+						<a href="/wesell/admin/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
 					<div class="card shadow mb-4">
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/depositList.do"
+							<form action="/wesell/admin/trade/depositList.do"
 								name="listForm" id="listForm">
 								<input type="hidden" name="pageIndex" value="1" /> <input
 									type="hidden" name="username" id="username" value="${username}" />
@@ -150,7 +150,7 @@ function page(pageNo){
 														pattern="yyyy-MM-dd HH:mm" /></td>
 												<c:if test="${item.fromname ne null }">
 													<td
-														onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.from}'"
+														onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.from}'"
 														style="cursor: pointer;">${item.fromname}</td>
 												</c:if>
 												<c:if test="${item.fromname eq null }">
@@ -308,7 +308,7 @@ function checkRequest(widx, stat){
 	}
     jQuery.ajax({                                
         type:"POST", 
-        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/depositProcess.do?widx="+widx+"&stat="+stat,
+        url : "/wesell/admin/trade/depositProcess.do?widx="+widx+"&stat="+stat,
         dataType:"json",
         date:{widx:widx, stat:stat},
         success : function(data) {              	
@@ -341,7 +341,7 @@ function changeAlarm(idx, alarm){
 	$.ajax({
 		type :"post",
 		dataType : "json" ,
-		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=d",
+		url : "/wesell/admin/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=d",
 		success:function(data){
 			if(data.result == "suc"){
 				location.reload();

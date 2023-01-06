@@ -18,7 +18,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -29,7 +29,7 @@ function page(pageNo){
 							<h6 class="m-0 font-weight-bold text-primary">trade</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/spottrade/tradeList.do"
+							<form action="/wesell/admin/spottrade/tradeList.do"
 								name="listForm" id="listForm">
 								<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1" /> <input
@@ -167,7 +167,7 @@ function page(pageNo){
 												<td>${item.buyDatetime}</td>
 												<td>${item.userIdx}</td>
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'"
+													onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.userIdx}'"
 													style="cursor: pointer;">${item.name} <c:if
 														test="${item.phone eq '-1'}">
 														<span style="color: red;"> 삭제계정
@@ -175,7 +175,7 @@ function page(pageNo){
 												</td>
 												<c:if test="${item.pname ne null}">
 													<td
-														onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.parentsIdx}'"
+														onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.parentsIdx}'"
 														style="cursor: pointer;">${item.pname} <c:if
 															test="${item.pphone eq '-1'}">
 															<span style="color: red;"> 삭제계정

@@ -8,7 +8,7 @@
 </head>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -132,7 +132,7 @@ function getMoneySum(sdate, edate) {
 			"sdate" : sdate,
 			"edate" : edate
 		},
-		url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/getDashboard.do',
+		url : '/wesell/admin/getDashboard.do',
 		dataType : "json",
 		success : function(data) {
 			console.log("getDashboard ajax:", data);
@@ -181,35 +181,35 @@ function getMoneySum(sdate, edate) {
 			/* $("#partnerWallet").html("<td>파트너장 보유잔고</td> <td><span class='onkrw futures'>"+data.pWallet+"</span></td> <td><span class='onkrw btc'>"+partnerWallet[0]+"</span></td> <td><span class='onkrw usdt'>"+partnerWallet[1]+"</span></td> <td><span class='onkrw xrp'>"+partnerWallet[2]+"</span></td> <td><span class='onkrw trx'>"+partnerWallet[3]+"</span></td>"); */
 			//$("#deposit").html("<td>입금 총액</td> <td><span class='onkrw btc'>"+depoarray[0]+"</span></td> <td><span class='onkrw usdt'>"+depoarray[1]+"</span></td> <td><span class='onkrw xrp'>"+depoarray[2]+"</span></td> <td><span class='onkrw trx'>"+depoarray[3]+"</span></td>");
 			$("#userDeposit").html("<td>유저 입금 총액</td>"
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=%2B&coin=BTC&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=%2B&coin=BTC&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw btc'>"
 									+ userDepoarray[0]
 									+ "</a><span class='krwCoin'> BTC</span></td>"
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=%2B&coin=ETH&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=%2B&coin=ETH&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw eth'>"
 									+ userDepoarray[4]
 									+ "</a><span class='krwCoin'> ETH</span></td>"
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=%2B&coin=USDT&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=%2B&coin=USDT&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw usdt'>"
 									+ userDepoarray[1]
 									+ "</a><span class='krwCoin'> USDT</span></td>"
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=%2B&coin=XRP&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=%2B&coin=XRP&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw xrp'>"
 									+ userDepoarray[2]
 									+ "</a><span class='krwCoin'> XRP</span></td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=%2B&coin=TRX&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=%2B&coin=TRX&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
@@ -219,35 +219,35 @@ function getMoneySum(sdate, edate) {
 									+ "<td><span id='tot_d' class='onkrw usdt'></span><span class='krwCoin'> USDT</span></td>");
 
 			$("#withdraw").html("<td>출금 총액</td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=-&coin=BTC&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=-&coin=BTC&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw btc'>"
 									+ witharray[0]
 									+ "</a><span class='krwCoin'> BTC</span></td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=-&coin=ETH&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=-&coin=ETH&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw eth'>"
 									+ witharray[4]
 									+ "</a><span class='krwCoin'> ETH</span></td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=-&coin=USDT&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=-&coin=USDT&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw usdt'>"
 									+ witharray[1]
 									+ "</a><span class='krwCoin'> USDT</span></td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=-&coin=XRP&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=-&coin=XRP&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate
 									+ "' class='onkrw xrp'>"
 									+ witharray[2]
 									+ "</a><span class='krwCoin'> XRP</span></td> "
-									+ "<td><a href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?label=-&coin=TRX&wstat=1&test=test&sdate="
+									+ "<td><a href='/wesell/admin/transactions.do?label=-&coin=TRX&wstat=1&test=test&sdate="
 									+ sdate
 									+ "&edate="
 									+ edate

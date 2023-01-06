@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
 							<h6 class="m-0 font-weight-bold text-primary">funding log</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/fundingLog.do"
+							<form action="/wesell/admin/log/fundingLog.do"
 								name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1" /> <input
@@ -87,7 +87,7 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'"
+													onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.userIdx}'"
 													style="cursor: pointer;">${item.name}</td>
 												<td>${item.level}</td>
 												<td>${item.symbol}</td>

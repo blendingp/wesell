@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="content-wrapper">
         	<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
 		                    <div class="panel panel-default">
 		                        <div class="panel-body">
 		                        	<div class="row">
-									   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/totalLog.do" name="listForm" id="listForm">
+									   <form action="/wesell/admin/account/totalLog.do" name="listForm" id="listForm">
 											<input type="hidden" name="pageIndex" value="1"/>
 											<input type="hidden" name="userIdx" value="${userIdx}"/>									
 										</form>

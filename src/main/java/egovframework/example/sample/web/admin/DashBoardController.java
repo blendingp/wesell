@@ -31,7 +31,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw")
+@RequestMapping("/admin")
 public class DashBoardController {
 
 	@Resource(name = "sampleDAO")

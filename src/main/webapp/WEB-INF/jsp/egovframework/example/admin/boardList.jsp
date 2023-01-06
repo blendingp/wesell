@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -49,21 +49,21 @@ function page(pageNo){
 												<td><input type="checkbox" name="arrayIdx"
 													value="${item.bidx}" /></td>
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}Detail.do?idx=${item.bidx}'"
+													onclick="location.href='/wesell/admin/board/${type}Detail.do?idx=${item.bidx}'"
 													style="cursor: pointer">${pi.totalRecordCount - (pi.totalRecordCount - ((pi.currentPageNo-1) * pi.recordCountPerPage + i.index)-1)}</td>
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}Detail.do?idx=${item.bidx}'"
+													onclick="location.href='/wesell/admin/board/${type}Detail.do?idx=${item.bidx}'"
 													style="cursor: pointer; width: 60%; word-break: break-all;">${item.btitle}</td>
 												<c:if
 													test="${type eq 'event' || type eq 'notice' || type eq 'faq'}">
 													<td
-														onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}Detail.do?idx=${item.bidx}'"
+														onclick="location.href='/wesell/admin/board/${type}Detail.do?idx=${item.bidx}'"
 														style="cursor: pointer"><c:if
 															test="${item.blang == 0}">KO</c:if> <c:if
 															test="${item.blang == 1}">EN</c:if></td>
 												</c:if>
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}Detail.do?idx=${item.bidx}'"
+													onclick="location.href='/wesell/admin/board/${type}Detail.do?idx=${item.bidx}'"
 													style="cursor: pointer"><fmt:formatDate
 														value="${item.bdate}" type="date"></fmt:formatDate></td>
 											</tr>
@@ -81,13 +81,13 @@ function page(pageNo){
 							</div>
 						</div>
 					</div>
-					<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}List.do"
+					<form action="/wesell/admin/board/${type}List.do"
 						name="listForm" id="listForm">
 						<input type="hidden" name="pageIndex" value="1" /> <input
 							type="hidden" name="type" value="${type}" />
 					</form>
 					<button type="button"
-						onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/${type}Write.do'"
+						onclick="location.href='/wesell/admin/board/${type}Write.do'"
 						class="btn btn btn-secondary">글등록
 					</button>
 					<button type="button" onclick="listDel('${type}')"
@@ -141,7 +141,7 @@ function page(pageNo){
 			jQuery.ajax({
 				type : 'post',
 				data : param,
-				url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/" + type
+				url : "/wesell/admin/board/" + type
 						+ "Delete.do",
 				success : function(data) {
 					if (data.result == 'success') {

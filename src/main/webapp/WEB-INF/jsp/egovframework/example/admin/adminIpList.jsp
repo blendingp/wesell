@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -80,7 +80,7 @@ function insertIp(){
 	console.log(ip);
 	jQuery.ajax({
         type:"POST",
-        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/insertAdminIp.do?ip="+ip,
+        url :"/wesell/admin/insertAdminIp.do?ip="+ip,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);
@@ -98,7 +98,7 @@ function deleteIp(idx){
 	console.log("ASAS");
 	jQuery.ajax({
         type:"POST",
-        url :"/wesell/0nI0lMy6jAzAFRVe0DqLOw/deleteAdminIp.do?idx="+idx,
+        url :"/wesell/admin/deleteAdminIp.do?idx="+idx,
         dataType:"json",
         success : function(data) {
 			alert(data.msg);

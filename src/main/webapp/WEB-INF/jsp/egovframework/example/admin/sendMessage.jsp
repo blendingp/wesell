@@ -22,7 +22,7 @@ function insertProcess(){
 	
 	oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 	var data = $("#insertForm").serialize();
-	var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/messageInsert.do";
+	var url = "/wesell/admin/contact/messageInsert.do";
 	$.ajax({
 		type:'post',
 		url : url,
@@ -43,7 +43,7 @@ function insertProcess(){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>

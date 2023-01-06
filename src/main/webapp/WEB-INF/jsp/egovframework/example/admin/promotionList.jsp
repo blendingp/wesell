@@ -18,7 +18,7 @@ function page(pageNo){
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -82,7 +82,7 @@ function page(pageNo){
                     </div>
                 </div>
             </div>
-		   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionList.do" name="listForm" id="listForm">
+		   <form action="/wesell/admin/apply/promotionList.do" name="listForm" id="listForm">
 				<input type="hidden" name="pageIndex" value="1"/>
 			</form>
         </div>
@@ -92,7 +92,7 @@ function page(pageNo){
 	function changeApproval(idx , approval){
 		$.ajax({
 			type:'get',
-			url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/apply/promotionApproval.do?idx='+idx+'&approval='+approval,
+			url:'/wesell/admin/apply/promotionApproval.do?idx='+idx+'&approval='+approval,
 			success:function(data){
 				alert(data.msg);
 				location.reload();

@@ -17,7 +17,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/account")
+@RequestMapping("/admin/account")
 public class AdminVirtualAccountController {
 
 	@Resource(name = "sampleDAO")
@@ -56,7 +56,7 @@ public class AdminVirtualAccountController {
 		in.put("fee", fee);
 		sampleDAO.update("updateFee",in);		
 		AdminUtil.insertAdminLog(request, sampleDAO, AdminLog.UPDATE_WFEE, -1, coinname, 1, fee, prevFee+" -> "+fee);
-		return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname="+coinname;
+		return "redirect:/admin/account/showFee.do?coinname="+coinname;
 	}
 	@RequestMapping(value = "/updateDepositFee.do")
 	public String updateDepositFee(HttpServletRequest request, ModelMap model) throws Exception {
@@ -71,7 +71,7 @@ public class AdminVirtualAccountController {
 		HttpSession session = request.getSession();
 		Integer aidx = Integer.parseInt(session.getAttribute("adminIdx")+"");
 		AdminUtil.insertAdminLog(request, sampleDAO, AdminLog.UPDATE_DFEE, -1, coinname, 1, fee, prevFee+" -> "+fee);
-		return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname="+coinname;
+		return "redirect:/admin/account/showDepositFee.do?coinname="+coinname;
 	}
 	
 	//real balance 로그

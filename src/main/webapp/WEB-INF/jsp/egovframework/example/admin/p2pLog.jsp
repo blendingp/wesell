@@ -18,7 +18,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -47,13 +47,13 @@ function page(pageNo){
 									</div>
 								</c:if>
 								<!-- 
-									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
-									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
-									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
-									<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
+									<a href="/wesell/admin/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
+									<a href="/wesell/admin/account/realBalance.do?coinname=XRP&type=1">XRP</a>
+									<a href="/wesell/admin/account/realBalance.do?coinname=TRX&type=1">TRX</a>
+									<a href="/wesell/admin/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
 
 								<div class="card-body">
-									<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do"
+									<form action="/wesell/admin/p2p/p2pLog.do"
 										name="listForm" id="listForm">
 										<input type="hidden" name="fileDown" id="fileDown" value="0" />
 										<input type="hidden" name="pageIndex" value="1" /> <input
@@ -182,7 +182,7 @@ function page(pageNo){
 			                                            <td>${item.useridx}</td>
 														<c:if test="${item.istest eq '1'}">
 															<c:if test="${adminLevel ne 3}">
-																<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'"
+																<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.useridx}'"
 																	style="cursor: pointer;">${item.name}<span
 																	style="color: red">(테스트 계정)</span> (${item.pname})
 																</td>
@@ -194,7 +194,7 @@ function page(pageNo){
 														</c:if>
 														<c:if test="${item.istest ne '1'}">
 															<c:if test="${adminLevel ne 3}">
-																<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.useridx}'" style="cursor: pointer;">
+																<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.useridx}'" style="cursor: pointer;">
 																	${item.name}(${item.pname})
 																</td>
 															</c:if>
@@ -202,7 +202,7 @@ function page(pageNo){
 																<td>${item.name}(${item.pname})</td>
 															</c:if>
 														</c:if>
-														<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pList.do?search=${item.tname}'" style="cursor: pointer;">
+														<td onclick="location.href='/wesell/admin/p2p/p2pList.do?search=${item.tname}'" style="cursor: pointer;">
 															${item.tname}
 														</td>
 														<td>
@@ -254,11 +254,11 @@ function page(pageNo){
 														</td>
 														<td><c:if test="${item.unread != 0}">
 																<button class="btn btn-danger btn-sm" type="button"
-																	onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pChat.do?midx=${item.idx}'">+${item.unread}</button>
+																	onclick="location.href='/wesell/admin/p2p/p2pChat.do?midx=${item.idx}'">+${item.unread}</button>
 															</c:if>
 															<button class="btn btn-primary btn-sm statBtn"
 																type="button"
-																onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pChat.do?midx=${item.idx}'">채팅</button>
+																onclick="location.href='/wesell/admin/p2p/p2pChat.do?midx=${item.idx}'">채팅</button>
 														</td>
 													</tr>
 												</c:forEach>
@@ -297,7 +297,7 @@ function depositCancel(idx , midx){
 	if(confirm("입금취소하시겠습니까?")){
 		$.ajax({
 			type :'get',
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/cancelDeposit.do?idx='+idx+'&midx='+midx,
+			url : '/wesell/admin/p2p/cancelDeposit.do?idx='+idx+'&midx='+midx,
 			success:function(data){
 				alert(data.msg);
 				location.reload();
@@ -339,7 +339,7 @@ function checkRequest(widx,stat){
 	requesting = true;
     jQuery.ajax({                                
         type:"POST", 
-        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pWithdrawalProcess.do?widx="+widx+"&stat="+stat,
+        url : "/wesell/admin/p2p/p2pWithdrawalProcess.do?widx="+widx+"&stat="+stat,
         dataType:"json",
         date:{widx:widx, stat:stat},
         success : function(data) {              	
@@ -370,7 +370,7 @@ function changeAlarm(idx, alarm, pkind){
 	$.ajax({
 		type :"post",
 		dataType : "json" ,
-		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
+		url : "/wesell/admin/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=k"+pkind,
 		success:function(data){
 			if(data.result == "suc"){
 				location.reload();
@@ -386,7 +386,7 @@ function changeAlarm(idx, alarm, pkind){
 function payConfirm(widx){
     jQuery.ajax({                                
         type:"POST", 
-        url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/payConfirm.do?widx="+widx,
+        url : "/wesell/admin/p2p/payConfirm.do?widx="+widx,
         dataType:"json",
         date:{widx:widx},
         success : function(data) {              	
@@ -404,7 +404,7 @@ function moneySend(midx){
 	jQuery.ajax({
 		type : "POST",
 		data : {"midx" : midx},
-		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/moneySend.do",
+		url : "/wesell/admin/p2p/moneySend.do",
 		dataType : "json",
 		success : function(data) {
 			if (data.result != "suc") {

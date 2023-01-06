@@ -36,9 +36,9 @@
     	<property name="urls">
     		<list> <!-- interceptor 제외할 url list -->
     			<value>/wesell/changeLanguage.do</value>
-    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/logout.do</value>
-    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do</value>
-    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/loginProcess.do</value>
+    			<value>/wesell/admin/logout.do</value>
+    			<value>/wesell/admin/login.do</value>
+    			<value>/wesell/admin/loginProcess.do</value>
     			<value>/wesell/showRest.do</value>
     			<value>/wesell/user/myasset.do</value>    			   			
     			<value>/wesell/user/tradeHistory.do</value>    			   			
@@ -51,8 +51,8 @@
     			<value>/wesell/infl/loginProcess.do</value>
     			<value>/wesell/verificationPhoneJoin.do</value>
     			<value>/wesell/verificationEmailJoin.do</value>
-    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/updateCommissionRate.do</value>
-    			<value>/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/apiMoneyResult.do</value> <!-- api data받는 url -->
+    			<value>/wesell/admin/user/updateCommissionRate.do</value>
+    			<value>/wesell/admin/trade/apiMoneyResult.do</value> <!-- api data받는 url -->
     		</list>
     	</property>
     </bean>  

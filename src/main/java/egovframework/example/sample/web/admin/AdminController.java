@@ -22,34 +22,27 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.cj.util.Util;
-
 import egovframework.example.sample.classes.AdminUtil;
 import egovframework.example.sample.classes.Coin;
-import egovframework.example.sample.classes.CointransService;
 import egovframework.example.sample.classes.Copytrade;
 import egovframework.example.sample.classes.Member;
-import egovframework.example.sample.classes.Message;
 import egovframework.example.sample.classes.Position;
 import egovframework.example.sample.classes.Project;
 import egovframework.example.sample.classes.QueryWait;
 import egovframework.example.sample.classes.ServerInfo;
 import egovframework.example.sample.classes.SocketHandler;
-import egovframework.example.sample.classes.Wallet;
 import egovframework.example.sample.enums.AdminLog;
 import egovframework.example.sample.enums.CopytradeState;
-import egovframework.example.sample.enums.QueryType;
 import egovframework.example.sample.service.impl.Log;
 import egovframework.example.sample.service.impl.MemberControllMgr;
 import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.example.sample.web.util.CryptoUtil;
 import egovframework.example.sample.web.util.Send;
-import egovframework.example.sample.web.util.Validation;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Resource(name="sampleDAO")
@@ -61,19 +54,7 @@ public class AdminController {
 	@RequestMapping(value="/login.do")
 	public String login(HttpServletRequest request) throws NoSuchAlgorithmException, GeneralSecurityException{
 		String key = ""+request.getParameter("key");
-		try {
-			CryptoUtil crypto = CryptoUtil.getInstance();
-			String project = Project.getProjectName();
-			
-			if(request.getServerName().equals("localhost") || crypto.decrypt(key).equals(project)){
-				return "admin/login";
-			}else{
-				return "err";
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return "err";
-		}
+		return "admin/login";
 	}
 	
 	@RequestMapping(value="/createSubAdmin.do")
@@ -286,10 +267,10 @@ public class AdminController {
 		public String statchange(HttpServletRequest request, ModelMap model) throws Exception {
 		String stat = request.getParameter("stat");
 		if(stat.length()>30){
-			return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do";
+			return "redirect:/admin/fixstat.do";
 		}
 		SocketHandler.fixstat = Integer.parseInt(stat);
-		return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do";
+		return "redirect:/admin/fixstat.do";
 	}
 	
 	@ResponseBody
@@ -433,7 +414,7 @@ public class AdminController {
     	}
     	String ip = request.getParameter("ip");
     	if(ip.length()>30){
-			return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do";
+			return "redirect:/admin/fixstat.do";
 		}
     	EgovMap in = new EgovMap();
     	in.put("ip", ip);
@@ -457,7 +438,7 @@ public class AdminController {
     	}
     	String idx = request.getParameter("idx");
     	if(idx.length()>30){
-			return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do";
+			return "redirect:/admin/fixstat.do";
 		}
     	EgovMap in = new EgovMap();
     	in.put("idx", idx);
@@ -475,7 +456,7 @@ public class AdminController {
     	String count = request.getParameter("count");
     	String wallet = request.getParameter("wallet");
     	if(count.length()>30 || wallet.length()>50){
-			return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do";
+			return "redirect:/admin/fixstat.do";
 		}
     	if(count == null) return "not count";
     	if(wallet == null) wallet="0";

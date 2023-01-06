@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -25,7 +25,7 @@ function page(pageNo){
 					<h1 class="h3 mb-2 text-gray-800">IP 차단 목록</h1>
 					<div class="card shadow mb-4">
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/ipBanList.do"
+							<form action="/wesell/admin/user/ipBanList.do"
 								name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="pageIndex" value="1" /> <input
@@ -127,7 +127,7 @@ function page(pageNo){
 			data : {
 				"ip" : ip
 			},
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/releaseBan.do',
+			url : '/wesell/admin/user/releaseBan.do',
 			dataType : 'json',
 			success : function(data) {
 				alert(data.msg);

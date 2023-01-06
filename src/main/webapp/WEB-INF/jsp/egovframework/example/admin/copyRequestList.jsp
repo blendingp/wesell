@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
 							<h6 class="m-0 font-weight-bold text-primary">follower</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/copyRequestList.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/trader/copyRequestList.do" name="listForm" id="listForm">
 								<input type="hidden" name="pageIndex" value="1" /> 
 								<input type="hidden" name="order" id="order" value="${order}" /> 
 								<input type="hidden" name="orderAD" id="orderAD" value="${orderAD}" />
@@ -101,10 +101,10 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.uidx}'"
+													onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.uidx}'"
 													style="cursor: pointer;">${item.uname}</td>
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.tidx}'"
+													onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.tidx}'"
 													style="cursor: pointer;">${item.tname}</td>
 												<td>${item.symbol}</td>
 												<td><c:if test="${item.fixLeverage eq null}">트레이더</c:if>
@@ -194,7 +194,7 @@ function requestDeny(uidx, symbol){
 	$.ajax({
 		type:'get',
 		data:{"useridx" : uidx, "symbol" : symbol},
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/requestDeny.do',
+		url:'/wesell/admin/trader/requestDeny.do',
 		success:function(data){
 			alert(data.msg);
 			if(data.result=="suc")
@@ -210,7 +210,7 @@ function requestConfirm(uidx, symbol){
 	$.ajax({
 		type:'get',
 		data:{"useridx" : uidx, "symbol" : symbol},
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/requestConfirm.do',
+		url:'/wesell/admin/trader/requestConfirm.do',
 		success:function(data){
 			alert(data.msg);
 			if(data.result=="suc")

@@ -39,7 +39,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -49,7 +49,7 @@ function page(pageNo){
 		                <div class="col-lg-12">
 		                    <div class="panel panel-default">
 		                        <div class="panel-body">
-								   	<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/dwCalculate.do" name="listForm" id="listForm">
+								   	<form action="/wesell/admin/p2p/dwCalculate.do" name="listForm" id="listForm">
 										<div class="row">
 											<input type="hidden" name="test" id="test" value="${test}"/>
 											<div class="col-lg-4">
@@ -186,7 +186,7 @@ $(function() {
 	});
 	$(".linkname").on("click", function() {
 		var uidx = Number($(this).parent().attr("uidx"));
-		location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="+uidx;
+		location.href="/wesell/admin/user/userDetail.do?idx="+uidx;
 	});
 	
 	$.each($(".childblock"), function(index, item){

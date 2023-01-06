@@ -18,7 +18,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -31,7 +31,7 @@ function page(pageNo){
 							</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferral.do"
+							<form action="/wesell/admin/referral/giveReferral.do"
 								name="listForm" id="listForm">
 								<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1" />
@@ -109,7 +109,7 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td
-													onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.uidx}'"
+													onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.uidx}'"
 													style="cursor: pointer;">${item.name }</td>
 												<td><fmt:formatNumber value="${item.accum}"
 														pattern="#,###.########" /></td>
@@ -121,7 +121,7 @@ function page(pageNo){
 															pattern="yyyy-MM-dd HH:mm:ss" />
 													</c:if></td>
 												<td><button class="btn-xs btn-default"
-														onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumTradeLog.do?uidx=${item.uidx}&username=${item.name}'">내역
+														onclick="location.href='/wesell/admin/referral/accumTradeLog.do?uidx=${item.uidx}&username=${item.name}'">내역
 														보기</button></td>
 												<td><button class="btn-xs btn-primary"
 														onclick="gift(${item.uidx})">지급</button></td>
@@ -156,11 +156,11 @@ function gift(uidx){
 		$.ajax({
 			type :'post',
 			data : {"uidx" : uidx},
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/accumReferralGift.do',
+			url : '/wesell/admin/referral/accumReferralGift.do',
 			success:function(data){
 				alert(data.msg);
 				if(data.result == "suc"){
-					location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferral.do";
+					location.href="/wesell/admin/referral/giveReferral.do";
 				}
 			},
 			error:function(e){

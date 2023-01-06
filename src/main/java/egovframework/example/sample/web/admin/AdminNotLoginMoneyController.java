@@ -32,7 +32,7 @@ import egovframework.example.sample.classes.Project;
 import egovframework.example.sample.classes.SocketHandler;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/trade")
+@RequestMapping("/admin/trade")
 public class AdminNotLoginMoneyController {
 
 	@Resource(name = "sampleDAO")

@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -27,7 +27,7 @@ function page(pageNo){
 					</h1>
 					<div class="card shadow mb-4">						
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/followerList.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/trader/followerList.do" name="listForm" id="listForm">
 								<div class="row">
 									<input type="hidden" name="fileDown" id="fileDown" value="0" />
 									<input type="hidden" name="pageIndex" value="1" /> 
@@ -151,8 +151,8 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td>${item.uidx}</td>
-												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.uidx}'" style="cursor: pointer;">${item.uname}</td>
-												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.tidx}'" style="cursor: pointer;">${item.tname}</td>
+												<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.uidx}'" style="cursor: pointer;">${item.uname}</td>
+												<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.tidx}'" style="cursor: pointer;">${item.tname}</td>
 												<td>${item.symbol}</td>
 												<td><c:if test="${item.fixLeverage eq null}">트레이더</c:if>
 													<c:if test="${item.fixLeverage ne null}">${item.fixLeverage}</c:if>

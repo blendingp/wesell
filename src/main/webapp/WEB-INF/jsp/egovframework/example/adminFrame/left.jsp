@@ -10,7 +10,7 @@
 </head>
 <body>
 	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="font-weight:bold;">
-	   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/main.do">
+	   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/wesell/admin/main.do">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -18,13 +18,13 @@
         </a>
 		<c:if test="${adminLevel ne 3}">
 			<li class="nav-item">
-	        	<a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/dangerMsgList.do" id="danger">
+	        	<a class="nav-link" href="/wesell/admin/dangerMsgList.do" id="danger">
 	                   <i class="fas fa-fw fa-exclamation-circle"></i>
 	                   <span>주의회원 알림 <span id="dangerCnt"></span></span></a>
 	        	</li>
 			<c:if test="${project.wdPhoneMsg eq true}">
 				<li class="nav-item">
-	               <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/wdPhoneList.do">
+	               <a class="nav-link" href="/wesell/admin/wdPhoneList.do">
 	                   <i class="fas fa-fw fa-exclamation-circle"></i>
 	                   <span>관리자 알림 휴대폰</span></a>
 	           	</li>
@@ -38,11 +38,11 @@
 	           </a>
 	           <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	               <div class="bg-white py-2 collapse-inner rounded">
-	                   <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?test=test">전체 회원 관리</a>
-			        <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?level=chong&test=test">파트너 회원 관리</a>
-			        <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?level=user&test=test">일반 회원 관리</a>
-			        <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?out=out&test=test">삭제 회원 관리</a>
-			       	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userList.do?ban=ban&test=test">차단 회원 관리</a>
+	                   <a class="collapse-item" href="/wesell/admin/user/userList.do?test=test">전체 회원 관리</a>
+			        <a class="collapse-item" href="/wesell/admin/user/userList.do?level=chong&test=test">파트너 회원 관리</a>
+			        <a class="collapse-item" href="/wesell/admin/user/userList.do?level=user&test=test">일반 회원 관리</a>
+			        <a class="collapse-item" href="/wesell/admin/user/userList.do?out=out&test=test">삭제 회원 관리</a>
+			       	<a class="collapse-item" href="/wesell/admin/user/userList.do?ban=ban&test=test">차단 회원 관리</a>
 	               </div>
 	           </div>
 	        </li>
@@ -56,17 +56,17 @@
 	               </a>
 	               <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 	                   <div class="bg-white py-2 collapse-inner rounded">
-	                       <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/subAdminList.do">하위 관리자 리스트</a>
-	                       <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/createSubAdmin.do">하위 관리자 생성</a>
-	                       <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/log.do">관리자 로그</a>
+	                       <a class="collapse-item" href="/wesell/admin/subAdminList.do">하위 관리자 리스트</a>
+	                       <a class="collapse-item" href="/wesell/admin/createSubAdmin.do">하위 관리자 생성</a>
+	                       <a class="collapse-item" href="/wesell/admin/log/log.do">관리자 로그</a>
 	                       <c:if test="${project.adminIp eq true}">
-	                       	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/adminIpList.do">관리자 IP 설정</a>
+	                       	<a class="collapse-item" href="/wesell/admin/adminIpList.do">관리자 IP 설정</a>
 	                       </c:if>
 	                   </div>
 	               </div>
 	           </li>
 	           <li class="nav-item">
-	              <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/fixstat.do">
+	              <a class="nav-link" href="/wesell/admin/fixstat.do">
 	                  <i class="fas fa-fw fa-edit"></i>
 	                  <span>사이트 점검</span></a>
 	           </li>
@@ -80,25 +80,25 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?test=test">거래내역 ${futures}</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/orderList.do?test=test">주문내역 ${futures}</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do?test=test">청산내역 ${futures}</a>
+	                    <a class="collapse-item" href="/wesell/admin/trade/tradeList.do?test=test">거래내역 ${futures}</a>
+	                    <a class="collapse-item" href="/wesell/admin/trade/orderList.do?test=test">주문내역 ${futures}</a>
+	                    <a class="collapse-item" href="/wesell/admin/trade/liqList.do?test=test">청산내역 ${futures}</a>
 	                    <c:if test="${project.inverse eq true}">
-	                     <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tradeList.do?test=test&inverse=inverse">거래내역 (현물)</a>
-	                     <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/orderList.do?test=test&inverse=inverse">주문내역 (현물)</a>
-	                     <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/liqList.do?test=test&inverse=inverse">청산내역 (현물)</a>
+	                     <a class="collapse-item" href="/wesell/admin/trade/tradeList.do?test=test&inverse=inverse">거래내역 (현물)</a>
+	                     <a class="collapse-item" href="/wesell/admin/trade/orderList.do?test=test&inverse=inverse">주문내역 (현물)</a>
+	                     <a class="collapse-item" href="/wesell/admin/trade/liqList.do?test=test&inverse=inverse">청산내역 (현물)</a>
 	                    </c:if>
 	                    <c:if test="${project.adminIp eq true}">
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/adminIpList.do">관리자 IP 설정</a>
+	                    	<a class="collapse-item" href="/wesell/admin/adminIpList.do">관리자 IP 설정</a>
 	                    </c:if>
 	                    <c:if test="${project.tailUse eq true}">
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tailmanipul.do">사용안함</a>
+	                    	<a class="collapse-item" href="/wesell/admin/trade/tailmanipul.do">사용안함</a>
 	                    </c:if>
 	                </div>
 	            </div>
 	        </li>
 			<li class="nav-item">
-	            <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/positionList.do">
+	            <a class="nav-link" href="/wesell/admin/trade/positionList.do">
 	                <i class="fas fa-fw fa-signal"></i>
 	                <span>현재 회원 포지션</span>
 	            </a>
@@ -112,13 +112,13 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/spottrade/tradeList.do?test=test">거래내역</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/spottrade/orderList.do?test=test">주문내역</a>	                    	                    	          
+		                    <a class="collapse-item" href="/wesell/admin/spottrade/tradeList.do?test=test">거래내역</a>
+		                    <a class="collapse-item" href="/wesell/admin/spottrade/orderList.do?test=test">주문내역</a>	                    	                    	          
 		                </div>
 		            </div>
 		        </li>
 				<li class="nav-item">
-		            <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/positionList.do">
+		            <a class="nav-link" href="/wesell/admin/trade/positionList.do">
 		                <i class="fas fa-fw fa-signal"></i>
 		                <span>현재 회원 포지션</span>
 		            </a>
@@ -133,11 +133,11 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item copytrade" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/traderList.do">트레이더 <span id="traderRequest"></span></a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/followerList.do">팔로워</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/copytradeLog.do">트레이딩 로그</a>
+	                    <a class="collapse-item copytrade" href="/wesell/admin/trader/traderList.do">트레이더 <span id="traderRequest"></span></a>
+	                    <a class="collapse-item" href="/wesell/admin/trader/followerList.do">팔로워</a>
+	                    <a class="collapse-item" href="/wesell/admin/trader/copytradeLog.do">트레이딩 로그</a>
 	                    <c:if test="${project.copyRequest eq true}">
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/copyRequestList.do">팔로우 신청 리스트</a>
+	                    	<a class="collapse-item" href="/wesell/admin/trader/copyRequestList.do">팔로우 신청 리스트</a>
 	                    </c:if>
 	                </div>
 	            </div>
@@ -151,10 +151,10 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/transactions.do?test=test">입출금 내역</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/chongPerfomance.do">총판별 입출금 취합</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/depositList.do?test=test&order=completionTime&orderAD=desc" id="depositLeft">입금신청 목록<span id="depositLeftButton"></span></a>
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalList.do?test=test" id="withdrawLeft">출금신청 목록<span id="withdrawLeftButton"></span></a>
+		                    <a class="collapse-item" href="/wesell/admin/transactions.do?test=test">입출금 내역</a>
+		                    <a class="collapse-item" href="/wesell/admin/chongPerfomance.do">총판별 입출금 취합</a>
+		                    <a class="collapse-item" href="/wesell/admin/trade/depositList.do?test=test&order=completionTime&orderAD=desc" id="depositLeft">입금신청 목록<span id="depositLeftButton"></span></a>
+	                    	<a class="collapse-item" href="/wesell/admin/trade/withdrawalList.do?test=test" id="withdrawLeft">출금신청 목록<span id="withdrawLeftButton"></span></a>
 		                </div>
 		            </div>
 		        </li>
@@ -168,17 +168,17 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?kind=d&stat=0">입금신청 목록</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?kind=w&stat=0">출금신청 목록</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?kind=&except=0">입출금 처리내역</a>
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/kWithdrawalList.do?kind=&except=0&test=test">입출금 처리내역(테스트)</a>
+		                    <a class="collapse-item" href="/wesell/admin/trade/kWithdrawalList.do?kind=d&stat=0">입금신청 목록</a>
+		                    <a class="collapse-item" href="/wesell/admin/trade/kWithdrawalList.do?kind=w&stat=0">출금신청 목록</a>
+		                    <a class="collapse-item" href="/wesell/admin/trade/kWithdrawalList.do?kind=&except=0">입출금 처리내역</a>
+	                    	<a class="collapse-item" href="/wesell/admin/trade/kWithdrawalList.do?kind=&except=0&test=test">입출금 처리내역(테스트)</a>
 		                </div>
 		            </div>
 		        </li>
 	        </c:if>
 	        <c:if test="${project.notloginmoney eq true}">
 				<li class="nav-item">
-		            <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/notLoginKWithdrawalList.do?kind=d">
+		            <a class="nav-link" href="/wesell/admin/trade/notLoginKWithdrawalList.do?kind=d">
 		                <i class="fas fa-fw fa-signal"></i>
 		                <span>미로그인입금신청</span>
 		            </a>
@@ -193,11 +193,11 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pInsert.do">P2P 등록</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pList.do">P2P 리스트</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=d">P2P 입금내역</a>
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=w">P2P 출금내역</a>
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/dwCalculate.do">P2P 입출금 정산</a>
+		                    <a class="collapse-item" href="/wesell/admin/p2p/p2pInsert.do">P2P 등록</a>
+		                    <a class="collapse-item" href="/wesell/admin/p2p/p2pList.do">P2P 리스트</a>
+		                    <a class="collapse-item" href="/wesell/admin/p2p/p2pLog.do?kind=d">P2P 입금내역</a>
+	                    	<a class="collapse-item" href="/wesell/admin/p2p/p2pLog.do?kind=w">P2P 출금내역</a>
+	                    	<a class="collapse-item" href="/wesell/admin/p2p/dwCalculate.do">P2P 입출금 정산</a>
 		                </div>
 		            </div>
 		        </li>
@@ -211,11 +211,11 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/giveReferral.do">레퍼럴 지급</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/pointLog.do?ltype=accumRef">레퍼럴 지급 로그 (Futures)</a>
+		                    <a class="collapse-item" href="/wesell/admin/referral/giveReferral.do">레퍼럴 지급</a>
+		                    <a class="collapse-item" href="/wesell/admin/log/pointLog.do?ltype=accumRef">레퍼럴 지급 로그 (Futures)</a>
 		                    <c:if test="${project.inverse eq true}">
 		                    	<c:forEach var="item" items="${useCoins}">
-				                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/coinLog.do?ltype=accumRef">레퍼럴 지급 로그 (${item})</a>
+				                    <a class="collapse-item" href="/wesell/admin/log/coinLog.do?ltype=accumRef">레퍼럴 지급 로그 (${item})</a>
 		                    	</c:forEach>
 		                    </c:if>
 		                </div>
@@ -232,17 +232,17 @@
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
 		                    <c:if test="${project.depositFee eq true}">
-					    		<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname=BTC">BTC 입금 수수료 설정</a> 
-						    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname=USDT">USDT 입금 수수료 설정</a>
-						        <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname=ETH">ETH 입금 수수료 설정</a> 
-						    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname=XRP">XRP 입금 수수료 설정</a> 
-						    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showDepositFee.do?coinname=TRX">TRX 입금 수수료 설정</a> 
+					    		<a class="collapse-item" href="/wesell/admin/account/showDepositFee.do?coinname=BTC">BTC 입금 수수료 설정</a> 
+						    	<a class="collapse-item" href="/wesell/admin/account/showDepositFee.do?coinname=USDT">USDT 입금 수수료 설정</a>
+						        <a class="collapse-item" href="/wesell/admin/account/showDepositFee.do?coinname=ETH">ETH 입금 수수료 설정</a> 
+						    	<a class="collapse-item" href="/wesell/admin/account/showDepositFee.do?coinname=XRP">XRP 입금 수수료 설정</a> 
+						    	<a class="collapse-item" href="/wesell/admin/account/showDepositFee.do?coinname=TRX">TRX 입금 수수료 설정</a> 
 					    	</c:if>
-					    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname=BTC">BTC 출금 수수료 설정</a>
-					    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname=USDT">USDT 출금 수수료 설정</a>
-					        <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname=ETH">ETH 출금 수수료 설정</a>
-					    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname=XRP">XRP 출금 수수료 설정</a>
-					    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/showFee.do?coinname=TRX">TRX 출금 수수료 설정</a>
+					    	<a class="collapse-item" href="/wesell/admin/account/showFee.do?coinname=BTC">BTC 출금 수수료 설정</a>
+					    	<a class="collapse-item" href="/wesell/admin/account/showFee.do?coinname=USDT">USDT 출금 수수료 설정</a>
+					        <a class="collapse-item" href="/wesell/admin/account/showFee.do?coinname=ETH">ETH 출금 수수료 설정</a>
+					    	<a class="collapse-item" href="/wesell/admin/account/showFee.do?coinname=XRP">XRP 출금 수수료 설정</a>
+					    	<a class="collapse-item" href="/wesell/admin/account/showFee.do?coinname=TRX">TRX 출금 수수료 설정</a>
 		                </div>
 		            </div>
 		        </li>
@@ -255,10 +255,10 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/pointLog.do">USDT(FUTURES)</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/coinLog.do?coin=USDT">USDT</a>
+	                    <a class="collapse-item" href="/wesell/admin/log/pointLog.do">USDT(FUTURES)</a>
+	                    <a class="collapse-item" href="/wesell/admin/log/coinLog.do?coin=USDT">USDT</a>
 	                   	<c:forEach var="item" items="${useCoins}">
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/coinLog.do?coin=${item}">${item}</a>
+		                    <a class="collapse-item" href="/wesell/admin/log/coinLog.do?coin=${item}">${item}</a>
 	                   	</c:forEach>
 	                </div>
 	            </div>
@@ -271,10 +271,10 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/fundingLog.do?coin=FUTURES">USDT(FUTURES)</a>
+	                    <a class="collapse-item" href="/wesell/admin/log/fundingLog.do?coin=FUTURES">USDT(FUTURES)</a>
 	                    <c:if test="${project.inverse eq true}">
 		                   	<c:forEach var="item" items="${useCoins}">
-			                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/fundingLog.do?coin=${item}">${item}</a>
+			                    <a class="collapse-item" href="/wesell/admin/log/fundingLog.do?coin=${item}">${item}</a>
 		                   	</c:forEach>
 	                   	</c:if>
 	                </div>
@@ -288,8 +288,8 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/ipBanList.do">IP 차단 목록</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userBanList.do">유저 차단 목록</a>
+	                    <a class="collapse-item" href="/wesell/admin/user/ipBanList.do">IP 차단 목록</a>
+	                    <a class="collapse-item" href="/wesell/admin/user/userBanList.do">유저 차단 목록</a>
 	                </div>
 	            </div>
 	        </li>
@@ -301,22 +301,22 @@
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/noticeList.do">공지사항</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/eventList.do">팝업 공지사항</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/systemList.do">자동댓글 게시판</a>
-	                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/faqList.do">FAQ</a>
+	                    <a class="collapse-item" href="/wesell/admin/board/noticeList.do">공지사항</a>
+	                    <a class="collapse-item" href="/wesell/admin/board/eventList.do">팝업 공지사항</a>
+	                    <a class="collapse-item" href="/wesell/admin/board/systemList.do">자동댓글 게시판</a>
+	                    <a class="collapse-item" href="/wesell/admin/board/faqList.do">FAQ</a>
 	                </div>
 	            </div>
 	        </li>
 	        <li class="nav-item">
-	            <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/contactList.do" id="contact">
+	            <a class="nav-link" href="/wesell/admin/contact/contactList.do" id="contact">
 	                <i class="fas fa-fw fa-comment-o"></i>
 	                <span>문의</span>
 	            </a>
 	        </li>
 	        <c:if test="${project.letter eq true}">
 	        	<li class="nav-item">
-	            <a class="nav-link" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/contact/sendMessage.do">
+	            <a class="nav-link" href="/wesell/admin/contact/sendMessage.do">
 	                <i class="fas fa-fw fa-envelope-o"></i>
 	                <span>쪽지 보내기</span>
 	            </a>
@@ -333,10 +333,10 @@
 		            </a>
 		            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 		                <div class="bg-white py-2 collapse-inner rounded">
-		                	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pInsert.do">P2P 등록</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pList.do">P2P 리스트</a>
-		                    <a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=d">P2P 입금내역</a>
-	                    	<a class="collapse-item" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=w">P2P 출금내역</a>
+		                	<a class="collapse-item" href="/wesell/admin/p2p/p2pInsert.do">P2P 등록</a>
+		                    <a class="collapse-item" href="/wesell/admin/p2p/p2pList.do">P2P 리스트</a>
+		                    <a class="collapse-item" href="/wesell/admin/p2p/p2pLog.do?kind=d">P2P 입금내역</a>
+	                    	<a class="collapse-item" href="/wesell/admin/p2p/p2pLog.do?kind=w">P2P 출금내역</a>
 		                </div>
 		            </div>
 		        </li>
@@ -346,8 +346,8 @@
 <!-- 				<li> -->
 <!-- 				    <a href="#"><i class="fa fa-list fa-fw"></i> 카피 일괄처리<span class="fa arrow"></span></a> -->
 <!-- 				    <ul class="nav nav-second-level collapse"> -->
-<!-- 				        <li> <a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/copysInsert.do">등록</a> </li> -->
-<!-- 				        <li> <a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/copysRelease.do">해제</a> </li> -->
+<!-- 				        <li> <a href="/wesell/admin/copysInsert.do">등록</a> </li> -->
+<!-- 				        <li> <a href="/wesell/admin/copysRelease.do">해제</a> </li> -->
 <!-- 				    </ul> -->
 <!-- 				</li>			 -->
          <!-- Divider -->
@@ -441,7 +441,7 @@ dangerReadCheck();
 function dangerReadCheck(){
 	$.ajax({
 		type:'post',
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/getDangerRead.do',
+		url:'/wesell/admin/getDangerRead.do',
 		dataType:'json',
 		success:function(data){
 			if(data.read != 0){
@@ -463,7 +463,7 @@ function allAlarmChek(){
 	$.ajax({
 		type :"post",
 		dataType : "json" ,
-		url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/isAllAlarmCheck.do",
+		url : "/wesell/admin/user/isAllAlarmCheck.do",
 		success:function(data){
 			if(data.result == "success"){
 				var alarm = 0;
@@ -548,7 +548,7 @@ function updateBalanceCheck(useridx){
 	$.ajax({
 		type:'post',
 		data:{"idx" : useridx},
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/balanceCheck.do',
+		url:'/wesell/admin/user/balanceCheck.do',
 		dataType:'json',
 		success:function(data){
 			alert(data.msg);

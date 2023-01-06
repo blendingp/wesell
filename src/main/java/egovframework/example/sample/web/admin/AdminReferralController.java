@@ -33,7 +33,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/referral")
+@RequestMapping("/admin/referral")
 public class AdminReferralController {
 
 	@Resource(name = "sampleDAO")
@@ -43,7 +43,7 @@ public class AdminReferralController {
 	public String feeSetting(HttpServletRequest request, ModelMap model) throws Exception {
 		HttpSession session = request.getSession();
 		if(!AdminUtil.highAdminCheck(session)){
-			return "redirect:/0nI0lMy6jAzAFRVe0DqLOw/main.do";
+			return "redirect:/admin/main.do";
 		}
 		
 		List<?> list = (List<?>) sampleDAO.list("selectRateRange");

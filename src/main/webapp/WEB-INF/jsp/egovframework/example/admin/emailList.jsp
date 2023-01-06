@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
              		         <h6 class="m-0 font-weight-bold text-primary">${info.name}님, 현재 이메일 ${info.email}</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/trade/emailList.do" name="listForm" id="listForm">
 								<input type="hidden" name="pageIndex" value="1"/>									
 							</form>
 							<div class="table-responsive">

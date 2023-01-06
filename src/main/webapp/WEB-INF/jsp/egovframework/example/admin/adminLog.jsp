@@ -14,7 +14,7 @@
 </head>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -26,7 +26,7 @@
 						</div>
 						<div class="card-body">
 							<!-- /.panel-heading -->
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/log.do"
+							<form action="/wesell/admin/log/log.do"
 								name="listForm" id="listForm">
 								<input type="hidden" name="pageIndex" value="1" />
 								<div class="row">
@@ -85,7 +85,7 @@
 													</c:forEach></td>
 												<td><c:if test="${item.name ne null}">
 														<span style="cursor: pointer;"
-															onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.uidx}'">${item.name}
+															onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.uidx}'">${item.name}
 															(등급 : ${item.level})</span>
 													</c:if></td>
 												<td><c:if test="${item.name ne null}">${item.phone} </c:if></td>

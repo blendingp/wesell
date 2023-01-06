@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -32,7 +32,7 @@ function page(pageNo){
 									</h6>
 								</div>
 								<div class="card-body">
-									<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/chongPerfomance.do" name="listForm" id="listForm">
+									<form action="/wesell/admin/chongPerfomance.do" name="listForm" id="listForm">
 										<div class="row">
 											<input type="hidden" name="pageIndex" value="1" /> <input
 												type="hidden" name="test" id="test" value="${test}" />
@@ -99,7 +99,7 @@ function page(pageNo){
 													<tr
 														style="background-color:${item.color}; border-top:double;">
 														<td
-															onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'"
+															onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.idx}'"
 															style="cursor: pointer;">${item.name}<c:if
 																test="${item.istest eq 1 }">
 																<span style="color: red"> (테스트 계정)</span>

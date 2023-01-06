@@ -11,7 +11,7 @@
 </head>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -154,7 +154,7 @@
 				'search' : $("#search").val(),
 				'searchSelect' : $("#searchSelect").val()
 			},
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/setSearchInfo.do',
+			url : '/wesell/admin/trade/setSearchInfo.do',
 			success : function(data) {
 				if (data.result == 'suc') {
 					getPositionData();
@@ -168,7 +168,7 @@
 	function getPositionData() {
 		$.ajax({
 			type : 'post',
-			url : '/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/getNowPositionData.do',
+			url : '/wesell/admin/trade/getNowPositionData.do',
 			success : function(data) {
 				positionCount = 0;
 				marginSum = parseFloat(0);
@@ -287,7 +287,7 @@
 			let
 			parentTdOption = "";
 			if (plist[i].pidx != null) {
-				parentTdOption = "style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
+				parentTdOption = "style='cursor:pointer;' onclick=\"location.href='/wesell/admin/user/userDetail.do?idx="
 						+ plist[i].pidx + "'\"";
 			}
 
@@ -297,7 +297,7 @@
 				betCoin = coin.toUpperCase();
 
 			$id.append("<tr><td>"
-							+ plist[i].userIdx+"</td><td style='cursor:pointer;' onclick=\"location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx="
+							+ plist[i].userIdx+"</td><td style='cursor:pointer;' onclick=\"location.href='/wesell/admin/user/userDetail.do?idx="
 							+ plist[i].userIdx
 							+ "'\">"
 							+ plist[i].name

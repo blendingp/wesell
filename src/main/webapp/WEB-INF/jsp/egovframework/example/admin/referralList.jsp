@@ -18,7 +18,7 @@ function page(pageNo){
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -31,7 +31,7 @@ function page(pageNo){
 						<div class="panel-heading">referral</div>
                         <div class="panel-body">
 							<div class="row">
-							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/referral/referralList.do" name="listForm" id="listForm">
+							   <form action="/wesell/admin/referral/referralList.do" name="listForm" id="listForm">
 									<input type="hidden" name="pageIndex" value="1"/>
 									<input type="hidden" name="ad" value="${ad}"/>
 									<input type="hidden" name="coin" id="coin" value="${coin}"/>
@@ -108,7 +108,7 @@ function page(pageNo){
 	                                    	<c:forEach var="item" items="${list}" varStatus="i">
 		                                        <tr style="background-color:${item.color}">
 		                                            <td>${item.time}</td>
-		                                            <td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'" style="cursor:pointer;">${item.name }</td>
+		                                            <td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.userIdx}'" style="cursor:pointer;">${item.name }</td>
 		                                            <td><fmt:formatNumber value="${item.volume}" pattern="#,###.####"/></td>
 		                                            <td><fmt:formatNumber value="${item.fee}" pattern="#,###.####"/></td>
 		                                            <td><fmt:formatNumber value="${item.commission}" pattern="#,###.####"/></td>
@@ -121,7 +121,7 @@ function page(pageNo){
 	                                    	<c:forEach var="item" items="${list}" varStatus="i">
 		                                        <tr style="background-color:${item.color}">
 		                                            <td>${item.time}</td>
-		                                            <td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.gname}</td>
+		                                            <td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.idx}'" style="cursor:pointer;">${item.gname}</td>
 		                                            <td><fmt:formatNumber value="${item.volume}" pattern="#,###.####"/></td>
 		                                            <td><fmt:formatNumber value="${item.fee}" pattern="#,###.####"/></td>
 		                                            <td><fmt:formatNumber value="${item.commission}" pattern="#,###.####"/></td>

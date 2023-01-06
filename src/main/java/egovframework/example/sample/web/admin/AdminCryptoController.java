@@ -19,7 +19,7 @@ import egovframework.example.sample.web.util.CryptoUtil;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/crypto")
+@RequestMapping("/admin/crypto")
 public class AdminCryptoController {
 
 	@Resource(name = "sampleDAO")

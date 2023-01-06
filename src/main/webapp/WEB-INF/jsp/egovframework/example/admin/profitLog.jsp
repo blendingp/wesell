@@ -12,7 +12,7 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -28,7 +28,7 @@
 						<!-- (하루 : 영국 00시 기준 - 대한민국 8시 기준) -->
                         <div class="panel-body">
 							<div class="row">
-							   <form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/log/profitLog.do" name="listForm" id="listForm">
+							   <form action="/wesell/admin/log/profitLog.do" name="listForm" id="listForm">
 									<div class="col-lg-3">
 										<label>연도</label>
 										<jsp:useBean id="now" class="java.util.Date" />

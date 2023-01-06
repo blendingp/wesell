@@ -71,11 +71,6 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 			}
 		}
 		
-		if(urlArr[2].equals("0nI0lMy6jAzAFRVe0DqLOw")){
-			if(!adminServerCheck(request))
-				return false;
-		}
-		
     	for(int i=0; i < urls.size(); i++){ // url이 무시해야될 url이면 
     		if(urls.get(i).equals(url)){
     			return true; // 바로 그 url로 이동 
@@ -90,17 +85,11 @@ public class Interceptor  extends HandlerInterceptorAdapter{
     	
     	if(urlArr[2].equals("WEB-INF")){
     		return true;
-    	}else if(urlArr[2].equals("0nI0lMy6jAzAFRVe0DqLOw")){// 관리자의 경우 
+    	}else if(urlArr[2].equals("admin")){// 관리자의 경우 
 			// 로그인 안되어있으면 로그인 페이지로 
 			if(session.getAttribute("adminLogin") == null){ 
-    			response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
+    			response.sendRedirect("/wesell/admin/login.do");
     			return false;
-			}
-			if(!adminIpCheck(userip, request)){
-				session.setAttribute("adminIdx",null);
-				session.setAttribute("adminLogin", null);
-				response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
-				return false;
 			}
 			String adminLevel = ""+session.getAttribute("adminLevel");
 			
@@ -114,7 +103,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 					return true;
 				default:
 					System.out.println(urlArr[urlArr.length-1]);
-					response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/p2p/p2pLog.do?kind=d");
+					response.sendRedirect("/wesell/admin/p2p/p2pLog.do?kind=d");
 					return false;
 				}
 			}
@@ -127,7 +116,7 @@ public class Interceptor  extends HandlerInterceptorAdapter{
 				case "log.do":
 					if( adminLevel.equals("1"))
 						return true;
-					response.sendRedirect("/wesell/0nI0lMy6jAzAFRVe0DqLOw/login.do");
+					response.sendRedirect("/wesell/admin/login.do");
 					return false;
 				default:
 					return true;

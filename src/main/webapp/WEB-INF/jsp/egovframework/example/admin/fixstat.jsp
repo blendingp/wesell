@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -31,12 +31,12 @@
 							<div>
 								<c:if test="${fixstat eq 0}">
 									<button type="button"
-										onClick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=1'"
+										onClick="location.href='/wesell/admin/statchange.do?stat=1'"
 										class="btn btn-primary">점검상태로 변동</button>
 								</c:if>
 								<c:if test="${fixstat eq 1}">
 									<button type="button"
-										onClick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/statchange.do?stat=0'"
+										onClick="location.href='/wesell/admin/statchange.do?stat=0'"
 										class="btn btn-primary">운영상태로 변동</button>
 								</c:if>
 							</div>

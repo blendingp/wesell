@@ -17,7 +17,7 @@
 function insertProcess(type){
 	oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD",[]);
 	var data = $("#insertForm").serialize();
-	var url = "/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"Insert.do";
+	var url = "/wesell/admin/board/"+type+"Insert.do";
 	$.ajax({
 		type:'post',
 		url : url,
@@ -25,7 +25,7 @@ function insertProcess(type){
 		success:function(data){
 			if(data.result == 'success'){
 				alert("글 등록이 완료되었습니다.");
-				location.href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/board/"+type+"List.do";
+				location.href="/wesell/admin/board/"+type+"List.do";
 			}else{
 				alert(data.msg);
 			}
@@ -37,7 +37,7 @@ function insertProcess(type){
 }
 </script>
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>

@@ -17,7 +17,7 @@ function page(pageNo){
 </script>
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,7 +28,7 @@ function page(pageNo){
 							<h6 class="m-0 font-weight-bold text-primary">copytrade trading log</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trader/copytradeLog.do" name="listForm" id="listForm">
+							<form action="/wesell/admin/trader/copytradeLog.do" name="listForm" id="listForm">
 								<input type="hidden" name="fileDown" id="fileDown" value="0" />
 								<input type="hidden" name="pageIndex" value="1" /> 
 								<input type="hidden" name="order" id="order" value="${order}" /> 
@@ -111,9 +111,9 @@ function page(pageNo){
 										<c:forEach var="item" items="${list}" varStatus="i">
 											<tr style="background-color:${item.color}">
 												<td>${item.userIdx}</td>
-												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.userIdx}'"
+												<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.userIdx}'"
 													style="cursor: pointer;">${item.uname}</td>
-												<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.tidx}'"
+												<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.tidx}'"
 													style="cursor: pointer;">${item.tname}</td>
 												<td>${item.symbol}</td>
 												<td><c:if test="${item.levFollow eq 0}">지정</c:if> <c:if

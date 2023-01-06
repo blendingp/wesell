@@ -18,7 +18,7 @@ function page(pageNo){
 
 <body id="page-top">
 	<div id="wrapper">
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do" />
+		<c:import url="/admin/left.do" />
 		<div id="content-wrapper">
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
@@ -28,13 +28,13 @@ function page(pageNo){
 						<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<!-- 
-							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
-							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=XRP&type=1">XRP</a>
-							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=TRX&type=1">TRX</a>
-							<a href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
+							<a href="/wesell/admin/account/realBalance.do?coinname=BTC&type=1">보유코인 많은순 BTC</a>
+							<a href="/wesell/admin/account/realBalance.do?coinname=XRP&type=1">XRP</a>
+							<a href="/wesell/admin/account/realBalance.do?coinname=TRX&type=1">TRX</a>
+							<a href="/wesell/admin/account/realBalance.do?coinname=ETH&type=1">ETH</a> -->
 								<div class="card-body">
 									<form
-										action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalList.do"
+										action="/wesell/admin/trade/withdrawalList.do"
 										name="listForm" id="listForm">
 										<input type="hidden" name="pageIndex" value="1" /> <input
 											type="hidden" name="order" id="order" value="${order}" /> <input
@@ -161,14 +161,14 @@ function page(pageNo){
 												<c:forEach var="item" items="${list}" varStatus="i">
 													<tr style="background-color:${item.color}">
 														<td><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd HH:mm" /></td>
-														<td onclick="location.href='/wesell/0nI0lMy6jAzAFRVe0DqLOw/user/userDetail.do?idx=${item.wuseridx}'" style="cursor: pointer;">${item.name}</td>
+														<td onclick="location.href='/wesell/admin/user/userDetail.do?idx=${item.wuseridx}'" style="cursor: pointer;">${item.name}</td>
 														<td><c:if test="${item.parents eq ''}">없음</c:if>${item.parents}</td>
 														<td>${item.wcoinname}</td>
 														<td><fmt:formatNumber value="${item.wamount}"
 																pattern="#,###.#####" /></td>
 														<td>
 															<c:if test="${!empty item.stock }">(${item.stock})&ensp;</c:if>
-															<a target="_blank" href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalList.do?pageIndex=1&sdate=&edate=&searchSelect=idx&search=${item.wuseridx }&coin=${item.wcoinname }&wstat=1">
+															<a target="_blank" href="/wesell/admin/trade/withdrawalList.do?pageIndex=1&sdate=&edate=&searchSelect=idx&search=${item.wuseridx }&coin=${item.wcoinname }&wstat=1">
 																<span id="c${item.widx}" class="txtext">${item.waddress}</span>
 															</a>
 															&nbsp;&nbsp; 
@@ -222,7 +222,7 @@ function page(pageNo){
 																	onclick="checkRequest('${item.widx}','0')">대기</button>
 															</c:if></td>
 														<td><a target="_blank"
-															href="/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
+															href="/wesell/admin/trade/emailList.do?idx=${item.wuseridx}">${item.wemail}</a>
 														</td>
 													</tr>
 												</c:forEach>
@@ -378,7 +378,7 @@ function page(pageNo){
 		console.log(widx+" / "+stat+" / "+tx);
 		jQuery.ajax({
 			type : "POST",
-			url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalProcess.do?widx=" + widx
+			url : "/wesell/admin/trade/withdrawalProcess.do?widx=" + widx
 					+ "&stat=" + stat + "&tx=" + tx,
 			dataType : "json",
 			date : {
@@ -417,7 +417,7 @@ function page(pageNo){
 	function emailConfirm(widx) {
 		jQuery.ajax({
 			type : "POST",
-			url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/withdrawalEmailConfirm.do?widx=" + widx,
+			url : "/wesell/admin/trade/withdrawalEmailConfirm.do?widx=" + widx,
 			dataType : "json",
 			date : {
 				widx : widx
@@ -440,7 +440,7 @@ function page(pageNo){
 		$.ajax({
 			type :"post",
 			dataType : "json" ,
-			url : "/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=w",
+			url : "/wesell/admin/trade/changeAlarm.do?idx="+idx+"&alarm="+alarm+"&kind=w",
 			success:function(data){
 				if(data.result == "suc"){
 					location.reload();

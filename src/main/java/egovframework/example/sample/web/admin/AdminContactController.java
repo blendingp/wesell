@@ -26,7 +26,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping("/0nI0lMy6jAzAFRVe0DqLOw/contact")
+@RequestMapping("/admin/contact")
 public class AdminContactController {
 	
 	@Resource(name = "sampleDAO")

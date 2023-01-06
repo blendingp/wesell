@@ -13,7 +13,7 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../adminFrame/top.jsp"></jsp:include>
-		<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+		<c:import url="/admin/left.do"/>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -89,7 +89,7 @@ function tailSet(type,coinNum){
 	$.ajax({
 		type:'post',
 		data:{"coinNum" : coinNum, "type" : type, "val" : val},
-		url:'/wesell/0nI0lMy6jAzAFRVe0DqLOw/trade/tailSet.do',
+		url:'/wesell/admin/trade/tailSet.do',
 		dataType:'json',
 		success:function(data){
 			alert(data.msg);

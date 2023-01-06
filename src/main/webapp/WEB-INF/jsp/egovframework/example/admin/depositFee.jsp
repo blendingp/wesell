@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body id="page-top">
 	<div id="wrapper">	
-	<c:import url="/0nI0lMy6jAzAFRVe0DqLOw/left.do"/>
+	<c:import url="/admin/left.do"/>
        <div id="content-wrapper">        	
         	<div id="content">	        
 			<jsp:include page="../adminFrame/top.jsp"></jsp:include>	           
@@ -25,7 +25,7 @@
 							</h6>
 						</div>
 						<div class="card-body">
-							<form action="/wesell/0nI0lMy6jAzAFRVe0DqLOw/account/updateDepositFee.do" name="updateForm" id="updateForm" method="post">
+							<form action="/wesell/admin/account/updateDepositFee.do" name="updateForm" id="updateForm" method="post">
 								<input type="hidden" name="coinname" value="${item.ftype}"/>
 								<div class="row">									
 									<div class="col-lg-6">

@@ -174,7 +174,7 @@ public class Log {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/0nI0lMy6jAzAFRVe0DqLOw/logread.do", produces = "text/html; charset=utf8")
+	@RequestMapping(value = "/admin/logread.do", produces = "text/html; charset=utf8")
 	public String logread(HttpServletRequest request, ModelMap model) throws Exception {
 		String min = "" + 5 * ((int) (Calendar.getInstance().getTime().getMinutes() / 5));
 		String filetimestamp = (Calendar.getInstance().getTime().getYear() + 1900) + "_"
@@ -207,7 +207,7 @@ public class Log {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/0nI0lMy6jAzAFRVe0DqLOw/bldlog.do", produces = "text/html; charset=utf8")
+	@RequestMapping(value = "/admin/bldlog.do", produces = "text/html; charset=utf8")
 	public String bldlog(HttpServletRequest request, ModelMap model) throws Exception {
 		String f = "";
 		for (int i = 0; i < DEBUGFILTERALL.length; i++) {
@@ -231,7 +231,7 @@ public class Log {
 				+ " complete : function(data) { },"
 				+ " error : function(xhr, status , error){console.log('ajax ERROR!!! : ' );}" + "});" + "}"
 				+ "setFilter('none');" + "function step(){" + "if( $('input[name=playpause]:checked').val() == 'play' )"
-				+ "jQuery.ajax({" + "type:'POST'," + "url :'/" + projectName + "/0nI0lMy6jAzAFRVe0DqLOw/logread.do', " + "dataType:'text',"
+				+ "jQuery.ajax({" + "type:'POST'," + "url :'/" + projectName + "/admin/logread.do', " + "dataType:'text',"
 				+ "success : function(data) {" + "	$('.log').html(data);" + "}," + " complete : function(data) { },"
 				+ " error : function(xhr, status , error){console.log('ajax ERROR!!! : ' );}" + "});"
 				+ "setTimeout(step,1000);" + "}" + "setTimeout(step,1000);" + "</script>" + "</html>";
