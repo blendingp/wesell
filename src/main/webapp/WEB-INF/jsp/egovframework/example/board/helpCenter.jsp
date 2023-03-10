@@ -14,7 +14,7 @@
 <meta content="account setting" property="twitter:title">
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<form id="contactForm" name="contactForm" method="post" enctype="multipart/form-data" class="form-6">
 			<jsp:include page="../wesellFrame/top2.jsp" />

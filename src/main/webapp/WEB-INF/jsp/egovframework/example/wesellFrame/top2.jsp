@@ -35,7 +35,7 @@
 						<a href="/wesell/user/transactions.do" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
 						<a href="/wesell/user/exchange.do" class="button-14-copy w-button"><spring:message code="wallet.menu.exchange"/></a> 
 						<a href="/wesell/user/transfer.do" class="button-14-copy w-button"><spring:message code="wallet.futuresExchange"/></a> 
-						<a href="/wesell/user/requestList.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawallist"/></a> > 
+						<a href="/wesell/user/requestList.do" class="button-14-copy w-button"><spring:message code="wallet.withdrawallist"/></a> 
 					</div>
 				</div>
 				<div class="topmenubtn tall">
@@ -54,7 +54,7 @@
 					<a href="#" onclick="dropToggle(this)" class="topbtn <c:if test="${currentP eq 'mypage'}">click</c:if> w-button"><spring:message code="menu.mypage"/></a> 
 					<div class="topbtn_drop tall">
 <%-- 						<a href="/wesell/user/tradeHistory.do" class="button-14-copy w-button"><spring:message code="trade.tradeHistory"/></a> --%>
-<%-- <%-- 						<c:if test="${userLevel eq 'chong'}">  --%> --%>
+<%-- <%-- 						<c:if test="${userLevel eq 'chong'}">  --%>
 <%-- 							<a href="/wesell/user/referells.do" class="button-14-copy w-button"><spring:message code="menu.referrals"/></a> --%>
 <%-- 						</c:if>  --%>
 						<a href="/wesell/user/tradeSpotHistory.do" class="button-14-copy w-button"><spring:message code="pop.show.SpotHistory"/></a>

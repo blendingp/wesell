@@ -21,7 +21,7 @@
 	var fileurl = '<%=this.getClass().getSimpleName().replaceAll("_", ".").replaceAll(".jsp", "")%>';
 </script>
 </head>
-<body class="body2">
+<body class="body">
 	<jsp:include page="../wesellFrame/top2.jsp" />
 	<div class="frame-2">
 		<div class="frame2-2">

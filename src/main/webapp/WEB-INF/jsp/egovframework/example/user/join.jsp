@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
-<body class="body1">
+<body class="body">
 	<form id="joinFrm" class="form-5">
 		<div class="frame">
 			<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>

@@ -113,7 +113,7 @@
 
 </script>
 </head>
-<body class="body2">
+<body class="body">
 	<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6073d35203881b197a7cdb93" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	<div class="frame">
 		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
@@ -171,7 +171,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/USDTicon.png" loading="lazy" alt=""
+									<img src="../webflow/images/USDTicon45_1USDTicon45.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">USDT</div>
 								</div>
@@ -191,7 +191,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/ETHicon.png" loading="lazy" alt=""
+									<img src="../webflow/images/ETHicon_1ETHicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">ETH</div>
 								</div>
@@ -209,7 +209,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/TRXicon.png" loading="lazy" alt=""
+									<img src="../webflow/images/TRXicon_1TRXicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">TRX</div>
 								</div>
@@ -227,7 +227,7 @@
 						<div class="asset_coinsub">
 							<div class="asset_coininfoblock">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/XRPicon.png" loading="lazy" alt=""
+									<img src="../webflow/images/XRPicon_1XRPicon.png" loading="lazy" alt=""
 										class="coinimg1">
 									<div class="asset_coinsub_name">XRP</div>
 								</div>

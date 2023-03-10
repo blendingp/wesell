@@ -17,7 +17,7 @@
 	text-overflow:ellipsis; 
 }
 </style>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<form id="kycForm" name="kycForm" method="post" enctype="multipart/form-data" class="form-6">
 			<jsp:include page="../wesellFrame/top2.jsp" />

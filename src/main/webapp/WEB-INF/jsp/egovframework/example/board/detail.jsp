@@ -12,7 +12,7 @@
 <meta content="detail" property="twitter:title">
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<div class="form-block w-form">
 			<form id="email-form" name="email-form" data-name="Email Form">

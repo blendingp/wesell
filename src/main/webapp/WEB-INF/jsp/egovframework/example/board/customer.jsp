@@ -22,7 +22,7 @@
 	height: 8.6em;
 }
 </style>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<div class="form-block w-form">
 			<form id="email-form" name="email-form" data-name="Email Form" class="form">

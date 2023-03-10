@@ -18,7 +18,7 @@
 		alert("<spring:message code='pop.notBalance'/>");
 </script>
 </head>
-<body class="body2">
+<body class="body">
 	<div class="frame">
 		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame2">

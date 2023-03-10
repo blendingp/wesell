@@ -27,7 +27,7 @@ if(auto == "1"){
 	location.href="/wesell/login.do";
 }
 </script>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="frame4">

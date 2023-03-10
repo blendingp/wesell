@@ -11,7 +11,7 @@
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 <title>Personal information processing policy</title>
 </head>
-<body class="body1">
+<body class="body">
   <div class="frame">
     <jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
     <div class="frame5">

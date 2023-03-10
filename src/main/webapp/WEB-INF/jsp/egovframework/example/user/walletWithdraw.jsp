@@ -406,7 +406,7 @@
 	}
 </script>
 </head>
-<body class="body2">
+<body class="body">
 	<form>
 		<input type="hidden" name="withdrawAddress" id="withdrawAddress">
 		<input type="hidden" name="withdrawAmount" id="withdrawAmount">
@@ -509,7 +509,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'USDT')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/USDTicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images/USDTicon45_1USDTicon45.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">USDT</div>
 								</div>
 								<div class="asset_coininfo">
@@ -585,7 +585,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'ETH')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/ETHicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images/ETHicon_1ETHicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">ETH</div>
 								</div>
 								<div class="asset_coininfo">
@@ -662,7 +662,7 @@
 							<div class="asset_coininfoblock"
 								onclick="coinToggle(this, 'TRX')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/TRXicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images/TRXicon_1TRXicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">TRX</div>
 								</div>
 								<div class="asset_coininfo">
@@ -735,7 +735,7 @@
 							</div>
 							<div class="asset_coininfoblock" onclick="coinToggle(this, 'XRP')" slide="off">
 								<div class="asset_cointitle">
-									<img src="../webflow/images2/XRPicon.png" loading="lazy" alt="" class="coinimg1">
+									<img src="../webflow/images/XRPicon_1XRPicon.png" loading="lazy" alt="" class="coinimg1">
 									<div class="asset_coinsub_name">XRP</div>
 								</div>
 								<div class="asset_coininfo">

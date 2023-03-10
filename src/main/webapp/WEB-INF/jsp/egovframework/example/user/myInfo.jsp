@@ -14,7 +14,7 @@
 <meta content="reward" property="twitter:title">
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
-<body class="body2">
+<body class="body">
 	<div class="frame">
 		<form name="infoForm" id="infoForm" class="form-8">
 			<input type="hidden" name="idx" id="idx" value="${info.idx}" /> 

@@ -12,7 +12,7 @@
 <title>FAQ</title>
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
 </head>
-<body class="body1">
+<body class="body">
 	<div class="frame">
 		<div class="form-block w-form">
 			<form name="listForm" id="listForm" action="/wesell/faq.do">
