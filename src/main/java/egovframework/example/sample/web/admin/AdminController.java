@@ -1,5 +1,6 @@
 package egovframework.example.sample.web.admin;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import egovframework.example.sample.classes.AdminUtil;
 import egovframework.example.sample.classes.Coin;
@@ -38,6 +43,7 @@ import egovframework.example.sample.service.impl.MemberControllMgr;
 import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.example.sample.web.util.CryptoUtil;
 import egovframework.example.sample.web.util.Send;
+import egovframework.example.sample.web.util.Validation;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -744,16 +750,90 @@ public class AdminController {
     	
     	return text+"ok";
     }
+	
+	@RequestMapping(value = "/exchangeList.do")
+	public String exchangeList(HttpServletRequest request, ModelMap model) throws Exception {
+		List<?> list = (List<?>) sampleDAO.list("exchangeL");
+		model.addAttribute("list", list);
+		
+		return "admin/exchangeList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/exchangeInsert.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String exchangeInsert(MultipartHttpServletRequest mre) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		
+		String coin = mre.getParameter("coin");
+		String volume = mre.getParameter("volume");
+		String link = mre.getParameter("link");
+		
+		if (Validation.isNull(coin)) {
+			obj.put("msg", "코인을 입력해주세요.");
+			return obj.toJSONString();
+		}
+		if (Validation.isNull(volume)) {
+			obj.put("msg", "볼륨을 입력해주세요.");
+			return obj.toJSONString();
+		}
+		if (Validation.isNull(link)) {
+			obj.put("msg", "링크를 입력해주세요.");
+			return obj.toJSONString();
+		}
+		
+		EgovMap in = new EgovMap();
+		in.put("coin", coin);
+		in.put("volume", volume);
+		in.put("link", link);
+		
+		MultipartFile mf = mre.getFile("symbol");
+		String path = "C:/upload/wesell/exchange/";
+
+		if(mf == null || mf.isEmpty()){
+			obj.put("msg", "이미지를 선택해주세요.");
+			return obj.toJSONString();
+		}
+
+		File file = new File(path);
+        if(!file.exists()) {
+           file.mkdirs();
+        }
+        if(!mf.isEmpty()){
+        	String filename = mf.getOriginalFilename();
+        	String saveNm = UUID.randomUUID().toString().replaceAll("-", "") + filename.substring(filename.lastIndexOf("."));
+        	try {
+        		mf.transferTo(new File(path+saveNm));
+        		in.put("symbol", saveNm);
+			} catch (Exception e) {
+				e.printStackTrace();
+				obj.put("msg", "이미지를 업로드 에러.");
+				return obj.toJSONString();
+			}
+        }
+        
+		sampleDAO.insert("exchangeInsert", in);
+
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/exchangeDelete.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String exchangeDelete(HttpServletRequest request) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		obj.put("msg", "fail");
+		
+		String idx = request.getParameter("idx");
+		
+		EgovMap in = new EgovMap();
+		in.put("idx", idx);
+		
+		sampleDAO.delete("exchangeDelete", in);
+		
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-

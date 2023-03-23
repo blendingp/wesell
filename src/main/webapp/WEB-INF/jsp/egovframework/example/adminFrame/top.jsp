@@ -13,11 +13,11 @@
             <i class="fa fa-bars"></i>
         </button>
 
-		<ul class="nav navbar-top-links navbar-right">
+		<!-- <ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown"> <span style="font-weight:bold;">총 포지션 증거금 :</span> <span id="position"></span>&ensp;/&ensp;</li>		
 			<li class="dropdown"> <span style="font-weight:bold;">수익금(유저 손실액):</span> <span id="profit"></span>&ensp;/&ensp;</li>
 			<li class="dropdown"> <span style="font-weight:bold;">순수익(수익금 + 거래수수료 - 펀딩 - 총판 분배금):</span> <span id="netP"></span> </li>
-		</ul>
+		</ul> -->
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item dropdown no-arrow">

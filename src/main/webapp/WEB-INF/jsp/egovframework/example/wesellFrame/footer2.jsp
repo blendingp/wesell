@@ -17,7 +17,7 @@
 						<div class="footerlist_title">
 							<spring:message code="menu.deal" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/tradeSpot.do'"><spring:message code="newwave.menu.spotCoin"/></div>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do'"><spring:message code="newwave.menu.spotCoin"/></div>
 						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/trade.do?betMode=inverse'"><spring:message code="menu.spotCoin"/></div> --%>
 					</div>
 					<div class="footerlist_block">
@@ -49,17 +49,6 @@
 							<spring:message code="submitRequest" />
 						</div>
 						
-					</div>
-					<div class="footerlist_block">
-						<div class="footerlist_title">
-							<spring:message code="menu.mypage" />
-						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/tradeHistory.do'">
-							<spring:message code="trade.tradeHistory" />
-						</div>
-<!-- 						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/fundingHistory.do'"> -->
-<%-- 							<spring:message code="menu.fundingHistory"/> --%>
-<!-- 						</div>						 -->
 					</div>
 				</div>
 			</div>

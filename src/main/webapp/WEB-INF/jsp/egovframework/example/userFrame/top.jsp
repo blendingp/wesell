@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,7 +26,7 @@
 					<a href="/wesell/user/main.do" class="topbtn <c:if test="${currentP eq 'main'}">click</c:if> w-button"><spring:message code="menu.main"/></a>
 				</div>
 				<div class="topmenubtn">
-					<a href="/wesell/tradeSpot.do" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="trade.trade"/></a>
+					<a href="/wesell/user/chart.do" class="topbtn <c:if test="${currentP eq 'trade'}">click</c:if> w-button"><spring:message code="trade.trade"/></a>
 				</div>
 				<div class="topmenubtn">
 					<img src="/wesell/webflow/images/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
@@ -87,7 +86,7 @@
 	                <div class="topbtn_drop">
 	                  <a href="javascript:changeLang2('EN')" class="button-14-copy w-button">English</a>
 	                  <c:if test="${userIdx ne null and isKrCode eq true}">
-		                  <a href="javascript:changeLang2('KO')" class="button-14-copy w-button">한국어</a>
+	                  	<a href="javascript:changeLang2('KO')" class="button-14-copy w-button">한국어</a>
 	                  </c:if>
 	                  <a href="javascript:changeLang2('JP')" class="button-14-copy w-button">日本語</a>
 	                  <a href="javascript:changeLang2('CH')" class="button-14-copy w-button">简体中文</a>

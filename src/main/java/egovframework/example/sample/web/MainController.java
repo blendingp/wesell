@@ -1,6 +1,7 @@
 package egovframework.example.sample.web;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -165,6 +166,16 @@ public class MainController {
 		return "user/trade";
 	}
 	
+	@RequestMapping(value = "/user/chart.do")
+	public String chart(HttpServletRequest request, ModelMap model) throws Exception {
+		EgovMap in = new EgovMap();
+		in.put("limit", 50);
+		
+		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);
+		model.addAttribute("list", list);
+		
+		return "user/chart";
+	}
 	
 	@RequestMapping(value = "/tradeSpot.do")
 	public String tradeSpot(HttpServletRequest request, ModelMap model) throws Exception {

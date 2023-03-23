@@ -26,7 +26,7 @@ input[type=range]::-webkit-slider-thumb {
 	<div class="frame6">
 		<div class="block">
 			<div class="maintananceblock">
-				<img src="//webflow/images2/sub_logo1.svg" loading="lazy" alt="" class="image-40">
+				<img src="/wesell/webflow/images2/wesell_logo.svg" loading="lazy" alt="" class="image-40">
 					<div class="title4">
 						<spring:message code="pop.ServiceRest_1" />
 						<span class="text-span-16">

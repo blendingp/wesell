@@ -66,13 +66,14 @@
 	               </div>
 	           </li>
 	           <li class="nav-item">
-	              <a class="nav-link" href="/wesell/admin/fixstat.do">
-	                  <i class="fas fa-fw fa-edit"></i>
-	                  <span>사이트 점검</span></a>
+	              <a class="nav-link" href="/wesell/admin/fixstat.do"> <i class="fas fa-fw fa-edit"></i> <span>사이트 점검</span> </a>
+	           </li>
+	           <li class="nav-item">
+	              <a class="nav-link" href="/wesell/admin/exchangeList.do"> <i class="fas fa-fw fa-cog"></i> <span>거래소 목록</span> </a>
 	           </li>
 			</c:if>
 				
-			<c:set var="collapseCnt" value="${collapseCnt+1}"/>
+			<%-- <c:set var="collapseCnt" value="${collapseCnt+1}"/>
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse${collapseCnt}" aria-expanded="true" aria-controls="collapse${collapseCnt}">
 	                <i class="fas fa-fw fa-cog"></i>
@@ -279,7 +280,7 @@
 	                   	</c:if>
 	                </div>
 	            </div>
-	        </li>
+	        </li> --%>
 	        <c:set var="collapseCnt" value="${collapseCnt+1}"/>
 	        <li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse${collapseCnt}" aria-expanded="true" aria-controls="collapse${collapseCnt}">

@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -56,6 +57,11 @@ public class UserController {
 
 	@RequestMapping(value = "/main.do")
 	public String main(HttpServletRequest request, ModelMap model) throws Exception {
+		EgovMap in = new EgovMap();
+		in.put("limit", 50);
+		
+		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);
+		model.addAttribute("list", list);
 		
 		return "wesell/wesellMain";
 	}

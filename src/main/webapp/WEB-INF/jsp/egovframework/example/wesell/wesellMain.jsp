@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE>
 <html>
 
@@ -35,45 +36,50 @@
           </div>
         </div>
         <div class="m_rolling">
-          <div class="rolling_area">
-            <div><spring:message code="wesell.main.ment7"/></div>
-          </div>
+          <div class="rolling_area"></div>
         </div>
       </div>
       <div class="m_section2 wf-section">
         <div class="m_sc_block2">
           <div class="m_sc_title2"><spring:message code="wesell.main.ment8"/></div>
           <div class="m_sc_stitle"><spring:message code="wesell.main.ment9"/></div>
-          <div class="m_sc2_box">
-            <div class="form-block w-form">
-              <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get">
-                <div class="m_sc2_item">
-                  <div class="m_c_box">
-                    <div>USDT</div><input type="text" class="m_c_input w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Example Text" id="field-2" required="">
-                  </div>
-                  <div class="m_c_box2"><img src="/wesell/webflow/images2/1608681_exchange_icon_11608681_exchange_icon.png" loading="lazy" alt="" class="m_c_icon"></div>
-                  <div class="m_c_box">
-                    <div>Coin Select</div><select id="field-3" name="field-3" data-name="Field 3" class="m_coin_select w-select">
-                      <option value="">Select one...</option>
-                      <option value="First">First choice</option>
-                      <option value="Second">Second choice</option>
-                      <option value="Third">Third choice</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="m_c_result">
-                  <div>1,000,000,000 Coin</div>
-                </div>
-              </form>
-              <div class="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-              </div>
-              <div class="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-              </div>
-            </div>
-          </div>
-        </div>
+					<div class="m_sc2_box">
+						<div class="mlist_block">
+							<div class="list_top">
+								<div class="list_box">
+									<div><spring:message code="trade.symbol"/></div>
+								</div>
+								<div class="list_box">
+									<div><spring:message code="trade.coin"/></div>
+								</div>
+								<div class="list_box _3">
+									<div><spring:message code="trade.volume"/></div>
+								</div>
+								<div class="list_box _2">
+									<div><spring:message code="wallet.p2p.detail"/></div>
+								</div>
+							</div>
+							<c:forEach var="item" items="${list}">
+								<div class="list">
+									<div class="list_box">
+										<div class="m_list_imgbox">
+											<img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" alt="" class="list_img">
+										</div>
+									</div>
+									<div class="list_box">
+										<div>${item.coin}</div>
+									</div>
+									<div class="list_box _3">
+										<div><fmt:formatNumber value="${item.volume}"/></div>
+									</div>
+									<div class="list_box _2">
+										<a href="${item.link}" target="_blank" class="m_list_link">Go Detail</a>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
       </div>
       <div class="m_section3 wf-section">
         <div class="m_sc_block3">
