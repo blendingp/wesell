@@ -15,7 +15,7 @@
 		<jsp:include page="../wesellFrame/top2.jsp"></jsp:include>
 		<div class="c_section">
 			<div class="c_list_block">
-				<h1 class="c_title">Tokken Info</h1>
+				<h1 class="c_title"><spring:message code="trade.${type}"/></h1>
 				<div class="mlist_block">
 					<div class="list_top">
 						<div class="list_box">
@@ -26,6 +26,9 @@
 						</div>
 						<div class="list_box _3">
 							<div><spring:message code="trade.volume"/></div>
+						</div>
+						<div class="list_box _3">
+							<div><spring:message code="trade.changed"/></div>
 						</div>
 						<div class="list_box _2">
 							<div><spring:message code="wallet.p2p.detail"/></div>
@@ -43,6 +46,16 @@
 							</div>
 							<div class="list_box _3">
 								<div><fmt:formatNumber value="${item.volume}"/></div>
+							</div>
+							<div class="list_box _3">
+								<c:set var="updownArrow" value=""/>
+								<c:if test="${item.updown eq 'up'}">
+									<c:set var="updownArrow" value="↑"/>
+								</c:if>
+								<c:if test="${item.updown eq 'down'}">
+									<c:set var="updownArrow" value="↓"/>
+								</c:if>
+								<div class="list_txt ${item.updown}"><fmt:formatNumber value="${item.changed}"/><span class="arrow_up">${updownArrow}</span><br> </div>
 							</div>
 							<div class="list_box _2">
 								<a href="${item.link}" target="_blank" class="m_list_link">Go Detail</a>

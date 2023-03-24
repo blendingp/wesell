@@ -18,6 +18,7 @@
         <![CDATA[
             SELECT *
             FROM exchange
+            WHERE type = #type#
             order by idx desc
         ]]>
         <isNotEmpty property="limit">
@@ -31,11 +32,17 @@
 				( symbol
 				  , coin
 				  , volume
-				  , link)
+				  , changed
+				  , updown
+				  , link
+				  , type)
 			VALUES ( #symbol#
 				  , #coin#
 				  , #volume#
-				  , #link#)
+				  , #changed#
+				  , #updown#
+				  , #link#
+				  , #type#)
 		]]>
 	</insert>
 	

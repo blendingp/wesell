@@ -20,26 +20,12 @@
 					<div class="loginblock" style="display:flex;"><img src="/wesell/webflow/images2/main_logo1.svg" loading="lazy" data-w-id="ea9f9d47-59cb-1533-1095-666329c4628b" alt="" class="login_logo">
 						<div class="title4"><spring:message code="menu.register" /></div>
 						<div class="w-form">
-							<div class="regist_btnwarp">
-								<input type="hidden" name="joinKind" id="joinKind" value="setphone"/>
-								<a href="javascript:setAuth('setphone')" class="button-65 w-button click setphonebtn"><spring:message code="join.phoneauth" /></a> 
-								<a href="javascript:setAuth('setemail')" class="button-65 w-button setemailbtn"><spring:message code="join.emailauth" /></a>
-							</div>
+							<input type="hidden" name="joinKind" id="joinKind" value="setphone"/>
 							<label class="title5"><spring:message code="join.name" /></label>
 							<input type="text" class="text-field-10 w-input" maxlength="30" name="name" placeholder="<spring:message code="join.nameTxt"/>" id="name"> 
 							
 							<label for="name" class="title5 setphone"> <spring:message code="join.phone" /></label>
-							<div class="loginbox setphone">
-								<input type="text" onkeyup="SetNum(this)" class="text-field-9 w-input" maxlength="12" name="phone"	placeholder="<spring:message code="join.phoneTxt"/>" id="phone">
-								<a href="javascript:sendRequestPhone()" class="button-10 w-button"> <spring:message code="join.request" /></a>
-							</div>
-							<label class="title5 setemail" style="display:none"><spring:message code="join.email" /></label>
-							<div class="loginbox setemail" style="display:none">
-								<input type="text" class="text-field-9 w-input" maxlength="30" name="email" id="email" placeholder="<spring:message code="join.emailTxt"/>"> 
-								<a href="javascript:sendRequestEmail()" class="button-10 w-button">
-									<spring:message code="join.request" />
-								</a>
-							</div>
+							<input type="text" onkeyup="SetNum(this)" class="text-field-10 w-input" maxlength="12" name="phone"	placeholder="<spring:message code="join.phoneTxt"/>" id="phone">
 							
 							<label class="title5"><spring:message code="join.pw" /></label> 
 							<input type="password" class="text-field-10 w-input" maxlength="20" name="pw" placeholder="<spring:message code="join.pWrong"/>" id="pw">
@@ -48,12 +34,13 @@
 							<spring:message code="join.pwConfirm" /></label> 
 							<input type="password" class="text-field-10 w-input" maxlength="20" placeholder="<spring:message code="join.pwConfirm"/>" id="pwConfirm">
 						</div>
-						<div class="title5">
+						
+						<%-- <div class="title5">
 							<spring:message code="join.invite" />
 						</div>
 						<input type="text" class="text-field-10 w-input" maxlength="10" name="inviteCode" placeholder="<spring:message code="join.inviteTxt"/>" value="${invi}"> 
 						
-						<%-- <label for="email-4" class="title5">
+						<label for="email-4" class="title5">
 							<spring:message code="join.maccount"/>(<spring:message code="join.mbank"/>)
 						</label>
 						<div class="loginbox">
@@ -305,10 +292,10 @@
 			if (joining)
 				return;
 			
-			if (!checkPhone && !checkEmail) {				
+			/* if (!checkPhone && !checkEmail) {				
 				alert("<spring:message code='join.phoneconfirmOrEmail'/>");
 				return false;
-			}
+			} */
 
 			/* if (!checkEmail) {
 				alert("<spring:message code='join.emailconfirm'/>");
@@ -323,10 +310,10 @@
 				return false;
 			}
 			
-			if(!$("#calAgree").is(":checked")){
+			/* if(!$("#calAgree").is(":checked")){
 				alert("<spring:message code='join.calAgree_msg'/>")
 				return false;
-			}
+			} */
 			
 			/* if ($("#account").val().length < 1) {
 				alert("<spring:message code='join.wrAccount'/>")

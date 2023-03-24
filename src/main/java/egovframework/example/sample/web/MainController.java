@@ -27,6 +27,7 @@ import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.example.sample.web.spot.SpotOrder;
 import egovframework.example.sample.web.util.PublicUtils;
 import egovframework.example.sample.web.util.Send;
+import egovframework.example.sample.web.util.Validation;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
@@ -168,11 +169,19 @@ public class MainController {
 	
 	@RequestMapping(value = "/user/chart.do")
 	public String chart(HttpServletRequest request, ModelMap model) throws Exception {
+		String type = request.getParameter("type");
+		if(Validation.isNull(type)){
+			type = "unlisted";
+		}
+		
 		EgovMap in = new EgovMap();
+		in.put("type", type);
 		in.put("limit", 50);
 		
 		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("type", type);
 		
 		return "user/chart";
 	}

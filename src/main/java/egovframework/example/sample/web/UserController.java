@@ -58,6 +58,7 @@ public class UserController {
 	@RequestMapping(value = "/main.do")
 	public String main(HttpServletRequest request, ModelMap model) throws Exception {
 		EgovMap in = new EgovMap();
+		in.put("type", "unlisted");
 		in.put("limit", 50);
 		
 		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);

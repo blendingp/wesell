@@ -15,10 +15,21 @@
 				<div class="footerlist_warp">
 					<div class="footerlist_block">
 						<div class="footerlist_title">
-							<spring:message code="menu.deal" />
+							<spring:message code="trade.news" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do'"><spring:message code="newwave.menu.spotCoin"/></div>
-						<%-- <div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/trade.do?betMode=inverse'"><spring:message code="menu.spotCoin"/></div> --%>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/news.do'"><spring:message code="trade.news"/></div>
+					</div>
+					<div class="footerlist_block">
+						<div class="footerlist_title">
+							<spring:message code="trade.world" />
+						</div>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=world'"><spring:message code="trade.world"/></div>
+					</div>
+					<div class="footerlist_block">
+						<div class="footerlist_title">
+							<spring:message code="trade.unlisted" />
+						</div>
+						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=unlisted'"><spring:message code="trade.unlisted"/></div>
 					</div>
 					<div class="footerlist_block">
 						<div class="footerlist_title">

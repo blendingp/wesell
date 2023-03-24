@@ -454,4 +454,41 @@
             limit 1
         ]]>
 	</select>
+	
+	<!-- news -->
+	<select id="newsL" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM news
+            order by idx desc
+        ]]>
+        <isNotEmpty property="firstindex">
+            limit $firstindex$, $recordperpage$
+        </isNotEmpty>
+    </select>
+    <select id="newsT" resultClass="int">
+        <![CDATA[
+            SELECT count(*) num
+            FROM news
+        ]]>
+    </select>
+	
+	<insert id="newsInsert">
+		<![CDATA[
+			INSERT INTO news
+				( title
+				  , ndate
+				  , link)
+			VALUES ( #title#
+				  , #ndate#
+				  , #link#)
+		]]>
+	</insert>
+
+	<delete id="newsDelete">
+		<![CDATA[
+			DELETE FROM news
+			WHERE idx=#idx#
+		]]>
+	</delete>
 </sqlMap>

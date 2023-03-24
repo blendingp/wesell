@@ -36,38 +36,19 @@ if(auto == "1"){
 					<div class="title4"> <spring:message code="menu.login" /> </div>
 					<div class="w-form">
 						<form action="javascript:login()" id="loginFrm" class="form-5">
-							<div class="regist_btnwarp">
-								<input type="hidden" name="joinKind" id="joinKind" value="setphone"/>
-								<a href="javascript:setAuth('setphone')" class="button-65 w-button click setphonebtn"><spring:message code="login.phoneauth" /></a> 
-								<a href="javascript:setAuth('setemail')" class="button-65 w-button setemailbtn"><spring:message code="login.emailauth" /></a>
-<%-- 								<a href="javascript:setAuth('settelegram')" class="button-65 w-button settelegrambtn"><spring:message code="affiliate.cb.3"/> <spring:message code="join.request"/></a> --%>
-							</div>
-							
+							<input type="hidden" name="joinKind" id="joinKind" value="setphone"/>
 							<label for="name" class="title5 setphone"><spring:message code="join.phone" /></label>
 							<label for="name" class="title5 setemail" style="display:none"><spring:message code="join.email" /></label>
 							<label for="name" class="title5 settelegram" style="display:none"><spring:message code="join.phone" /></label>
 							<div class="loginbox">
-								<!-- onkeyup="SetNum(this);" -->
-								<input type="text" class="text-field-9 w-input" maxlength="30"  name="phone" id="phone" placeholder="<spring:message code="join.phoneTxt"/>">
-								<a href="javascript:sendRequest()" class="button-10 w-button">
-									<spring:message	code="join.request" />
-								</a>
+								<input type="text" class="text-field-10 w-input" maxlength="30"  name="phone" id="phone" placeholder="<spring:message code="join.phoneTxt"/>">
 							</div>
-							<label for="code" class="title5">
-								<spring:message	code="join.code" />
-							</label> 
-							<input type="text"	class="text-field-10 w-input" maxlength="256" id="code" name="code" placeholder="<spring:message code="pop.inputConfirmCode"/>" autocomplete="off" onkeypress="if(event.keyCode==13) {javascript:login(); return false;}">
 							<label for="email-2" class="title5">
 								<spring:message	code="join.pw" />
 							</label> 
 							<input type="password"	class="text-field-10 w-input" name="pw" id="pw" placeholder="<spring:message code="join.pWrong"/>" onkeypress="if(event.keyCode==13) {javascript:login(); return false;}">
 							<div class="login_pwtxt">
-								<span onclick="$('#pwPop').css('display','flex')"
-									class="login_pwbtn" style="cursor: pointer;"><spring:message
-										code="join.forgotPW" /></span>" / " <span
-									onclick="location.href='/wesell/join.do'" class="login_pwbtn"
-									style="cursor: pointer;"><spring:message
-										code="menu.register2" /></span>
+								<span onclick="location.href='/wesell/join.do'" class="login_pwbtn" style="cursor: pointer;"><spring:message code="menu.register2" /></span>
 							</div>
 							<input type="submit" value="<spring:message code="menu.login" />" data-wait="Please wait..." class="submit-button-2 w-button">
 						</form>

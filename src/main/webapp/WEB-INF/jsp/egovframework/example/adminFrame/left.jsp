@@ -68,10 +68,21 @@
 	           <li class="nav-item">
 	              <a class="nav-link" href="/wesell/admin/fixstat.do"> <i class="fas fa-fw fa-edit"></i> <span>사이트 점검</span> </a>
 	           </li>
-	           <li class="nav-item">
-	              <a class="nav-link" href="/wesell/admin/exchangeList.do"> <i class="fas fa-fw fa-cog"></i> <span>거래소 목록</span> </a>
-	           </li>
 			</c:if>
+			
+			<c:set var="collapseCnt" value="${collapseCnt+1}"/>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse${collapseCnt}" aria-expanded="true" aria-controls="collapse${collapseCnt}">
+	                <i class="fas fa-fw fa-cog"></i>
+	                <span>거래소&토큰</span>
+	            </a>
+	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+	                <div class="bg-white py-2 collapse-inner rounded">
+	                    <a class="collapse-item" href="/wesell/admin/exchangeList.do?type=world">전세계 거래소</a>
+	                    <a class="collapse-item" href="/wesell/admin/exchangeList.do?type=unlisted">비상장 토큰</a>
+	                </div>
+	            </div>
+	        </li>
 				
 			<%-- <c:set var="collapseCnt" value="${collapseCnt+1}"/>
 			<li class="nav-item">
@@ -298,10 +309,11 @@
 	        <li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse${collapseCnt}" aria-expanded="true" aria-controls="collapse${collapseCnt}">
 	                <i class="fas fa-fw fa-wrench"></i>
-	                <span>공지사항 게시판</span>
+	                <span>게시판</span>
 	            </a>
 	            <div id="collapse${collapseCnt}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	                <div class="bg-white py-2 collapse-inner rounded">
+	                    <a class="collapse-item" href="/wesell/admin/newsList.do">뉴스</a>
 	                    <a class="collapse-item" href="/wesell/admin/board/noticeList.do">공지사항</a>
 	                    <a class="collapse-item" href="/wesell/admin/board/eventList.do">팝업 공지사항</a>
 	                    <a class="collapse-item" href="/wesell/admin/board/systemList.do">자동댓글 게시판</a>

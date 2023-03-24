@@ -16,58 +16,38 @@
 			<div id="content">
 				<jsp:include page="../adminFrame/top.jsp"></jsp:include>
 				<div class="container-fluid">
-					<h1 class="h3 mb-2 text-gray-800">
-						<c:if test="${type eq 'world'}">전세계 거래소</c:if>
-						<c:if test="${type eq 'unlisted'}">비상장 토큰</c:if>
-					</h1>
+					<h1 class="h3 mb-2 text-gray-800">뉴스</h1>
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">${type}</h6>
+							<h6 class="m-0 font-weight-bold text-primary">news</h6>
 						</div>
 						<div class="card-body">
-							<span>* 변동량이 0보다 크면 파란색, 0보다 작으면 빨간색으로 표시됩니다</span>
 							<div class="table-responsive">
 								<form name="insertForm" id="insertForm" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="type" id="type" value="${type}">
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
 												<th>삭제</th>
-												<th>심볼</th>
-												<th>코인</th>
-												<th>볼륨</th>
-												<th>변동량</th>
+												<!-- <th>이미지</th> -->
+												<th>제목</th>
+												<th>날짜</th>
 												<th>링크</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td><div onclick="insertProcess()" class="btn btn-primary">등록</div></td>
-												<td><input type="file" name="symbol" id="symbol"></td>
-												<td><input name="coin" id="coin"></td>
-												<td><input name="volume" id="volume"></td>
-												<td><input name="changed" id="changed"></td>
+												<!-- <td><input type="file" name="img" id="img"></td> -->
+												<td><input name="title" id="title"></td>
+												<td><input type="date" name="ndate" id="ndate"></td>
 												<td><input name="link" id="link"></td>
 											</tr>
 											<c:forEach var="item" items="${list}" varStatus="i">
 												<tr>
 													<td><div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div></td>
-													<td><img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" style="max-width:100px"></td>
-													<td>${item.coin}</td>
-													<td><fmt:formatNumber value="${item.volume}"/></td>
-													<td>
-														<c:set var="color" value=""/>
-														<c:set var="updownArrow" value=""/>
-														<c:if test="${item.updown eq 'up'}">
-															<c:set var="color" value="#4e73df"/>
-															<c:set var="updownArrow" value="↑"/>
-														</c:if>
-														<c:if test="${item.updown eq 'down'}">
-															<c:set var="color" value="#e74a3b"/>
-															<c:set var="updownArrow" value="↓"/>
-														</c:if>
-														<span style="color:${color}"><fmt:formatNumber value="${item.changed}"/> ${updownArrow}</span>
-													</td>
+													<%-- <td><img src="/filePath/wesell/news/${item.img}" loading="lazy" style="max-width:100px"></td> --%>
+													<td>${item.title}</td>
+													<td>${item.ndate}</td>
 													<td>${item.link}</td>
 												</tr>
 											</c:forEach>
@@ -92,7 +72,7 @@
 			contentType: false,
 			data : formData ,
 			dataType : "json" ,
-			url : "/wesell/admin/exchangeInsert.do",
+			url : "/wesell/admin/newsInsert.do",
 			success:function(data){
 				if(data.result == "success"){
 					location.reload();
@@ -113,7 +93,7 @@
 				type :"post",
 				data : data ,
 				dataType : "json" ,
-				url : "/wesell/admin/exchangeDelete.do",
+				url : "/wesell/admin/newsDelete.do",
 				success:function(data){
 					if(data.result == "success"){
 						location.reload();

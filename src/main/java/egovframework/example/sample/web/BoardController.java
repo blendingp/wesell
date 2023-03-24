@@ -138,6 +138,30 @@ public class BoardController {
 		return obj.toJSONString();
 	}
 	
+	@RequestMapping(value = "/news.do")
+	public String news(HttpServletRequest request, ModelMap model) throws Exception {
+		PaginationInfo pi = new PaginationInfo();
+		if(request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals("")){
+			pi.setCurrentPageNo(1);
+		}else{
+			pi.setCurrentPageNo(Integer.parseInt(""+request.getParameter("pageIndex")));
+		}
+		
+		pi.setPageSize(10);
+		pi.setRecordCountPerPage(10);
+		
+		EgovMap in = new EgovMap();
+		in.put("first" , pi.getFirstRecordIndex());
+		in.put("record" , pi.getRecordCountPerPage());
+		
+		pi.setTotalRecordCount((int)sampleDAO.select("newsT" , in));
+		List<?> newsList = (List<?>) sampleDAO.list("newsL", in);
+		model.addAttribute("newsList", newsList);
+		model.addAttribute("pi", pi);
+		model.addAttribute("search", request.getParameter("search"));
+		return "board/news";
+	}
+	
 	@RequestMapping(value = "/notice.do")
 	public String notice(HttpServletRequest request, ModelMap model) throws Exception {
 		HttpSession session = request.getSession();

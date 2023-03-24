@@ -394,13 +394,12 @@ public class JoinController {
 		HttpSession session = request.getSession();
 		String phone = request.getParameter("phone"); // 전화번호
 		String pw = request.getParameter("pw"); // 비밀번호
-		String checkPhone = request.getParameter("checkPhone"); // 인증여부 
+		//String checkPhone = request.getParameter("checkPhone"); // 인증여부 
 		Log.print("Login st"+phone, 1, "logincheck");
-		String code = request.getParameter("code"); // 인증 코드		
+//		String code = request.getParameter("code"); // 인증 코드		
 		JSONObject obj = new JSONObject();
 		obj.put("result", "fail");
 		
-		EgovMap info = null;
 		if(phone == null || phone.equals("")){
 			obj.put("msg", Message.get().msg(messageSource, "pop.inputPhone", request));
 			return obj.toJSONString();
@@ -411,10 +410,6 @@ public class JoinController {
 		if(phone.length()>40){
 			obj.put("msg", Message.get().msg(messageSource, "pop.inputPhoneNum", request));
 			return obj.toJSONString();
-		}
-		if(phone.length()==12){
-			char f = phone.charAt(0);
-			phone = phone.replace(Character.toString(f), "");
 		}
 		
 		if(pw == null || pw.equals("")){
@@ -433,11 +428,7 @@ public class JoinController {
 		in.put("phone", phone);
 		in.put("pw", pw);
 				
-		if(joinKind.compareTo("setemail") == 0){			
-				info = (EgovMap)sampleDAO.select("selectMemberForLoginByEmail" , in);			
-		}
-		else
-			info = (EgovMap)sampleDAO.select("selectMemberForLogin" , in);
+		EgovMap info = (EgovMap)sampleDAO.select("selectMemberForLogin" , in);
 		
 		
 		if(info != null && Integer.parseInt(info.get("istest")+"") == 1){
@@ -466,41 +457,41 @@ public class JoinController {
 			Log.print("User Login suc userIdx = "+ info.get("idx")+"phone = "+request.getParameter("phone")+" IP = "+userip, 1, "logincheck");
 			return obj.toJSONString();
 		}else{
-			if(code == null || code.equals("")){
-				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
-				return obj.toJSONString();
-			}
-
-			if(code.length()>20){
-				obj.put("msg", Message.get().msg(messageSource, "join.inputConfirmCode", request));
-				return obj.toJSONString();
-			}
+//			if(code == null || code.equals("")){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
+//				return obj.toJSONString();
+//			}
+//
+//			if(code.length()>20){
+//				obj.put("msg", Message.get().msg(messageSource, "join.inputConfirmCode", request));
+//				return obj.toJSONString();
+//			}
 			
-			if(!code.equals("bit!akzpt142")){
-				String phones = ""+session.getAttribute("phone");
-				if(checkPhone.equals("false")){
-					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
-					return obj.toJSONString();
-				}
-
-				if(phone.compareTo(phones)!=0){
-					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
-					return obj.toJSONString();
-				}
-				
-//				if(server != 1){ //실서버 아니면 휴대폰코드로 로그인 불가
-//					obj.put("msg", Message.get().msg(messageSource, "pop.wrongAccess", request));
+//			if(!code.equals("bit!akzpt142")){
+//				String phones = ""+session.getAttribute("phone");
+//				if(checkPhone.equals("false")){
+//					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
 //					return obj.toJSONString();
 //				}
-				if(session.getAttribute("phoneCode") == null){
-					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
-					return obj.toJSONString();
-				}
-				if(!session.getAttribute("phoneCode").toString().equals(code)){
-					obj.put("msg", Message.get().msg(messageSource, "pop.wrongPhoneCode", request));
-					return obj.toJSONString();
-				}
-			}
+//
+//				if(phone.compareTo(phones)!=0){
+//					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
+//					return obj.toJSONString();
+//				}
+//				
+////				if(server != 1){ //실서버 아니면 휴대폰코드로 로그인 불가
+////					obj.put("msg", Message.get().msg(messageSource, "pop.wrongAccess", request));
+////					return obj.toJSONString();
+////				}
+//				if(session.getAttribute("phoneCode") == null){
+//					obj.put("msg", Message.get().msg(messageSource, "join.phoneconfirm", request));
+//					return obj.toJSONString();
+//				}
+//				if(!session.getAttribute("phoneCode").toString().equals(code)){
+//					obj.put("msg", Message.get().msg(messageSource, "pop.wrongPhoneCode", request));
+//					return obj.toJSONString();
+//				}
+//			}
 			//info = (EgovMap)sampleDAO.select("selectMemberForLogin" , in);
 			if(info != null){
 				if(Integer.parseInt(info.get("jstat")+"") == 0){
@@ -599,7 +590,7 @@ public class JoinController {
 	@ResponseBody
 	@RequestMapping(value="/joinProcess.do" , produces="application/json; charset=utf8")
 	public String joinProcess(HttpServletRequest request) throws UnsupportedEncodingException{
-		String inviteCode = request.getParameter("inviteCode"); // 초대코드
+		//String inviteCode = request.getParameter("inviteCode"); // 초대코드
 		String country = "82"; // 국가
 		
 		String email = request.getParameter("email"); // 이메일
@@ -610,15 +601,15 @@ public class JoinController {
 		String pw = request.getParameter("pw"); // pw
 		/*String bank = request.getParameter("bank"); // 은행
 		String account = request.getParameter("account"); // 계좌번호 */
-		String pCode = request.getParameter("pCode"); // 휴대폰 인증 코드
-		String eCode = request.getParameter("eCode"); // 이메일 인증 코드
+//		String pCode = request.getParameter("pCode"); // 휴대폰 인증 코드
+//		String eCode = request.getParameter("eCode"); // 이메일 인증 코드
 		
 		JSONObject obj = new JSONObject();
 		obj.put("result", "fail");
-		if(inviteCode.length() > 30){
-			obj.put("msg", Message.get().msg(messageSource, "pop.selectCountry", request));
-			return obj.toJSONString();
-		}
+//		if(inviteCode.length() > 30){
+//			obj.put("msg", Message.get().msg(messageSource, "pop.selectCountry", request));
+//			return obj.toJSONString();
+//		}
 		
 		HttpSession session = request.getSession();
 		if(joinKind.compareTo("setphone") == 0){
@@ -626,42 +617,42 @@ public class JoinController {
 				obj.put("msg", Message.get().msg(messageSource, "pop.inputPhone", request));
 				return obj.toJSONString();
 			}			
-			if(!session.getAttribute("phone").toString().equals(phone)){
-				obj.put("msg", Message.get().msg(messageSource, "pop.phoneCodeDiff", request));
-				return obj.toJSONString();
-			}
-			if(pCode == null || pCode.equals("") || pCode.length() > 20){
-				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
-				return obj.toJSONString();
-			}			
-			if(!session.getAttribute("phoneCode").toString().equals(pCode)){
-				obj.put("msg", Message.get().msg(messageSource, "pop.wrongPhoneCode", request));
-				return obj.toJSONString();
-			}
+//			if(!session.getAttribute("phone").toString().equals(phone)){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.phoneCodeDiff", request));
+//				return obj.toJSONString();
+//			}
+//			if(pCode == null || pCode.equals("") || pCode.length() > 20){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
+//				return obj.toJSONString();
+//			}			
+//			if(!session.getAttribute("phoneCode").toString().equals(pCode)){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.wrongPhoneCode", request));
+//				return obj.toJSONString();
+//			}
 		}		
-		if(joinKind.compareTo("setemail") == 0){
-			if(email == null || email.isEmpty()){
-				obj.put("msg", Message.get().msg(messageSource, "pop.inputPhone", request));
-				return obj.toJSONString();
-			}			
-			if(!session.getAttribute("email").toString().equals(email)){
-				obj.put("msg", Message.get().msg(messageSource, "pop.emailCodeDiff", request));
-				return obj.toJSONString();
-			}
-			if(!Validation.isValidEmail(email) && email.length() > 50){
-				obj.put("result", "fail");
-				obj.put("msg", Message.get().msg(messageSource, "pop.checkEmail", request));
-				return obj.toJSONString();
-			}			
-			if(eCode == null || eCode.equals("") || eCode.length() > 20){
-				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
-				return obj.toJSONString();
-			}
-			if(!session.getAttribute("emailCode").toString().equals(eCode)){
-				obj.put("msg", Message.get().msg(messageSource, "pop.wrongEmailCode", request));
-				return obj.toJSONString();
-			}
-		}
+//		if(joinKind.compareTo("setemail") == 0){
+//			if(email == null || email.isEmpty()){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.inputPhone", request));
+//				return obj.toJSONString();
+//			}			
+//			if(!session.getAttribute("email").toString().equals(email)){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.emailCodeDiff", request));
+//				return obj.toJSONString();
+//			}
+//			if(!Validation.isValidEmail(email) && email.length() > 50){
+//				obj.put("result", "fail");
+//				obj.put("msg", Message.get().msg(messageSource, "pop.checkEmail", request));
+//				return obj.toJSONString();
+//			}			
+//			if(eCode == null || eCode.equals("") || eCode.length() > 20){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.inputConfirmCode", request));
+//				return obj.toJSONString();
+//			}
+//			if(!session.getAttribute("emailCode").toString().equals(eCode)){
+//				obj.put("msg", Message.get().msg(messageSource, "pop.wrongEmailCode", request));
+//				return obj.toJSONString();
+//			}
+//		}
 		
 		if(name == null || name.equals("")){
 			obj.put("msg", Message.get().msg(messageSource, "pop.inputName", request));
@@ -701,19 +692,19 @@ public class JoinController {
 				obj.put("msg", Message.get().msg(messageSource, "pop.alreadyPhone", request));
 				return obj.toJSONString();
 			}else{
-				if(inviteCode.equals("BMBIT") || inviteCode == null || inviteCode.equals("")){ // 관리자코드
-					in.put("parentsIdx", -1);   // 추천인 -1					 
-				}
-				else if(inviteCode != null && !inviteCode.equals("")) {
-					in.put("inviteCode", inviteCode);
-					//부모를 찾는다
-					EgovMap parents = (EgovMap)sampleDAO.select("selectMemberByAdminInvitationCode", in);
-					if (parents == null || Member.isBanded(parents.get("idx").toString())) {
-						obj.put("msg", Message.get().msg(messageSource, "pop.wrongInvite", request));
-						return obj.toJSONString();
-					}
-					in.put("parentsIdx", ""+parents.get("idx"));
-				}
+//				if(inviteCode.equals("BMBIT") || inviteCode == null || inviteCode.equals("")){ // 관리자코드
+//					in.put("parentsIdx", -1);   // 추천인 -1					 
+//				}
+//				else if(inviteCode != null && !inviteCode.equals("")) {
+//					in.put("inviteCode", inviteCode);
+//					//부모를 찾는다
+//					EgovMap parents = (EgovMap)sampleDAO.select("selectMemberByAdminInvitationCode", in);
+//					if (parents == null || Member.isBanded(parents.get("idx").toString())) {
+//						obj.put("msg", Message.get().msg(messageSource, "pop.wrongInvite", request));
+//						return obj.toJSONString();
+//					}
+//					in.put("parentsIdx", ""+parents.get("idx"));
+//				}
 				name= name.trim();
 				pw = pw.trim();
 				

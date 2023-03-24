@@ -31,8 +31,7 @@
 					<spring:message code="menu.support" />
 				</div>
 				<div class="custermertitle2">
-					<span class="text-span-2"><spring:message
-							code="main.cutomer_1" /></span>
+					<span class="text-span-2"><spring:message code="main.cutomer_1" /></span>
 					<spring:message code="main.cutomer_2" />
 				</div>
 			</div>

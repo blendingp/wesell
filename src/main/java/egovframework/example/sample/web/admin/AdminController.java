@@ -753,8 +753,18 @@ public class AdminController {
 	
 	@RequestMapping(value = "/exchangeList.do")
 	public String exchangeList(HttpServletRequest request, ModelMap model) throws Exception {
-		List<?> list = (List<?>) sampleDAO.list("exchangeL");
+		String type = request.getParameter("type");
+		if(Validation.isNull(type)){
+			type = "unlisted";
+		}
+		
+		EgovMap in = new EgovMap();
+		in.put("type", type);
+		
+		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("type", type);
 		
 		return "admin/exchangeList";
 	}
@@ -765,10 +775,17 @@ public class AdminController {
 		JSONObject obj = new JSONObject();
 		obj.put("result", "fail");
 		
+		String type = mre.getParameter("type");
 		String coin = mre.getParameter("coin");
 		String volume = mre.getParameter("volume");
+		String changed = mre.getParameter("changed");
 		String link = mre.getParameter("link");
+		String updown = "";
 		
+		if (Validation.isNull(type)) {
+			obj.put("msg", "잘못된 경로입니다. 새로고침 후 다시 이용해주세요.");
+			return obj.toJSONString();
+		}
 		if (Validation.isNull(coin)) {
 			obj.put("msg", "코인을 입력해주세요.");
 			return obj.toJSONString();
@@ -777,15 +794,29 @@ public class AdminController {
 			obj.put("msg", "볼륨을 입력해주세요.");
 			return obj.toJSONString();
 		}
+		if (Validation.isNull(changed)) {
+			obj.put("msg", "변동량을 입력해주세요.");
+			return obj.toJSONString();
+		}
 		if (Validation.isNull(link)) {
 			obj.put("msg", "링크를 입력해주세요.");
 			return obj.toJSONString();
 		}
+
+		if(Integer.parseInt(changed)>0){
+			updown = "up";
+		}
+		else if(Integer.parseInt(changed)<0){
+			updown = "down";
+		}
 		
 		EgovMap in = new EgovMap();
+		in.put("type", type);
 		in.put("coin", coin);
 		in.put("volume", volume);
+		in.put("changed", Math.abs(Integer.parseInt(changed)));
 		in.put("link", link);
+		in.put("updown", updown);
 		
 		MultipartFile mf = mre.getFile("symbol");
 		String path = "C:/upload/wesell/exchange/";
@@ -831,6 +862,92 @@ public class AdminController {
 		in.put("idx", idx);
 		
 		sampleDAO.delete("exchangeDelete", in);
+		
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
+	/* 뉴스 */
+	@RequestMapping(value = "/newsList.do")
+	public String newsList(HttpServletRequest request, ModelMap model) throws Exception {
+		List<?> list = (List<?>) sampleDAO.list("newsL");
+		model.addAttribute("list", list);
+		
+		return "admin/newsList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/newsInsert.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String newsInsert(MultipartHttpServletRequest mre) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		
+		String title = mre.getParameter("title");
+		String ndate = mre.getParameter("ndate");
+		String link = mre.getParameter("link");
+		
+		if (Validation.isNull(title)) {
+			obj.put("msg", "제목을 입력해주세요.");
+			return obj.toJSONString();
+		}
+		if (Validation.isNull(ndate)) {
+			obj.put("msg", "날짜를 선택해주세요.");
+			return obj.toJSONString();
+		}
+		if (Validation.isNull(link)) {
+			obj.put("msg", "링크를 입력해주세요.");
+			return obj.toJSONString();
+		}
+		
+		EgovMap in = new EgovMap();
+		in.put("title", title);
+		in.put("ndate", ndate);
+		in.put("link", link);
+		
+		/*MultipartFile mf = mre.getFile("img");
+		String path = "C:/upload/wesell/news/";
+		
+		if(mf == null || mf.isEmpty()){
+			obj.put("msg", "이미지를 선택해주세요.");
+			return obj.toJSONString();
+		}
+		
+		File file = new File(path);
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		if(!mf.isEmpty()){
+			String filename = mf.getOriginalFilename();
+			String saveNm = UUID.randomUUID().toString().replaceAll("-", "") + filename.substring(filename.lastIndexOf("."));
+			try {
+				mf.transferTo(new File(path+saveNm));
+				in.put("img", saveNm);
+			} catch (Exception e) {
+				e.printStackTrace();
+				obj.put("msg", "이미지를 업로드 에러.");
+				return obj.toJSONString();
+			}
+		}*/
+		
+		sampleDAO.insert("newsInsert", in);
+		
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/newsDelete.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String newsDelete(HttpServletRequest request) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		obj.put("msg", "fail");
+		
+		String idx = request.getParameter("idx");
+		
+		EgovMap in = new EgovMap();
+		in.put("idx", idx);
+		
+		sampleDAO.delete("newsDelete", in);
 		
 		obj.put("result", "success");
 		return obj.toJSONString();
