@@ -12,7 +12,7 @@
 		<div class="mainpop_block">
 			<div class="main_popfeild" style="word-break: break-all; line-height: normal;"><spring:message code="pop.stopTradeWarn"/></div>
 			<div class="warp2">
-				<a href="#" onclick="closepopupn('-1')" class="mainpopbtn w-button"><spring:message code="pop.withdrawRequest_5" /></a>
+				<a href="#" onclick="$('#popupn-1').hide();" class="mainpopbtn w-button"><spring:message code="pop.withdrawRequest_5" /></a>
 			</div>
 		</div>
 	</div>
