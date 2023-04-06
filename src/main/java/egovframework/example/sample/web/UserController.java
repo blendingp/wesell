@@ -64,14 +64,36 @@ public class UserController {
 		List<?> list = (List<?>) sampleDAO.list("exchangeL", in);
 		model.addAttribute("list", list);
 		
+		HttpSession session = request.getSession();
+		int lang = 0;
+		if(session.getAttribute("lang") == null || session.getAttribute("lang").equals("EN")) lang = 1;
+		else if(session.getAttribute("lang").equals("JP")) lang =2;
+		else if(session.getAttribute("lang").equals("CH")) lang = 3;
+		else if(session.getAttribute("lang").equals("FC")) lang = 4;
+		
+		in.put("bcategory", "event");
+		in.put("bwhere", 1);
+		in.put("blang", lang);
+		ArrayList<EgovMap> event = (ArrayList<EgovMap>)sampleDAO.list("selectAllBoard", in);
+		for(int i = 0; i < event.size(); i++){
+			String text = StringEscapeUtils.unescapeHtml3(event.get(i).get("bcontent").toString());
+			event.get(i).put("text", text);
+		}
+		model.addAttribute("notilist", event);
+		
 		return "wesell/wesellMain";
 	}
 	@RequestMapping(value = "/wesellMain.do")
 	public String wesellMain(HttpServletRequest request, ModelMap model) throws Exception {
 		HttpSession session = request.getSession();
 		session.setAttribute("currentP", "main");
+		
 		int lang = 0;
 		if(session.getAttribute("lang") == null || session.getAttribute("lang").equals("EN")) lang = 1;
+		else if(session.getAttribute("lang").equals("JP")) lang =2;
+		else if(session.getAttribute("lang").equals("CH")) lang = 3;
+		else if(session.getAttribute("lang").equals("FC")) lang = 4;
+		
 		EgovMap in = new EgovMap();
 		in.put("bcategory", "event");
 		in.put("bwhere", 1);

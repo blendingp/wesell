@@ -66,22 +66,12 @@ function updateProcess(type){
 									<div class="col-lg-12">
 										<div class="form-group">
 											<label>내용</label>
-											<c:if test="${type eq 'notice'}">
-												 <%-- <select name="bwhere">
-	                                            	<option value="0" <c:if test="${info.bwhere eq 0}">selected</c:if>>전체</option>
-	                                            	<option value="1" <c:if test="${info.bwhere eq 1}">selected</c:if>>메인</option>
-	                                            	<option value="2" <c:if test="${info.bwhere eq 2}">selected</c:if>>거래창</option>
-	                                            </select> --%>
-												 <select name="blang">
-	                                            	<option value="0" <c:if test="${info.blang eq 0}">selected</c:if>>KO(한국어)</option>
-	                                            	<option value="1" <c:if test="${info.blang eq 1}">selected</c:if>>EN(영어)</option>
-	                                            </select>
-											</c:if>
-											<c:if test="${(type eq 'event') or (type eq 'faq')}">
-												 <select name="blang">
-	                                            	<option value="0" <c:if test="${info.blang eq 0}">selected</c:if>>KO(한국어)</option>
-	                                            	<option value="1" <c:if test="${info.blang eq 1}">selected</c:if>>EN(영어)</option>
-	                                            </select>
+											<c:if test="${type eq 'notice' || type eq 'event' || type eq 'faq'}">
+												<select name="blang">
+													<option value="0" <c:if test="${info.blang eq 0}">selected</c:if>>KO(한국어)</option>
+													<option value="1" <c:if test="${info.blang eq 1}">selected</c:if>>EN(영어)</option>
+													<option value="3" <c:if test="${info.blang eq 3}">selected</c:if>>CH(중국어)</option>
+												</select>
 											</c:if>
 											<c:if test="${type eq 'faq'}">
 												<c:if test="${project.name eq 'BITWIN'}">

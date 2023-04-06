@@ -189,7 +189,7 @@ function ready(){
 
 function notiCloseCheck(){
 	var allClose = true;
-	$.each($(".main_noticepop"), function(index, item){
+	$.each($("#popDiv .main_noticepop"), function(index, item){
  		if($(item).css("display") == 'flex') allClose = false;
 	})
 	if(allClose){

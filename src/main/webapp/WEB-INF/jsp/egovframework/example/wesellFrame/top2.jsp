@@ -36,9 +36,9 @@
 					<img src="/wesell/webflow/images2/more_icon3.svg" loading="lazy" alt="" class="top_arrow">
  					<a onclick="dropToggle(this)" href="#" class="topbtn <c:if test="${currentP eq 'wallet'}">click</c:if> w-button"><spring:message code="menu.depandwith"/></a> 
 					<div class="topbtn_drop">
-						<a href="javascript:ready()" class="button-14-copy w-button"><spring:message code="wallet.deposit"/></a> 
-						<a href="javascript:ready()" class="button-14-copy w-button"><spring:message code="wallet.withdrawal"/></a>
-						<a href="javascript:ready()" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
+						<a href="javascript:$('#popupn-1').css('display', 'flex')" class="button-14-copy w-button"><spring:message code="wallet.deposit"/></a> 
+						<a href="javascript:$('#popupn-1').css('display', 'flex')" class="button-14-copy w-button"><spring:message code="wallet.withdrawal"/></a>
+						<a href="javascript:$('#popupn-1').css('display', 'flex')" class="button-14-copy w-button"><spring:message code="wallet.DeandWithHistory_m"/></a> 
 					</div>
 				</div>
 				<div class="topmenubtn tall">

@@ -21,15 +21,22 @@
 						<div class="list_box">
 							<div><spring:message code="trade.symbol"/></div>
 						</div>
-						<div class="list_box">
-							<div><spring:message code="trade.coin"/></div>
-						</div>
-						<div class="list_box _3">
-							<div><spring:message code="trade.volume"/></div>
-						</div>
-						<div class="list_box _3">
-							<div><spring:message code="trade.changed"/></div>
-						</div>
+						<c:if test="${type eq 'unlisted'}">
+							<div class="list_box">
+								<div><spring:message code="trade.coin"/></div>
+							</div>
+							<div class="list_box _3">
+								<div><spring:message code="trade.volume"/></div>
+							</div>
+							<div class="list_box _3">
+								<div><spring:message code="trade.changed"/></div>
+							</div>
+						</c:if>
+						<c:if test="${type eq 'world'}">
+							<div class="list_box" <c:if test="${type eq 'world'}">style="width:68%"</c:if>>
+								<div><spring:message code="wallet.stockExchange"/></div>
+							</div>
+						</c:if>
 						<div class="list_box _2">
 							<div><spring:message code="wallet.p2p.detail"/></div>
 						</div>
@@ -41,22 +48,24 @@
 									<img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" alt="" class="list_img">
 								</div>
 							</div>
-							<div class="list_box">
+							<div class="list_box" <c:if test="${type eq 'world'}">style="width:68%"</c:if>>
 								<div>${item.coin}</div>
 							</div>
-							<div class="list_box _3">
-								<div><fmt:formatNumber value="${item.volume}"/></div>
-							</div>
-							<div class="list_box _3">
-								<c:set var="updownArrow" value=""/>
-								<c:if test="${item.updown eq 'up'}">
-									<c:set var="updownArrow" value="↑"/>
-								</c:if>
-								<c:if test="${item.updown eq 'down'}">
-									<c:set var="updownArrow" value="↓"/>
-								</c:if>
-								<div class="list_txt ${item.updown}"><fmt:formatNumber value="${item.changed}"/><span class="arrow_up">${updownArrow}</span><br> </div>
-							</div>
+							<c:if test="${type eq 'unlisted'}">
+								<div class="list_box _3">
+									<div><fmt:formatNumber value="${item.volume}"/></div>
+								</div>
+								<div class="list_box _3">
+									<c:set var="updownArrow" value=""/>
+									<c:if test="${item.updown eq 'up'}">
+										<c:set var="updownArrow" value="↑"/>
+									</c:if>
+									<c:if test="${item.updown eq 'down'}">
+										<c:set var="updownArrow" value="↓"/>
+									</c:if>
+									<div class="list_txt ${item.updown}"><fmt:formatNumber value="${item.changed}"/><span class="arrow_up">${updownArrow}</span><br> </div>
+								</div>
+							</c:if>
 							<div class="list_box _2">
 								<a href="${item.link}" target="_blank" class="m_list_link">Go Detail</a>
 							</div>

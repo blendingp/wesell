@@ -7,6 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
+<div class="popup" id="popupn-1" style="display: none;">
+	<div class="main_noticepop">
+		<div class="mainpop_block">
+			<div class="main_popfeild" style="word-break: break-all; line-height: normal;"><spring:message code="pop.stopTradeWarn"/></div>
+			<div class="warp2">
+				<a href="#" onclick="closepopupn('-1')" class="mainpopbtn w-button"><spring:message code="pop.withdrawRequest_5" /></a>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="bottom">
 	<div class="footer <c:if test="${nowpage eq 'tradep'}"> _2</c:if>">
 		<div class="footer_block">
@@ -14,22 +24,19 @@
 				<div class="footerlogoblock"><img src="/wesell/webflow/images2/wesell_logo.svg" loading="lazy" alt="" class="footerlogo"></div>
 				<div class="footerlist_warp">
 					<div class="footerlist_block">
-						<div class="footerlist_title">
+						<div class="footerlist_title" style="cursor: pointer;" onclick="location.href='/wesell/news.do'">
 							<spring:message code="trade.news" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/news.do'"><spring:message code="trade.news"/></div>
 					</div>
 					<div class="footerlist_block">
-						<div class="footerlist_title">
+						<div class="footerlist_title" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=world'">
 							<spring:message code="trade.world" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=world'"><spring:message code="trade.world"/></div>
 					</div>
 					<div class="footerlist_block">
-						<div class="footerlist_title">
+						<div class="footerlist_title" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=unlisted'">
 							<spring:message code="trade.unlisted" />
 						</div>
-						<div class="footerlist" style="cursor: pointer;" onclick="location.href='/wesell/user/chart.do?type=unlisted'"><spring:message code="trade.unlisted"/></div>
 					</div>
 					<div class="footerlist_block">
 						<div class="footerlist_title">

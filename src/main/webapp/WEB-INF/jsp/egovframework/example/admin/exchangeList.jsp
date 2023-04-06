@@ -34,9 +34,14 @@
 											<tr>
 												<th>삭제</th>
 												<th>심볼</th>
-												<th>코인</th>
-												<th>볼륨</th>
-												<th>변동량</th>
+												<c:if test="${type eq 'unlisted'}">
+													<th>코인</th>
+													<th>볼륨</th>
+													<th>변동량</th>
+												</c:if>
+												<c:if test="${type eq 'world'}">
+													<th>거래소명</th>
+												</c:if>
 												<th>링크</th>
 											</tr>
 										</thead>
@@ -45,8 +50,10 @@
 												<td><div onclick="insertProcess()" class="btn btn-primary">등록</div></td>
 												<td><input type="file" name="symbol" id="symbol"></td>
 												<td><input name="coin" id="coin"></td>
-												<td><input name="volume" id="volume"></td>
-												<td><input name="changed" id="changed"></td>
+												<c:if test="${type eq 'unlisted'}">
+													<td><input name="volume" id="volume"></td>
+													<td><input name="changed" id="changed"></td>
+												</c:if>
 												<td><input name="link" id="link"></td>
 											</tr>
 											<c:forEach var="item" items="${list}" varStatus="i">
@@ -54,20 +61,22 @@
 													<td><div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div></td>
 													<td><img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" style="max-width:100px"></td>
 													<td>${item.coin}</td>
-													<td><fmt:formatNumber value="${item.volume}"/></td>
-													<td>
-														<c:set var="color" value=""/>
-														<c:set var="updownArrow" value=""/>
-														<c:if test="${item.updown eq 'up'}">
-															<c:set var="color" value="#4e73df"/>
-															<c:set var="updownArrow" value="↑"/>
-														</c:if>
-														<c:if test="${item.updown eq 'down'}">
-															<c:set var="color" value="#e74a3b"/>
-															<c:set var="updownArrow" value="↓"/>
-														</c:if>
-														<span style="color:${color}"><fmt:formatNumber value="${item.changed}"/> ${updownArrow}</span>
-													</td>
+													<c:if test="${type eq 'unlisted'}">
+														<td><fmt:formatNumber value="${item.volume}"/></td>
+														<td>
+															<c:set var="color" value=""/>
+															<c:set var="updownArrow" value=""/>
+															<c:if test="${item.updown eq 'up'}">
+																<c:set var="color" value="#4e73df"/>
+																<c:set var="updownArrow" value="↑"/>
+															</c:if>
+															<c:if test="${item.updown eq 'down'}">
+																<c:set var="color" value="#e74a3b"/>
+																<c:set var="updownArrow" value="↓"/>
+															</c:if>
+															<span style="color:${color}"><fmt:formatNumber value="${item.changed}"/> ${updownArrow}</span>
+														</td>
+													</c:if>
 													<td>${item.link}</td>
 												</tr>
 											</c:forEach>

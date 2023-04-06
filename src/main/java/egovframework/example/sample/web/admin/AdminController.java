@@ -775,48 +775,20 @@ public class AdminController {
 		JSONObject obj = new JSONObject();
 		obj.put("result", "fail");
 		
-		String type = mre.getParameter("type");
+		String type = ""+mre.getParameter("type");
 		String coin = mre.getParameter("coin");
 		String volume = mre.getParameter("volume");
 		String changed = mre.getParameter("changed");
 		String link = mre.getParameter("link");
 		String updown = "";
+
+		EgovMap in = new EgovMap();
 		
 		if (Validation.isNull(type)) {
 			obj.put("msg", "잘못된 경로입니다. 새로고침 후 다시 이용해주세요.");
 			return obj.toJSONString();
 		}
-		if (Validation.isNull(coin)) {
-			obj.put("msg", "코인을 입력해주세요.");
-			return obj.toJSONString();
-		}
-		if (Validation.isNull(volume)) {
-			obj.put("msg", "볼륨을 입력해주세요.");
-			return obj.toJSONString();
-		}
-		if (Validation.isNull(changed)) {
-			obj.put("msg", "변동량을 입력해주세요.");
-			return obj.toJSONString();
-		}
-		if (Validation.isNull(link)) {
-			obj.put("msg", "링크를 입력해주세요.");
-			return obj.toJSONString();
-		}
-
-		if(Integer.parseInt(changed)>0){
-			updown = "up";
-		}
-		else if(Integer.parseInt(changed)<0){
-			updown = "down";
-		}
-		
-		EgovMap in = new EgovMap();
 		in.put("type", type);
-		in.put("coin", coin);
-		in.put("volume", volume);
-		in.put("changed", Math.abs(Integer.parseInt(changed)));
-		in.put("link", link);
-		in.put("updown", updown);
 		
 		MultipartFile mf = mre.getFile("symbol");
 		String path = "C:/upload/wesell/exchange/";
@@ -842,6 +814,43 @@ public class AdminController {
 				return obj.toJSONString();
 			}
         }
+		
+		if (Validation.isNull(coin)) {
+			obj.put("msg", "코인을 입력해주세요.");
+			if(type.compareTo("world")==0){
+				obj.put("msg", "거래소를 입력해주세요.");
+			}
+			return obj.toJSONString();
+		}
+		in.put("coin", coin);
+		
+		if(type.compareTo("unlisted")==0){
+			if (Validation.isNull(volume)) {
+				obj.put("msg", "볼륨을 입력해주세요.");
+				return obj.toJSONString();
+			}
+			in.put("volume", volume);
+			
+			if (Validation.isNull(changed)) {
+				obj.put("msg", "변동량을 입력해주세요.");
+				return obj.toJSONString();
+			}
+			in.put("changed", Math.abs(Integer.parseInt(changed)));
+
+			if(Integer.parseInt(changed)>0){
+				updown = "up";
+			}
+			else if(Integer.parseInt(changed)<0){
+				updown = "down";
+			}
+			in.put("updown", updown);
+		}
+		
+		if (Validation.isNull(link)) {
+			obj.put("msg", "링크를 입력해주세요.");
+			return obj.toJSONString();
+		}
+		in.put("link", link);
         
 		sampleDAO.insert("exchangeInsert", in);
 

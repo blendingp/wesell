@@ -328,16 +328,15 @@
 			</form>
 		</div>
 		<div class="popup" id="popDiv">
-			<c:forEach var="item" items="${notilist}">
-				<div class="main_noticepop" id="popupn${item.bidx}"
-					style="display: none;">
+			<c:forEach var="notilist" items="${notilist}">
+				<div class="main_noticepop" id="popupn${notilist.bidx}" style="display: none;">
 					<div class="mainpop_block">
-						<div class="main_popfeild" style="word-break: break-all; line-height: normal;">${item.text}</div>
+						<div class="main_popfeild" style="word-break: break-all; line-height: normal;">${notilist.text}</div>
 						<div class="warp2">
-							<a href="#" onclick="closepopupn(${item.bidx})" class="mainpopbtn w-button"><spring:message code="pop.withdrawRequest_5" /></a>
+							<a href="#" onclick="closepopupn('${notilist.bidx}')" class="mainpopbtn w-button"><spring:message code="pop.withdrawRequest_5" /></a>
 							<div class="form-block-15 w-form">
 								<label class="w-checkbox checkbox-field"> 
-								<input type="checkbox" id="popupnc${item.bidx}" class="w-checkbox-input checkbox-3"> 
+								<input type="checkbox" id="popupnc${notilist.bidx}" class="w-checkbox-input checkbox-3"> 
 								<span class="checkbox-label w-form-label" for="checkbox"> 
 									<spring:message code="menu.24nonshow" />
 								</span>
@@ -362,7 +361,7 @@ function ready(){
 
 function notiCloseCheck(){
 	var allClose = true;
-	$.each($(".main_noticepop"), function(index, item){
+	$.each($("#popDiv .main_noticepop"), function(index, item){
  		if($(item).css("display") == 'flex') allClose = false;
 	})
 	if(allClose){

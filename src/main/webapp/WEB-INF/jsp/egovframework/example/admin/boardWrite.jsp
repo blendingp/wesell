@@ -60,16 +60,11 @@ function insertProcess(type){
 									<div class="col-lg-12">
 										<div class="form-group">
 											<label>내용</label>
-											<c:if test="${type eq 'notice'}">
+											<c:if test="${type eq 'notice' || type eq 'event' || type eq 'faq'}">
 												<select name="blang">
 													<option value="0" selected>KO(한국어)</option>
 													<option value="1">EN(영어)</option>
-												</select>
-											</c:if>
-											<c:if test="${(type eq 'event') or (type eq 'faq')}">
-												<select name="blang">
-													<option value="0" selected>KO(한국어)</option>
-													<option value="1">EN(영어)</option>
+													<option value="3">CH(중국어)</option>
 												</select>
 											</c:if>
 											<c:if test="${type eq 'faq'}">
