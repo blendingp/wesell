@@ -57,25 +57,25 @@
 									<div class="text-block-31 nochange nobtn">${info.email}</div>
 								</div>
 							</c:if>
-							<c:if test="${info.level ne 'user'}">
+							<%-- <c:if test="${info.level ne 'user'}">
 								<div class="title3"><spring:message code="join.invite"/></div>
 								<div class="warp1">
 									<div class="text-block-31 nochange">${info.inviteCode}</div>
 									<a href="javascript:inviteCopy()" class="button-38 w-button">LINK</a>
 								</div>
 							</c:if>
-<!-- 							<div class="accountwarp"> -->
-<%-- 								<div class="title3"><spring:message code="join.email"/></div> --%>
-<!-- 								<div class="accountbox2"> -->
-<%-- 									<input type="text" style="background-color:#2d333a; width:100%;" disabled onkeyup="emailCheck(this)" class="text-field-15 w-input" name="email" value="${info.email}" id="email"> --%>
-<%-- 									<a href="javascript:sendRequestEmail()" <c:if test="${info.emailconfirm eq '1'}">style="display:none;"</c:if> id="emailVerification" class="button-20 w-button"><spring:message code="join.request"/></a> --%>
-<!-- 								</div> -->
-<%-- 								<div class="accountbox2" id="inputEmailCode" style="<c:if test="${info.emailconfirm eq '1'}">display:none;</c:if> margin-bottom:0.5vw;">
-<%-- 								<input type="text" class="text-field-14 certification w-input"  name="emailCode" onkeyup="numCheck(this)" value="<spring:message code="affiliate.verification"/>"  id="emailCode" > --%>
-<%-- 								</div> --%>
-<!-- 							</div> -->
-								
-							<%-- <div class="title3"><spring:message code="join.email"/></div>
+							<div class="accountwarp">
+ 								<div class="title3"><spring:message code="join.email"/></div>
+								<div class="accountbox2">
+ 									<input type="text" style="background-color:#2d333a; width:100%;" disabled onkeyup="emailCheck(this)" class="text-field-15 w-input" name="email" value="${info.email}" id="email">
+ 									<a href="javascript:sendRequestEmail()" <c:if test="${info.emailconfirm eq '1'}">style="display:none;"</c:if> id="emailVerification" class="button-20 w-button"><spring:message code="join.request"/></a>
+								</div>
+ 								<div class="accountbox2" id="inputEmailCode" style="<c:if test="${info.emailconfirm eq '1'}">display:none;</c:if> margin-bottom:0.5vw;">
+ 								<input type="text" class="text-field-14 certification w-input"  name="emailCode" onkeyup="numCheck(this)" value="<spring:message code="affiliate.verification"/>"  id="emailCode" >
+ 								</div>
+							</div>
+							
+							<div class="title3"><spring:message code="join.email"/></div>
 							<div class="warp1">
 								<div class="text-block-31 nochange nobtn">${info.email }</div>
 							</div> --%>
@@ -85,7 +85,7 @@
 								<div class="text-block-31 nochange nobtn">${info.name}</div>
 							</div>
 							
-							<div class="title3"><spring:message code="join.level"/></div>
+							<%-- <div class="title3"><spring:message code="join.level"/></div>
 							<div class="warp1">
 								<c:if test="${info.level eq 'user'}">
 									<div class="text-block-31 nochange nobtn">${info.level}</div>
@@ -95,10 +95,10 @@
 									<a href="/wesell/infl/login.do" target="_blank" class="button-38 w-button">PARTNER</a>
 								</c:if>
 							</div>
-<%-- 							<div class="title3"><spring:message code="menu.wallet"/></div> --%>
-<!-- 							<div class="warp1"> -->
-<%-- 								<div class="text-block-31 nochange nobtn"><fmt:formatNumber value="${info.wallet}" pattern="#,###.####"/> USDT</div> --%>
-<!-- 							</div> -->
+							<div class="title3"><spring:message code="menu.wallet"/></div>
+							<div class="warp1">
+								<div class="text-block-31 nochange nobtn"><fmt:formatNumber value="${info.wallet}" pattern="#,###.####"/> USDT</div>
+							</div> --%>
 							
 							<div class="title3"><spring:message code="join.date"/></div>
 							<div class="warp1">

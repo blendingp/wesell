@@ -126,7 +126,7 @@
           </div>
         </div>
       </div>
-      <div class="m_section_store wf-section">
+      <%-- <div class="m_section_store wf-section">
         <div class="m_sc_store">
           <div class="m_store_block">
             <div class="m_store_txt">
@@ -147,7 +147,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --%>
     </div>
 		<div class="popup" id="popDiv">
 			<c:forEach var="item" items="${notilist}">

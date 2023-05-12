@@ -27,42 +27,55 @@
 						<div class="card-body">
 							<span>* 변동량이 0보다 크면 파란색, 0보다 작으면 빨간색으로 표시됩니다</span>
 							<div class="table-responsive">
-								<form name="insertForm" id="insertForm" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="type" id="type" value="${type}">
-									<table class="table table-striped table-hover">
-										<thead>
-											<tr>
-												<th>삭제</th>
-												<th>심볼</th>
-												<c:if test="${type eq 'unlisted'}">
-													<th>코인</th>
-													<th>볼륨</th>
-													<th>변동량</th>
-												</c:if>
-												<c:if test="${type eq 'world'}">
-													<th>거래소명</th>
-												</c:if>
-												<th>링크</th>
-											</tr>
-										</thead>
-										<tbody>
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th>삭제</th>
+											<th>심볼</th>
+											<c:if test="${type eq 'unlisted'}">
+												<th>코인</th>
+												<th>볼륨</th>
+												<th>변동량</th>
+											</c:if>
+											<c:if test="${type eq 'world'}">
+												<th>거래소명</th>
+											</c:if>
+											<th>링크</th>
+										</tr>
+									</thead>
+									<tbody>
+										<form name="insertForm" id="insertForm" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="type" id="type" value="${type}">
 											<tr>
 												<td><div onclick="insertProcess()" class="btn btn-primary">등록</div></td>
-												<td><input type="file" name="symbol" id="symbol"></td>
-												<td><input name="coin" id="coin"></td>
+												<td><input type="file" name="symbol"></td>
+												<td><input name="coin"></td>
 												<c:if test="${type eq 'unlisted'}">
-													<td><input name="volume" id="volume"></td>
-													<td><input name="changed" id="changed"></td>
+													<td><input name="volume"></td>
+													<td><input name="changed"></td>
 												</c:if>
-												<td><input name="link" id="link"></td>
+												<td><input name="link"></td>
 											</tr>
-											<c:forEach var="item" items="${list}" varStatus="i">
+										</form>
+										<c:forEach var="item" items="${list}" varStatus="i">
+											<form id="insertForm${item.idx}" method="post" enctype="multipart/form-data">
+												<input type="hidden" name="type" id="type" value="${type}">
+												<input type="hidden" name="idx" value="${item.idx}">
 												<tr>
-													<td><div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div></td>
-													<td><img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" style="max-width:100px"></td>
-													<td>${item.coin}</td>
+													<td>
+														<div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div>
+														<div onclick="updateProcess('${item.idx}')" class="btn btn-primary">수정</div>
+													</td>
+													<td>
+														<img src="/filePath/wesell/exchange/${item.symbol}" loading="lazy" style="max-width:100px">
+														<br><input type="file" name="symbol">
+													</td>
+													<td>${item.coin}<br><input name="coin"></td>
 													<c:if test="${type eq 'unlisted'}">
-														<td><fmt:formatNumber value="${item.volume}"/></td>
+														<td>
+															<fmt:formatNumber value="${item.volume}"/>
+															<br><input name="volume">
+														</td>
 														<td>
 															<c:set var="color" value=""/>
 															<c:set var="updownArrow" value=""/>
@@ -75,14 +88,15 @@
 																<c:set var="updownArrow" value="↓"/>
 															</c:if>
 															<span style="color:${color}"><fmt:formatNumber value="${item.changed}"/> ${updownArrow}</span>
+															<br><input name="changed">
 														</td>
 													</c:if>
-													<td>${item.link}</td>
+													<td>${item.link}<br><input name="link"></td>
 												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</form>
+											</form>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -113,6 +127,31 @@
 			},
 			error:function(e){ console.log("ajax error"); }
 		});
+	}
+	
+	function updateProcess(idx){
+		if(confirm("수정하시겠습니까?")){
+			var formData = new FormData($("#insertForm"+idx)[0]);
+			$.ajax({
+				type :"post",
+				enctype : "multipart/form-data",
+				processData: false,
+				contentType: false,
+				data : formData ,
+				dataType : "json" ,
+				url : "/wesell/admin/exchangeUpdate.do",
+				success:function(data){
+					if(data.result == "success"){
+						location.reload();
+					}
+					else{
+						alert(data.msg);
+						return;
+					}
+				},
+				error:function(e){ console.log("ajax error"); }
+			});
+		}
 	}
 	
 	function deleteProcess(idx){

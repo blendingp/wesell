@@ -462,8 +462,8 @@
             FROM news
             order by idx desc
         ]]>
-        <isNotEmpty property="firstindex">
-            limit $firstindex$, $recordperpage$
+        <isNotEmpty property="first">
+            limit $first$, $record$
         </isNotEmpty>
     </select>
     <select id="newsT" resultClass="int">
@@ -484,6 +484,25 @@
 				  , #link#)
 		]]>
 	</insert>
+	
+	<update id="newsUpdate">
+		<![CDATA[
+			UPDATE news
+			SET idx=idx
+		]]>
+			<isNotEmpty property="title">
+				, title=#title#
+			</isNotEmpty>
+			<isNotEmpty property="ndate">
+				, ndate=#ndate#
+			</isNotEmpty>
+			<isNotEmpty property="link">
+				, link=#link#
+			</isNotEmpty>
+		<![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
 
 	<delete id="newsDelete">
 		<![CDATA[

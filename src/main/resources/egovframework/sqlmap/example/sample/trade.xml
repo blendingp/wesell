@@ -26,6 +26,15 @@
         </isNotEmpty>
 	</select>
 	
+	<select id="exchangeC" resultClass="EgovMap">
+        <![CDATA[
+            SELECT *
+            FROM exchange
+            WHERE idx = #idx#
+            limit 1
+        ]]>
+	</select>
+	
 	<insert id="exchangeInsert">
 		<![CDATA[
 			INSERT INTO exchange
@@ -45,6 +54,34 @@
 				  , #type#)
 		]]>
 	</insert>
+	
+	<update id="exchangeUpdate">
+		<![CDATA[
+			UPDATE exchange
+			SET idx=idx
+		]]>
+			<isNotEmpty property="symbol">
+				, symbol=#symbol#
+			</isNotEmpty>
+			<isNotEmpty property="coin">
+				, coin=#coin#
+			</isNotEmpty>
+			<isNotEmpty property="volume">
+				, volume=#volume#
+			</isNotEmpty>
+			<isNotEmpty property="changed">
+				, changed=#changed#
+			</isNotEmpty>
+			<isNotEmpty property="updown">
+				, updown=#updown#
+			</isNotEmpty>
+			<isNotEmpty property="link">
+				, link=#link#
+			</isNotEmpty>
+		<![CDATA[
+			WHERE idx=#idx#
+		]]>
+	</update>
 	
 	<delete id="exchangeDelete">
 		<![CDATA[

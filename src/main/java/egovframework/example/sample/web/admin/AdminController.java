@@ -859,6 +859,87 @@ public class AdminController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/exchangeUpdate.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String exchangeUpdate(MultipartHttpServletRequest mre) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		
+		String type = ""+mre.getParameter("type");
+		String idx = mre.getParameter("idx");
+		String coin = mre.getParameter("coin");
+		String volume = mre.getParameter("volume");
+		String changed = mre.getParameter("changed");
+		String link = mre.getParameter("link");
+		String updown = "";
+		
+		
+		if (Validation.isNull(type) || Validation.isNull(idx)) {
+			obj.put("msg", "잘못된 경로입니다. 새로고침 후 다시 이용해주세요.");
+			return obj.toJSONString();
+		}
+		
+		EgovMap in = new EgovMap();
+		in.put("idx", idx);
+		
+		MultipartFile mf = mre.getFile("symbol");
+		String path = "C:/upload/wesell/exchange/";
+		
+		if(mf != null && !mf.isEmpty()){
+			File file = new File(path);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			if(!mf.isEmpty()){
+				EgovMap exchangeInfo = (EgovMap)sampleDAO.select("exchangeC", in);
+				String oldSymbol = ""+exchangeInfo.get("symbol");
+				Validation.fileDelete("wesell/exchange", oldSymbol);
+				
+				String filename = mf.getOriginalFilename();
+				String saveNm = UUID.randomUUID().toString().replaceAll("-", "") + filename.substring(filename.lastIndexOf("."));
+				try {
+					mf.transferTo(new File(path+saveNm));
+					in.put("symbol", saveNm);
+				} catch (Exception e) {
+					e.printStackTrace();
+					obj.put("msg", "이미지를 업로드 에러.");
+					return obj.toJSONString();
+				}
+			}
+		}
+		
+		if (!Validation.isNull(coin)) {
+			in.put("coin", coin);
+		}
+		
+		if(type.compareTo("unlisted")==0){
+			if (!Validation.isNull(volume)) {
+				in.put("volume", volume);
+			}
+			
+			if (!Validation.isNull(changed)) {
+				in.put("changed", Math.abs(Integer.parseInt(changed)));
+
+				if(Integer.parseInt(changed)>0){
+					updown = "up";
+				}
+				else if(Integer.parseInt(changed)<0){
+					updown = "down";
+				}
+				in.put("updown", updown);
+			}
+		}
+		
+		if (!Validation.isNull(link)) {
+			in.put("link", link);
+		}
+		
+		sampleDAO.update("exchangeUpdate", in);
+		
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/exchangeDelete.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String exchangeDelete(HttpServletRequest request) throws Exception {
 		JSONObject obj = new JSONObject();
@@ -869,6 +950,10 @@ public class AdminController {
 		
 		EgovMap in = new EgovMap();
 		in.put("idx", idx);
+
+		EgovMap exchangeInfo = (EgovMap)sampleDAO.select("exchangeC", in);
+		String oldSymbol = ""+exchangeInfo.get("symbol");
+		Validation.fileDelete("wesell/exchange", oldSymbol);
 		
 		sampleDAO.delete("exchangeDelete", in);
 		
@@ -913,32 +998,37 @@ public class AdminController {
 		in.put("ndate", ndate);
 		in.put("link", link);
 		
-		/*MultipartFile mf = mre.getFile("img");
-		String path = "C:/upload/wesell/news/";
-		
-		if(mf == null || mf.isEmpty()){
-			obj.put("msg", "이미지를 선택해주세요.");
-			return obj.toJSONString();
-		}
-		
-		File file = new File(path);
-		if(!file.exists()) {
-			file.mkdirs();
-		}
-		if(!mf.isEmpty()){
-			String filename = mf.getOriginalFilename();
-			String saveNm = UUID.randomUUID().toString().replaceAll("-", "") + filename.substring(filename.lastIndexOf("."));
-			try {
-				mf.transferTo(new File(path+saveNm));
-				in.put("img", saveNm);
-			} catch (Exception e) {
-				e.printStackTrace();
-				obj.put("msg", "이미지를 업로드 에러.");
-				return obj.toJSONString();
-			}
-		}*/
-		
 		sampleDAO.insert("newsInsert", in);
+		
+		obj.put("result", "success");
+		return obj.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/newsUpdate.do" , method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String newsUpdate(MultipartHttpServletRequest mre) throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("result", "fail");
+		
+		String idx = mre.getParameter("idx");
+		String title = mre.getParameter("title");
+		String ndate = mre.getParameter("ndate");
+		String link = mre.getParameter("link");
+
+		EgovMap in = new EgovMap();
+		in.put("idx", idx);
+		
+		if (!Validation.isNull(title)) {
+			in.put("title", title);
+		}
+		if (!Validation.isNull(ndate)) {
+			in.put("ndate", ndate);
+		}
+		if (!Validation.isNull(link)) {
+			in.put("link", link);
+		}
+		
+		sampleDAO.insert("newsUpdate", in);
 		
 		obj.put("result", "success");
 		return obj.toJSONString();

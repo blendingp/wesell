@@ -23,37 +23,43 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<form name="insertForm" id="insertForm" method="post" enctype="multipart/form-data">
-									<table class="table table-striped table-hover">
-										<thead>
-											<tr>
-												<th>삭제</th>
-												<!-- <th>이미지</th> -->
-												<th>제목</th>
-												<th>날짜</th>
-												<th>링크</th>
-											</tr>
-										</thead>
-										<tbody>
+								<table class="table table-striped table-hover">
+									<thead>
+										<tr>
+											<th>삭제</th>
+											<!-- <th>이미지</th> -->
+											<th>제목</th>
+											<th>날짜</th>
+											<th>링크</th>
+										</tr>
+									</thead>
+									<tbody>
+										<form name="insertForm" id="insertForm" method="post" enctype="multipart/form-data">
 											<tr>
 												<td><div onclick="insertProcess()" class="btn btn-primary">등록</div></td>
 												<!-- <td><input type="file" name="img" id="img"></td> -->
-												<td><input name="title" id="title"></td>
-												<td><input type="date" name="ndate" id="ndate"></td>
-												<td><input name="link" id="link"></td>
+												<td><input name="title"></td>
+												<td><input type="date" name="ndate"></td>
+												<td><input name="link"></td>
 											</tr>
-											<c:forEach var="item" items="${list}" varStatus="i">
+										</form>
+										<c:forEach var="item" items="${list}" varStatus="i">
+											<form id="insertForm${item.idx}" method="post" enctype="multipart/form-data">
+												<input type="hidden" name="idx" value="${item.idx}">
 												<tr>
-													<td><div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div></td>
+													<td>
+														<div onclick="deleteProcess('${item.idx}')" class="btn btn-danger">삭제</div>
+														<div onclick="updateProcess('${item.idx}')" class="btn btn-primary">수정</div>
+													</td>
 													<%-- <td><img src="/filePath/wesell/news/${item.img}" loading="lazy" style="max-width:100px"></td> --%>
-													<td>${item.title}</td>
-													<td>${item.ndate}</td>
-													<td>${item.link}</td>
+													<td>${item.title}<br><input name="title"></td>
+													<td>${item.ndate}<br><input type="date" name="ndate"></td>
+													<td>${item.link}<br><input name="link"></td>
 												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</form>
+											</form>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -84,6 +90,31 @@
 			},
 			error:function(e){ console.log("ajax error"); }
 		});
+	}
+	
+	function updateProcess(idx){
+		if(confirm("수정하시겠습니까?")){
+			var formData = new FormData($("#insertForm"+idx)[0]);
+			$.ajax({
+				type :"post",
+				enctype : "multipart/form-data",
+				processData: false,
+				contentType: false,
+				data : formData ,
+				dataType : "json" ,
+				url : "/wesell/admin/newsUpdate.do",
+				success:function(data){
+					if(data.result == "success"){
+						location.reload();
+					}
+					else{
+						alert(data.msg);
+						return;
+					}
+				},
+				error:function(e){ console.log("ajax error"); }
+			});
+		}
 	}
 	
 	function deleteProcess(idx){

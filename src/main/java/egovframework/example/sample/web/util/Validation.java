@@ -1,5 +1,6 @@
 package egovframework.example.sample.web.util;
 
+import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -23,6 +24,17 @@ import egovframework.example.sample.service.impl.SampleDAO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 public class Validation {
+	public static void fileDelete(String filePath, String fileName){
+		String path= "C:\\upload\\"+filePath+"\\"; // upload 경로
+		File serverFile = new File(path+fileName);
+		
+		if(serverFile.exists()){ // 파일이 존재한다면 
+			serverFile.delete(); // 해당 파일을 지워라 
+		}
+		
+		return;
+	}
+	
 	public static boolean isNull(String str){
 		return str == null || str.isEmpty() || str.equals("null") || str.equals("NaN") || str.equals("undefined");
 	}

@@ -10,6 +10,12 @@
 <head>
 <meta charset="utf-8">
 <jsp:include page="../wesellFrame/header2.jsp"></jsp:include>
+<script>
+	function fn_egov_link_page(page) {
+		document.listForm.pageIndex.value = page;
+		document.listForm.submit();
+	}
+</script>
 </head>
 <body class="body">
 	<div class="frame">
@@ -60,12 +66,5 @@
 			<jsp:include page="../wesellFrame/footer2.jsp"></jsp:include>
 		</div>
 	</div>
-	<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-	<script>
-		function fn_egov_link_page(page) {
-			document.listForm.pageIndex.value = page;
-			document.listForm.submit();
-		}
-	</script>
 </body>
 </html>
